@@ -1,0 +1,9 @@
+.section {
+  padding: 20px;
+}
+.headingContainer {
+  padding: 10px;
+  @include grid(grid, 10% repeat(3, 20%) 20%, null, 10px);
+}
+
+

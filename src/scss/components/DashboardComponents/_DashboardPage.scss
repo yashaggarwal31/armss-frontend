@@ -1,0 +1,115 @@
+.Dashboard {
+  &-container {
+    padding: 1rem;
+    background-color: $mainBackground;
+    @include grid(grid, null, auto auto, null, 1rem, space-between);
+  }
+  &-welcomeContainer {
+    margin-top: 2rem;
+    @include width_height(null, 100%);
+    @include flex(flex, row, center);
+    .textContainer {
+      padding: 20px 20px;
+      background-color: $backgraoundBlue;
+      border-radius: 1.4rem;
+
+      @include flex(flex, column, center);
+      @include width_height(24vh, 92%);
+      @include position(relative);
+
+      h2 {
+        @include font_size_color(1.28rem, 600, $white);
+      }
+
+      p {
+        @include font_size_color(0.88rem, lighter, $white);
+      }
+    }
+  }
+  &-ContentContainer {
+    margin-top: 3rem;
+    @include flex(flex, null, center);
+    @include width_height(null, 100%);
+  }
+  &-SubContentContainer {
+    @include width_height(null, 92%);
+    @include flex(flex, column, flex-start);
+    background-color: $white;
+    border-radius: 1rem;
+    padding: 1.4rem;
+
+    .SubContentContainer-Elements {
+      padding: 1rem;
+      @include flex(flex, row, space-between, center);
+
+      button.upload {
+        @include flex(flex, row, space-between, center, 1rem);
+        @include font_size_color(0.88rem, 400, $white, "Inter");
+        width: 100%;
+        padding: 0.8rem;
+        background-color: $darkblue;
+        border-radius: 0.6rem;
+        outline: none;
+        border: none;
+      }
+
+      // div {
+      //   width: 36%;
+      //   @include flex(flex, row, space-between, center, 1rem);
+      // }
+
+      // div button:first-child {
+      //   background-color: $input-placeholder-gray;
+      // }
+    }
+
+    .ContainerList {
+      background-color: $mainBackground;
+      border-radius: 1rem;
+      padding: 1.4rem;
+      @include flex(flex, row, flex-start, center, 1.2rem, wrap);
+    }
+  }
+  &-Image {
+    @include position(absolute, null, 4.8%, 20.8%, null);
+    @include width_height(null, 24%);
+  }
+}
+
+.Icon {
+  width: 8px;
+  height: 18px;
+}
+
+.DashboardFolderIcon {
+  height: 6vh;
+  width: 100%;
+}
+
+.listitem {
+  @include flex(flex, column, space-between, flex-start);
+  padding: 1rem;
+  width: 18%;
+  max-height: 20vh;
+  min-height: 20vh;
+  border-radius: 1rem;
+  background-color: $white;
+}
+
+.listitem div {
+  width: 28%;
+  max-height: 6vh;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background-color: $mainBackground;
+}
+
+.ContainerListactive {
+  background-color: $backgraoundBlue;
+  h4 {
+    color: $white;
+  }
+}
+.ContainerListactive div {
+  background-color: $white;
+}

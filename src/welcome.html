@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../dist/css/Dashboard.min.css" />
+    <link rel="stylesheet" href="./scss/Header.css" />
+    <link rel="stylesheet" href="../dist/css/Demop.min.css" />
+    <link rel="stylesheet" href="css/chatbot.css" />
+  </head>
+  <body class="body">
+    <header id="Header"></header>
+    <section id="Dashboard" class="Dashboard">
+      <div class="Dashboard-container">
+        <div class="Dashboard-welcomeContainer">
+          <div class="textContainer">
+            <h2>Attract top talent effortlessly</h2>
+            <p>Simplify recruitment and find your next hero for the team</p>
+          </div>
+          <img
+            src="./assets/DashboardPng2.png"
+            class="Dashboard-Image"
+            alt="DashboardPng"
+          />
+        </div>
+        <div class="Dashboard-ContentContainer">
+          <div class="Dashboard-SubContentContainer">
+            <div class="SubContentContainer-Elements">
+              <h2>Resume Category (<span id="Categorys"></span>)</h2>
+              <div>
+                <!-- <button class="" id="CategoryCreate">
+                  <svg class="Icon">
+                    <use xlink:href="./Icons/icons.svg#plus" />
+                  </svg>
+                  Create Category
+                </button> -->
+                <button
+                  class="primary upload"
+                  onclick="window.dialog.showModal();"
+                >
+                  <svg class="Icon">
+                    <use xlink:href="./Icons/icons.svg#plus" />
+                  </svg>
+                  Upload Resumes
+                </button>
+
+                <dialog id="dialog" class="upload-dialog">
+                  <div class="flex-col gap-2 div-center mt-2">
+                    <h2>Upload your files!</h2>
+
+                    <div id="progress-div" class="flex div-center">
+                      <label class="label-upload">
+                        <span id="file-count">0</span>
+                        <progress
+                          id="progressBarOverall"
+                          max="100"
+                          value="100"
+                          style="--p: 0%"
+                        ></progress
+                      ></label>
+                    </div>
+
+                    <input type="file" id="fileInput" multiple />
+
+                    <!-- 
+                    <label for="fileInput" class="file-input" style="width: auto">
+                      <input
+                      class="isVisuallyHidden"
+                        type="file"
+                        id="fileInput"
+                        multiple
+                      />
+                      Upload Files
+                    </label>
+          -->
+                    <!-- <button id='upload-btn' onclick="upload()">Upload file</button> -->
+                    <button class="button-21" role="button" id="upload-btn">
+                      Upload Files
+                    </button>
+                  </div>
+
+                  <!-- <progress id="progressBarOverall" value="0" max="100"></progress> -->
+                  <span id="progressNumbers"></span>
+                  <div id="fileUploadList">
+                    <!-- File upload list will be dynamically populated  -->
+                  </div>
+
+                  <div>
+                    <!-- <progress id="progress-bar" value="0" max="100"></progress> -->
+                    <span id="individual-progress"></span>
+                  </div>
+
+                  <div id="u-lists" class="upload-lists">
+                    <div class="flex gap-4 items-center">
+                      <div id="queue-list" class="max-width-200">
+                        <h1>In Queue</h1>
+                      </div>
+                      <div id="upload-list" class="max-width-200">
+                        <h1>Uploading</h1>
+                      </div>
+                      <div id="success-list" class="max-width-200">
+                        <h1>Successful</h1>
+                      </div>
+                      <div id="failed-list" class="max-width-200">
+                        <h1>Failed</h1>
+                      </div>
+                      <!-- <div id="cancelled-list">
+                        <h1>Cancelled</h1>
+                      </div> -->
+                    </div>
+                  </div>
+
+                  <button
+                    onclick="window.dialog.close();"
+                    aria-label="close"
+                    class="x close-button"
+                  >
+                    ❌
+                  </button>
+                </dialog>
+              </div>
+            </div>
+            <ul id="ContainerList" class="ContainerList"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="./js/cookie.js"></script>
+    <script src="./js/HeaderLoader.js"></script>
+    <script src="./js/Dashboard.js"></script>
+    <script src="./js/upload.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+      defer
+    ></script>
+    <!-- <script src="./js/header.js"></script> -->
+    <script>
+      window.onload = () => {
+        isLogout();
+      };
+    </script>
+  </body>
+</html>

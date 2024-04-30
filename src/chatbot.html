@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/chatbot.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="chatbot-modal">
+      <button id="myBtn">Open ChatBot</button>
+
+      <div id="myModal" class="chat-modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="head">
+            <p>CHATBOT.</p>
+            <span class="close">&times;</span>
+          </div>
+          <div class="recent-ques">
+            <button class="ques-btn" id="ques-btn" onclick="addQuestion(this)">
+              "Can you help me find resumes with experience in “Java
+              programming”?"
+            </button>
+            <button class="ques-btn" id="ques-btn" onclick="addQuestion(this)">
+              "Show me resumes of candidates with UX/UI design skills.".
+            </button>
+            <button class="ques-btn" id="ques-btn" onclick="addQuestion(this)">
+              "Find resumes with project management experience."
+            </button>
+            <button class="ques-btn" id="ques-btn" onclick="addQuestion(this)">
+              Exit Chatbot .
+            </button>
+          </div>
+
+          <div class="chat">
+            <div class="chat-space">
+              <p class="left">Hlo User.</p>
+              <!-- <p class="right">Lorem ipsum dolor sit.</p> -->
+              <p class="left">What Can I do For you?</p>
+              <!-- <p class="right">Lorem ipsum dolor sit.</p> -->
+              <!-- <p class="left">Lorem ipsum dolor sit.</p> -->
+            </div>
+
+            <div class="chat-input">
+              <input
+                id="queryInput"
+                type="text"
+                placeholder="Type Your Query..."
+              />
+              <button class="query-submit-btn" onclick="chat()">Submit</button>
+              <button class="query-reset-btn" onclick="resetQuery()">
+                <ion-icon name="reload"></ion-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="scripts/chatbot.js"></script>
+    <script>
+      // Get the modal
+      var modal = document.getElementById("myModal");
+
+      // Get the button that opens the modal
+      var btn = document.getElementById("myBtn");
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks on the button, open the modal
+      btn.onclick = function () {
+        modal.style.display = "block";
+      };
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>

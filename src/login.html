@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/global.css" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <label for="username">Email:</label><br />
+        <input type="mail" id="username" name="Email" required /><br />
+        <label for="password">Password:</label><br />
+        <input type="password" id="password" name="Password" required /><br />
+        <input type="submit" value="Login" />
+      </form>
+      <p>or</p>
+      <div class="SignInContainer">
+        <img
+          src="https://pngimg.com/d/google_PNG19635.png"
+          alt="googlelogo"
+          class="SignIn"
+        />
+        <a href="/google-login"> Sign in with Google </a>
+      </div>
+    </div>
+    <script src="./scripts/script.js"></script>
+  </body>
+</html>

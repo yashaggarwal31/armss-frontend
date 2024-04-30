@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/client/src/scripts/bulkUpload.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+      defer
+    ></script>
+    <link rel="stylesheet" href="/client/src/css/bulkUpload.css" />
+  </head>
+  <body>
+    <input type="file" id="fileInput" multiple />
+    <!-- <button id='upload-btn' onclick="upload()">Upload file</button> -->
+    <button id="upload-btn" type="submit">Upload file</button>
+
+    <progress id="progressBarOverall" value="0" max="100"></progress>
+    <span id="progressNumbers"></span>
+    <div id="fileUploadList">
+      <!-- File upload list will be dynamically populated  -->
+    </div>
+
+    <div>
+      <progress id="progress-bar" value="0" max="100"></progress>
+      <span id="individual-progress"></span>
+    </div>
+
+    <div class="flex gap-2">
+      <div id="queue-list">
+        <h1>In Queue</h1>
+      </div>
+      <div id="upload-list">
+        <h1>Uploading</h1>
+      </div>
+      <div id="success-list">
+        <h1>Successful</h1>
+      </div>
+      <div id="failed-list">
+        <h1>Failed</h1>
+      </div>
+      <div id="cancelled-list">
+        <h1>Cancelled</h1>
+      </div>
+    </div>
+  </body>
+</html>

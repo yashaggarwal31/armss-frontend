@@ -1,0 +1,68 @@
+.login {
+  width: 80%;
+  height: 60%;
+  align-self: center;
+  justify-self: center;
+  padding: 10px;
+  @include flex(flex, column, space-evenly, center);
+  @include position(relative);
+
+  &-titles {
+    width: 80%;
+    text-align: start;
+    @include font_size_color(null, null, $Textblack, "Inter");
+
+    p {
+      padding-top: 6px;
+      font-size: 0.88rem;
+      font-family: "Inter";
+    }
+  }
+}
+.loginForm {
+  &-Container {
+    padding: 1.8rem 1rem;
+    width: 60vh;
+    @include flex(flex, column, space-evenly, null, 1rem);
+    border-radius: 6px;
+    box-shadow: 0px 1px 2px 0px #a9bfeaeb;
+  }
+  &-input {
+    height: 5.02vh;
+    background: transparent;
+    border-radius: 6px;
+    border: 0.4px solid $input-border-gray;
+    padding: 6px 6px 6px 10px;
+    cursor: pointer;
+    input {
+      width: 100%;
+      @include font_size_color(1rem, null, $Textblack);
+      outline: none;
+      border: none;
+    }
+    input::placeholder {
+      @include font_size_color(0.88rem, null, $input-placeholder-gray);
+    }
+  }
+  // &-input:hover,
+  // :active {
+  //   border: 1px solid $backgraoundBlue;
+  // }
+}
+
+.PasswordContainer {
+  @include flex(flex, row, space-evenly, center);
+}
+.PasswordIcon {
+  color: rgb(214, 213, 213);
+  @include width_height(1rem, 1rem);
+}
+.LabelContainer {
+  @include font_size_color(0.88rem, 400, $Textblack, "Inter");
+  @include flex(flex, column);
+}
+
+.responsePara {
+  @include font_size_color(0.8rem, 400, red, "Inter");
+  padding-left: 0.2rem;
+}

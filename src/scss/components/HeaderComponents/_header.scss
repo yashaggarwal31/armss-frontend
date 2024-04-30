@@ -1,0 +1,150 @@
+.Header {
+  &-container {
+    background-color: $white;
+    @include grid(grid, null, 2fr 2fr);
+  }
+  &-SubContainer {
+    position: relative;
+    padding: 10px;
+    width: 100%;
+    @include flex(flex, row, space-between, center);
+  }
+
+  &-Filters {
+    @include width_height(null, 40%);
+    @include flex(flex, row, space-between, center);
+    background-color: rgb(232, 238, 251, 44%);
+    border: 0.8px solid #e1eaff;
+    border-radius: 2rem;
+    padding: 0.4rem 0.6rem;
+  }
+  &-logoContainer {
+    // @include width_height(null, 8%);
+    @include flex(flex, column, center, center);
+    @include font_size_color(0.48rem, 600, $darkblue, "Inter");
+  }
+  &-logo {
+    @include width_height(null, 60%);
+  }
+  &-dropdownContainer {
+    border: 1px solid #e1eaff;
+    padding: 0.6rem;
+    border-radius: 2rem;
+    @include width_height(5vh, 16.8%);
+    @include flex(flex, row, space-between, center);
+
+    p {
+      @include font_size_color(0.88rem, 400, $Textblack, "Inter");
+    }
+  }
+  &-FilterButton {
+    padding: 8px;
+    border-radius: 50%;
+    background-color: $backgraoundBlue;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    @include flex(flex, row, space-between, center);
+  }
+  &-keywords {
+    @include font_size_color(1rem, null, null, "Inter");
+    @include width_height(5vh, 88%);
+    background-color: transparent;
+    padding: 0rem 0.8rem;
+    margin-bottom: 2.8px;
+    border: none;
+    outline: none;
+    border-radius: 1.6rem 0 0 1.6rem;
+  }
+  &-keywords::placeholder {
+    @include font_size_color(0.88rem, 400, rgb(51, 51, 51, 60%), "Inter");
+  }
+
+  &-Profile {
+    @include width_height(null, 40%);
+    border-radius: 50%;
+  }
+  &-SearchFilter {
+    @include flex(flex, row, center, center);
+    background-color: #f6f9ff;
+    padding: 0.4rem 0.8rem;
+    input {
+      border: none;
+      background-color: #f6f9ff;
+      outline: none;
+      color: $darkblue;
+      padding-left: 1.2rem;
+    }
+    input::placeholder {
+      @include font_size_color(0.88rem, 400, rgb(0, 82, 241, 38%), "Inter");
+    }
+  }
+}
+.Icon {
+  @include width_height(1rem, 1rem);
+  transform: rotate(0turn);
+  transition: transform 0.6s ease;
+}
+.IconStyles {
+  transform: rotate(0.5turn);
+  transition: transform 0.6s ease;
+}
+
+.dropdownVisible {
+  @include width_height(null, 16%);
+  @include position(absolute, null, 32%, 90%, null);
+  border-radius: 0.6rem;
+  box-shadow: 0 2px 4px 0px rgb(0, 0, 0, 0.3);
+  background-color: $white;
+  z-index: 10;
+}
+.dropdown-list li,
+.Skillslist li {
+  line-height: 2;
+  padding: 0.4rem 0 0 1rem;
+  @include font_size_color(0.8rem, null, null, "Inter");
+}
+.dropdown-list li:first-child {
+  border-radius: 0.6rem 0.6rem 0 0;
+
+  span {
+    font-size: 0.6rem;
+    padding-left: 0.2rem;
+  }
+}
+.Skillsdropdown input {
+  @include width_height(4vh, 100%);
+}
+
+.dropdown-list li:hover,
+.Skillslist li:hover {
+  background-color: #f6f9ff;
+  color: #0052f1;
+}
+
+.Chatbot {
+  @include position(fixed, null, 2%, 90.8%, 2%);
+  @include width_height(null, 4%);
+  @include flex(flex, row, center, center);
+  border-radius: 50%;
+  padding: 1rem;
+  background-color: $darkblue;
+}
+.ProfileContainer {
+  @include position(relative);
+}
+
+.ProfileContainer .LogoutBtn {
+  @include position(absolute, -6%, null, null, -80%);
+  @include font_size_color(0.8rem, 480, $Textblack, "Inter");
+  padding: 0.4rem;
+  background-color: $white;
+  border-radius: 0.2rem;
+  box-shadow: 0 2px 4px 0px #bfbfbf;
+  border: none;
+  outline: none;
+  visibility: hidden;
+}
+.ProfileContainer:hover .LogoutBtn {
+  visibility: visible;
+}
