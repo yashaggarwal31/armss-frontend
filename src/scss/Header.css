@@ -57,22 +57,45 @@ p {
   font-family: "Inter";
 }
 
+body {
+  overflow-x: hidden;
+}
+
 label {
   padding-bottom: 0.4rem;
 }
 
 button {
   cursor: pointer;
+  outline: none;
+  border: none;
 }
 
-.Header-container {
+::-webkit-scrollbar {
+  width: 0;
+}
+
+::-webkit-scrollbar {
+  height: 0;
+}
+
+::-webkit-scrollbar-track {
+  visibility: hidden;
+}
+
+::-webkit-scrollbar-thumb {
+  visibility: hidden;
+}
+
+.Header-Container {
+  padding-top: 1rem;
   background-color: #ffffff;
   display: grid;
-  grid-template-rows: 2fr 2fr;
+  grid-template-rows: 2fr 0.6fr;
+  border-bottom: 0.1px solid rgba(191, 191, 191, 0.7137254902);
 }
 .Header-SubContainer {
   position: relative;
-  padding: 10px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -80,7 +103,7 @@ button {
   align-items: center;
 }
 .Header-Filters {
-  width: 40%;
+  width: 60%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -88,7 +111,7 @@ button {
   background-color: rgba(232, 238, 251, 0.44);
   border: 0.8px solid #e1eaff;
   border-radius: 2rem;
-  padding: 0.4rem 0.6rem;
+  padding: 0.2rem;
 }
 .Header-logoContainer {
   display: flex;
@@ -97,11 +120,11 @@ button {
   align-items: center;
   font-size: 0.48rem;
   font-weight: 600;
-  color: #0052f1;
+  color: #333333;
   font-family: "Inter";
 }
 .Header-logo {
-  width: 60%;
+  width: 48%;
 }
 .Header-dropdownContainer {
   border: 1px solid #e1eaff;
@@ -201,6 +224,7 @@ button {
 }
 
 .dropdownVisible {
+  height: 34vh;
   width: 16%;
   position: absolute;
   right: 32%;
@@ -209,31 +233,25 @@ button {
   box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
   background-color: #ffffff;
   z-index: 10;
+  max-height: 34vh;
+  overflow-y: auto;
 }
 
 .dropdown-list li,
-.Skillslist li {
+.Locationlist li {
   line-height: 2;
   padding: 0.4rem 0 0 1rem;
   font-size: 0.8rem;
   font-family: "Inter";
 }
 
-.dropdown-list li:first-child {
-  border-radius: 0.6rem 0.6rem 0 0;
-}
-.dropdown-list li:first-child span {
-  font-size: 0.6rem;
-  padding-left: 0.2rem;
-}
-
-.Skillsdropdown input {
+.Locationdropdown input {
   height: 4vh;
   width: 100%;
 }
 
 .dropdown-list li:hover,
-.Skillslist li:hover {
+.Locationlist li:hover {
   background-color: #f6f9ff;
   color: #0052f1;
 }
@@ -272,8 +290,89 @@ button {
   border: none;
   outline: none;
   visibility: hidden;
+  transition: visibility 0.6s;
 }
 
 .ProfileContainer:hover .LogoutBtn {
   visibility: visible;
+}
+
+.SearchItems {
+  justify-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+  gap: 0.4rem;
+  width: 60%;
+  border-radius: 1rem;
+  margin-top: 0.2rem;
+  margin-left: 4rem;
+}
+
+.ClearFunction {
+  cursor: pointer;
+}
+
+.SearchItemsList {
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.2rem;
+  width: 90%;
+}
+
+.SearchItemsList li {
+  text-align: center;
+  background-color: #0052f1;
+  border-radius: 1rem;
+  padding: 0.1rem;
+  font-size: 0.68rem;
+  font-weight: 480;
+  color: #ffffff;
+  font-family: "Inter";
+}
+
+.SuggestionContainer {
+  position: absolute;
+  left: 14.8%;
+  top: 14%;
+  height: 40vh;
+  width: 40%;
+  min-height: 40vh;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+  background-color: #f6f9ff;
+  box-shadow: 0px 2px 4px 0px #e5e9f2;
+  padding: 10px;
+  display: none;
+  z-index: 1;
+}
+
+.SuggestionContainer div {
+  min-height: 100%;
+  width: 50%;
+}
+.SuggestionContainer div h4 {
+  text-align: left;
+  padding-left: 1rem;
+  border-bottom: 1px solid #bfbfbf;
+}
+.SuggestionContainer div ul {
+  max-height: 36vh;
+  overflow-y: scroll;
+}
+.SuggestionContainer div ul li {
+  font-size: 0.8rem;
+  font-weight: 480;
+  font-family: "Inter";
+}
+.SuggestionContainer div ul li:hover {
+  background-color: #cdd4e0;
 }/*# sourceMappingURL=Header.css.map */

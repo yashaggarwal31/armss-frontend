@@ -73,7 +73,7 @@ Filteritem = {
 };
 
 toget = async (
-  url = "https://armss-be.exitest.com/filter/",
+  url = "https://armss-be.exitest.com/displayfilter/",
   method = "POST",
   Filteringdata = Filterdata
 ) => {
@@ -223,6 +223,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 function toShowData(data) {
+  listItems.innerHTML = "";
+
   if (data.length !== 0) {
     data = data[1];
     lst = [];
@@ -245,8 +247,9 @@ function toShowData(data) {
     }
 
     lst2 = Object.keys(items);
-    for (i of lst2) {
-      // console.log(i);
+    TotalValue.textContent = lst2.length;
+    for (let i of lst2) {
+      console.log(items[i]);
       let li = document.createElement("li");
       let ResumeId = document.createElement("p");
       ResumeId.textContent = items[i]["ResumeId"];
@@ -257,10 +260,21 @@ function toShowData(data) {
       Contact_type.textContent = contactvalue[0][1];
       let Contact_value = document.createElement("p");
       Contact_value.textContent = contactvalue[0][0];
-      let SkillName = document.createElement("p");
-      SkillName.textContent = Array.from(items[i].SkillName)
-        .slice(0, 10)
-        .join(", ");
+      let SkillName = document.createElement("button");
+      SkillName.classList.add("SkillElement");
+      SkillName.textContent = "Skills";
+      SkillName.addEventListener("mouseover", () => {
+        content = Array.from(items[i].SkillName);
+        toUpadteSkillContainer(Array.from(items[i].SkillName).join(", "));
+        SkillsContainer.style.display = "block";
+      });
+      SkillName.addEventListener("mouseout", () => {
+        SkillsContainer.textContent = "";
+        SkillsContainer.style.display = "none";
+      });
+      // SkillName.textContent = Array.from(items[i].SkillName)
+      //   .slice(0, 10)
+      //   .join(", ");
       let Experience = document.createElement("p");
       Experience.style.paddingLeft = "10px";
       Experience.textContent = Array.from(items[i].Experience)[0];
@@ -270,14 +284,13 @@ function toShowData(data) {
       li.appendChild(Contact_value);
       li.appendChild(SkillName);
       li.appendChild(Experience);
-
-      li.classList.add("headingContainer");
+      li.classList.add("elementStyle");
       listItems.appendChild(li);
     }
 
     if (method === "GET") {
       Filterdata.ResumeIdList.ResumeIdValue.push({ ResumeIdValue: lst2 });
-      // console.log(Filterdata);
+      console.log(Filterdata);
     }
   } else {
     let li = document.createElement("li");
@@ -329,14 +342,65 @@ function toShowData(data) {
 
 // console.log(document.getElementById("SearchItems"));
 
+// Experience
+
+DropdownSelectFunction = (data) => {
+  var listItems = data.getElementsByTagName("li");
+  let lst = ["All", "0-1", "1-2", "2-3", "3-6", "6-9", "9-10"];
+  for (var i = 0; i < listItems.length; i++) {
+    listItems[i].setAttribute("data-value", lst[i]);
+    listItems[i].addEventListener("click", function () {
+      Filterdata.Candidate.experience = [];
+
+      let Value = document.getElementById(this.id).textContent;
+      console.log(Value);
+      let Experiencetitle = document.getElementById("ExperienceValue");
+
+      Experiencetitle.textContent = Value !== "All" ? Value : "Experience";
+      ExperienceDropdownFunction();
+
+      if (data.experience === "All") {
+        Filterdata.Candidate.experience = [];
+      } else {
+        const [start, end] = this.getAttribute("data-value")
+          .split("-")
+          .map(Number);
+        function range(start, end) {
+          for (var i = start; i < end; i++) {
+            Filterdata.Candidate.experience.push({
+              uniqueId: generateUniqueId(),
+              experience: i,
+            });
+          }
+        }
+        range(start, end);
+      }
+      toget();
+    });
+  }
+};
+
+toUpadteSkillContainer = function (data) {
+  SkillsContainer.textContent = data;
+};
+
 function setIds() {
   SearchFilters = document.getElementById("SearchFilters");
+  TotalValue = document.getElementById("TotalValue");
+  SkillsContainer = document.getElementById("SkillsContainer");
+  chatbot = document.getElementById("Chatbot");
   // SearchInput = document.getElementById("SearchInput");
   SearchItems = document.getElementById("SearchItems");
   SearchButton = document.getElementById("SearchButton");
-  chatbot = document.getElementById("Chatbot")
   // listItems = document.getElementById("listItems");
+  ExperienceList = document.getElementById("ExperienceList");
+  SkillSuggestions = document.getElementById("SkillSuggestions");
+  LocationSuggestions = document.getElementById("LocationSuggestions");
+  SuggestionContainer = document.getElementById("SuggestionContainer");
+  LocationValue = document.getElementById("LocationValue");
 
+  console.log(SuggestionContainer);
+  DropdownSelectFunction(ExperienceList);
   SearchFilters.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
       let value = event.target.value;
@@ -346,13 +410,13 @@ function setIds() {
           uniqueId: generateUniqueId(),
           SkillName: i,
         };
-        let para = document.createElement("p");
-        para.textContent = i + " X ";
-        para.id = data.uniqueId;
-        para.onclick = function () {
+        let li = document.createElement("li");
+        li.textContent = i;
+        li.id = data.uniqueId;
+        li.onclick = function () {
           removeFunction(data.uniqueId);
         };
-        SearchItems.appendChild(para);
+        SearchItems.appendChild(li);
         Filterdata.Skill.SkillName.push(data);
       }
       SearchFilters.value = "";
@@ -363,10 +427,75 @@ function setIds() {
     toget();
     console.log(Filterdata);
     listItems.innerHTML = "";
-
   });
 
-  chatbot.addEventListener("click", function () {
-
-  })
+  chatbot.addEventListener("click", function () { });
 }
+
+toappendLocation = (data) => {
+  for (let i of data.States) {
+    let li = document.createElement("li");
+    li.textContent = i;
+    li.id = i;
+    li.setAttribute("data-value", i);
+    li.addEventListener("click", () => {
+      Filterdata.WorkExperience.Location = [];
+      LocationValue.textContent = li.id === "All" ? "Location" : li.id;
+      if (li.id === "All") {
+        Filterdata.WorkExperience.Location = [];
+      } else {
+        Filterdata.WorkExperience.Location.push({
+          uniqueId: generateUniqueId(),
+          Location: li.id,
+        });
+      }
+      LocationdropdownFunction();
+      toget();
+    });
+    Locationlist.appendChild(li);
+  }
+};
+
+FetchingLocation = () => {
+  fetch("./assets/Data/SuggestionsList.json")
+    .then((response) => response.json())
+    .then((data) => {
+      toappendLocation(data);
+    });
+};
+
+// Dropdowncode
+let downicon1 = document.getElementById("DownIcon1");
+let downicon2 = document.getElementById("DownIcon2");
+let Locationdropdown = document.getElementById("Locationdropdown");
+let ExperienceDropdown = document.getElementById("ExperienceDropdown");
+let LocationHeader = document.getElementById("Location-Header");
+let ExperienceHeader = document.getElementById("Experience-Header");
+
+let LocationdropdownFunction = () => {
+  if (Locationdropdown.style.display === "block") {
+    Locationdropdown.classList.remove("dropdownVisible");
+    Locationdropdown.style.display = "none";
+    downicon1.classList.remove("IconStyles");
+  } else {
+    FetchingLocation();
+    Locationdropdown.classList.add("dropdownVisible");
+    Locationdropdown.style.display = "block";
+    downicon1.classList.add("IconStyles");
+  }
+};
+let ExperienceDropdownFunction = () => {
+  if (ExperienceDropdown.style.display === "block") {
+    ExperienceDropdown.classList.remove("dropdownVisible");
+    ExperienceDropdown.style.display = "none";
+    downicon2.classList.remove("IconStyles");
+  } else {
+    ExperienceDropdown.classList.add("dropdownVisible");
+    ExperienceDropdown.style.display = "block";
+    ExperienceDropdown.style.right = "10.8%";
+    downicon2.classList.add("IconStyles");
+  }
+};
+
+LocationHeader.addEventListener("click", LocationdropdownFunction);
+ExperienceHeader.addEventListener("click", ExperienceDropdownFunction);

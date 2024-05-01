@@ -1,9 +1,120 @@
 .section {
+  padding: 1rem;
+  font-family: "Inter";
+
+  &-TitleContainer {
+    @include flex(flex, row, space-between, center);
+  }
+
+  &-RoleContainer {
+    .heading {
+      @include font_size_color(1.4rem, 600, $darkblue, "Inter");
+    }
+  }
+
+  &-headingContainer {
+    padding: 1rem;
+    font-size: "Inter";
+    background-color: #fafcff;
+    @include font_size_color(0.8rem, 600, null, "Inter");
+    @include grid(grid, 10% repeat(2, 20%) 5% 20%, 10%, 1rem);
+    margin-top: 2%;
+  }
+  &-SubContainer {
+    position: relative;
+    width: 100%;
+    @include flex(flex, row, space-between, center);
+
+    .heading {
+      width: 10%;
+      @include font_size_color(1.2rem, 600, $Textblack, "Inter");
+    }
+  }
+  &-DropdownContainers {
+    width: 100%;
+    @include flex(flex, row, flex-end, center, 1rem);
+  }
+  &-dropdownContainer {
+    border: 1px solid #e1eaff;
+    padding: 0.6rem;
+    border-radius: 2rem;
+    @include width_height(5vh, 16.8%);
+    @include flex(flex, row, space-between, center);
+
+    p {
+      @include font_size_color(0.88rem, 400, $Textblack, "Inter");
+    }
+  }
+}
+.Icon {
+  @include width_height(1rem, 1rem);
+  transform: rotate(0turn);
+  transition: transform 0.6s ease;
+}
+
+.IconStyles {
+  transform: rotate(0.5turn);
+  transition: transform 0.6s ease;
+}
+
+.dropdownVisible {
+  @include width_height(34vh, 16%);
+  @include position(absolute, null, 28%, null, 0%);
+  border-radius: 0.6rem;
+  box-shadow: 0 2px 4px 0px rgb(0, 0, 0, 0.3);
+  background-color: $white;
+  z-index: 10;
+  max-height: 34vh;
+  overflow-y: auto;
+  margin-top: 0.8rem;
+}
+.dropdown-list li,
+.Locationlist li {
+  line-height: 2;
+  padding: 0.4rem 0 0 1rem;
+  @include font_size_color(0.8rem, null, null, "Inter");
+}
+
+.Locationdropdown input {
+  @include width_height(4vh, 100%);
+}
+
+.dropdown-list li:hover,
+.Locationlist li:hover {
+  background-color: #f6f9ff;
+  color: #0052f1;
+}
+
+.elementStyle {
   padding: 20px;
-}
-.headingContainer {
-  padding: 10px;
-  @include grid(grid, 10% repeat(3, 20%) 20%, null, 10px);
+  font-size: "Inter";
+  @include grid(grid, 10% repeat(2, 20%) 5% 20%, null, 1rem);
 }
 
+#paraelemnet {
+  padding-bottom: 10px;
+  @include font_size_color(0.8rem, null, $Textblack, "Inter");
+}
 
+#listItems {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.SkillElement {
+  padding: 4.8px;
+  background-color: $backgraoundBlue;
+  border-radius: 6px;
+  color: $white;
+  outline: none;
+  border: none;
+}
+#SkillsContainer {
+  @include flex(flex, row, center, center, null, wrap);
+  min-height: 10vh;
+  background-color: #fafcff;
+  min-width: 96vw;
+  @include position(absolute, 0%, 100%, null, 60%);
+  @include font_size_color(0.8rem, null, null, "Inter");
+  display: none;
+}

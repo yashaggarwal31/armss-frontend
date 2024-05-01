@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./css/Dashboard.min.css" />
+    <link rel="stylesheet" href="./scss/Dashboard.css" />
+    <!-- <link rel="stylesheet" href="../dist/css/Dashboard.min.css" /> -->
     <link rel="stylesheet" href="./scss/Header.css" />
-    <link rel="stylesheet" href="./css/Demop.min.css" />
+    <link rel="stylesheet" href="./css/demop.css" />
     <link rel="stylesheet" href="css/chatbot.css" />
   </head>
   <body class="body">
-    <header id="Header"></header>
+    <header class="Header-Container" id="Header"></header>
     <section id="Dashboard" class="Dashboard">
       <div class="Dashboard-container">
         <div class="Dashboard-welcomeContainer">
@@ -28,16 +29,18 @@
           <div class="Dashboard-SubContentContainer">
             <div class="SubContentContainer-Elements">
               <h2>Resume Category (<span id="Categorys"></span>)</h2>
-              <div>
-                <!-- <button class="" id="CategoryCreate">
+
+              <div class="ButtonContainer">
+                <button class="Add" id="CategoryCreate">
                   <svg class="Icon">
                     <use xlink:href="./Icons/icons.svg#plus" />
                   </svg>
-                  Create Category
-                </button> -->
+                  Add Folder
+                </button>
+
                 <button
-                  class="primary upload"
-                  onclick="window.dialog.showModal();"
+                  class="upload primary"
+                  onclick="window.dialog.showModal()"
                 >
                   <svg class="Icon">
                     <use xlink:href="./Icons/icons.svg#plus" />
@@ -126,11 +129,43 @@
         </div>
       </div>
     </section>
+    <section class="section" id="SubCategorySection" style="display: none">
+      <div class="section-CategorySubContainer">
+        <div class="section-SubHeadingContainer">
+          <h4 class="SubCategoryHeading">
+            <span id="SubCategoryHeading"></span> (<span
+              id="SubCategoryHeadingValue"
+            ></span
+            >)
+          </h4>
+          <svg class="Icon" id="CloseSubContainer">
+            <use xlink:href="./Icons/icons.svg#close" />
+          </svg>
+        </div>
+        <div class="section-subCategory">
+          <div class="Header-Filters">
+            <input
+              type="text"
+              class="Header-keywords"
+              id="SubCategorySearchFilters"
+              placeholder=" Search Folders "
+            />
+            <button class="Header-FilterButton" id="SubCategory">
+              <svg class="Icon" id="Icon">
+                <use xlink:href="./Icons/icons.svg#SearchIcon" />
+              </svg>
+            </button>
+          </div>
+          <button>Add Folder</button>
+        </div>
 
+        <ul id="SubContainerList" class="ContainerList"></ul>
+      </div>
+    </section>
     <script src="./js/cookie.js"></script>
     <script src="./js/HeaderLoader.js"></script>
     <script src="./js/Dashboard.js"></script>
-    <script src="./js/upload.js"></script>
+    <script src="./js/upload.js" defer></script>
     <script
       src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
       defer

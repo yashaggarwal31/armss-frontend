@@ -57,12 +57,34 @@ p {
   font-family: "Inter";
 }
 
+body {
+  overflow-x: hidden;
+}
+
 label {
   padding-bottom: 0.4rem;
 }
 
 button {
   cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+::-webkit-scrollbar {
+  height: 0;
+}
+
+::-webkit-scrollbar-track {
+  visibility: hidden;
+}
+
+::-webkit-scrollbar-thumb {
+  visibility: hidden;
 }
 
 .Dashboard-container {
@@ -70,26 +92,25 @@ button {
   background-color: #f7faff;
   display: grid;
   grid-template-rows: auto auto;
-  justify-content: 1rem;
-  align-items: space-between;
+  justify-content: 4rem;
 }
 .Dashboard-welcomeContainer {
-  margin-top: 2rem;
+  margin-top: 0.6rem;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  position: relative;
 }
 .Dashboard-welcomeContainer .textContainer {
   padding: 20px 20px;
   background-color: #0052f1;
-  border-radius: 1.4rem;
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 24vh;
   width: 92%;
-  position: relative;
 }
 .Dashboard-welcomeContainer .textContainer h2 {
   font-size: 1.28rem;
@@ -123,24 +144,19 @@ button {
   justify-content: space-between;
   align-items: center;
 }
-.Dashboard-SubContentContainer .SubContentContainer-Elements button {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  font-size: 0.88rem;
-  font-weight: 400;
-  color: #ffffff;
-  font-family: "Inter";
-  width: 100%;
-  padding: 0.8rem;
-  background-color: #0052f1;
-  border-radius: 0.6rem;
-  outline: none;
-  border: none;
+.Dashboard-Image {
+  position: absolute;
+  right: 4.8%;
+  top: 4%;
+  width: 24%;
 }
-.Dashboard-SubContentContainer .ContainerList {
+
+.Icon {
+  width: 8px;
+  height: 18px;
+}
+
+.ContainerList {
   background-color: #f7faff;
   border-radius: 1rem;
   padding: 1.4rem;
@@ -151,24 +167,8 @@ button {
   gap: 1.2rem;
   flex-wrap: wrap;
 }
-.Dashboard-Image {
-  position: absolute;
-  right: 4.8%;
-  top: 20.8%;
-  width: 24%;
-}
 
-.Icon {
-  width: 8px;
-  height: 18px;
-}
-
-.DashboardFolderIcon {
-  height: 6vh;
-  width: 100%;
-}
-
-.listitem {
+.listItem {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -177,16 +177,44 @@ button {
   width: 18%;
   max-height: 20vh;
   min-height: 20vh;
-  border-radius: 1rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.listItem div:first-child {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.listItem:hover {
+  background-color: #0052f1;
+}
+.listItem:hover h4 {
+  color: #ffffff;
+}
+.listItem:hover .DashboardFolderIcon svg {
+  background-color: #ffffff;
+}
+.listItem:hover .DashboardFolderIcon2 {
   background-color: #ffffff;
 }
 
-.listitem div {
-  width: 28%;
-  max-height: 6vh;
-  margin-bottom: 1rem;
-  border-radius: 50%;
+.DashboardFolderIcon svg {
+  display: flex;
+  max-height: 6.4vh;
+  width: 34%;
+  padding: 0.6rem;
   background-color: #f7faff;
+  border-radius: 50%;
+}
+
+.DashboardFolderIcon2 {
+  max-height: 4.6vh;
+  width: 20%;
+  padding: 0.56rem;
+  background-color: rgba(255, 235, 230, 0.4705882353);
+  border-radius: 50%;
 }
 
 .ContainerListactive {
@@ -195,7 +223,95 @@ button {
 .ContainerListactive h4 {
   color: #ffffff;
 }
-
-.ContainerListactive div {
+.ContainerListactive .DashboardFolderIcon svg {
   background-color: #ffffff;
+}
+
+.ButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.ButtonContainer button.upload {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: #ffffff;
+  font-family: "Inter";
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  background-color: #0052f1;
+}
+
+button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: #ffffff;
+  font-family: "Inter";
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  background-color: #0052f1;
+}
+
+.section {
+  position: absolute;
+  top: 0%;
+  bottom: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 120%;
+  background-color: rgba(255, 255, 255, 0.3254901961);
+  -webkit-backdrop-filter: blur(0.6px);
+          backdrop-filter: blur(0.6px);
+}
+.section-SubHeadingContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.section-SubHeadingContainer svg {
+  cursor: pointer;
+}
+.section-CategorySubContainer {
+  width: 56%;
+  background-color: #ffffff;
+  padding: 1.2rem;
+  border-radius: 1rem;
+  max-height: 40%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: 0 2px 4px 0px #bfbfbf;
+}
+.section-CategorySubContainer .SubCategoryHeading {
+  font-size: 1.28rem;
+  font-weight: 600;
+  color: #333333;
+  font-family: "Inter";
+  margin-bottom: 0.8rem;
+}
+.section-subCategory {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+#SubContainerList li {
+  width: 30%;
 }/*# sourceMappingURL=Dashboard.css.map */

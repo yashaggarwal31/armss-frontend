@@ -57,21 +57,195 @@ p {
   font-family: "Inter";
 }
 
+body {
+  overflow-x: hidden;
+}
+
 label {
   padding-bottom: 0.4rem;
 }
 
 button {
   cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+::-webkit-scrollbar {
+  height: 0;
+}
+
+::-webkit-scrollbar-track {
+  visibility: hidden;
+}
+
+::-webkit-scrollbar-thumb {
+  visibility: hidden;
 }
 
 .section {
-  padding: 20px;
+  padding: 1rem;
+  font-family: "Inter";
+}
+.section-TitleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.section-RoleContainer .heading {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #0052f1;
+  font-family: "Inter";
+}
+.section-headingContainer {
+  padding: 1rem;
+  font-size: "Inter";
+  background-color: #fafcff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: "Inter";
+  display: grid;
+  grid-template-columns: 10% repeat(2, 20%) 5% 20%;
+  grid-template-rows: 10%;
+  gap: 1rem;
+  margin-top: 2%;
+}
+.section-SubContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.section-SubContainer .heading {
+  width: 10%;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333333;
+  font-family: "Inter";
+}
+.section-DropdownContainers {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+.section-dropdownContainer {
+  border: 1px solid #e1eaff;
+  padding: 0.6rem;
+  border-radius: 2rem;
+  height: 5vh;
+  width: 16.8%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.section-dropdownContainer p {
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: #333333;
+  font-family: "Inter";
 }
 
-.headingContainer {
-  padding: 10px;
+.Icon {
+  height: 1rem;
+  width: 1rem;
+  transform: rotate(0turn);
+  transition: transform 0.6s ease;
+}
+
+.IconStyles {
+  transform: rotate(0.5turn);
+  transition: transform 0.6s ease;
+}
+
+.dropdownVisible {
+  height: 34vh;
+  width: 16%;
+  position: absolute;
+  right: 28%;
+  bottom: 0%;
+  border-radius: 0.6rem;
+  box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+  z-index: 10;
+  max-height: 34vh;
+  overflow-y: auto;
+  margin-top: 0.8rem;
+}
+
+.dropdown-list li,
+.Locationlist li {
+  line-height: 2;
+  padding: 0.4rem 0 0 1rem;
+  font-size: 0.8rem;
+  font-family: "Inter";
+}
+
+.Locationdropdown input {
+  height: 4vh;
+  width: 100%;
+}
+
+.dropdown-list li:hover,
+.Locationlist li:hover {
+  background-color: #f6f9ff;
+  color: #0052f1;
+}
+
+.elementStyle {
+  padding: 20px;
+  font-size: "Inter";
   display: grid;
-  grid-template-columns: 10% repeat(3, 20%) 20%;
-  gap: 10px;
+  grid-template-columns: 10% repeat(2, 20%) 5% 20%;
+  gap: 1rem;
+}
+
+#paraelemnet {
+  padding-bottom: 10px;
+  font-size: 0.8rem;
+  color: #333333;
+  font-family: "Inter";
+}
+
+#listItems {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.SkillElement {
+  padding: 4.8px;
+  background-color: #0052f1;
+  border-radius: 6px;
+  color: #ffffff;
+  outline: none;
+  border: none;
+}
+
+#SkillsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: 10vh;
+  background-color: #fafcff;
+  min-width: 96vw;
+  position: absolute;
+  left: 0%;
+  right: 100%;
+  bottom: 60%;
+  font-size: 0.8rem;
+  font-family: "Inter";
+  display: none;
 }/*# sourceMappingURL=Data.css.map */

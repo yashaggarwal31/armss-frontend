@@ -141,7 +141,7 @@ async function chat(event) {
             // sessionStorage.setItem('send_data', send_data_json);
             console.log("after the mess");
             console.log(send_data);
-            let url = 'https://armss.exitest.com/resumeDisplay.html';
+            let url = 'resumeDisplay.html';
             // Redirect to the new URL
             // window.location.href = url;
             window.location.replace(url);
@@ -210,7 +210,7 @@ async function chat(event) {
 
     //             console.log("after the mess")
     //             console.log(send_data)
-    //             let url = 'https://armss.exitest.com/resumeDisplay.html'
+    //             let url = 'resumeDisplay.html'
 
     //             // Redirect to the new URL
     //             // window.location.href = url;

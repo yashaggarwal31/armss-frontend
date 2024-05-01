@@ -10,11 +10,69 @@
     <title>Document</title>
   </head>
   <body>
-    <header id="Header"></header>
+    <header class="Header-Container" id="Header"></header>
     <main>
       <section class="section">
-        <h2 id="heading"></h2>
-        <div class="headingContainer">
+        <div class="section-TitleContainer">
+          <div class="section-RoleContainer">
+            <h2 id="heading" class="heading"></h2>
+            <p id="paraelemnet">
+              Efficient recruitment process with quick access to candidate
+              qualifications.
+            </p>
+          </div>
+        </div>
+        <div class="section-SubContainer">
+          <h2 class="heading">Total: <span id="TotalValue"></span></h2>
+          <div class="section-DropdownContainers">
+            <div class="section-dropdownContainer" id="Location-Header">
+              <p id="LocationValue">Location</p>
+              <svg class="Icon" id="DownIcon1">
+                <use xlink:href="./Icons/icons.svg#Downarrow" />
+              </svg>
+            </div>
+
+            <div class="section-dropdownContainer" id="Experience-Header">
+              <p id="ExperienceValue">Experience</p>
+              <svg class="Icon" id="DownIcon2">
+                <use xlink:href="./Icons/icons.svg#Downarrow" />
+              </svg>
+            </div>
+            <button>
+              <svg class="Icon" id="Icon">
+                <use xlink:href="./Icons/icons.svg#plus" />
+              </svg>
+              Upload Resumes
+            </button>
+          </div>
+
+          <div
+            class="section-dropdownContainer"
+            id="ExperienceDropdown"
+            style="display: none"
+          >
+            <ul class="dropdown-list" id="ExperienceList">
+              <li id="All">All</li>
+              <li id="item1">0 - 1 Year</li>
+              <li id="item2">1 - 2 Year</li>
+              <li id="item3">2 - 3 Year</li>
+              <li id="item4">3 - 6 Year</li>
+              <li id="item5">6 - 9 Year</li>
+              <li id="item6">9+ Year</li>
+            </ul>
+          </div>
+
+          <div
+            class="Locationdropdown"
+            id="Locationdropdown"
+            style="display: none"
+          >
+            <ul class="Locationlist" id="Locationlist"></ul>
+          </div>
+        </div>
+        <div id="SkillsContainer" class="SkillContainer"></div>
+
+        <div class="section-headingContainer">
           <h4>Resume Id</h4>
           <h4>Name</h4>
           <h4>E-mail</h4>

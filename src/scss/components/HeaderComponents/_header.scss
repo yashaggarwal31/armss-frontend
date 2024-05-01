@@ -1,30 +1,31 @@
 .Header {
-  &-container {
+  &-Container {
+    padding-top: 1rem;
     background-color: $white;
-    @include grid(grid, null, 2fr 2fr);
+    @include grid(grid, null, 2fr 0.6fr);
+    border-bottom: 0.1px solid #bfbfbfb6;
   }
   &-SubContainer {
     position: relative;
-    padding: 10px;
     width: 100%;
     @include flex(flex, row, space-between, center);
   }
 
   &-Filters {
-    @include width_height(null, 40%);
+    @include width_height(null, 60%);
     @include flex(flex, row, space-between, center);
     background-color: rgb(232, 238, 251, 44%);
     border: 0.8px solid #e1eaff;
     border-radius: 2rem;
-    padding: 0.4rem 0.6rem;
+    padding: 0.2rem;
   }
   &-logoContainer {
     // @include width_height(null, 8%);
     @include flex(flex, column, center, center);
-    @include font_size_color(0.48rem, 600, $darkblue, "Inter");
+    @include font_size_color(0.48rem, 600, $Textblack, "Inter");
   }
   &-logo {
-    @include width_height(null, 60%);
+    @include width_height(null, 48%);
   }
   &-dropdownContainer {
     border: 1px solid #e1eaff;
@@ -91,33 +92,28 @@
 }
 
 .dropdownVisible {
-  @include width_height(null, 16%);
+  @include width_height(34vh, 16%);
   @include position(absolute, null, 32%, 90%, null);
   border-radius: 0.6rem;
   box-shadow: 0 2px 4px 0px rgb(0, 0, 0, 0.3);
   background-color: $white;
   z-index: 10;
+  max-height: 34vh;
+  overflow-y: auto;
 }
 .dropdown-list li,
-.Skillslist li {
+.Locationlist li {
   line-height: 2;
   padding: 0.4rem 0 0 1rem;
   @include font_size_color(0.8rem, null, null, "Inter");
 }
-.dropdown-list li:first-child {
-  border-radius: 0.6rem 0.6rem 0 0;
 
-  span {
-    font-size: 0.6rem;
-    padding-left: 0.2rem;
-  }
-}
-.Skillsdropdown input {
+.Locationdropdown input {
   @include width_height(4vh, 100%);
 }
 
 .dropdown-list li:hover,
-.Skillslist li:hover {
+.Locationlist li:hover {
   background-color: #f6f9ff;
   color: #0052f1;
 }
@@ -144,7 +140,69 @@
   border: none;
   outline: none;
   visibility: hidden;
+  transition: visibility 0.6s;
 }
 .ProfileContainer:hover .LogoutBtn {
   visibility: visible;
+}
+
+.SearchItems {
+  justify-self: center;
+  @include flex(flex, row, flex-start, baseline, 0.4rem);
+  @include width_height(null, 60%);
+  border-radius: 1rem;
+  margin-top: 0.2rem;
+  margin-left: 4rem;
+}
+.ClearFunction {
+  cursor: pointer;
+}
+.SearchItemsList {
+  border-radius: 1rem;
+  @include flex(flex, row, flex-start, center, 0.2rem);
+  @include width_height(null, 90%);
+}
+.SearchItemsList li {
+  text-align: center;
+  background-color: $backgraoundBlue;
+  border-radius: 1rem;
+  padding: 0.1rem;
+  @include font_size_color(0.68rem, 480, $white, "Inter");
+}
+
+.SuggestionContainer {
+  @include position(absolute, 14.8%, null, 14%);
+  @include width_height(40vh, 40%);
+  min-height: 40vh;
+  border-radius: 1rem;
+  @include flex(flex, row, space-around, center, 1rem);
+  background-color: #f6f9ff;
+  box-shadow: 0px 2px 4px 0px #e5e9f2;
+  padding: 10px;
+  display: none;
+  z-index: 1;
+}
+
+.SuggestionContainer div {
+  min-height: 100%;
+  @include width_height(null, 50%);
+
+  h4 {
+    text-align: left;
+    padding-left: 1rem;
+    border-bottom: 1px solid #bfbfbf;
+  }
+
+  ul {
+    max-height: 36vh;
+    overflow-y: scroll;
+
+    li {
+      @include font_size_color(0.8rem, 480, null, "Inter");
+    }
+
+    li:hover {
+      background-color: #cdd4e0;
+    }
+  }
 }

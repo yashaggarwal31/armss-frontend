@@ -57,12 +57,34 @@ p {
   font-family: "Inter";
 }
 
+body {
+  overflow-x: hidden;
+}
+
 label {
   padding-bottom: 0.4rem;
 }
 
 button {
   cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+::-webkit-scrollbar {
+  height: 0;
+}
+
+::-webkit-scrollbar-track {
+  visibility: hidden;
+}
+
+::-webkit-scrollbar-thumb {
+  visibility: hidden;
 }
 
 .btn {
