@@ -45,7 +45,7 @@ function waitForCondition(i) {
 //condition will become uploadingQueue size less than 5
 
 const upload = async () => {
-    document.getElementById('u-lists').style.display = 'block';
+    // document.getElementById('u-lists').style.display = 'block';
     document.getElementById('upload-btn').disabled = true;
 
     fileList = document.getElementById('fileInput').files;

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./scss/Header.css" />
     <link rel="stylesheet" href="./css/demop.css" />
     <link rel="stylesheet" href="css/chatbot.css" />
+    <link rel="stylesheet" href="./css/uploadfiles.css" />
   </head>
   <body class="body">
     <header class="Header-Container" id="Header"></header>
@@ -48,7 +49,97 @@
                   Upload Resumes
                 </button>
 
-                <dialog id="dialog" class="upload-dialog">
+                <!-- UPLOAD FUNCTIONALITY -->
+
+                <dialog id="dialog" class="upload-dialog main-upload-div">
+                  <div class="upload-files-title-div">
+                    <span class="upload-files-title">Upload Files</span>
+                    <button
+                      onclick="window.dialog.close();"
+                      aria-label="close"
+                      class="x close-button"
+                    >
+                      ❌
+                    </button>
+                  </div>
+
+                  <div class="upload-zone-div div-center flex-col">
+                    <img
+                      style="width: 50px; height: 50px"
+                      src="./assets/upload-icon.png"
+                      alt=""
+                    />
+
+                    <div>Drag & drop files, <a href="#">Browse</a></div>
+                    <div><span>Or</span></div>
+                    <div class="div-center gap-1">
+                      from Google Drive
+                      <img
+                        style="display: inline; width: 20px; height: 20px"
+                        src="./assets/google-drive.png"
+                        alt=""
+                      />
+                    </div>
+
+                    <div class="upload-files-supported text-center">
+                      PNG, JPEG, PDF, TXT are supported
+                    </div>
+                  </div>
+
+                  <div class="upload-files-button">
+                    <button
+                      class="upload-button-real"
+                      role="button"
+                      id="upload-btn"
+                    >
+                      Upload
+                    </button>
+                  </div>
+
+                  <div class="upload-files-after-click-div gap-4">
+                    <div class="div-center">
+                      <img src="./assets/uploading.png" alt="" />
+                    </div>
+                    <!-- <span>Uploading</span> -->
+                    <div class="right-side-upload-files-div">
+                      <div class="text-right">
+                        <span style="color: #f69400">2</span>
+                        <span class="font-weight-500">ERRORS</span>
+                      </div>
+                      <div>
+                        <progress
+                          style="width: 100%"
+                          class="upload-progress-bar"
+                          id="progressBarOverall"
+                          max="100"
+                          value="100"
+                          style="color: #0052f1"
+                        ></progress>
+                      </div>
+                      <div class="upload-files-count">
+                        8/10 files
+                        <a style="color: #0052f1" href="#">are uploaded</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="system-error-table">
+                    <div class="text-left">System Error</div>
+                    <div>
+                      <ul>
+                        <li class="grid grid-template-col-5">
+                          <h4>Status</h4>
+                          <h4>Filename</h4>
+                          <h4>Note</h4>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </dialog>
+
+                <!-- UPLOAD FUNCTIONALITY END -->
+
+                <!-- <dialog id="dialog" class="upload-dialog">
                   <div class="flex-col gap-2 div-center mt-2">
                     <h3 class="text-left">Upload your files!</h3>
 
@@ -77,21 +168,21 @@
                       Upload Files
                     </label>
           -->
-                    <!-- <button id='upload-btn' onclick="upload()">Upload file</button> -->
-                    <button class="button-21" role="button" id="upload-btn">
+                <!-- <button id='upload-btn' onclick="upload()">Upload file</button> -->
+                <!-- <button class="button-21" role="button" id="upload-btn">
                       Upload Files
                     </button>
-                  </div>
+                  </div>  -->
 
-                  <!-- <progress id="progressBarOverall" value="0" max="100"></progress> -->
-                  <span id="progressNumbers"></span>
+                <!-- <progress id="progressBarOverall" value="0" max="100"></progress> -->
+                <!-- <span id="progressNumbers"></span>
                   <div id="fileUploadList">
                     <!-- File upload list will be dynamically populated  -->
-                  </div>
+                <!-- </div>
 
                   <div>
                     <!-- <progress id="progress-bar" value="0" max="100"></progress> -->
-                    <span id="individual-progress"></span>
+                <!-- <span id="individual-progress"></span>
                   </div>
 
                   <div id="u-lists" class="upload-lists">
@@ -111,7 +202,7 @@
                       <!-- <div id="cancelled-list">
                         <h1>Cancelled</h1>
                       </div> -->
-                    </div>
+                <!-- </div>
                   </div>
 
                   <button
@@ -121,7 +212,7 @@
                   >
                     ❌
                   </button>
-                </dialog>
+                </dialog>   -->
               </div>
             </div>
             <ul id="ContainerList" class="ContainerList"></ul>
