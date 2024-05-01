@@ -30,7 +30,7 @@ downicon2.addEventListener("click", function () {
 });
 
 function Logout() {
-  window.location.replace("https://armss.exitest.com/src/index.html");
+  window.location.replace("https://armss.exitest.com/index.html");
   setCookie(localStorage.getItem("Rsession_name"), " ", -1);
   localStorage.removeItem("Rsession_name");
 }

@@ -38,7 +38,7 @@ toLoginValidate = (data) => {
     localStorage.setItem("Rsession_name", data.session_name);
     setCookie(data.session_name, data.session_token, data.validation_time);
 
-    window.location.replace("https://armss.exitest.com/src/welcome.html");
+    window.location.replace("https://armss.exitest.com/welcome.html");
 
     // document.getElementById("responsePara").textContent = "";
   } else {

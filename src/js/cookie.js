@@ -27,14 +27,14 @@ getCookie = (name) => {
 isLogin = () => {
   let cookieData = localStorage.getItem("Rsession_name");
   if (getCookie(cookieData) !== null) {
-    window.location.replace("https://armss.exitest.com/src/welcome.html");
+    window.location.replace("https://armss.exitest.com/welcome.html");
   }
 };
 
 isLogout = () => {
   let cookieData = localStorage.getItem("Rsession_name");
   if (getCookie(cookieData) === null) {
-    window.location.replace("https://armss.exitest.com/src/index.html");
+    window.location.replace("https://armss.exitest.com/index.html");
   }
 };
 
