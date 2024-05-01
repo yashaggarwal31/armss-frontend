@@ -5,12 +5,16 @@ const htmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
     mode: "development",
     entry: {
-        entry1: "./src/login.html",
-        home: "./src/index.html",
+        login: "./src/index.html",
+        welcome: "./src/welcome.html",
+        resumeDisplay: "./src/resumeDisplay.html",
+        data: './src/data.html'
+
     },
     output: {
         filename: "[name].bundle.js",
         path: path.resolve(__dirname, "dist"),
+        publicPath: '/',
     },
     devServer: {
         allowedHosts: "all",
@@ -41,15 +45,27 @@ module.exports = {
     },
     plugins: [
         new htmlWebpackPlugin({
-            title: "login",
-            template: "./src/login.html", // Path to your HTML template
-            filename: "login.html", // Output HTML file name
-            inject: false,
-        }),
-        new htmlWebpackPlugin({
             title: "index.html",
             template: "./src/index.html", // Path to another HTML template
             filename: "index.html", // Output HTML file name
+            inject: false,
+        }),
+        new htmlWebpackPlugin({
+            title: "welcome.html",
+            template: "./src/welcome.html", // Path to another HTML template
+            filename: "welcome.html", // Output HTML file name
+            inject: false,
+        }),
+        new htmlWebpackPlugin({
+            title: "resumeDisplay.html",
+            template: "./src/resumeDisplay.html", // Path to another HTML template
+            filename: "resumeDisplay.html", // Output HTML file name
+            inject: false,
+        }),
+        new htmlWebpackPlugin({
+            title: "data.html",
+            template: "./src/data.html", // Path to another HTML template
+            filename: "data.html", // Output HTML file name
             inject: false,
         }),
         new webpack.HotModuleReplacementPlugin(),

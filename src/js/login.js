@@ -1,10 +1,11 @@
 async function digestMessage(message) {
-  const msgUint8 = new TextEncoder().encode(message);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", msgUint8);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hashHex = hashArray
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
+  // Calculate the SHA-256 hash using CryptoJS
+  const hash = CryptoJS.SHA256(message);
+
+  // Convert the hash to a hex string
+  const hashHex = hash.toString(CryptoJS.enc.Hex);
+
+  // Return the hash as a hex string
   return hashHex;
 }
 
@@ -37,7 +38,7 @@ toLoginValidate = (data) => {
     localStorage.setItem("Rsession_name", data.session_name);
     setCookie(data.session_name, data.session_token, data.validation_time);
 
-    window.location.replace("http://127.0.0.1:5500/src/welcome.html");
+    window.location.replace("https://armss.exitest.com/src/welcome.html");
 
     // document.getElementById("responsePara").textContent = "";
   } else {

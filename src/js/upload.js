@@ -185,7 +185,7 @@ const uploadFileThroughLink = (url, file, fileProgress, fileID) => {
     // let newurl = url.replace('minio:9000', '172.24.0.5:9000')
     // console.log('I am sending url ', url)
 
-    // fetch('http://localhost:5500/upload',
+    // fetch('https://armss.exitest.com/upload',
     //     {
     //         method: 'POST',
     //         headers: {
