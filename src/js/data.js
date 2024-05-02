@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     let url = new URL("https://armss-be.exitest.com/displayskillmap/");
     url.search = new URLSearchParams(data1).toString();
     method = "GET";
-    // toget(url, method);
+    toget(url, method);
   }
 });
 

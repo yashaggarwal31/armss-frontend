@@ -16,7 +16,7 @@
     padding: 1rem;
     background-color: #fafcff;
     @include font_size_color(0.8rem, 600, null, "Inter");
-    @include grid(grid, 14% 12% 6% 10% 16% 10% 14% 12% 6%, 1rem);
+    @include grid(grid, 10% 12% 10% 10% 16% 10% 14% 12% 6%, 1rem);
     margin-top: 2%;
   }
   &-SubContainer {
@@ -89,7 +89,7 @@
   padding: 20px;
   font-size: "Inter";
 
-  @include grid(grid, 14% 12% 6% 10% 16% 10% 14% 12% 6%, 1rem);
+  @include grid(grid, 10% 12% 10% 10% 16% 10% 14% 12% 6%, 1rem);
 }
 
 #paraelemnet {

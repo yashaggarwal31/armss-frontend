@@ -110,7 +110,7 @@ button {
   font-weight: 600;
   font-family: "Inter";
   display: grid;
-  grid-template-columns: 14% 12% 6% 10% 16% 10% 14% 12% 6%;
+  grid-template-columns: 10% 12% 10% 10% 16% 10% 14% 12% 6%;
   grid-template-rows: 1rem;
   margin-top: 2%;
 }
@@ -206,7 +206,7 @@ button {
   padding: 20px;
   font-size: "Inter";
   display: grid;
-  grid-template-columns: 14% 12% 6% 10% 16% 10% 14% 12% 6%;
+  grid-template-columns: 10% 12% 10% 10% 16% 10% 14% 12% 6%;
   grid-template-rows: 1rem;
 }
 
