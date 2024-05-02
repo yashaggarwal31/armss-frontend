@@ -1,3 +1,72 @@
+const uploadDiv = document.getElementById('upload-zone');
+const fileInput = document.getElementById('fileInput');
+const drivelink = document.getElementById('drivelink');
+const filesList = document.getElementById('fileList');
+
+uploadDiv.addEventListener('click', function (event) {
+
+    if (event.target !== drivelink) {
+        // If not, trigger the file input click event
+        fileInput.click();
+    }
+});
+
+// Add drag-and-drop event listeners to the div
+uploadDiv.addEventListener('dragover', function (event) {
+    // Prevent default behavior to allow dropping
+    event.preventDefault();
+    uploadDiv.classList.add('dragging');
+});
+
+uploadDiv.addEventListener('dragleave', function () {
+    // Remove dragging style when drag leaves the div
+    uploadDiv.classList.remove('dragging');
+});
+
+uploadDiv.addEventListener('drop', function (event) {
+    // Prevent default behavior and stop event propagation
+    event.preventDefault();
+    uploadDiv.classList.remove('dragging');
+
+    // Access the dropped files
+    const files = event.dataTransfer.files;
+
+    // Set the dropped files in the file input element
+    fileInput.files = files;
+
+    // Optional: Handle the file selection
+    if (files.length > 0) {
+        console.log('Dropped files:', files);
+        // Perform desired action with the files (e.g., uploading)
+    }
+});
+
+
+fileInput.addEventListener('change', function () {
+    const files = fileInput.files;
+
+    // Clear previous list
+    filesList.innerHTML = '';
+
+    if (files.length > 0) {
+        // Apply CSS class when files are selected
+        uploadDiv.classList.add('hasFiles');
+
+        // Display the list of uploaded files
+        const ul = document.createElement('ul');
+        for (let i = 0; i < files.length; i++) {
+            const li = document.createElement('li');
+            li.textContent = files[i].name;
+            ul.appendChild(li);
+        }
+        filesList.appendChild(ul);
+    } else {
+        // Remove CSS class if no files are selected
+        uploadDiv.classList.remove('hasFiles');
+    }
+});
+
+
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('upload-btn').addEventListener('click', function (event) {
         event.preventDefault();
@@ -45,14 +114,17 @@ function waitForCondition(i) {
 //condition will become uploadingQueue size less than 5
 
 const upload = async () => {
+
     // document.getElementById('u-lists').style.display = 'block';
     document.getElementById('upload-btn').disabled = true;
 
     fileList = document.getElementById('fileInput').files;
 
+    console.log('ssss', fileList)
+
     // document.getElementById('fileInput').value = ''
     progressDiv = document.getElementById('progress-div');
-    progressDiv.style.display = 'block';
+    // progressDiv.style.display = 'block';
 
     progressBarOverall = document.getElementById('progressBarOverall');
     total = fileList.length;

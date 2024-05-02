@@ -18,12 +18,28 @@
 .upload-files-button{
     margin-top: 1rem;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
 }
 
 .upload-button-real{
     padding:0.8rem 2rem;
     font-weight: 600;
+}
+
+.text-color-green{
+    color: green;
+}
+
+.display-none{
+    display: none;
+}
+
+.right-side-upload-files-div{
+    display: none;
+}
+
+.dragging{
+    background-color: aqua;
 }
 
 .text-right{
@@ -48,7 +64,8 @@
 }
 
 .upload-files-after-click-div{
-    display:grid;
+    display: none;
+    /* display:grid; */
     grid-template-columns: 1.5fr 5fr;
     border: 2px solid #EBEBEB;
     padding: 1rem;
@@ -73,13 +90,17 @@
     overflow-x: hidden;
 }
 
-/* .text-color-grey{
-    color: #757575;
-} */
+.text-color-grey{
+    color: #333;
+}
 
 .font-weight-500{
     font-weight: 500;
 }
+
+.font-weight-600{
+    font-weight:600;
+};
 
 .text-center{
     text-align: center;
@@ -147,7 +168,7 @@
 }
 
 .border-top{
-    border-top:1px solid black;
+    border-top:1px solid #DEE9FF;
 }
 
 .divider{
@@ -162,10 +183,28 @@
     /* margin:0 1.25rem; */
 }
 
+.google-drive{
+    z-index: 9;
+}
+
+
+
 
 div.text-color-grey{
     h4{
         color: #757575;
         padding:0;
+    }
+}
+
+h4.failure{
+   color:red;
+}
+
+.upload-table-ele{
+    li{
+        h4{
+            font-weight: 400;
+        }
     }
 }
