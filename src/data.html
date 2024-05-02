@@ -38,12 +38,27 @@
                 <use xlink:href="./Icons/icons.svg#Downarrow" />
               </svg>
             </div>
+
+            <div class="section-dropdownContainer" id="Skill-Header">
+              <p id="SkillValue">Skills</p>
+              <svg class="Icon" id="DownIcon3">
+                <use xlink:href="./Icons/icons.svg#Downarrow" />
+              </svg>
+            </div>
             <button>
               <svg class="Icon" id="Icon">
                 <use xlink:href="./Icons/icons.svg#plus" />
               </svg>
               Upload Resumes
             </button>
+          </div>
+
+          <div
+            class="section-dropdownContainer"
+            id="SkillDropdown"
+            style="display: none"
+          >
+            <ul class="dropdown-list" id="SkillList"></ul>
           </div>
 
           <div
@@ -70,26 +85,30 @@
             <ul class="Locationlist" id="Locationlist"></ul>
           </div>
         </div>
-        <div id="SkillsContainer" class="SkillContainer"></div>
 
         <div class="section-headingContainer">
-          <h4>Resume Id</h4>
           <h4>Name</h4>
-          <h4>E-mail</h4>
+          <h4>Role</h4>
           <h4>Skills</h4>
           <h4>Experience</h4>
+          <h4>E-mail</h4>
+          <h4>Location</h4>
+          <h4>Contact Number</h4>
+          <h4>Upload Date</h4>
+          <h4>Action</h4>
         </div>
         <ul id="listItems"></ul>
+        <div id="SkillsContainer" class="SkillContainer"></div>
       </section>
     </main>
-    <script src="./js/HeaderLoader.js"></script>
-    <!-- <script src="scripts/chatbot.js"></script> -->
-    <script src="./js/data.js"></script>
     <script src="./js/cookie.js"></script>
+    <script src="./js/HeaderLoader.js"></script>
+    <!-- <script src="scripts/chxatbot.js"></script> -->
+    <script src="./js/data.js"></script>
+
     <!-- <script>
       // Get the modal
       var modal = document.getElementById("myModal");
-
       // Get the button that opens the modal
       var btn = document.getElementById("Chatbot");
 

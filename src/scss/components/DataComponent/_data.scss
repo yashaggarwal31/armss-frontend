@@ -8,16 +8,15 @@
 
   &-RoleContainer {
     .heading {
-      @include font_size_color(1.4rem, 600, $darkblue, "Inter");
+      @include font_size_color(1.4rem, 700, $backgraoundBlue, "Inter");
     }
   }
 
   &-headingContainer {
     padding: 1rem;
-    font-size: "Inter";
     background-color: #fafcff;
     @include font_size_color(0.8rem, 600, null, "Inter");
-    @include grid(grid, 10% repeat(2, 20%) 5% 20%, 10%, 1rem);
+    @include grid(grid, 14% 12% 6% 10% 16% 10% 14% 12% 6%, 1rem);
     margin-top: 2%;
   }
   &-SubContainer {
@@ -31,13 +30,13 @@
     }
   }
   &-DropdownContainers {
-    width: 100%;
+    width: 80%;
     @include flex(flex, row, flex-end, center, 1rem);
   }
   &-dropdownContainer {
     border: 1px solid #e1eaff;
-    padding: 0.6rem;
     border-radius: 2rem;
+    padding: 0.6rem;
     @include width_height(5vh, 16.8%);
     @include flex(flex, row, space-between, center);
 
@@ -58,8 +57,8 @@
 }
 
 .dropdownVisible {
-  @include width_height(34vh, 16%);
-  @include position(absolute, null, 28%, null, 0%);
+  @include width_height(28.8vh, 14%);
+  @include position(absolute, null, 44.8%, null, 0%);
   border-radius: 0.6rem;
   box-shadow: 0 2px 4px 0px rgb(0, 0, 0, 0.3);
   background-color: $white;
@@ -67,12 +66,13 @@
   max-height: 34vh;
   overflow-y: auto;
   margin-top: 0.8rem;
+  padding: 0;
 }
 .dropdown-list li,
 .Locationlist li {
   line-height: 2;
   padding: 0.4rem 0 0 1rem;
-  @include font_size_color(0.8rem, null, null, "Inter");
+  @include font_size_color(0.68rem, null, null, "Inter");
 }
 
 .Locationdropdown input {
@@ -88,7 +88,8 @@
 .elementStyle {
   padding: 20px;
   font-size: "Inter";
-  @include grid(grid, 10% repeat(2, 20%) 5% 20%, null, 1rem);
+
+  @include grid(grid, 14% 12% 6% 10% 16% 10% 14% 12% 6%, 1rem);
 }
 
 #paraelemnet {
@@ -99,10 +100,11 @@
 #listItems {
   max-height: 80vh;
   overflow-y: auto;
+  position: relative;
 }
 
 .SkillElement {
-  padding: 4.8px;
+  padding: 4px;
   background-color: $backgraoundBlue;
   border-radius: 6px;
   color: $white;
@@ -111,10 +113,17 @@
 }
 #SkillsContainer {
   @include flex(flex, row, center, center, null, wrap);
-  min-height: 10vh;
   background-color: #fafcff;
-  min-width: 96vw;
-  @include position(absolute, 0%, 100%, null, 60%);
+  width: 20%;
+  @include position(absolute, 0%, 10%, null, 60%);
   @include font_size_color(0.8rem, null, null, "Inter");
   display: none;
+}
+
+button {
+  @include flex(flex, row, space-between, center, 1rem);
+  @include font_size_color(0.88rem, 400, $white, "Inter");
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  background-color: $darkblue;
 }

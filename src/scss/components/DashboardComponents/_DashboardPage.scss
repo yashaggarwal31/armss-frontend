@@ -69,18 +69,27 @@
   min-height: 20vh;
   background-color: $white;
   border-radius: 10px;
+
+  h4 {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 
 .listItem div:first-child {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  pointer-events: none;
 }
 
 .listItem:hover {
   background-color: $backgraoundBlue;
   h4 {
     color: $white;
+    white-space: wrap;
   }
 
   .DashboardFolderIcon {
