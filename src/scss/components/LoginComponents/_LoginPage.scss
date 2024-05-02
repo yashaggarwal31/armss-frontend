@@ -1,7 +1,8 @@
 .LoginPage {
   &-Container {
     @include width_height(100vh, 100%);
-    @include grid(grid, 0.4fr 4fr 5fr);
+    @include grid(grid, 0.8fr 1fr);
+    overflow: hidden;
   }
   &-LogoContainer {
     padding: 20px;
@@ -22,6 +23,8 @@
       rgb(6, 86, 207, 100%),
       rgb(6, 86, 207, 100%)
     );
+
+    margin-left: 10%;
   }
 
   &-Carousel {

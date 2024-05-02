@@ -180,11 +180,18 @@ button {
   background-color: #ffffff;
   border-radius: 10px;
 }
+.listItem h4 {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
 .listItem div:first-child {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  pointer-events: none;
 }
 
 .listItem:hover {
@@ -192,6 +199,7 @@ button {
 }
 .listItem:hover h4 {
   color: #ffffff;
+  white-space: wrap;
 }
 .listItem:hover .DashboardFolderIcon svg {
   background-color: #ffffff;

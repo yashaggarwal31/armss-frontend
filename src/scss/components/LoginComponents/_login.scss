@@ -1,6 +1,5 @@
 .login {
   width: 80%;
-  height: 60%;
   align-self: center;
   justify-self: center;
   padding: 10px;
@@ -8,15 +7,22 @@
   @include position(relative);
 
   &-titles {
-    width: 80%;
+    width: 76%;
     text-align: start;
     @include font_size_color(null, null, $Textblack, "Inter");
+    padding-bottom: 1rem;
 
     p {
       padding-top: 6px;
       font-size: 0.88rem;
       font-family: "Inter";
     }
+  }
+
+  &-Bgdesign {
+    width: 60%;
+    @include position(absolute, null, -20%, null, -50%);
+    z-index: -50;
   }
 }
 .loginForm {
@@ -26,9 +32,9 @@
     @include flex(flex, column, space-evenly, null, 1rem);
     border-radius: 6px;
     box-shadow: 0px 1px 2px 0px #a9bfeaeb;
+    background-color: $white;
   }
   &-input {
-    height: 5.02vh;
     background: transparent;
     border-radius: 6px;
     border: 0.4px solid $input-border-gray;
@@ -60,6 +66,9 @@
 .LabelContainer {
   @include font_size_color(0.88rem, 400, $Textblack, "Inter");
   @include flex(flex, column);
+}
+.CheckboxContainer {
+  @include flex(inline-flex, row, null, baseline, 0.4rem);
 }
 
 .responsePara {

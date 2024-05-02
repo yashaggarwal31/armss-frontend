@@ -83,10 +83,10 @@ toget = async (
     method === "GET"
       ? { method: method }
       : {
-        method: method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      };
+          method: method,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        };
 
   await fetch(url, options)
     .then((response) => {
@@ -224,72 +224,62 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 function toShowData(data) {
   listItems.innerHTML = "";
-
+  lst = [];
   if (data.length !== 0) {
     data = data[1];
-    lst = [];
-    items = {};
-    for (let i of data) {
-      if (i[0] in items) {
-        if (!items[i[0]].SkillName) {
-          items[i[0]].SkillName = new Set();
-        }
-        items[i[0]].SkillName.add(i[4]);
-      } else {
-        item = {};
-        item.ResumeId = i[0];
-        item.FirstName = i[1];
-        item.Contact = new Set([[i[2], i[3]]]);
-        item.SkillName = new Set([i[4]]);
-        item.Experience = new Set([i[5]]);
-        items[i[0]] = item;
-      }
-    }
-
-    lst2 = Object.keys(items);
-    TotalValue.textContent = lst2.length;
-    for (let i of lst2) {
-      console.log(items[i]);
+    TotalValue.textContent = data.length;
+    for (let i in data) {
+      lst.push(i);
       let li = document.createElement("li");
-      let ResumeId = document.createElement("p");
-      ResumeId.textContent = items[i]["ResumeId"];
       let FirstName = document.createElement("p");
-      FirstName.textContent = items[i].FirstName;
-      let contactvalue = Array.from(items[i].Contact);
-      let Contact_type = document.createElement("p");
-      Contact_type.textContent = contactvalue[0][1];
-      let Contact_value = document.createElement("p");
-      Contact_value.textContent = contactvalue[0][0];
+      FirstName.textContent = data[i].FirstName;
+
+      let Role = document.createElement("p");
+      Role.textContent = data[i].Role;
+
       let SkillName = document.createElement("button");
       SkillName.classList.add("SkillElement");
       SkillName.textContent = "Skills";
-      SkillName.addEventListener("mouseover", () => {
-        content = Array.from(items[i].SkillName);
-        toUpadteSkillContainer(Array.from(items[i].SkillName).join(", "));
-        SkillsContainer.style.display = "block";
-      });
-      SkillName.addEventListener("mouseout", () => {
-        SkillsContainer.textContent = "";
-        SkillsContainer.style.display = "none";
-      });
-      // SkillName.textContent = Array.from(items[i].SkillName)
-      //   .slice(0, 10)
-      //   .join(", ");
-      let Experience = document.createElement("p");
-      Experience.style.paddingLeft = "10px";
-      Experience.textContent = Array.from(items[i].Experience)[0];
+      // SkillName.addEventListener("mouseover", () => {
+      //   content = Array.from(items[i].SkillName);
+      //   toUpadteSkillContainer(Array.from(items[i].SkillName).join(", "));
+      //   SkillsContainer.style.display = "block";
+      // });
+      // SkillName.addEventListener("mouseout", () => {
+      //   SkillsContainer.textContent = "";
+      //   SkillsContainer.style.display = "none";
+      // });
 
-      li.appendChild(ResumeId);
+      let Experience = document.createElement("p");
+      Experience.textContent = data[i].Experience;
+
+      let Email = document.createElement("p");
+      Email.textContent = data[i].Contact_Email;
+
+      let Location = document.createElement("p");
+      Location.textContent = data[i].Location;
+
+      let Phone_no = document.createElement("p");
+      Phone_no.textContent = data[i].Contact_Phone;
+
+      let UploadDate = document.createElement("p");
+      UploadDate.textContent = data[i].UploadDate;
+
       li.appendChild(FirstName);
-      li.appendChild(Contact_value);
+      li.appendChild(Role);
       li.appendChild(SkillName);
       li.appendChild(Experience);
+      li.appendChild(Email);
+      li.appendChild(Location);
+      li.appendChild(Phone_no);
+      li.appendChild(UploadDate);
+
       li.classList.add("elementStyle");
       listItems.appendChild(li);
     }
 
     if (method === "GET") {
-      Filterdata.ResumeIdList.ResumeIdValue.push({ ResumeIdValue: lst2 });
+      Filterdata.ResumeIdList.ResumeIdValue.push({ ResumeIdValue: lst });
       console.log(Filterdata);
     }
   } else {
@@ -298,6 +288,7 @@ function toShowData(data) {
     listItems.appendChild(li);
   }
 }
+
 // toshowdata = async (data) => {
 //   vale = {
 //     data: data,
@@ -344,7 +335,7 @@ function toShowData(data) {
 
 // Experience
 
-DropdownSelectFunction = (data) => {
+let DropdownSelectFunction = (data) => {
   var listItems = data.getElementsByTagName("li");
   let lst = ["All", "0-1", "1-2", "2-3", "3-6", "6-9", "9-10"];
   for (var i = 0; i < listItems.length; i++) {
@@ -380,7 +371,7 @@ DropdownSelectFunction = (data) => {
   }
 };
 
-toUpadteSkillContainer = function (data) {
+toUpdateSkillContainer = function (data) {
   SkillsContainer.textContent = data;
 };
 
@@ -429,8 +420,31 @@ function setIds() {
     listItems.innerHTML = "";
   });
 
-  chatbot.addEventListener("click", function () { });
+  chatbot.addEventListener("click", function () {});
 }
+
+toappendSkills = (data) => {
+  for (let i of data.SkillList) {
+    let li = document.createElement("li");
+    li.textContent = i;
+    li.id = i;
+    li.setAttribute("data-value", i);
+    li.addEventListener("click", () => {
+      SkillValue.textContent = li.id === "All" ? "Skill" : li.id;
+      if (li.id === "All") {
+        Filterdata.Skill.SkillName = [];
+      } else {
+        Filterdata.Skill.SkillName.push({
+          uniqueId: generateUniqueId(),
+          SkillName: li.id,
+        });
+      }
+      SkillDropdownFunction();
+      toget();
+    });
+    SkillList.appendChild(li);
+  }
+};
 
 toappendLocation = (data) => {
   for (let i of data.States) {
@@ -461,16 +475,22 @@ FetchingLocation = () => {
     .then((response) => response.json())
     .then((data) => {
       toappendLocation(data);
+      toappendSkills(data);
     });
 };
 
 // Dropdowncode
 let downicon1 = document.getElementById("DownIcon1");
 let downicon2 = document.getElementById("DownIcon2");
+let downicon3 = document.getElementById("DownIcon3");
 let Locationdropdown = document.getElementById("Locationdropdown");
 let ExperienceDropdown = document.getElementById("ExperienceDropdown");
+let SkillDropdown = document.getElementById("SkillDropdown");
 let LocationHeader = document.getElementById("Location-Header");
 let ExperienceHeader = document.getElementById("Experience-Header");
+let SkillHeader = document.getElementById("Skill-Header");
+let SkillList = document.getElementById("SkillList");
+let SkillValue = document.getElementById("SkillValue");
 
 let LocationdropdownFunction = () => {
   if (Locationdropdown.style.display === "block") {
@@ -478,7 +498,6 @@ let LocationdropdownFunction = () => {
     Locationdropdown.style.display = "none";
     downicon1.classList.remove("IconStyles");
   } else {
-    FetchingLocation();
     Locationdropdown.classList.add("dropdownVisible");
     Locationdropdown.style.display = "block";
     downicon1.classList.add("IconStyles");
@@ -492,10 +511,25 @@ let ExperienceDropdownFunction = () => {
   } else {
     ExperienceDropdown.classList.add("dropdownVisible");
     ExperienceDropdown.style.display = "block";
-    ExperienceDropdown.style.right = "10.8%";
+    ExperienceDropdown.style.right = "29.8%";
     downicon2.classList.add("IconStyles");
+  }
+};
+
+let SkillDropdownFunction = () => {
+  if (SkillDropdown.style.display === "block") {
+    SkillDropdown.classList.remove("dropdownVisible");
+    SkillDropdown.style.display = "none";
+    downicon3.classList.remove("IconStyles");
+  } else {
+    SkillDropdown.classList.add("dropdownVisible");
+    SkillDropdown.style.display = "block";
+    SkillDropdown.style.right = "14.8%";
+    downicon3.classList.add("IconStyles");
   }
 };
 
 LocationHeader.addEventListener("click", LocationdropdownFunction);
 ExperienceHeader.addEventListener("click", ExperienceDropdownFunction);
+SkillHeader.addEventListener("click", SkillDropdownFunction);
+FetchingLocation();
