@@ -14,9 +14,9 @@
 
   &-headingContainer {
     padding: 1rem;
-    background-color: #fafcff;
-    @include font_size_color(0.8rem, 600, null, "Inter");
-    @include grid(grid, 10% 12% 10% 10% 16% 10% 14% 12% 6%, 1rem);
+    background-color: #f4f7ff;
+    @include font_size_color(0.8rem, 600, $Textblack, "Inter");
+    @include grid(grid, 10% 12% 10% 10% 18% 10% 14% 12% 6%, 1rem);
     margin-top: 2%;
   }
   &-SubContainer {
@@ -86,10 +86,13 @@
 }
 
 .elementStyle {
-  padding: 20px;
+  padding: 1rem;
   font-size: "Inter";
-
-  @include grid(grid, 10% 12% 10% 10% 16% 10% 14% 12% 6%, 1rem);
+  border: 1px solid #f4f2ff;
+  margin: 0.4rem 0;
+  border-radius: 0.4rem;
+  @include grid(grid, 10% 12% 10% 10% 18% 10% 14% 12% 6%, 1rem);
+  align-items: center;
 }
 
 #paraelemnet {
@@ -103,11 +106,16 @@
   position: relative;
 }
 
+#listItems li:hover {
+  background-color: #cadbfc;
+}
+
 .SkillElement {
-  padding: 4px;
-  background-color: $backgraoundBlue;
+  justify-self: flex-start;
+  padding: 0.6rem;
+  background-color: #f6f8fc;
   border-radius: 6px;
-  color: $white;
+  @include font_size_color(0.8rem, 480, #003db4, "Inter");
   outline: none;
   border: none;
 }

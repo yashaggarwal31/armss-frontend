@@ -105,12 +105,13 @@ button {
 }
 .section-headingContainer {
   padding: 1rem;
-  background-color: #fafcff;
+  background-color: #f4f7ff;
   font-size: 0.8rem;
   font-weight: 600;
+  color: #333333;
   font-family: "Inter";
   display: grid;
-  grid-template-columns: 10% 12% 10% 10% 16% 10% 14% 12% 6%;
+  grid-template-columns: 10% 12% 10% 10% 18% 10% 14% 12% 6%;
   grid-template-rows: 1rem;
   margin-top: 2%;
 }
@@ -203,11 +204,15 @@ button {
 }
 
 .elementStyle {
-  padding: 20px;
+  padding: 1rem;
   font-size: "Inter";
+  border: 1px solid #f4f2ff;
+  margin: 0.4rem 0;
+  border-radius: 0.4rem;
   display: grid;
-  grid-template-columns: 10% 12% 10% 10% 16% 10% 14% 12% 6%;
+  grid-template-columns: 10% 12% 10% 10% 18% 10% 14% 12% 6%;
   grid-template-rows: 1rem;
+  align-items: center;
 }
 
 #paraelemnet {
@@ -223,11 +228,19 @@ button {
   position: relative;
 }
 
+#listItems li:hover {
+  background-color: #cadbfc;
+}
+
 .SkillElement {
-  padding: 4px;
-  background-color: #0052f1;
+  justify-self: flex-start;
+  padding: 0.6rem;
+  background-color: #f6f8fc;
   border-radius: 6px;
-  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 480;
+  color: #003db4;
+  font-family: "Inter";
   outline: none;
   border: none;
 }
