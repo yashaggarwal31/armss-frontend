@@ -185,6 +185,7 @@ togetFolders();
 
 CloseSubContainer.onclick = () => {
   SubCategorySection.style.display = "none";
+  SubCategorySearchFilters.value = "";
 };
 
 window.onload = () => {

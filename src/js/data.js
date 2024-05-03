@@ -239,7 +239,7 @@ function toShowData(data) {
 
       let SkillName = document.createElement("button");
       SkillName.classList.add("SkillElement");
-      SkillName.textContent = "Skills";
+      SkillName.textContent = "UI";
       // SkillName.addEventListener("mouseover", () => {
       //   content = Array.from(items[i].SkillName);
       //   toUpadteSkillContainer(Array.from(items[i].SkillName).join(", "));
@@ -251,7 +251,7 @@ function toShowData(data) {
       // });
 
       let Experience = document.createElement("p");
-      Experience.textContent = data[i].Experience;
+      Experience.textContent = data[i].Experience + " Years";
 
       let Email = document.createElement("p");
       Email.textContent = data[i].Contact_Email;
