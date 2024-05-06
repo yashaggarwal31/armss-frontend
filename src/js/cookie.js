@@ -38,6 +38,12 @@ isLogout = () => {
   }
 };
 
+function redirectToCustomPath(customPath) {
+  var newPath = window.location.origin + "/" + customPath;
+  window.history.pushState({}, "", newPath);
+  window.location.replace(newPath);
+}
+
 window.setCookie = setCookie;
 window.getCookie = getCookie;
 window.isLogin = isLogin;
