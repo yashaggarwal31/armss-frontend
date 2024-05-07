@@ -134,7 +134,7 @@ SearchButton.addEventListener("click", function () {
     window.location.href = `data.html?data=${encodedData}`;
   } else {
     // toget();
-    console.log('hh' + window.location.href);
+    console.log(window.location.href);
   }
 
   // SearchItems.innerHTML = "";
