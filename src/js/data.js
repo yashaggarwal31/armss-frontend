@@ -1,5 +1,11 @@
 const CategoryCreate = document.getElementById("CategoryCreate");
 
+const FilteringData = {
+  ItesmIds: [],
+  LocationCities: [],
+  Skills: [],
+};
+
 const Filterdata = {
   Candidate: {
     check: [],
@@ -211,7 +217,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (dataString) {
     const data = JSON.parse(decodeURIComponent(dataString));
     document.getElementById("heading").textContent = data;
-
     let data1 = {
       category_data: data,
     };
@@ -222,15 +227,56 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 });
 
+// Show Skill Container
+toUpdateSkillContainer = function (data, id, item, interval) {
+  let Listid = document.getElementById(id);
+  let Listitem = document.getElementById(item);
+  Listitem.innerHTML = "";
+  for (let i of data) {
+    let li = document.createElement("li");
+    li.textContent = i;
+    Listitem.appendChild(li);
+  }
+  // Listid.appendChild(Listitem);
+  Listitem.style.display = "flex";
+  Listid.style.position = "relative";
+};
+
+toHideSkillContainer = function (id, item) {
+  let Listid = document.getElementById(id);
+  let Listitem = document.getElementById(item);
+
+  // Listid.removeChild(Listitem);
+
+  Listitem.addEventListener("mouseover", () => {
+    Listitem.style.display = "flex";
+    Listid.style.position = "relative";
+    clearTimeout(interval);
+  });
+
+  Listitem.addEventListener("mouseout", () => {
+    Listitem.style.display = "none";
+    Listid.style.position = "";
+  });
+
+  interval = setTimeout(() => {
+    Listitem.style.display = "none";
+    Listid.style.position = "";
+  }, 50);
+};
+
 function toShowData(data) {
+  console.log(data);
   listItems.innerHTML = "";
   lst = [];
   if (data.length !== 0) {
+    TotalValue.textContent = data[0];
     data = data[1];
-    TotalValue.textContent = data.length;
+    let interval;
     for (let i in data) {
       lst.push(i);
       let li = document.createElement("li");
+      li.id = i;
       let FirstName = document.createElement("p");
       FirstName.textContent = data[i].FirstName;
 
@@ -238,17 +284,24 @@ function toShowData(data) {
       Role.textContent = data[i].Role;
 
       let SkillName = document.createElement("button");
+      SkillName.id = i;
       SkillName.classList.add("SkillElement");
-      SkillName.textContent = "UI";
-      // SkillName.addEventListener("mouseover", () => {
-      //   content = Array.from(items[i].SkillName);
-      //   toUpadteSkillContainer(Array.from(items[i].SkillName).join(", "));
-      //   SkillsContainer.style.display = "block";
-      // });
-      // SkillName.addEventListener("mouseout", () => {
-      //   SkillsContainer.textContent = "";
-      //   SkillsContainer.style.display = "none";
-      // });
+      SkillName.textContent = "Skills";
+
+      SkillName.addEventListener("mouseover", () => {
+        let values = data[i].SkillName;
+        toUpdateSkillContainer(values, li.id, ul.id, interval);
+        clearTimeout(interval);
+      });
+
+      SkillName.addEventListener("mouseout", () => {
+        toHideSkillContainer(li.id, ul.id);
+
+        // ul.addEventListener("mouseover", () => {
+        //   let values = data[i].SkillName;
+        //   toUpdateSkillContainer(values, li.id, ul.id, interval);
+        // });
+      });
 
       let Experience = document.createElement("p");
       Experience.textContent = data[i].Experience + " Years";
@@ -265,6 +318,22 @@ function toShowData(data) {
       let UploadDate = document.createElement("p");
       UploadDate.textContent = data[i].UploadDate;
 
+      let icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      let useElement = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "use"
+      );
+      useElement.setAttributeNS(
+        "http://www.w3.org/1999/xlink",
+        "href",
+        "./Icons/icons.svg#ActionIcon"
+      );
+
+      let ul = document.createElement("li");
+      ul.id = "SkillsContainer" + i;
+      ul.classList.add("SkillsContainer");
+
+      icon.appendChild(useElement);
       li.appendChild(FirstName);
       li.appendChild(Role);
       li.appendChild(SkillName);
@@ -273,8 +342,13 @@ function toShowData(data) {
       li.appendChild(Location);
       li.appendChild(Phone_no);
       li.appendChild(UploadDate);
+      li.appendChild(icon);
+      li.appendChild(ul);
 
-      li.classList.add("elementStyle");
+      className =
+        toCheckRecent(data[i].UploadDate) < 3 ? "RecentElements" : "None";
+      li.classList.add("elementStyle", className);
+
       listItems.appendChild(li);
     }
 
@@ -289,6 +363,23 @@ function toShowData(data) {
   }
 }
 
+// Check Recent
+
+function toCheckRecent(data) {
+  if (data) {
+    const [day, month, year] = data.split("-").map(Number);
+    const date1 = new Date(year, month - 1, day);
+    const date2 = new Date();
+
+    const differenceMs = Math.abs(date2 - date1);
+
+    const differenceDays = Math.ceil(differenceMs / (1000 * 60 * 60 * 24));
+
+    return differenceDays;
+  }
+}
+
+// toCheckRecent("02-05-2024");
 // toshowdata = async (data) => {
 //   vale = {
 //     data: data,
@@ -348,7 +439,7 @@ let DropdownSelectFunction = (data) => {
       let Experiencetitle = document.getElementById("ExperienceValue");
 
       Experiencetitle.textContent = Value !== "All" ? Value : "Experience";
-      ExperienceDropdownFunction();
+      // ExperienceDropdownFunction();
 
       if (data.experience === "All") {
         Filterdata.Candidate.experience = [];
@@ -357,7 +448,7 @@ let DropdownSelectFunction = (data) => {
           .split("-")
           .map(Number);
         function range(start, end) {
-          for (var i = start; i < end; i++) {
+          for (var i = start; i <= end; i++) {
             Filterdata.Candidate.experience.push({
               uniqueId: generateUniqueId(),
               experience: i,
@@ -371,14 +462,9 @@ let DropdownSelectFunction = (data) => {
   }
 };
 
-toUpdateSkillContainer = function (data) {
-  SkillsContainer.textContent = data;
-};
-
 function setIds() {
   SearchFilters = document.getElementById("SearchFilters");
   TotalValue = document.getElementById("TotalValue");
-  SkillsContainer = document.getElementById("SkillsContainer");
   chatbot = document.getElementById("Chatbot");
   // SearchInput = document.getElementById("SearchInput");
   SearchItems = document.getElementById("SearchItems");
@@ -424,47 +510,59 @@ function setIds() {
 }
 
 toappendSkills = (data) => {
-  for (let i of data.SkillList) {
+  SkillList.innerHTML = "";
+  // data = data.SkillList !== undefined ? data.SkillList : data;
+  data = data.SkillList.sort((a, b) => a.localeCompare(b));
+  for (let i of data) {
     let li = document.createElement("li");
     li.textContent = i;
     li.id = i;
     li.setAttribute("data-value", i);
     li.addEventListener("click", () => {
-      SkillValue.textContent = li.id === "All" ? "Skill" : li.id;
       if (li.id === "All") {
         Filterdata.Skill.SkillName = [];
       } else {
+        let Unique_id = generateUniqueId();
         Filterdata.Skill.SkillName.push({
-          uniqueId: generateUniqueId(),
+          uniqueId: Unique_id,
           SkillName: li.id,
         });
+        toAppendHistory(li.id, Unique_id, SkillSearchHistory);
+        toCheckSearchHistory();
       }
-      SkillDropdownFunction();
-      toget();
+      // SkillDropdownFunction();
+      // toget();
     });
     SkillList.appendChild(li);
   }
 };
 
 toappendLocation = (data) => {
-  for (let i of data.States) {
+  Locationlist.innerHTML = "";
+  data = data.States !== undefined ? data.States : data;
+  for (let i of data) {
     let li = document.createElement("li");
     li.textContent = i;
     li.id = i;
     li.setAttribute("data-value", i);
     li.addEventListener("click", () => {
-      Filterdata.WorkExperience.Location = [];
-      LocationValue.textContent = li.id === "All" ? "Location" : li.id;
+      // LocationValue.textContent = li.id === "All" ? "Location" : li.id;
       if (li.id === "All") {
+        LocationSearchHistory.innerHTML = "";
         Filterdata.WorkExperience.Location = [];
+        toCheckSearchHistory();
       } else {
+        Unique_id = generateUniqueId();
+        toAppendHistory(li.id, Unique_id, LocationSearchHistory);
         Filterdata.WorkExperience.Location.push({
-          uniqueId: generateUniqueId(),
+          uniqueId: Unique_id,
           Location: li.id,
         });
+        console.log(Filterdata.WorkExperience);
+        toCheckSearchHistory();
       }
-      LocationdropdownFunction();
-      toget();
+      // LocationdropdownFunction();
+      // toget();
     });
     Locationlist.appendChild(li);
   }
@@ -476,6 +574,11 @@ FetchingLocation = () => {
     .then((data) => {
       toappendLocation(data);
       toappendSkills(data);
+      FilteringData.LocationCities = [
+        ...FilteringData.LocationCities,
+        ...data.States,
+      ];
+      FilteringData.Skills = [...data.SkillList];
     });
 };
 
@@ -497,10 +600,14 @@ let LocationdropdownFunction = () => {
     Locationdropdown.classList.remove("dropdownVisible");
     Locationdropdown.style.display = "none";
     downicon1.classList.remove("IconStyles");
+    LocationHeader.style.boxShadow = "none";
   } else {
+    LocationHeader.style.boxShadow = "0px 2px 2px 0px #f4f2ff";
     Locationdropdown.classList.add("dropdownVisible");
     Locationdropdown.style.display = "block";
     downicon1.classList.add("IconStyles");
+    SearchLocation.value = "";
+    FetchingLocation();
   }
 };
 let ExperienceDropdownFunction = () => {
@@ -508,7 +615,9 @@ let ExperienceDropdownFunction = () => {
     ExperienceDropdown.classList.remove("dropdownVisible");
     ExperienceDropdown.style.display = "none";
     downicon2.classList.remove("IconStyles");
+    ExperienceHeader.style.boxShadow = "none";
   } else {
+    ExperienceHeader.style.boxShadow = "0px 2px 2px 0px #f4f2ff";
     ExperienceDropdown.classList.add("dropdownVisible");
     ExperienceDropdown.style.display = "block";
     ExperienceDropdown.style.right = "29.8%";
@@ -521,11 +630,15 @@ let SkillDropdownFunction = () => {
     SkillDropdown.classList.remove("dropdownVisible");
     SkillDropdown.style.display = "none";
     downicon3.classList.remove("IconStyles");
+    SkillHeader.style.boxShadow = "none";
+    document.getElementById("SearchSkills").value = "";
   } else {
+    SkillHeader.style.boxShadow = "0px 2px 2px 0px #f4f2ff";
     SkillDropdown.classList.add("dropdownVisible");
     SkillDropdown.style.display = "block";
     SkillDropdown.style.right = "14.8%";
     downicon3.classList.add("IconStyles");
+    FetchingLocation();
   }
 };
 
@@ -533,3 +646,107 @@ LocationHeader.addEventListener("click", LocationdropdownFunction);
 ExperienceHeader.addEventListener("click", ExperienceDropdownFunction);
 SkillHeader.addEventListener("click", SkillDropdownFunction);
 FetchingLocation();
+
+//  Fetching All Cities
+
+let FetchCities = async () => {
+  let response = await fetch(
+    "https://countriesnow.space/api/v0.1/countries/cities",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        country: "India",
+      }),
+    }
+  );
+  let data = await response.json();
+
+  FilteringData.LocationCities = [
+    ...FilteringData.LocationCities,
+    ...data.data,
+  ];
+};
+
+FetchCities();
+
+// Search Location Functionality
+SearchLocation = document.getElementById("SearchLocation");
+SearchLocation.addEventListener("input", (event) => {
+  data = FilteringData.LocationCities.filter((item) =>
+    item.toLowerCase().includes(event.target.value.toLowerCase())
+  );
+  data = new Set(data);
+  toappendLocation([...data]);
+});
+
+// Append Loaction History
+
+LocationSearchHistory = document.getElementById("LocationSearchHistory");
+
+removeFunction = (id, item) => {
+  const para1 = document.getElementById(id);
+  para1.parentNode.removeChild(para1);
+
+  if (item.id === "LocationSearchHistory") {
+    Filterdata.WorkExperience.Location =
+      Filterdata.WorkExperience.Location.filter((item) => item.uniqueId !== id);
+  } else {
+    Filterdata.Skill.SkillName = Filterdata.Skill.SkillName.filter(
+      (item) => item.uniqueId !== id
+    );
+  }
+  console.log(Filterdata.SkillName, Filterdata.WorkExperience.Location);
+  toCheckSearchHistory();
+};
+
+function toAppendHistory(data, id, list) {
+  let li = document.createElement("li");
+  li.textContent = data;
+  li.id = id;
+  li.addEventListener("click", () => {
+    removeFunction(li.id, list);
+    toCheckSearchHistory();
+  });
+  list.appendChild(li);
+}
+
+//  Search History
+SearchHistoryContainer = document.getElementById("SearchHistoryContainer");
+
+function toCheckSearchHistory() {
+  let LocationHistory = Filterdata.WorkExperience.Location.length;
+  let SkillHistory = Filterdata.Skill.SkillName.length;
+  let ExperienceHistory = Filterdata.Candidate.experience.length;
+
+  console.log(LocationHistory + SkillHistory + ExperienceHistory);
+  if (LocationHistory + SkillHistory + ExperienceHistory === 0) {
+    SearchHistoryContainer.style.display = "none";
+  } else {
+    SearchHistoryContainer.style.display = "grid";
+  }
+}
+
+toCheckSearchHistory();
+
+// Clear History
+document.getElementById("ClearHistory").addEventListener("click", function () {
+  Filterdata.WorkExperience.Location = [];
+  Filterdata.Skill.SkillName = [];
+  Filterdata.Candidate.experience = [];
+  LocationSearchHistory.innerHTML = "";
+  SearchHistoryContainer.style.display = "none";
+});
+
+// Search Skills
+
+document
+  .getElementById("SearchSkills")
+  .addEventListener("input", function (event) {
+    data = FilteringData.Skills.filter((item) =>
+      item.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    toappendSkills({ SkillList: data });
+  });

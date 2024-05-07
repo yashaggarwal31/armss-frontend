@@ -133,7 +133,7 @@ async function chat(event) {
             messageElement.textContent = data[0];
             chatSpace.appendChild(messageElement);
         } else {
-            resumes = data[0].slice(0, 10);
+            // resumes = data[0].slice(0, 10);
             send_data["resume_filters"] = data[1];
             send_data["count"] = data[2];
             let send_data_str = JSON.stringify(send_data);
