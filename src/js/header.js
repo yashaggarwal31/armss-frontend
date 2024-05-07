@@ -129,7 +129,7 @@ SearchButton.addEventListener("click", function () {
   }
   data = data.join(" & ");
 
-  if (window.location.href === "welcome.html") {
+  if (window.location.href === "https://armss.exitest.com/welcome.html") {
     const encodedData = encodeURIComponent(JSON.stringify(data));
     window.location.href = `data.html?data=${encodedData}`;
   } else {
