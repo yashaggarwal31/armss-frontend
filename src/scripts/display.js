@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", onDomLoaded);
 function fetchData() {
   console.log(send_data["resume_filters"]);
 
-  fetch("https://armss-be.exitest.com/filter", {
+  fetch("https://armss-be.exitest.com/displayfilter", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
