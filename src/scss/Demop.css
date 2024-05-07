@@ -75,8 +75,7 @@
 
 /*General Styles*/
 button.primary {
-  display: inline-block;
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: #fff !important;
   background: rgb(var(--vs-primary)/100%);
   padding: 13px 25px;

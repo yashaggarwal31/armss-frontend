@@ -41,7 +41,6 @@ h2 {
   font-size: 1.4rem;
   color: #333333;
   font-family: "Inter";
-  padding-bottom: 6px;
 }
 
 h4 {
@@ -89,7 +88,6 @@ button {
 
 .btn {
   width: 100%;
-  height: 6vh;
   color: #ffffff;
   padding: 0.6rem;
   background: #0052f1;
@@ -107,19 +105,17 @@ button {
 }
 
 .login {
-  width: 80%;
-  height: 60%;
-  align-self: center;
-  justify-self: center;
+  max-width: 700px;
+  width: 100%;
   padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: center;
+  align-items: start;
   position: relative;
+  padding: 50px 90px 50px 0;
 }
 .login-titles {
-  width: 80%;
   text-align: start;
   color: #333333;
   font-family: "Inter";
@@ -131,8 +127,9 @@ button {
 }
 
 .loginForm-Container {
+  margin-top: 32px;
   padding: 1.8rem 1rem;
-  width: 60vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -141,7 +138,6 @@ button {
   box-shadow: 0px 1px 2px 0px rgba(169, 191, 234, 0.9215686275);
 }
 .loginForm-input {
-  height: 5.02vh;
   background: transparent;
   border-radius: 6px;
   border: 0.4px solid rgba(117, 117, 117, 0.51);
@@ -196,9 +192,9 @@ button {
 
 .LoginPage-Container {
   height: 100vh;
-  width: 100%;
   display: grid;
-  grid-template-columns: 0.4fr 4fr 5fr;
+  grid-template-columns: 0.9fr 1fr;
+  gap: 86px;
 }
 .LoginPage-LogoContainer {
   padding: 20px;
@@ -209,15 +205,21 @@ button {
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  gap: 4px;
 }
 .LoginPage-logo {
-  padding-right: 6px;
-  border-right: 1px solid #ffffff;
-  width: 10%;
+  height: 52px;
+  width: 52px;
+}
+.LoginPage-border {
+  height: 52px;
+  width: 1px;
+  border: 1px solid #fff;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 .LoginPage-CarouselContainer {
   background-image: radial-gradient(circle, rgb(202, 216, 244), rgba(6, 86, 207, 0.8), rgba(6, 86, 207, 0.9), rgb(6, 86, 207), rgb(6, 86, 207));
+  margin-left: 90px;
 }
 .LoginPage-Carousel {
   width: 100%;

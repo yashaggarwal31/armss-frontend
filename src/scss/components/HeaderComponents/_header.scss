@@ -1,8 +1,8 @@
 .Header {
   &-Container {
-    padding-top: 1rem;
+    padding:1.5rem 2rem;
     background-color: $white;
-    @include grid(grid, null, 2fr 0.6fr);
+    @include flex(flex, null,space-between,center );
     border-bottom: 0.1px solid #bfbfbfb6;
   }
   &-SubContainer {
@@ -21,11 +21,10 @@
   }
   &-logoContainer {
     // @include width_height(null, 8%);
-    @include flex(flex, column, center, center);
     @include font_size_color(0.48rem, 600, $Textblack, "Inter");
   }
   &-logo {
-    @include width_height(null, 48%);
+    @include width_height(54px, 89px);
   }
   &-dropdownContainer {
     border: 1px solid #e1eaff;

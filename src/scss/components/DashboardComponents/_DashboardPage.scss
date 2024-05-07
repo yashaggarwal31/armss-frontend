@@ -1,8 +1,10 @@
 .Dashboard {
+  background-color: $white;
   &-container {
-    padding: 1rem;
-    background-color: $mainBackground;
-    @include grid(grid, null, auto auto, null, 4rem);
+    padding: 2rem;
+    margin: auto;
+    width: 100%;
+    @include flex(flex, column,null, null, 70px, null);
   }
   &-welcomeContainer {
     margin-top: 0.6rem;
@@ -10,106 +12,131 @@
     @include flex(flex, row, center);
     @include position(relative);
     .textContainer {
-      padding: 20px 20px;
+      
+      padding: 55px 26px;
       background-color: $backgraoundBlue;
       border-radius: 1rem;
 
-      @include flex(flex, column, center);
-      @include width_height(24vh, 92%);
+      @include width_height(null, 100%);
 
       h2 {
-        @include font_size_color(1.28rem, 600, $white);
+        @include font_size_color(32px, 600, $white);
+        margin-bottom: 11px;
       }
 
       p {
-        @include font_size_color(0.88rem, lighter, $white);
+        @include font_size_color(18px, lighter, $white);
       }
     }
   }
   &-ContentContainer {
-    margin-top: 3rem;
+    background-color: $mainBackground;
+    padding: 1.4rem;
     @include flex(flex, null, center);
     @include width_height(null, 100%);
   }
   &-SubContentContainer {
-    @include width_height(null, 92%);
-    @include flex(flex, column, flex-start);
-    background-color: $white;
+    @include width_height(null, 100%);
+    @include flex(flex, column, flex-start,null,1rem);
     border-radius: 1rem;
-    padding: 1.4rem;
 
     .SubContentContainer-Elements {
-      padding: 1rem;
+      padding: 10px 0;
       @include flex(flex, row, space-between, center);
+      h2{
+        font-size: 24px;
+      }
+      .ButtonContainer {
+        @include flex(flex, row, space-between, center, 1rem);
+        .Add{
+          @include flex(flex,null,space-between,center,10px);
+          border-radius: 10px;
+        }
+        .upload{
+          @include flex(flex,null,space-between,center,10px);
+          border-radius: 10px;
+        }
+      }
+
     }
   }
   &-Image {
-    @include position(absolute, null, 4.8%, 4%, null);
-    @include width_height(null, 24%);
+    @include position(absolute, null, 10px, 32px, null);
+    @include width_height(auto, 328px);
   }
 }
 
-.Icon {
-  width: 8px;
-  height: 18px;
-}
 
 .ContainerList {
   background-color: $mainBackground;
   border-radius: 1rem;
-  padding: 1.4rem;
-  @include flex(flex, row, flex-start, center, 1.2rem, wrap);
+  @include grid(grid);
+  grid-template-columns: repeat(
+    auto-fill, minmax(233px, 1fr));
+    gap: 20px;
 }
+
 
 .listItem {
-  @include flex(flex, column, space-between, flex-start);
   padding: 1rem;
-  width: 18%;
-  max-height: 20vh;
-  min-height: 20vh;
+  min-width: 233px;
   background-color: $white;
-  border-radius: 10px;
+  border-radius: 10px; 
+  position: relative;
+  h4{
+    font-size: 14px;
+  }
+ 
 }
 
-.listItem div:first-child {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
+// .listItem div:first-child {
+//   display: flex;
+//   justify-content: space-between;
+//   width: 100%;
+// }
 
 .listItem:hover {
   background-color: $backgraoundBlue;
   h4 {
     color: $white;
   }
+}
 
+.icon-container{
+  margin-bottom:10px ;
   .DashboardFolderIcon {
-    svg {
-      background-color: $white;
-    }
+      display: flex;
+      height: 50px;
+      width: 50px;
+      text-align: center;
+      padding: 0.6rem;
+      background-color: $mainBackground;
+      border-radius: 50%;
+      svg{
+        position: absolute;
+      top: 21%;
+      left: 11%;
+      }
   }
   .DashboardFolderIcon2 {
-    background-color: $white;
-  }
-}
-
-.DashboardFolderIcon {
-  svg {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 24px;
+    width: 24px;
     display: flex;
-    max-height: 6.4vh;
-    width: 34%;
-    padding: 0.6rem;
-    background-color: $mainBackground;
+    text-align: center;
+    background-color: #ffebe678;
     border-radius: 50%;
+    svg{
+      position: absolute;
+      top: 20%;
+      left: 20%;
+    }
   }
-}
-.DashboardFolderIcon2 {
-  max-height: 4.6vh;
-  width: 20%;
-  padding: 0.56rem;
-  background-color: #ffebe678;
-  border-radius: 50%;
-}
+
+
+
 
 .ContainerListactive {
   background-color: $backgraoundBlue;
@@ -124,24 +151,7 @@
   }
 }
 
-.ButtonContainer {
-  @include flex(flex, row, space-between, center, 1rem);
 
-  button.upload {
-    @include flex(flex, row, space-between, center, 1rem);
-    @include font_size_color(0.88rem, 400, $white, "Inter");
-    padding: 0.8rem;
-    border-radius: 0.4rem;
-    background-color: $darkblue;
-  }
-}
-button {
-  @include flex(flex, row, space-between, center, 1rem);
-  @include font_size_color(0.88rem, 400, $white, "Inter");
-  padding: 0.8rem;
-  border-radius: 0.4rem;
-  background-color: $darkblue;
-}
 
 // SubCategory
 
@@ -181,4 +191,5 @@ button {
 }
 #SubContainerList li {
   width: 30%;
+}
 }

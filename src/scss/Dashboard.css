@@ -41,7 +41,6 @@ h2 {
   font-size: 1.4rem;
   color: #333333;
   font-family: "Inter";
-  padding-bottom: 6px;
 }
 
 h4 {
@@ -87,12 +86,16 @@ button {
   visibility: hidden;
 }
 
+.Dashboard {
+  background-color: #ffffff;
+}
 .Dashboard-container {
-  padding: 1rem;
-  background-color: #f7faff;
-  display: grid;
-  grid-template-rows: auto auto;
-  justify-content: 4rem;
+  padding: 2rem;
+  margin: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
 }
 .Dashboard-welcomeContainer {
   margin-top: 0.6rem;
@@ -103,88 +106,93 @@ button {
   position: relative;
 }
 .Dashboard-welcomeContainer .textContainer {
-  padding: 20px 20px;
+  padding: 55px 26px;
   background-color: #0052f1;
   border-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 24vh;
-  width: 92%;
+  width: 100%;
 }
 .Dashboard-welcomeContainer .textContainer h2 {
-  font-size: 1.28rem;
+  font-size: 32px;
   font-weight: 600;
   color: #ffffff;
+  margin-bottom: 11px;
 }
 .Dashboard-welcomeContainer .textContainer p {
-  font-size: 0.88rem;
+  font-size: 18px;
   font-weight: lighter;
   color: #ffffff;
 }
 .Dashboard-ContentContainer {
-  margin-top: 3rem;
+  background-color: #f7faff;
+  padding: 1.4rem;
   display: flex;
   justify-content: center;
   width: 100%;
 }
 .Dashboard-SubContentContainer {
-  width: 92%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background-color: #ffffff;
+  gap: 1rem;
   border-radius: 1rem;
-  padding: 1.4rem;
 }
 .Dashboard-SubContentContainer .SubContentContainer-Elements {
-  padding: 1rem;
+  padding: 10px 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
+.Dashboard-SubContentContainer .SubContentContainer-Elements h2 {
+  font-size: 24px;
+}
+.Dashboard-SubContentContainer .SubContentContainer-Elements .ButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.Dashboard-SubContentContainer .SubContentContainer-Elements .ButtonContainer .Add {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+}
+.Dashboard-SubContentContainer .SubContentContainer-Elements .ButtonContainer .upload {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+}
 .Dashboard-Image {
   position: absolute;
-  right: 4.8%;
-  top: 4%;
-  width: 24%;
-}
-
-.Icon {
-  width: 8px;
-  height: 18px;
+  right: 10px;
+  top: 32px;
+  height: auto;
+  width: 328px;
 }
 
 .ContainerList {
   background-color: #f7faff;
   border-radius: 1rem;
-  padding: 1.4rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1.2rem;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(233px, 1fr));
+  gap: 20px;
 }
 
 .listItem {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
   padding: 1rem;
-  width: 18%;
-  max-height: 20vh;
-  min-height: 20vh;
+  min-width: 233px;
   background-color: #ffffff;
   border-radius: 10px;
+  position: relative;
 }
-
-.listItem div:first-child {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+.listItem h4 {
+  font-size: 14px;
 }
 
 .listItem:hover {
@@ -193,78 +201,50 @@ button {
 .listItem:hover h4 {
   color: #ffffff;
 }
-.listItem:hover .DashboardFolderIcon svg {
-  background-color: #ffffff;
-}
-.listItem:hover .DashboardFolderIcon2 {
-  background-color: #ffffff;
-}
 
-.DashboardFolderIcon svg {
+.icon-container {
+  margin-bottom: 10px;
+}
+.icon-container .DashboardFolderIcon {
   display: flex;
-  max-height: 6.4vh;
-  width: 34%;
+  height: 50px;
+  width: 50px;
+  text-align: center;
   padding: 0.6rem;
   background-color: #f7faff;
   border-radius: 50%;
 }
-
-.DashboardFolderIcon2 {
-  max-height: 4.6vh;
-  width: 20%;
-  padding: 0.56rem;
+.icon-container .DashboardFolderIcon svg {
+  position: absolute;
+  top: 21%;
+  left: 11%;
+}
+.icon-container .DashboardFolderIcon2 {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  text-align: center;
   background-color: rgba(255, 235, 230, 0.4705882353);
   border-radius: 50%;
 }
-
-.ContainerListactive {
+.icon-container .DashboardFolderIcon2 svg {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+}
+.icon-container .ContainerListactive {
   background-color: #0052f1;
 }
-.ContainerListactive h4 {
+.icon-container .ContainerListactive h4 {
   color: #ffffff;
 }
-.ContainerListactive .DashboardFolderIcon svg {
+.icon-container .ContainerListactive .DashboardFolderIcon svg {
   background-color: #ffffff;
 }
-
-.ButtonContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-}
-.ButtonContainer button.upload {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  font-size: 0.88rem;
-  font-weight: 400;
-  color: #ffffff;
-  font-family: "Inter";
-  padding: 0.8rem;
-  border-radius: 0.4rem;
-  background-color: #0052f1;
-}
-
-button {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  font-size: 0.88rem;
-  font-weight: 400;
-  color: #ffffff;
-  font-family: "Inter";
-  padding: 0.8rem;
-  border-radius: 0.4rem;
-  background-color: #0052f1;
-}
-
-.section {
+.icon-container .section {
   position: absolute;
   top: 0%;
   bottom: 100%;
@@ -278,16 +258,16 @@ button {
   -webkit-backdrop-filter: blur(0.6px);
           backdrop-filter: blur(0.6px);
 }
-.section-SubHeadingContainer {
+.icon-container .section-SubHeadingContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
 }
-.section-SubHeadingContainer svg {
+.icon-container .section-SubHeadingContainer svg {
   cursor: pointer;
 }
-.section-CategorySubContainer {
+.icon-container .section-CategorySubContainer {
   width: 56%;
   background-color: #ffffff;
   padding: 1.2rem;
@@ -297,21 +277,20 @@ button {
   overflow-x: hidden;
   box-shadow: 0 2px 4px 0px #bfbfbf;
 }
-.section-CategorySubContainer .SubCategoryHeading {
+.icon-container .section-CategorySubContainer .SubCategoryHeading {
   font-size: 1.28rem;
   font-weight: 600;
   color: #333333;
   font-family: "Inter";
   margin-bottom: 0.8rem;
 }
-.section-subCategory {
+.icon-container .section-subCategory {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
 }
-
-#SubContainerList li {
+.icon-container #SubContainerList li {
   width: 30%;
 }/*# sourceMappingURL=Dashboard.css.map */

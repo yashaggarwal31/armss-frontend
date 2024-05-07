@@ -83,6 +83,7 @@ createListitems = (data, List, functions) => {
     let classValue = i == 0 ? "DashboardFolderIcon" : "DashboardFolderIcon2";
     let icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     let div = document.createElement("div");
+    
     let useElement = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "use"
@@ -93,6 +94,7 @@ createListitems = (data, List, functions) => {
     // icon.setAttribute("class", iconClass);
     div.setAttribute("class", classValue);
     MainDiv.appendChild(div);
+    MainDiv.classList.add("icon-container")
   }
 
   let h4 = document.createElement("h4");
