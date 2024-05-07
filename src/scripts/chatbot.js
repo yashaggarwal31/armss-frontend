@@ -113,7 +113,7 @@ async function chat(event) {
       messageElement.textContent = data[0];
       chatSpace.appendChild(messageElement);
     } else {
-      resumes = data[0].slice(0, 10);
+      // resumes = data[0].slice(0, 10);
       send_data["resume_filters"] = data[1];
       send_data["count"] = data[2];
       let send_data_str = JSON.stringify(send_data);
@@ -121,7 +121,7 @@ async function chat(event) {
       // sessionStorage.setItem('send_data', send_data_json);
       console.log("after the mess");
       console.log(send_data);
-      let url = "resumeDisplay.html?data=Chatbot Results";
+      let url = "resumeDisplay.html";
       // Redirect to the new URL
       // window.location.href = url;
       window.location.replace(url);
