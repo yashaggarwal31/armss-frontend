@@ -47,7 +47,12 @@ toAppendSuggestionData = (data) => {
     li.textContent = i;
     li.id = i;
     li.addEventListener("click", () => {
-      toAppendSearchItems(li.textContent);
+      let items = [...SearchItems.childNodes];
+
+      items = items.find((item) => item.id === "Search" + li.id);
+      if (!items) {
+        toAppendSearchItems(li.textContent);
+      }
     });
     SubCategoriesSuggestions.appendChild(li);
   }
@@ -55,7 +60,7 @@ toAppendSuggestionData = (data) => {
 
 // remove SearchItem
 
-removeFunction = (data) => {
+SearchremoveFunction = (data) => {
   let li = document.getElementById(data);
   li.remove();
 };
@@ -79,7 +84,7 @@ toAppendSearchItems = (data) => {
   icon.appendChild(circle);
   icon.style.marginLeft = "0.4rem";
   li.addEventListener("click", () => {
-    removeFunction(li.id);
+    SearchremoveFunction(li.id);
   });
   li.appendChild(icon);
   SearchItems.appendChild(li);
@@ -119,6 +124,20 @@ SearchFilters.addEventListener("input", function (event) {
   toAppendSuggestionData(data);
 });
 
+SearchFilters.addEventListener("keydown", function (event) {
+  if (event.key === "Enter" && event.target.value.length > 0) {
+    let data = event.target.value.toLowerCase();
+    let items = [...SearchItems.childNodes];
+
+    items = items.find((item) => item.id === "Search" + data);
+    if (!items) {
+      toAppendSearchItems(data);
+    }
+    SearchFilters.value = "";
+    FetchingSubcategories();
+  }
+});
+
 // searchButton
 
 SearchButton.addEventListener("click", function () {
@@ -127,16 +146,25 @@ SearchButton.addEventListener("click", function () {
   for (let i of Value) {
     data.push(i.id.replace("Search", ""));
   }
-  data = data.join(" & ");
-
-  if (window.location.href === "http://127.0.0.1:5501/src/welcome.html") {
-    const encodedData = encodeURIComponent(JSON.stringify(data));
-    window.location.href = `data.html?data=${encodedData}`;
+  let value;
+  if (MainSuggestionData.SubCategoriesData.find((item) => item === data[0])) {
+    value = true;
   } else {
-    // toget();
-    console.log(window.location.href);
+    value = false;
   }
 
+  console.log(value);
+  data = data.join(" & ");
+
+  if (data.length > 0) {
+    if (window.location.href === "http://127.0.0.1:5501/src/welcome.html") {
+      const encodedData = encodeURIComponent(JSON.stringify(data));
+      window.location.href = `data.html?data=${encodedData}&value=${value}`;
+    } else {
+      const encodedData = encodeURIComponent(JSON.stringify(data));
+      window.location.href = `data.html?data=${encodedData}&value=${value}`;
+    }
+  }
   // SearchItems.innerHTML = "";
 });
 
