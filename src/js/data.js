@@ -43,14 +43,14 @@ const Filterdata = {
   },
 };
 
-removeFunction = (id) => {
-  const para1 = document.getElementById(id);
-  console.log(para1);
-  para1.parentNode.removeChild(para1);
-  Filterdata.Skill.SkillName = Filterdata.Skill.SkillName.filter(
-    (item) => item.uniqueId !== id
-  );
-};
+// removeFunction = (id) => {
+//   const para1 = document.getElementById(id);
+//   console.log(para1);
+//   para1.parentNode.removeChild(para1);
+//   Filterdata.Skill.SkillName = Filterdata.Skill.SkillName.filter(
+//     (item) => item.uniqueId !== id
+//   );
+// };
 
 tocheck = (data) => {
   data = JSON.parse(JSON.stringify(data));
@@ -81,9 +81,15 @@ Filteritem = {
 toget = async (
   url = "https://armss-be.exitest.com/displayfilter/",
   method = "POST",
-  Filteringdata = Filterdata
+  data = Filterdata,
+  value = true
 ) => {
-  let data = method === "POST" ? tocheck(Filteringdata) : "";
+  console.log(value);
+  if (value === true) {
+    data = method === "POST" ? tocheck(data) : "";
+  } else {
+    data = data;
+  }
   console.log(url, method, data);
   options =
     method === "GET"
@@ -101,7 +107,7 @@ toget = async (
       }
       return response.json();
     })
-    .then((data) => toShowData(data));
+    .then((data) => toShowData(data, method));
 };
 
 function generateUniqueId() {
@@ -214,16 +220,29 @@ document.addEventListener("DOMContentLoaded", async function () {
   setIds();
 
   const dataString = getQueryParam("data");
+  const value = getQueryParam("value");
+
   if (dataString) {
     const data = JSON.parse(decodeURIComponent(dataString));
     document.getElementById("heading").textContent = data;
-    let data1 = {
-      category_data: data,
-    };
-    let url = new URL("https://armss-be.exitest.com/displayskillmap/");
-    url.search = new URLSearchParams(data1).toString();
-    method = "GET";
-    toget(url, method);
+    console.log(value);
+    if (value === "false") {
+      let data1 = {
+        query: data,
+      };
+      console.log(data1);
+      let url = new URL("https://armss-be.exitest.com/search_query/");
+      method = "POST";
+      toget(url, method, data1, false);
+    } else {
+      let data1 = {
+        category_data: data,
+      };
+      let url = new URL("https://armss-be.exitest.com/displayskillmap/");
+      url.search = new URLSearchParams(data1).toString();
+      method = "GET";
+      toget(url, method);
+    }
   }
 });
 
@@ -231,9 +250,12 @@ document.addEventListener("DOMContentLoaded", async function () {
 toUpdateSkillContainer = function (data, id, item, interval) {
   let Listid = document.getElementById(id);
   let Listitem = document.getElementById(item);
+
+  data = data.sort((a, b) => a.length - b.length);
+
   Listitem.innerHTML = "";
   for (let i of data) {
-    let li = document.createElement("li");
+    let li = document.createElement("span");
     li.textContent = i;
     Listitem.appendChild(li);
   }
@@ -264,8 +286,8 @@ toHideSkillContainer = function (id, item) {
     Listid.style.position = "";
   }, 50);
 };
-
-function toShowData(data) {
+let method = "";
+function toShowData(data, method = "POST") {
   console.log(data);
   listItems.innerHTML = "";
   lst = [];
@@ -310,7 +332,7 @@ function toShowData(data) {
       Email.textContent = data[i].Contact_Email;
 
       let Location = document.createElement("p");
-      Location.textContent = data[i].Location;
+      Location.textContent = data[i].Location.join(", ");
 
       let Phone_no = document.createElement("p");
       Phone_no.textContent = data[i].Contact_Phone;
@@ -478,33 +500,33 @@ function setIds() {
 
   console.log(SuggestionContainer);
   DropdownSelectFunction(ExperienceList);
-  SearchFilters.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      let value = event.target.value;
-      value = value.split(",");
-      for (let i of value) {
-        const data = {
-          uniqueId: generateUniqueId(),
-          SkillName: i,
-        };
-        let li = document.createElement("li");
-        li.textContent = i;
-        li.id = data.uniqueId;
-        li.onclick = function () {
-          removeFunction(data.uniqueId);
-        };
-        SearchItems.appendChild(li);
-        Filterdata.Skill.SkillName.push(data);
-      }
-      SearchFilters.value = "";
-    }
-  });
+  // SearchFilters.addEventListener("keydown", function (event) {
+  //   if (event.key === "Enter") {
+  //     let value = event.target.value;
+  //     value = value.split(",");
+  //     for (let i of value) {
+  //       const data = {
+  //         uniqueId: generateUniqueId(),
+  //         SkillName: i,
+  //       };
+  //       let li = document.createElement("li");
+  //       li.textContent = i;
+  //       li.id = data.uniqueId;
+  //       li.onclick = function () {
+  //         removeFunction(data.uniqueId);
+  //       };
+  //       SearchItems.appendChild(li);
+  //       Filterdata.Skill.SkillName.push(data);
+  //     }
+  //     SearchFilters.value = "";
+  //   }
+  // });
 
-  SearchButton.addEventListener("click", function () {
-    toget();
-    console.log(Filterdata);
-    listItems.innerHTML = "";
-  });
+  // SearchButton.addEventListener("click", function () {
+  //   toget();
+  //   console.log(Filterdata);
+  //   listItems.innerHTML = "";
+  // });
 
   chatbot.addEventListener("click", function () {});
 }
@@ -522,13 +544,18 @@ toappendSkills = (data) => {
       if (li.id === "All") {
         Filterdata.Skill.SkillName = [];
       } else {
-        let Unique_id = generateUniqueId();
-        Filterdata.Skill.SkillName.push({
-          uniqueId: Unique_id,
-          SkillName: li.id,
-        });
-        toAppendHistory(li.id, Unique_id, SkillSearchHistory);
-        toCheckSearchHistory();
+        let values = Filterdata.Skill.SkillName.find(
+          (item) => item.SkillName === li.id
+        );
+        if (!values) {
+          let Unique_id = generateUniqueId();
+          Filterdata.Skill.SkillName.push({
+            uniqueId: Unique_id,
+            SkillName: li.id,
+          });
+          toAppendHistory(li.id, Unique_id, SkillSearchHistory);
+          toCheckSearchHistory();
+        }
       }
       // SkillDropdownFunction();
       // toget();
@@ -552,14 +579,20 @@ toappendLocation = (data) => {
         Filterdata.WorkExperience.Location = [];
         toCheckSearchHistory();
       } else {
-        Unique_id = generateUniqueId();
-        toAppendHistory(li.id, Unique_id, LocationSearchHistory);
-        Filterdata.WorkExperience.Location.push({
-          uniqueId: Unique_id,
-          Location: li.id,
-        });
-        console.log(Filterdata.WorkExperience);
-        toCheckSearchHistory();
+        let values = Filterdata.WorkExperience.Location.find(
+          (item) => item.Location === li.id
+        );
+        if (!values) {
+          Unique_id = generateUniqueId();
+          toAppendHistory(li.id, Unique_id, LocationSearchHistory);
+
+          Filterdata.WorkExperience.Location.push({
+            uniqueId: Unique_id,
+            Location: li.id,
+          });
+          console.log(Filterdata.WorkExperience);
+          toCheckSearchHistory();
+        }
       }
       // LocationdropdownFunction();
       // toget();
@@ -697,8 +730,10 @@ removeFunction = (id, item) => {
     Filterdata.Skill.SkillName = Filterdata.Skill.SkillName.filter(
       (item) => item.uniqueId !== id
     );
+    console.log(Filterdata.Skill.SkillName);
   }
-  console.log(Filterdata.SkillName, Filterdata.WorkExperience.Location);
+
+  toget();
   toCheckSearchHistory();
 };
 
@@ -721,7 +756,6 @@ function toCheckSearchHistory() {
   let SkillHistory = Filterdata.Skill.SkillName.length;
   let ExperienceHistory = Filterdata.Candidate.experience.length;
 
-  console.log(LocationHistory + SkillHistory + ExperienceHistory);
   if (LocationHistory + SkillHistory + ExperienceHistory === 0) {
     SearchHistoryContainer.style.display = "none";
   } else {
@@ -736,8 +770,10 @@ document.getElementById("ClearHistory").addEventListener("click", function () {
   Filterdata.WorkExperience.Location = [];
   Filterdata.Skill.SkillName = [];
   Filterdata.Candidate.experience = [];
+  ExperienceValue.textContent = "Experience";
   LocationSearchHistory.innerHTML = "";
   SearchHistoryContainer.style.display = "none";
+  toget();
 });
 
 // Search Skills
@@ -750,3 +786,5 @@ document
     );
     toappendSkills({ SkillList: data });
   });
+
+// toapplyFilters

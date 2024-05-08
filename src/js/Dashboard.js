@@ -63,14 +63,14 @@ function generateUniqueId() {
 }
 
 // Remove Function
-removeFunction = (id) => {
-  const para1 = document.getElementById(id);
-  console.log(para1);
-  para1.parentNode.removeChild(para1);
-  Filterdata.Skill.SkillName = Filterdata.Skill.SkillName.filter(
-    (item) => item.uniqueId !== id
-  );
-};
+// removeFunction = (id) => {
+//   const para1 = document.getElementById(id);
+//   console.log(para1);
+//   para1.parentNode.removeChild(para1);
+//   Filterdata.Skill.SkillName = Filterdata.Skill.SkillName.filter(
+//     (item) => item.uniqueId !== id
+//   );
+// };
 
 toDataPage = async (value) => {
   const encodedData = encodeURIComponent(JSON.stringify(value));
@@ -260,3 +260,5 @@ SubCategorySearchFilters.addEventListener("input", function (event) {
   );
   toDisplaySubCategory(Data);
 });
+
+window.togetSubcategory = togetSubcategory;
