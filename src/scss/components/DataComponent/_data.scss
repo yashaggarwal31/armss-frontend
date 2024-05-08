@@ -160,6 +160,7 @@
   p {
     width: 94%;
     overflow-x: scroll;
+    white-space: nowrap;
   }
 }
 
@@ -173,7 +174,9 @@
 }
 
 #listItems {
-  max-height: 80vh;
+  // border: 2px solid;
+  max-height: 60vh;
+  min-height: 60vh;
   overflow-y: auto;
   overflow-x: hidden;
 }

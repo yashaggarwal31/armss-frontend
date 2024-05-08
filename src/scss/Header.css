@@ -93,9 +93,9 @@ button {
   display: grid;
   grid-template-rows: 2fr 0.6fr;
   border-bottom: 0.1px solid rgba(191, 191, 191, 0.7137254902);
+  position: relative;
 }
 .Header-SubContainer {
-  position: relative;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -287,6 +287,7 @@ button {
   border-radius: 1rem;
   margin-top: 0.2rem;
   margin-left: 4rem;
+  display: none;
 }
 
 .ClearFunction {
@@ -323,7 +324,7 @@ button {
 .SuggestionContainer {
   position: absolute;
   left: 22.8%;
-  top: 16%;
+  top: 104%;
   width: 20%;
   border-radius: 1rem;
   background-color: #ffffff;

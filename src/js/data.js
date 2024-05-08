@@ -81,9 +81,15 @@ Filteritem = {
 toget = async (
   url = "https://armss-be.exitest.com/displayfilter/",
   method = "POST",
-  Filteringdata = Filterdata
+  data = Filterdata,
+  value = true
 ) => {
-  let data = method === "POST" ? tocheck(Filteringdata) : "";
+  console.log(value);
+  if (value === true) {
+    data = method === "POST" ? tocheck(data) : "";
+  } else {
+    data = data;
+  }
   console.log(url, method, data);
   options =
     method === "GET"
@@ -219,14 +225,15 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (dataString) {
     const data = JSON.parse(decodeURIComponent(dataString));
     document.getElementById("heading").textContent = data;
-
-    if (value === false) {
+    console.log(value);
+    if (value === "false") {
       let data1 = {
         query: data,
       };
+      console.log(data1);
       let url = new URL("https://armss-be.exitest.com/search_query/");
       method = "POST";
-      toget(url, method, data1);
+      toget(url, method, data1, false);
     } else {
       let data1 = {
         category_data: data,
@@ -280,7 +287,7 @@ toHideSkillContainer = function (id, item) {
   }, 50);
 };
 let method = "";
-function toShowData(data, method = method) {
+function toShowData(data, method = "POST") {
   console.log(data);
   listItems.innerHTML = "";
   lst = [];
@@ -325,7 +332,7 @@ function toShowData(data, method = method) {
       Email.textContent = data[i].Contact_Email;
 
       let Location = document.createElement("p");
-      Location.textContent = data[i].Location;
+      Location.textContent = data[i].Location.join(", ");
 
       let Phone_no = document.createElement("p");
       Phone_no.textContent = data[i].Contact_Phone;
@@ -779,3 +786,5 @@ document
     );
     toappendSkills({ SkillList: data });
   });
+
+// toapplyFilters

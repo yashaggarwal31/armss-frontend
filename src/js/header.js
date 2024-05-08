@@ -52,6 +52,7 @@ toAppendSuggestionData = (data) => {
       items = items.find((item) => item.id === "Search" + li.id);
       if (!items) {
         toAppendSearchItems(li.textContent);
+        toDisplayClear();
       }
     });
     SubCategoriesSuggestions.appendChild(li);
@@ -63,6 +64,7 @@ toAppendSuggestionData = (data) => {
 SearchremoveFunction = (data) => {
   let li = document.getElementById(data);
   li.remove();
+  toDisplayClear();
 };
 
 // Append Search History
@@ -135,6 +137,7 @@ SearchFilters.addEventListener("keydown", function (event) {
     }
     SearchFilters.value = "";
     FetchingSubcategories();
+    toDisplayClear();
   }
 });
 
@@ -153,13 +156,13 @@ SearchButton.addEventListener("click", function () {
     value = false;
   }
 
-  console.log(value);
   data = data.join(" & ");
 
   if (data.length > 0) {
     if (window.location.href === "http://127.0.0.1:5501/src/welcome.html") {
       const encodedData = encodeURIComponent(JSON.stringify(data));
       window.location.href = `data.html?data=${encodedData}&value=${value}`;
+      // window.history.pushState("m")
     } else {
       const encodedData = encodeURIComponent(JSON.stringify(data));
       window.location.href = `data.html?data=${encodedData}&value=${value}`;
@@ -173,7 +176,22 @@ let ClearFunction = document.getElementById("ClearFunction");
 
 ClearFunction.addEventListener("click", function () {
   SearchItems.innerHTML = "";
+  toDisplayClear();
 });
+
+// ClearDisplay
+function toDisplayClear() {
+  let Header_SearchItemsContainer = document.getElementById(
+    "Header_SearchItemsContainer"
+  );
+  let Value = SearchItems.childNodes;
+  if (Value.length > 0) {
+    Header_SearchItemsContainer.style.display = "flex";
+  } else {
+    Header_SearchItemsContainer.style.display = "none";
+  }
+}
+toDisplayClear();
 
 // Logout
 function Logout() {
