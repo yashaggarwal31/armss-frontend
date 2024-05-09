@@ -1,7 +1,7 @@
 const CategoryCreate = document.getElementById("CategoryCreate");
 
 const FilteringData = {
-  ItesmIds: [],
+  FetchedData: [],
   LocationCities: [],
   Skills: [],
 };
@@ -107,7 +107,10 @@ toget = async (
       }
       return response.json();
     })
-    .then((data) => toShowData(data, method));
+    .then((data) => {
+      FilteringData.FetchedData = data.length > 0 ? data[1] : [];
+      toShowData(data, method);
+    });
 };
 
 function generateUniqueId() {
@@ -596,6 +599,8 @@ toappendLocation = (data) => {
       }
       // LocationdropdownFunction();
       // toget();
+      toapplyfilters(Filterdata);
+      toapplyfilters(Filterdata);
     });
     Locationlist.appendChild(li);
   }
@@ -788,3 +793,20 @@ document
   });
 
 // toapplyFilters
+
+toapplyfilters = (data) => {
+  data = tocheck(data);
+  console.log(data);
+  for (let key in data) {
+    if (data[key]["check"].length > 0) {
+      for (let i of data[key]["check"]) {
+        sampleData = FilteringData.FetchedData.map(
+          (item) => FilteringData.FetchedData[item]
+        );
+        console.log(sampleData);
+      }
+    }
+  }
+};
+
+toapplyfilters(Filterdata);

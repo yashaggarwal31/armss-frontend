@@ -18,7 +18,7 @@
     @include font_size_color(0.8rem, 600, $Textblack, "Inter");
     @include grid(
       grid,
-      10% 12.8% 8.8% 10.4% 18% 10% 14% 10% 6%,
+      10% 12.8% 8.8% 10.4% 18% 12% 14% 10% 6%,
       null,
       null,
       null,
@@ -153,7 +153,7 @@
   margin: 0.4rem 0;
   border-radius: 0.4rem;
   @include font_size_color(0.8rem, 480, #474643, "Inter");
-  @include grid(grid, 10% 12% 10% 10% 18% 10% 14% 12% 6%, 1rem);
+  @include grid(grid, 10% 12% 10% 10% 18% 12% 14% 12% 6%, 1rem);
   align-items: start;
   justify-items: start;
 
