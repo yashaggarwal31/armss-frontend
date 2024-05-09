@@ -80,6 +80,9 @@
     }
   }
 }
+.ChatbotIcon {
+  @include width_height(2rem, 1.4rem);
+}
 .Icon {
   @include width_height(1rem, 1rem);
   transform: rotate(0turn);
@@ -122,8 +125,9 @@
   @include width_height(null, 4%);
   @include flex(flex, row, center, center);
   border-radius: 50%;
-  padding: 1rem;
+  padding: 0.4rem;
   background-color: $darkblue;
+  z-index: 10;
 }
 .ProfileContainer {
   @include position(relative);
@@ -171,8 +175,9 @@
 
 .SuggestionContainer {
   @include position(absolute, 14.8%, null, 14%);
-  @include width_height(40vh, 40%);
+  @include width_height(null, 20%);
   min-height: 40vh;
+  max-height: 40vh;
   border-radius: 1rem;
   @include flex(flex, row, space-around, center, 1rem);
   background-color: #f6f9ff;

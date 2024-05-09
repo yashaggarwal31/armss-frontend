@@ -8,6 +8,13 @@ let SubContainerList = document.getElementById("SubContainerList");
 let SubCategorySection = document.getElementById("SubCategorySection");
 let CloseSubContainer = document.getElementById("CloseSubContainer");
 
+// Category and SubCategory Data
+
+Folders = {
+  MainCategory: "",
+  SubCategory: "",
+};
+
 // Filter Api JSon
 
 const Filterdata = {
@@ -107,8 +114,8 @@ createListitems = (data, List, functions) => {
 
   li.id = i;
 
-  li.addEventListener("click", (event) => {
-    functions(event.target.textContent);
+  li.addEventListener("click", () => {
+    functions(data);
   });
   List.append(li);
 };
@@ -137,12 +144,17 @@ togetSubcategory = async (data) => {
     method: "GET",
   })
     .then((response) => response.json())
-    .then((responseData) => toDisplaySubCategory(responseData));
+    .then((responseData) => {
+      Folders.SubCategory = responseData;
+      toDisplaySubCategory(responseData);
+    });
 };
 
 // SubCategory
 
 toDisplaySubCategory = (data) => {
+  console.log(data);
+  SubContainerList.innerHTML = "";
   SubCategoryHeadingValue.textContent = data.length;
   for (let i of data) {
     createListitems(i, SubContainerList, togetdata);
@@ -163,7 +175,10 @@ togetFolders = async () => {
     method: "GET",
   })
     .then((response) => response.json())
-    .then((responseData) => toDisplayFloder(responseData));
+    .then((responseData) => {
+      Folders.MainCategory = responseData;
+      toDisplayFloder(responseData);
+    });
 };
 
 togetFolders();
@@ -172,6 +187,7 @@ togetFolders();
 
 CloseSubContainer.onclick = () => {
   SubCategorySection.style.display = "none";
+  SubCategorySearchFilters.value = "";
 };
 
 window.onload = () => {
@@ -255,3 +271,16 @@ tosetSuggestionData = (data) => {
     SkillSuggestions.appendChild(li);
   }
 };
+
+//  Search Functionality of Folders
+
+let SubCategorySearchFilters = document.getElementById(
+  "SubCategorySearchFilters"
+);
+
+SubCategorySearchFilters.addEventListener("input", function (event) {
+  Data = Folders.SubCategory.filter((item) =>
+    item.toLowerCase().includes(event.target.value.toLowerCase())
+  );
+  toDisplaySubCategory(Data);
+});

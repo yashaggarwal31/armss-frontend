@@ -105,8 +105,9 @@ button {
 }
 
 .login {
-  max-width: 700px;
-  width: 100%;
+  width: 80%;
+  align-self: center;
+  justify-self: center;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -116,14 +117,23 @@ button {
   padding: 50px 90px 50px 0;
 }
 .login-titles {
+  width: 76%;
   text-align: start;
   color: #333333;
   font-family: "Inter";
+  padding-bottom: 1rem;
 }
 .login-titles p {
   padding-top: 6px;
   font-size: 0.88rem;
   font-family: "Inter";
+}
+.login-Bgdesign {
+  width: 60%;
+  position: absolute;
+  right: -20%;
+  bottom: -50%;
+  z-index: -50;
 }
 
 .loginForm-Container {
@@ -136,6 +146,7 @@ button {
   gap: 1rem;
   border-radius: 6px;
   box-shadow: 0px 1px 2px 0px rgba(169, 191, 234, 0.9215686275);
+  background-color: #ffffff;
 }
 .loginForm-input {
   background: transparent;
@@ -180,6 +191,13 @@ button {
   font-family: "Inter";
   display: flex;
   flex-direction: column;
+}
+
+.CheckboxContainer {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.4rem;
 }
 
 .responsePara {

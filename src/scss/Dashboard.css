@@ -185,14 +185,22 @@ button {
 }
 
 .listItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 1rem;
   min-width: 233px;
   background-color: #ffffff;
   border-radius: 10px;
   position: relative;
+  min-height: 142px;
 }
 .listItem h4 {
   font-size: 14px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .listItem:hover {
@@ -200,6 +208,7 @@ button {
 }
 .listItem:hover h4 {
   color: #ffffff;
+  white-space: wrap;
 }
 
 .icon-container {
@@ -235,16 +244,18 @@ button {
   top: 20%;
   left: 20%;
 }
-.icon-container .ContainerListactive {
+
+.ContainerListactive {
   background-color: #0052f1;
 }
-.icon-container .ContainerListactive h4 {
+.ContainerListactive h4 {
   color: #ffffff;
 }
-.icon-container .ContainerListactive .DashboardFolderIcon svg {
+.ContainerListactive .DashboardFolderIcon svg {
   background-color: #ffffff;
 }
-.icon-container .section {
+
+.section {
   position: absolute;
   top: 0%;
   bottom: 100%;
@@ -258,16 +269,16 @@ button {
   -webkit-backdrop-filter: blur(0.6px);
           backdrop-filter: blur(0.6px);
 }
-.icon-container .section-SubHeadingContainer {
+.section-SubHeadingContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
 }
-.icon-container .section-SubHeadingContainer svg {
+.section-SubHeadingContainer svg {
   cursor: pointer;
 }
-.icon-container .section-CategorySubContainer {
+.section-CategorySubContainer {
   width: 56%;
   background-color: #ffffff;
   padding: 1.2rem;
@@ -277,20 +288,21 @@ button {
   overflow-x: hidden;
   box-shadow: 0 2px 4px 0px #bfbfbf;
 }
-.icon-container .section-CategorySubContainer .SubCategoryHeading {
+.section-CategorySubContainer .SubCategoryHeading {
   font-size: 1.28rem;
   font-weight: 600;
   color: #333333;
   font-family: "Inter";
   margin-bottom: 0.8rem;
 }
-.icon-container .section-subCategory {
+.section-subCategory {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
 }
-.icon-container #SubContainerList li {
+
+#SubContainerList li {
   width: 30%;
 }/*# sourceMappingURL=Dashboard.css.map */
