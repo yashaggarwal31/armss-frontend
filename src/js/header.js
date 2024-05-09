@@ -157,17 +157,16 @@ SearchButton.addEventListener("click", function () {
   }
 
   data = data.join(" & ");
-
   if (data.length > 0) {
-    if (window.location.href === "http://127.0.0.1:5501/src/welcome.html") {
+    if (window.location.href === "https://armss.exitest.com/welcome.html") {
       const encodedData = encodeURIComponent(JSON.stringify(data));
       window.location.href = `data.html?data=${encodedData}&value=${value}`;
-      // window.history.pushState("m")
     } else {
       const encodedData = encodeURIComponent(JSON.stringify(data));
       window.location.href = `data.html?data=${encodedData}&value=${value}`;
     }
   }
+
   // SearchItems.innerHTML = "";
 });
 
