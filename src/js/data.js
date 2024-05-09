@@ -108,7 +108,10 @@ toget = async (
       return response.json();
     })
     .then((data) => {
-      FilteringData.FetchedData = data.length > 0 ? data[1] : [];
+      FilteringData.FetchedData =
+        data.length > 0
+          ? Object.keys(data[1]).map((item) => data[1][item])
+          : [];
       toShowData(data, method);
     });
 };
@@ -800,10 +803,11 @@ toapplyfilters = (data) => {
   for (let key in data) {
     if (data[key]["check"].length > 0) {
       for (let i of data[key]["check"]) {
-        sampleData = FilteringData.FetchedData.map(
-          (item) => FilteringData.FetchedData[item]
-        );
-        console.log(sampleData);
+        console.log(FilteringData.FetchedData);
+        //   sampleData = FilteringData.FetchedData.map(
+        //     (item) => FilteringData.FetchedData[item]
+        //   );
+        //   console.log(sampleData);
       }
     }
   }
