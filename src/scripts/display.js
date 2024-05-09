@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", onDomLoaded);
 function fetchData() {
   console.log(send_data["resume_filters"]);
 
-  fetch("https://armss-be.exitest.com/filter", {
+  fetch("https://armss-be.exitest.com/displayfilter", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -38,7 +38,7 @@ function fetchData() {
     // })
     .then((data) => {
       console.log(data);
-      toShowData(data[1]);
+      toShowData(data);
       // resumes = data[0].slice(0, 10);
       // // console.log(resumes.slice(0, 5))
       // // console.log(data[1].slice(0, 10));
@@ -60,63 +60,63 @@ function fetchData() {
     });
 }
 
-function toShowData(data) {
-  if (data.length !== 0) {
-    // data = data[0];
-    // lst = [];
-    // items = {};
+// function toShowData(data) {
+//   if (data.length !== 0) {
+//     // data = data[0];
+//     // lst = [];
+//     // items = {};
 
-    for (let i of data) {
-      // console.log(i);
-      let li = document.createElement("li");
-      let ResumeId = document.createElement("p");
-      ResumeId.textContent = i[0];
-      let FirstName = document.createElement("p");
-      FirstName.textContent = i[1];
-      // let contactvalue = Array.from(items[i].Contact);
-      let Contact_type = document.createElement("p");
-      Contact_type.textContent = i[2];
-      let Contact_value = document.createElement("p");
-      Contact_value.textContent = i[3];
-      let SkillName = document.createElement("button");
-      SkillName.classList.add("SkillElement");
-      SkillName.textContent = "Skills";
-      SkillName.addEventListener("mouseover", () => {
-        // content = Array.from(items[i].SkillName);
-        toUpadteSkillContainer(i[4]);
-        SkillsContainer.style.display = "block";
-      });
-      SkillName.addEventListener("mouseout", () => {
-        SkillsContainer.textContent = "";
-        SkillsContainer.style.display = "none";
-      });
-      let Experience = document.createElement("button");
-      Experience.classList.add("SkillElement");
-      Experience.textContent = "Experience";
-      Experience.addEventListener("mouseover", () => {
-        // content = Array.from(items[i].SkillName);
-        toUpadteSkillContainer(i[5]);
-        SkillsContainer.style.display = "block";
-      });
-      Experience.addEventListener("mouseout", () => {
-        SkillsContainer.textContent = "";
-        SkillsContainer.style.display = "none";
-      });
-      li.appendChild(ResumeId);
-      li.appendChild(FirstName);
-      li.appendChild(Contact_value);
-      li.appendChild(SkillName);
-      li.appendChild(Experience);
-      li.classList.add("elementStyle");
-      listItems.appendChild(li);
-    }
-    // if (method === "GET") {
-    //     Filterdata.ResumeIdList.ResumeIdValue = lst2;
-    //     // console.log(Filterdata);
-    // }
-  } else {
-    let li = document.createElement("li");
-    li.textContent = "No data";
-    listItems.appendChild(li);
-  }
-}
+//     for (let i of data) {
+//       // console.log(i);
+//       let li = document.createElement("li");
+//       let ResumeId = document.createElement("p");
+//       ResumeId.textContent = i[0];
+//       let FirstName = document.createElement("p");
+//       FirstName.textContent = i[1];
+//       // let contactvalue = Array.from(items[i].Contact);
+//       let Contact_type = document.createElement("p");
+//       Contact_type.textContent = i[2];
+//       let Contact_value = document.createElement("p");
+//       Contact_value.textContent = i[3];
+//       let SkillName = document.createElement("button");
+//       SkillName.classList.add("SkillElement");
+//       SkillName.textContent = "Skills";
+//       SkillName.addEventListener("mouseover", () => {
+//         // content = Array.from(items[i].SkillName);
+//         toUpadteSkillContainer(i[4]);
+//         SkillsContainer.style.display = "block";
+//       });
+//       SkillName.addEventListener("mouseout", () => {
+//         SkillsContainer.textContent = "";
+//         SkillsContainer.style.display = "none";
+//       });
+//       let Experience = document.createElement("button");
+//       Experience.classList.add("SkillElement");
+//       Experience.textContent = "Experience";
+//       Experience.addEventListener("mouseover", () => {
+//         // content = Array.from(items[i].SkillName);
+//         toUpadteSkillContainer(i[5]);
+//         SkillsContainer.style.display = "block";
+//       });
+//       Experience.addEventListener("mouseout", () => {
+//         SkillsContainer.textContent = "";
+//         SkillsContainer.style.display = "none";
+//       });
+//       li.appendChild(ResumeId);
+//       li.appendChild(FirstName);
+//       li.appendChild(Contact_value);
+//       li.appendChild(SkillName);
+//       li.appendChild(Experience);
+//       li.classList.add("elementStyle");
+//       listItems.appendChild(li);
+//     }
+//     // if (method === "GET") {
+//     //     Filterdata.ResumeIdList.ResumeIdValue = lst2;
+//     //     // console.log(Filterdata);
+//     // }
+//   } else {
+//     let li = document.createElement("li");
+//     li.textContent = "No data";
+//     listItems.appendChild(li);
+//   }
+// }

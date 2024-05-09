@@ -93,9 +93,9 @@ button {
   justify-content: space-between;
   align-items: center;
   border-bottom: 0.1px solid rgba(191, 191, 191, 0.7137254902);
+  position: relative;
 }
 .Header-SubContainer {
-  position: relative;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -179,33 +179,6 @@ button {
 .Header-Profile {
   width: 40%;
   border-radius: 50%;
-}
-.Header-SearchFilter {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background-color: #f6f9ff;
-  padding: 0.4rem 0.8rem;
-}
-.Header-SearchFilter input {
-  border: none;
-  background-color: #f6f9ff;
-  outline: none;
-  color: #0052f1;
-  padding-left: 1.2rem;
-}
-.Header-SearchFilter input::-moz-placeholder {
-  font-size: 0.88rem;
-  font-weight: 400;
-  color: rgba(0, 82, 241, 0.38);
-  font-family: "Inter";
-}
-.Header-SearchFilter input::placeholder {
-  font-size: 0.88rem;
-  font-weight: 400;
-  color: rgba(0, 82, 241, 0.38);
-  font-family: "Inter";
 }
 
 .ChatbotIcon {
@@ -311,6 +284,7 @@ button {
   border-radius: 1rem;
   margin-top: 0.2rem;
   margin-left: 4rem;
+  display: none;
 }
 
 .ClearFunction {
@@ -318,64 +292,64 @@ button {
 }
 
 .SearchItemsList {
-  border-radius: 1rem;
+  border-radius: 0.8rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   gap: 0.2rem;
   width: 90%;
+  overflow-x: auto;
 }
 
 .SearchItemsList li {
   text-align: center;
   background-color: #0052f1;
-  border-radius: 1rem;
-  padding: 0.1rem;
+  border-radius: 0.8rem;
+  padding: 0.4rem;
   font-size: 0.68rem;
   font-weight: 480;
   color: #ffffff;
   font-family: "Inter";
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
 }
 
 .SuggestionContainer {
   position: absolute;
-  left: 14.8%;
-  top: 14%;
+  left: 22.8%;
+  top: 104%;
   width: 20%;
-  min-height: 40vh;
-  max-height: 40vh;
   border-radius: 1rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  gap: 1rem;
-  background-color: #f6f9ff;
+  background-color: #ffffff;
   box-shadow: 0px 2px 4px 0px #e5e9f2;
   padding: 10px;
   display: none;
-  z-index: 1;
+  z-index: 10;
 }
 
 .SuggestionContainer div {
   min-height: 100%;
-  width: 50%;
+  width: 100%;
 }
 .SuggestionContainer div h4 {
   text-align: left;
-  padding-left: 1rem;
   border-bottom: 1px solid #bfbfbf;
 }
 .SuggestionContainer div ul {
-  max-height: 36vh;
+  max-height: 28vh;
   overflow-y: scroll;
+  padding: 0.2rem;
 }
 .SuggestionContainer div ul li {
   font-size: 0.8rem;
   font-weight: 480;
   font-family: "Inter";
+  padding: 0.2rem 0;
 }
 .SuggestionContainer div ul li:hover {
-  background-color: #cdd4e0;
+  background-color: #e3e9f7;
 }/*# sourceMappingURL=Header.css.map */

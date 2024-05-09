@@ -63,14 +63,14 @@ function generateUniqueId() {
 }
 
 // Remove Function
-removeFunction = (id) => {
-  const para1 = document.getElementById(id);
-  console.log(para1);
-  para1.parentNode.removeChild(para1);
-  Filterdata.Skill.SkillName = Filterdata.Skill.SkillName.filter(
-    (item) => item.uniqueId !== id
-  );
-};
+// removeFunction = (id) => {
+//   const para1 = document.getElementById(id);
+//   console.log(para1);
+//   para1.parentNode.removeChild(para1);
+//   Filterdata.Skill.SkillName = Filterdata.Skill.SkillName.filter(
+//     (item) => item.uniqueId !== id
+//   );
+// };
 
 toDataPage = async (value) => {
   const encodedData = encodeURIComponent(JSON.stringify(value));
@@ -207,56 +207,34 @@ function setIds() {
   // listItems = document.getElementById("listItems");
   // ExperienceHeader.style.display = "none";
 
-  SearchFilters.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      let value = event.target.value;
-      value = value.split(",");
-      for (let i of value) {
-        const data = {
-          uniqueId: generateUniqueId(),
-          SkillName: i,
-        };
-        let li = document.createElement("li");
-        li.textContent = i;
-        li.id = data.uniqueId;
-        li.onclick = function () {
-          removeFunction(data.uniqueId);
-        };
-        SearchItems.appendChild(li);
-        Filterdata.Skill.SkillName.push(data);
-      }
-    }
-  });
+  // SearchFilters.addEventListener("keydown", function (event) {
+  //   if (event.key === "Enter") {
+  //     let value = event.target.value;
+  //     value = value.split(",");
+  //     for (let i of value) {
+  //       const data = {
+  //         uniqueId: generateUniqueId(),
+  //         SkillName: i,
+  //       };
+  //       let li = document.createElement("li");
+  //       li.textContent = i;
+  //       li.id = data.uniqueId;
+  //       li.onclick = function () {
+  //         removeFunction(data.uniqueId);
+  //       };
+  //       SearchItems.appendChild(li);
+  //       Filterdata.Skill.SkillName.push(data);
+  //     }
+  //   }
+  // });
 
-  SearchFilters.addEventListener("text", HoverSuggestionListContainer);
-  SearchFilters.addEventListener("focus", HoverSuggestionListContainer);
-  SearchFilters.addEventListener("blur", HideHoverSuggestionListContainer);
-
-  SearchButton.addEventListener("click", function () {
-    if (window.location.href === "welcome.html") {
-      window.location.href = "data.html";
-    } else {
-      toget();
-    }
-
-    console.log(Filterdata);
-    listItems.innerHTML = "";
-  });
+  // SearchFilters.addEventListener("text", HoverSuggestionListContainer);
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
   await getHtml();
   setIds();
 });
-
-HoverSuggestionListContainer = () => {
-  let SuggestionContainer = document.getElementById("SuggestionContainer");
-  SuggestionContainer.style.display = "flex";
-};
-HideHoverSuggestionListContainer = () => {
-  let SuggestionContainer = document.getElementById("SuggestionContainer");
-  SuggestionContainer.style.display = "none";
-};
 
 //  settingSuggestionData
 tosetSuggestionData = (data) => {
@@ -284,3 +262,5 @@ SubCategorySearchFilters.addEventListener("input", function (event) {
   );
   toDisplaySubCategory(Data);
 });
+
+window.togetSubcategory = togetSubcategory;

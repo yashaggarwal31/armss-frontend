@@ -169,6 +169,8 @@
   @include flex(flex, row, center, center);
   @include width_height(null, 100%);
   min-height: 120%;
+  max-height: 120%;
+  overflow: hidden;
   background-color: #ffffff53;
   backdrop-filter: blur(0.6px);
 
