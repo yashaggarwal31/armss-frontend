@@ -126,7 +126,7 @@ const uploadDoc = async (fileID, formData, fileProgress) => {
 
   try {
     const response = await axios.post(
-      "https://armss-be.exitest.com/items/",
+      "http://localhost:8000/items/",
       formData,
       {
         cancelToken,

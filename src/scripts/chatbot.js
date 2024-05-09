@@ -79,7 +79,11 @@ send_data = {
 
 }
 
-
+function submitOnEnter(event) {
+    if (event.key === "Enter") {
+        chat(event);
+    }
+}
 
 
 
@@ -109,7 +113,8 @@ async function chat(event) {
 
 
     try {
-        const response = await fetch("https://armss-be.exitest.com/chatbot", {
+        // const response = await fetch("http://localhost:8000/chatbot", {
+        const response = await fetch("http://localhost:8000/chatbot", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -119,7 +124,7 @@ async function chat(event) {
         const data = await response.json();
 
         console.log("archit");
-        console.log(data);
+        console.log("data fetched", data);
         var queryInput = document.getElementById('queryInput');
         queryInput.value = '';
 
@@ -137,7 +142,9 @@ async function chat(event) {
             send_data["resume_filters"] = data[1];
             send_data["count"] = data[2];
             let send_data_str = JSON.stringify(send_data);
+            let resumeids = JSON.stringify(data[0])
             localStorage.setItem('send_data', send_data_str);
+            localStorage.setItem('resumeids', resumeids);
             // sessionStorage.setItem('send_data', send_data_json);
             console.log("after the mess");
             console.log(send_data);
@@ -156,7 +163,7 @@ async function chat(event) {
 
     ///////////////////////////////////////
 
-    // fetch("https://armss-be.exitest.com/chatbot", {
+    // fetch("http://localhost:8000/chatbot", {
     //     method: "POST",
     //     headers: {
     //         "Content-Type": "application/json",
@@ -260,7 +267,7 @@ async function chat(event) {
 //     "count": 0
 // }
 
-// fetch("https://armss-be.exitest.com/chatbot", {
+// fetch("http://localhost:8000/chatbot", {
 //     method: "POST",
 //     headers: {
 //         "Content-Type": "application/json",
@@ -292,3 +299,6 @@ function resetQuery() {
 
 
 // window.send_data = send_data
+
+
+// chat()

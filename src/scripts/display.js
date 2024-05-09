@@ -1,6 +1,8 @@
 // let myVariable = window.myVariable;
 let send_data_str = localStorage.getItem("send_data");
 let send_data = JSON.parse(send_data_str);
+let res = localStorage.getItem("resumeids");
+let resumeids = JSON.parse(res);
 // sendDATA["count"] = 10
 // window.myVariable = sendDATA
 console.log("Before change:", send_data);
@@ -66,21 +68,25 @@ document.addEventListener("DOMContentLoaded", onDomLoaded);
 // console.log(filterJson)
 
 function fetchData() {
-  console.log(send_data["resume_filters"]);
+  // console.log(send_data["resume_filters"]);
+  console.log("localstorage data", resumeids);
+  console.log(JSON.stringify(resumeids));
 
-  fetch("https://armss-be.exitest.com/displayfilter", {
+  // fetch("http://localhost:8000/displayfilter", {
+  fetch("http://localhost:8000/full_resume_data", {
+
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(send_data["resume_filters"]),
+    body: JSON.stringify(resumeids),
   })
     .then((response) => response.json())
     // .then((data) => {
     //     console.log(data);
     // })
     .then((data) => {
-      console.log(data);
+      console.log("got data", data);
       toShowData(data);
       // resumes = data[0].slice(0, 10);
       // // console.log(resumes.slice(0, 5))

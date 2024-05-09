@@ -136,7 +136,7 @@ togetSubcategory = async (data) => {
   data = {
     category: data,
   };
-  let url = new URL("https://armss-be.exitest.com/skillmapCategory/");
+  let url = new URL("http://localhost:8000/skillmapCategory/");
   url.search = new URLSearchParams(data).toString();
   await fetch(url, {
     method: "GET",
@@ -168,7 +168,7 @@ function togetdata(id) {
 }
 
 togetFolders = async () => {
-  let url = new URL("https://armss-be.exitest.com/SkillMappers");
+  let url = new URL("http://localhost:8000/SkillMappers");
   await fetch(url, {
     method: "GET",
   })

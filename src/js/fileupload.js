@@ -187,7 +187,7 @@ const getUploadLink = async (filename) => {
         name: filename
     };
 
-    return fetch('https://armss-be.exitest.com/presignedUrl/', {
+    return fetch('http://localhost:8000/presignedUrl/', {
         method: 'POST', // Change the method to POST
         headers: {
             'Content-Type': 'application/json' // Specify the Content-Type

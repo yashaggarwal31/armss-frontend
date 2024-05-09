@@ -131,7 +131,7 @@ const uploadDoc = async (fileID, formData, fileProgress) => {
     })
 
     try {
-        const response = await axios.post('https://armss-be.exitest.com/items/', formData, {
+        const response = await axios.post('http://localhost:8000/items/', formData, {
             cancelToken,
             onUploadProgress: progressEvent => {
                 const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);

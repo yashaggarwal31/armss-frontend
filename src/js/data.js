@@ -72,6 +72,7 @@ tocheck = (data) => {
 
 Filteritem = {
   ResumeId: "",
+
   FirstName: "",
   Contact: new Set(),
   SkillName: new Set(),
@@ -79,7 +80,7 @@ Filteritem = {
 };
 
 toget = async (
-  url = "https://armss-be.exitest.com/displayfilter/",
+  url = "http://localhost:8000/displayfilter/",
   method = "POST",
   Filteringdata = Filterdata
 ) => {
@@ -89,10 +90,10 @@ toget = async (
     method === "GET"
       ? { method: method }
       : {
-          method: method,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        };
+        method: method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      };
 
   await fetch(url, options)
     .then((response) => {
@@ -220,7 +221,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     let data1 = {
       category_data: data,
     };
-    let url = new URL("https://armss-be.exitest.com/displayskillmap/");
+    let url = new URL("http://localhost:8000/displayskillmap/");
     url.search = new URLSearchParams(data1).toString();
     method = "GET";
     toget(url, method);
@@ -384,7 +385,7 @@ function toCheckRecent(data) {
 //   vale = {
 //     data: data,
 //   };
-//   await fetch("https://armss-be.exitest.com/Resumeslist", {
+//   await fetch("http://localhost:8000/Resumeslist", {
 //     method: "POST",
 //     headers: {
 //       "Content-Type": "application/json",
@@ -506,7 +507,7 @@ function setIds() {
     listItems.innerHTML = "";
   });
 
-  chatbot.addEventListener("click", function () {});
+  chatbot.addEventListener("click", function () { });
 }
 
 toappendSkills = (data) => {

@@ -210,7 +210,7 @@ const getUploadLink = async (filename, fileProgress, fileID) => {
         name: filename
     };
 
-    return fetch('https://armss-be.exitest.com/presignedUrl/', {
+    return fetch('http://localhost:8000/presignedUrl/', {
         method: 'POST', // Change the method to POST
         headers: {
             'Content-Type': 'application/json' // Specify the Content-Type
@@ -323,7 +323,7 @@ const uploadDoc = async (fileID, formData, fileProgress) => {
     })
 
     try {
-        const response = await axios.post('https://armss-be.exitest.com/items', formData, {
+        const response = await axios.post('http://localhost:8000/items', formData, {
             cancelToken,
             onUploadProgress: progressEvent => {
                 const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);

@@ -14,7 +14,7 @@ togetLoginDetails = async (newJsonData, data = null) => {
     newJsonData["Password"] = hasedvalue;
   }
 
-  let url = new URL("https://armss-be.exitest.com/login/");
+  let url = new URL("http://localhost:8000/login/");
   url.search = new URLSearchParams(newJsonData).toString();
   await fetch(url, {
     method: "GET",

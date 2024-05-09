@@ -27,7 +27,7 @@ let resume_filters = {
 
 check_filter = { name: "archit" };
 
-fetch("https://armss-be.exitest.com/filter", {
+fetch("http://localhost:8000/filter", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
