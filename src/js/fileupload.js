@@ -92,6 +92,7 @@ let uploadedCount = 0;
 let totalFileCount = 0;
 let errorCount = 0;
 let progressBarOverall;
+let currentUploadCancelled = false;
 const maxFileSize = 2000 * 1024 * 1024; //2MB
 const uploadingDIV = document.getElementById('upload-click-div');
 const uploadCount = document.getElementById('uploadCount');
@@ -99,10 +100,18 @@ const totalCount = document.getElementById('totalCount')
 const errorCounter = document.getElementById('errorCount');
 const errorTotal = document.getElementById('errorTotal');
 
+document.getElementById('cancel-upload-btn').addEventListener('click', () => {
+    currentUploadCancelled = true;
+    document.getElementById('cancel-upload-btn').style.display = 'none';
+    document.getElementById('cancelled').style.display = 'inline';
+
+})
+
 
 
 
 const upload = async () => {
+    currentUploadCancelled = false;
 
     uploadedCount = 0;
     totalFileCount = 0;
@@ -140,6 +149,12 @@ const upload = async () => {
 
 
     for (let i = 0; i < fileList.length; i++) {
+
+        if (currentUploadCancelled) {
+            console.log('upload cancelled')
+            break;
+        }
+
 
         //selecting individual file
         const uploadedFile = fileList[i];
@@ -267,6 +282,7 @@ const uploadFileThroughLink = (url, file) => {
             console.log('Uploaded Count:', uploadedCount, '\nTotal File Count: ', totalFileCount);
 
             if (uploadedCount === totalFileCount && errorCount === 0) {
+                document.getElementById('cancel-upload-div').style.display = 'none';
                 document.getElementById('successful-message').style.display = 'block';
                 console.log('Reached here')
             }
@@ -274,6 +290,7 @@ const uploadFileThroughLink = (url, file) => {
         else {
             errorCount++;
             errorTotal.innerHTML = errorCount;
+            document.getElementById('cancel-upload-div').style.display = 'none';
             errorCounter.style.display = 'block';
         }
 
