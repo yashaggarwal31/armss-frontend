@@ -100,6 +100,8 @@ const errorCounter = document.getElementById('errorCount');
 const errorTotal = document.getElementById('errorTotal');
 
 
+
+
 const upload = async () => {
 
     uploadedCount = 0;
@@ -107,8 +109,17 @@ const upload = async () => {
     errorCount = 0;
 
     const fileList = document.getElementById('fileInput').files;
+    if (fileList.length == 0) return;
     const total = fileList.length;
     totalFileCount = total;
+    console.log('ssssddfdvdvdvdvdvddvdv', totalFileCount)
+
+    const { sessionId, sessionTime } = await getSession();
+
+
+
+
+
 
     uploadCount.innerHTML = uploadedCount;
     totalCount.innerHTML = total;
@@ -130,7 +141,14 @@ const upload = async () => {
 
     for (let i = 0; i < fileList.length; i++) {
 
-        const file = fileList[i];
+        //selecting individual file
+        const uploadedFile = fileList[i];
+
+        //giving the selected file a new name, appending the session ID
+        const newName = `[${sessionId}]-` + uploadedFile.name;
+        const file = new File([uploadedFile], newName, { type: uploadedFile.type });
+
+
 
         const fileHash = await calculateHash(file)
 
@@ -178,6 +196,23 @@ const upload = async () => {
     //     
     // }, 20000)
 };
+
+async function getSession() {
+    try {
+        const response = await fetch('https://armss-be.exitest.com/upload/create-session');
+        const data = await response.json();
+        const sessionId = data.sessionId;
+        const sessionTime = data.sessionTime;
+
+        console.log("Session ID:", sessionId);
+        console.log("Session Time:", sessionTime);
+
+
+        return { sessionId, sessionTime };
+    } catch (error) {
+        console.error('Error fetching session:', error);
+    }
+}
 
 
 
@@ -227,6 +262,13 @@ const uploadFileThroughLink = (url, file) => {
             if (progressBarOverall) {
                 progressBarOverall.value = uploadedCount;
                 uploadCount.innerHTML = uploadedCount;
+            }
+
+            console.log('Uploaded Count:', uploadedCount, '\nTotal File Count: ', totalFileCount);
+
+            if (uploadedCount === totalFileCount && errorCount === 0) {
+                document.getElementById('successful-message').style.display = 'block';
+                console.log('Reached here')
             }
         }
         else {
