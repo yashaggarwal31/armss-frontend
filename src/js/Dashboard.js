@@ -129,6 +129,7 @@ let toShowSubCategory = (id) => {
   SubCategoryHeading.textContent = id;
   SubCategorySection.style.display = "flex";
   SubContainerList.innerHTML = "";
+  document.getElementById("Dashboard").style.overflow = "hidden";
   togetSubcategory(id);
 };
 
@@ -186,6 +187,7 @@ togetFolders();
 CloseSubContainer.onclick = () => {
   SubCategorySection.style.display = "none";
   SubCategorySearchFilters.value = "";
+  document.getElementById("Dashboard").style.overflow = "auto";
 };
 
 window.onload = () => {
@@ -260,5 +262,3 @@ SubCategorySearchFilters.addEventListener("input", function (event) {
   );
   toDisplaySubCategory(Data);
 });
-
-window.togetSubcategory = togetSubcategory;

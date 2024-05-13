@@ -1,6 +1,10 @@
-{/* // Get the modal */ }
+{
+  /* // Get the modal */
+}
 var modal = document.getElementById("myModal");
-{/* // Get the button that opens the modal */ }
+{
+  /* // Get the button that opens the modal */
+}
 var btn = document.getElementById("Chatbot");
 var span = document.getElementsByClassName("close")[0];
 // When the user clicks on the button, open the modal
@@ -17,7 +21,7 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 };
-const chatSpace = document.querySelector('.chat-space');
+const chatSpace = document.querySelector(".chat-space");
 // chatSpace.innerHTML = '';
 // const initialMessageElement = document.createElement('p');
 // initialMessageElement.classList.add('left');
@@ -25,55 +29,55 @@ const chatSpace = document.querySelector('.chat-space');
 // chatSpace.appendChild(initialMessageElement);
 // window.myVariable = send_data
 // let send_data1 = localStorage.getItem('send_data');
-let userid = localStorage.getItem("Rsession_name")
-console.log(userid)
+let userid = localStorage.getItem("Rsession_name");
+console.log(userid);
 send_data = {
-  "query": "",
+  query: "",
   // "query": query,
-  "resume_filters": {
-    "Candidate": {
-      "check": [],
+  resume_filters: {
+    Candidate: {
+      check: [],
     },
-    "Education": {
-      "check": [],
+    Education: {
+      check: [],
     },
-    "WorkExperience": {
-      "check": [],
+    WorkExperience: {
+      check: [],
     },
-    "Contact": {
-      "check": [],
+    Contact: {
+      check: [],
     },
-    "Skill": {
-      "check": [],
+    Skill: {
+      check: [],
     },
-    "ResumeIdList": {
-      "check": [],
-      "ResumeIdValue": [],
+    ResumeIdList: {
+      check: [],
+      ResumeIdValue: [],
     },
   },
-  "count": 0,
-  "user": "userid1"
-}
+  count: 0,
+  user: "userid1",
+};
 function submitOnEnter(event) {
   if (event.key === "Enter") {
     chat(event);
   }
 }
 async function chat(event) {
-  event.preventDefault()
+  event.preventDefault();
   // const send_data_json = sessionStorage.getItem('send_data');
   // Parse the JSON string back to an object
   // const send_data = JSON.parse(send_data_json);
   // console.log("session")
   // console.log(send_data)
-  const inputElement = document.getElementById('queryInput');
+  const inputElement = document.getElementById("queryInput");
   const query = inputElement.value;
-  const UserQuery = document.createElement('p');
-  UserQuery.classList.add('right');
+  const UserQuery = document.createElement("p");
+  UserQuery.classList.add("right");
   UserQuery.textContent = query;
   chatSpace.appendChild(UserQuery);
-  send_data["query"] = query
-  console.log("archit1", send_data)
+  send_data["query"] = query;
+  console.log("archit1", send_data);
   ////////////////////////////////////////
   try {
     // const response = await fetch("https://armss-be.exitest.com/chatbot", {
@@ -87,15 +91,15 @@ async function chat(event) {
     const data = await response.json();
     console.log("archit");
     console.log("data fetched", data);
-    var queryInput = document.getElementById('queryInput');
-    queryInput.value = '';
+    var queryInput = document.getElementById("queryInput");
+    queryInput.value = "";
     if (data[0] === "exit") {
       var modal = document.getElementById("myModal");
       modal.style.display = "none";
-    } else if (typeof data[0] === 'string') {
+    } else if (typeof data[0] === "string") {
       console.log("check string");
-      const messageElement = document.createElement('p');
-      messageElement.classList.add('left');
+      const messageElement = document.createElement("p");
+      messageElement.classList.add("left");
       messageElement.textContent = data[0];
       chatSpace.appendChild(messageElement);
     } else {
@@ -103,13 +107,13 @@ async function chat(event) {
       send_data["resume_filters"] = data[1];
       send_data["count"] = data[2];
       let send_data_str = JSON.stringify(send_data);
-      let resumeids = JSON.stringify(data[0])
-      localStorage.setItem('send_data', send_data_str);
-      localStorage.setItem('resumeids', resumeids);
+      let resumeids = JSON.stringify(data[0]);
+      localStorage.setItem("send_data", send_data_str);
+      localStorage.setItem("resumeids", resumeids);
       // sessionStorage.setItem('send_data', send_data_json);
       console.log("after the mess");
       console.log(send_data);
-      let url = 'resumeDisplay.html';
+      let url = "resumeDisplay.html";
       // Redirect to the new URL
       // window.location.href = url;
       window.location.replace(url);
@@ -216,13 +220,13 @@ async function chat(event) {
 //         console.error("Error:", error);
 //     });
 function addQuestion(button) {
-  var queryInput = document.getElementById('queryInput');
+  var queryInput = document.getElementById("queryInput");
   var question = button.textContent.trim();
-  queryInput.value += ' ' + question;
+  queryInput.value += " " + question;
 }
 function resetQuery() {
-  var queryInput = document.getElementById('queryInput');
-  queryInput.value = '';
+  var queryInput = document.getElementById("queryInput");
+  queryInput.value = "";
 }
 // window.send_data = send_data
 // chat()

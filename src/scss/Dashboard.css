@@ -324,4 +324,55 @@ button {
 
 #SubContainerList li {
   width: 30%;
+}
+
+.section .AddfloderContainer {
+  width: 46%;
+}
+.section-AddFolderInputContainers {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.2rem;
+}
+.section-AddFolderInputContainers label {
+  font-size: 1rem;
+  font-weight: 480;
+  color: #333333;
+  font-family: "Inter";
+}
+.section-AddFolderInputContainers input {
+  outline: none;
+  border: 0.08rem solid rgba(117, 117, 117, 0.51);
+  padding: 0.8rem 0.6rem;
+  border-radius: 0.4rem;
+}
+.section-AddFolderInputContainers input::-moz-placeholder {
+  color: #a6a6a6;
+}
+.section-AddFolderInputContainers input::placeholder {
+  color: #a6a6a6;
+}
+.section-AddFolderInputContainers textarea {
+  resize: none;
+  border: 0.08rem solid rgba(117, 117, 117, 0.51);
+  padding: 0.8rem 0.6rem;
+  border-radius: 0.4rem;
+}
+.section-AddFolderInputContainers textarea::-moz-placeholder {
+  color: #a6a6a6;
+}
+.section-AddFolderInputContainers textarea::placeholder {
+  color: #a6a6a6;
+}
+.section button {
+  align-self: flex-end;
+  margin-top: 0.4rem;
+}
+.section-inputContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.2rem;
+  margin: 1rem 0;
 }/*# sourceMappingURL=Dashboard.css.map */

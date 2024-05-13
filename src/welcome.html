@@ -13,184 +13,187 @@
   </head>
   <body class="body">
     <header class="Header-Container" id="Header"></header>
-    <section id="Dashboard" class="Dashboard">
-      <div class="Dashboard-container">
-        <div class="Dashboard-welcomeContainer">
-          <div class="textContainer">
-            <h2>Attract top talent effortlessly</h2>
-            <p>Simplify recruitment and find your next hero for the team</p>
+    <main id="WelcomeMain">
+      <section id="Dashboard" class="Dashboard">
+        <div class="Dashboard-container">
+          <div class="Dashboard-welcomeContainer">
+            <div class="textContainer">
+              <h2>Attract top talent effortlessly</h2>
+              <p>Simplify recruitment and find your next hero for the team</p>
+            </div>
+            <img
+              src="./assets/DashboardPng2.png"
+              class="Dashboard-Image"
+              alt="DashboardPng"
+            />
           </div>
-          <img
-            src="./assets/DashboardPng2.png"
-            class="Dashboard-Image"
-            alt="DashboardPng"
-          />
-        </div>
-        <div class="Dashboard-ContentContainer">
-          <div class="Dashboard-SubContentContainer">
-            <div class="SubContentContainer-Elements">
-              <h2>Resume Category (<span id="Categorys"></span>)</h2>
+          <div class="Dashboard-ContentContainer">
+            <div class="Dashboard-SubContentContainer">
+              <div class="SubContentContainer-Elements">
+                <h2>Resume Category (<span id="Categorys"></span>)</h2>
 
-              <div class="ButtonContainer">
-                <button class="Add" id="CategoryCreate">
-                  <svg class="Icon">
-                    <use xlink:href="./Icons/icons.svg#plus" />
-                  </svg>
-                  Add Folder
-                </button>
+                <div class="ButtonContainer">
+                  <button class="Add" id="CategoryAddFolder">
+                    <svg class="Icon">
+                      <use xlink:href="./Icons/icons.svg#plus" />
+                    </svg>
+                    Add Folder
+                  </button>
 
-                <button
-                  class="upload primary"
-                  onclick="window.dialog.showModal()"
-                >
-                  <svg class="Icon">
-                    <use xlink:href="./Icons/icons.svg#plus" />
-                  </svg>
-                  Upload Resumes
-                </button>
-
-                <!-- UPLOAD FUNCTIONALITY -->
-
-                <dialog id="dialog" class="upload-dialog main-upload-div">
-                  <div class="upload-files-title-div">
-                    <span class="upload-files-title">Upload Files</span>
-                    <button
-                      onclick="window.dialog.close();"
-                      aria-label="close"
-                      class="x close-button"
-                    >
-                      ❌
-                    </button>
-                  </div>
-
-                  <div
-                    id="upload-zone"
-                    class="upload-zone-div div-center flex-col"
+                  <button
+                    class="upload primary"
+                    onclick="window.dialog.showModal()"
                   >
-                    <input
-                      class="isVisuallyHidden"
-                      type="file"
-                      id="fileInput"
-                      multiple
-                    />
+                    <svg class="Icon">
+                      <use xlink:href="./Icons/icons.svg#plus" />
+                    </svg>
+                    Upload Resumes
+                  </button>
 
-                    <img
-                      style="width: 50px; height: 50px"
-                      src="./assets/upload-icon.png"
-                      alt=""
-                    />
+                  <!-- UPLOAD FUNCTIONALITY -->
 
-                    <div>Drag & drop files, <a href="#">Browse</a></div>
-                    <div><span>Or</span></div>
-                    <div class="div-center gap-1">
-                      <a
-                        id="drivelink"
-                        href="drive.google.com"
-                        target="_blank"
-                        class="google-drive"
-                        >from Google Drive</a
+                  <dialog id="dialog" class="upload-dialog main-upload-div">
+                    <div class="upload-files-title-div">
+                      <span class="upload-files-title">Upload Files</span>
+                      <button
+                        onclick="window.dialog.close();"
+                        aria-label="close"
+                        class="x close-button"
                       >
+                        ❌
+                      </button>
+                    </div>
+
+                    <div
+                      id="upload-zone"
+                      class="upload-zone-div div-center flex-col"
+                    >
+                      <input
+                        class="isVisuallyHidden"
+                        type="file"
+                        id="fileInput"
+                        multiple
+                      />
+
                       <img
-                        style="display: inline; width: 20px; height: 20px"
-                        src="./assets/google-drive.png"
+                        style="width: 50px; height: 50px"
+                        src="./assets/upload-icon.png"
                         alt=""
                       />
-                    </div>
 
-                    <div class="upload-files-supported text-center">
-                      PNG, JPEG, PDF, TXT are supported
-                    </div>
-                  </div>
-
-                  <div id="fileList"></div>
-
-                  <div class="upload-files-button">
-                    <div>
-                      <h4
-                        id="FileRefCount-div"
-                        class="display-none text-color-green"
-                      >
-                        <span id="FileRefCount"></span> Files Selected
-                      </h4>
-                    </div>
-                    <button
-                      class="upload-button-real"
-                      role="button"
-                      id="upload-btn"
-                    >
-                      Upload
-                    </button>
-                  </div>
-
-                  <div
-                    id="upload-click-div"
-                    class="upload-files-after-click-div gap-4"
-                  >
-                    <div class="div-center">
-                      <img src="./assets/uploading.png" alt="" />
-                    </div>
-                    <!-- <span>Uploading</span> -->
-                    <div>
-                      <div
-                        id="errorCount"
-                        class="text-right right-side-upload-files-div"
-                      >
-                        <span id="errorTotal" style="color: #f69400">2</span>
-                        <span class="font-weight-500">ERRORS</span>
-                      </div>
-                      <div>
-                        <progress
-                          style="width: 100%"
-                          id="progressBarOverall"
-                          max="100"
-                          value="80"
-                        ></progress>
-                      </div>
-                      <div class="upload-files-count">
-                        <span id="uploadCount">0</span>/<span id="totalCount"
-                          >0</span
+                      <div>Drag & drop files, <a href="#">Browse</a></div>
+                      <div><span>Or</span></div>
+                      <div class="div-center gap-1">
+                        <a
+                          id="drivelink"
+                          href="drive.google.com"
+                          target="_blank"
+                          class="google-drive"
+                          >from Google Drive</a
                         >
-                        files
-                        <a style="color: #0052f1" href="#">are uploaded</a>
+                        <img
+                          style="display: inline; width: 20px; height: 20px"
+                          src="./assets/google-drive.png"
+                          alt=""
+                        />
+                      </div>
+
+                      <div class="upload-files-supported text-center">
+                        PNG, JPEG, PDF, TXT are supported
                       </div>
                     </div>
-                  </div>
 
-                  <div class="system-error-table pt-4">
-                    <div class="text-left mb-2 text-color-grey font-weight-600">
-                      System Error
-                    </div>
-                    <div class="upload-table-head">
-                      <div
-                        class="grid grid-template-col-5 text-color-grey plr-25 pb-15"
+                    <div id="fileList"></div>
+
+                    <div class="upload-files-button">
+                      <div>
+                        <h4
+                          id="FileRefCount-div"
+                          class="display-none text-color-green"
+                        >
+                          <span id="FileRefCount"></span> Files Selected
+                        </h4>
+                      </div>
+                      <button
+                        class="upload-button-real"
+                        role="button"
+                        id="upload-btn"
                       >
-                        <h4>Status</h4>
-                        <h4>Filename</h4>
-                        <h4>Note</h4>
-                      </div>
-
-                      <ul class="border-top plr-25 ptb-15 upload-table-ele">
-                        <li class="grid grid-template-col-5">
-                          <h4 class="failure">Failed X</h4>
-                          <h4>Filename</h4>
-                          <h4>Note</h4>
-                        </li>
-                      </ul>
-
-                      <ul class="border-top plr-25 ptb-15 upload-table-ele">
-                        <li class="grid grid-template-col-5">
-                          <h4 class="failure">Failed X</h4>
-                          <h4>Filename</h4>
-                          <h4>Note</h4>
-                        </li>
-                      </ul>
+                        Upload
+                      </button>
                     </div>
-                  </div>
-                </dialog>
 
-                <!-- UPLOAD FUNCTIONALITY END -->
+                    <div
+                      id="upload-click-div"
+                      class="upload-files-after-click-div gap-4"
+                    >
+                      <div class="div-center">
+                        <img src="./assets/uploading.png" alt="" />
+                      </div>
+                      <!-- <span>Uploading</span> -->
+                      <div>
+                        <div
+                          id="errorCount"
+                          class="text-right right-side-upload-files-div"
+                        >
+                          <span id="errorTotal" style="color: #f69400">2</span>
+                          <span class="font-weight-500">ERRORS</span>
+                        </div>
+                        <div>
+                          <progress
+                            style="width: 100%"
+                            id="progressBarOverall"
+                            max="100"
+                            value="80"
+                          ></progress>
+                        </div>
+                        <div class="upload-files-count">
+                          <span id="uploadCount">0</span>/<span id="totalCount"
+                            >0</span
+                          >
+                          files
+                          <a style="color: #0052f1" href="#">are uploaded</a>
+                        </div>
+                      </div>
+                    </div>
 
-                <!-- <dialog id="dialog" class="upload-dialog">
+                    <div class="system-error-table pt-4">
+                      <div
+                        class="text-left mb-2 text-color-grey font-weight-600"
+                      >
+                        System Error
+                      </div>
+                      <div class="upload-table-head">
+                        <div
+                          class="grid grid-template-col-5 text-color-grey plr-25 pb-15"
+                        >
+                          <h4>Status</h4>
+                          <h4>Filename</h4>
+                          <h4>Note</h4>
+                        </div>
+
+                        <ul class="border-top plr-25 ptb-15 upload-table-ele">
+                          <li class="grid grid-template-col-5">
+                            <h4 class="failure">Failed X</h4>
+                            <h4>Filename</h4>
+                            <h4>Note</h4>
+                          </li>
+                        </ul>
+
+                        <ul class="border-top plr-25 ptb-15 upload-table-ele">
+                          <li class="grid grid-template-col-5">
+                            <h4 class="failure">Failed X</h4>
+                            <h4>Filename</h4>
+                            <h4>Note</h4>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </dialog>
+
+                  <!-- UPLOAD FUNCTIONALITY END -->
+
+                  <!-- <dialog id="dialog" class="upload-dialog">
                   <div class="flex-col gap-2 div-center mt-2">
                     <h3 class="text-left">Upload your files!</h3>
 
@@ -219,21 +222,21 @@
                       Upload Files
                     </label>
           -->
-                <!-- <button id='upload-btn' onclick="upload()">Upload file</button> -->
-                <!-- <button class="button-21" role="button" id="upload-btn">
+                  <!-- <button id='upload-btn' onclick="upload()">Upload file</button> -->
+                  <!-- <button class="button-21" role="button" id="upload-btn">
                       Upload Files
                     </button>
                   </div>  -->
 
-                <!-- <progress id="progressBarOverall" value="0" max="100"></progress> -->
-                <!-- <span id="progressNumbers"></span>
+                  <!-- <progress id="progressBarOverall" value="0" max="100"></progress> -->
+                  <!-- <span id="progressNumbers"></span>
                   <div id="fileUploadList">
                     <!-- File upload list will be dynamically populated  -->
-                <!-- </div>
+                  <!-- </div>
 
                   <div>
                     <!-- <progress id="progress-bar" value="0" max="100"></progress> -->
-                <!-- <span id="individual-progress"></span>
+                  <!-- <span id="individual-progress"></span>
                   </div>
 
                   <div id="u-lists" class="upload-lists">
@@ -253,7 +256,7 @@
                       <!-- <div id="cancelled-list">
                         <h1>Cancelled</h1>
                       </div> -->
-                <!-- </div>
+                  <!-- </div>
                   </div>
 
                   <button
@@ -264,46 +267,72 @@
                     ❌
                   </button>
                 </dialog>   -->
+                </div>
               </div>
+              <ul id="ContainerList" class="ContainerList"></ul>
             </div>
-            <ul id="ContainerList" class="ContainerList"></ul>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="section" id="SubCategorySection" style="display: none">
-      <div class="section-CategorySubContainer">
-        <div class="section-SubHeadingContainer">
-          <h4 class="SubCategoryHeading">
-            <span id="SubCategoryHeading"></span> (<span
-              id="SubCategoryHeadingValue"
-            ></span
-            >)
-          </h4>
-          <svg class="Icon" id="CloseSubContainer">
-            <use xlink:href="./Icons/icons.svg#close" />
-          </svg>
-        </div>
-        <div class="section-subCategory">
-          <div class="Header-Filters">
-            <input
-              type="text"
-              class="Header-keywords"
-              id="SubCategorySearchFilters"
-              placeholder=" Search Folders "
-            />
-            <button class="Header-FilterButton" id="SubCategory">
-              <svg class="Icon" id="Icon">
-                <use xlink:href="./Icons/icons.svg#SearchIcon" />
-              </svg>
-            </button>
+      </section>
+      <section class="section" id="SubCategorySection" style="display: none">
+        <div class="section-CategorySubContainer">
+          <div class="section-SubHeadingContainer">
+            <h4 class="SubCategoryHeading">
+              <span id="SubCategoryHeading"></span> (<span
+                id="SubCategoryHeadingValue"
+              ></span
+              >)
+            </h4>
+            <svg class="Icon" id="CloseSubContainer">
+              <use xlink:href="./Icons/icons.svg#close" />
+            </svg>
           </div>
-          <button>Add Folder</button>
-        </div>
+          <div class="section-subCategory">
+            <div class="Header-Filters">
+              <input
+                type="text"
+                class="Header-keywords"
+                id="SubCategorySearchFilters"
+                placeholder=" Search Folders "
+              />
+              <button class="Header-FilterButton" id="SubCategory">
+                <svg class="Icon" id="Icon">
+                  <use xlink:href="./Icons/icons.svg#SearchIcon" />
+                </svg>
+              </button>
+            </div>
+            <button id="SubFolderAddFolder">Add Folder</button>
+          </div>
 
-        <ul id="SubContainerList" class="ContainerList"></ul>
-      </div>
-    </section>
+          <ul id="SubContainerList" class="ContainerList"></ul>
+        </div>
+      </section>
+      <section class="section" style="display: none">
+        <div class="section-CategorySubContainer AddfloderContainer">
+          <div class="section-SubHeadingContainer">
+            <h4 class="SubCategoryHeading">Create a New Folder</h4>
+            <svg class="Icon" id="CloseAddFolder">
+              <use xlink:href="./Icons/icons.svg#close" />
+            </svg>
+          </div>
+          <div class="section-inputContainer">
+            <div class="section-AddFolderInputContainers">
+              <label>Folder Name</label>
+              <input type="text" placeholder="Enter Role/Folder Name" />
+            </div>
+            <div class="section-AddFolderInputContainers">
+              <label>Skills</label>
+              <textarea
+                rows="4"
+                cols="20"
+                placeholder="Enter Skills by Comma Separator"
+              ></textarea>
+            </div>
+            <button class="AddFloder" id="SubmitAddFloder">Add Folder</button>
+          </div>
+        </div>
+      </section>
+    </main>
     <script src="./js/cookie.js"></script>
     <script src="./js/HeaderLoader.js"></script>
     <script src="./js/Dashboard.js"></script>

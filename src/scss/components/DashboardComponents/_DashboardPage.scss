@@ -193,3 +193,44 @@ button {
 #SubContainerList li {
   width: 30%;
 }
+
+.section {
+  .AddfloderContainer {
+    width: 46%;
+  }
+
+  &-AddFolderInputContainers {
+    @include flex(flex, column, flex-start, null, 0.2rem);
+
+    label {
+      @include font_size_color(1rem, 480, $Textblack, "Inter");
+    }
+    input {
+      outline: none;
+      border: 0.08rem solid $input-border-gray;
+      padding: 0.8rem 0.6rem;
+      border-radius: 0.4rem;
+    }
+    input::placeholder {
+      color: $input-placeholder-gray;
+    }
+    textarea {
+      resize: none;
+      border: 0.08rem solid $input-border-gray;
+      padding: 0.8rem 0.6rem;
+      border-radius: 0.4rem;
+    }
+    textarea::placeholder {
+      color: $input-placeholder-gray;
+    }
+  }
+  button {
+    align-self: flex-end;
+    margin-top: 0.4rem;
+  }
+
+  &-inputContainer {
+    @include flex(flex, column, flex-start, null, 0.2rem);
+    margin: 1rem 0;
+  }
+}
