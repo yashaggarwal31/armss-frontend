@@ -114,7 +114,7 @@ const upload = async () => {
     totalFileCount = total;
     console.log('ssssddfdvdvdvdvdvddvdv', totalFileCount)
 
-    const { sessionId, sessionTime } = await getSession();
+    // const { sessionId, sessionTime } = await getSession();
 
 
 
@@ -142,11 +142,14 @@ const upload = async () => {
     for (let i = 0; i < fileList.length; i++) {
 
         //selecting individual file
-        const uploadedFile = fileList[i];
+        // const uploadedFile = fileList[i];
+        const file = fileList[i];
 
         //giving the selected file a new name, appending the session ID
-        const newName = `[${sessionId}]-` + uploadedFile.name;
-        const file = new File([uploadedFile], newName, { type: uploadedFile.type });
+        // const newName = `[${sessionId}]-` + uploadedFile.name;
+        // const file = new File([uploadedFile], newName, { type: uploadedFile.type });
+
+
 
 
 
