@@ -4,19 +4,146 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./scss/Dashboard.css" />
-    <!-- <link rel="stylesheet" href="../dist/css/Dashboard.min.css" /> -->
+
     <link rel="stylesheet" href="./scss/Header.css" />
-    <link rel="stylesheet" href="./css/demop.css" />
     <link rel="stylesheet" href="css/chatbot.css" />
     <link rel="stylesheet" href="./css/uploadfiles.css" />
   </head>
   <body class="body">
     <header class="Header-Container" id="Header"></header>
     <main id="mainContent"></main>
+
+    <dialog id="dialog" class="upload-dialog main-upload-div">
+      <div class="upload-files-title-div">
+        <span class="upload-files-title">Upload Files</span>
+        <button
+          aria-label="close"
+          class="x close-button"
+          id="CloseUploadResumesbtn"
+        >
+          ❌
+        </button>
+      </div>
+
+      <div id="upload-zone" class="upload-zone-div div-center flex-col">
+        <input class="isVisuallyHidden" type="file" id="fileInput" multiple />
+
+        <img
+          style="width: 50px; height: 50px"
+          src="./assets/upload-icon.png"
+          alt=""
+        />
+
+        <div>
+          Drag & drop files,
+          <span style="cursor: pointer; color: blue">Browse</span>
+        </div>
+        <div><span>Or</span></div>
+        <div class="div-center gap-1">
+          <a
+            id="drivelink"
+            href="drive.google.com"
+            target="
+            "
+            class="google-drive"
+            >from Google Drive</a
+          >
+          <img
+            style="display: inline; width: 20px; height: 20px"
+            src="./assets/google-drive.png"
+            alt=""
+          />
+        </div>
+
+        <div class="upload-files-supported text-center">
+          PNG, JPEG, PDF, TXT are supported
+        </div>
+      </div>
+
+      <div id="fileList"></div>
+
+      <div class="upload-files-button">
+        <div>
+          <h4 id="FileRefCount-div" class="display-none text-color-green">
+            <span id="FileRefCount"></span> Files Selected
+          </h4>
+        </div>
+        <button class="upload-button-real" role="button" id="upload-btn">
+          Upload
+        </button>
+      </div>
+
+      <div id="upload-click-div" class="upload-files-after-click-div gap-4">
+        <div class="div-center">
+          <img src="./assets/uploading.png" alt="" />
+        </div>
+        <!-- <span>Uploading</span> -->
+        <div>
+          <div id="errorCount" class="text-right right-side-upload-files-div">
+            <span id="errorTotal" style="color: #f69400">2</span>
+            <span class="font-weight-500">ERRORS</span>
+          </div>
+          <div>
+            <progress
+              style="width: 100%"
+              id="progressBarOverall"
+              max="100"
+              value="80"
+            ></progress>
+          </div>
+          <div class="upload-files-count">
+            <span id="uploadCount">0</span>/<span id="totalCount">0</span>
+            files
+            <a style="color: #0052f1" href="#">are uploaded</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="system-error-table pt-4">
+        <div class="text-left mb-2 text-color-grey font-weight-600">
+          System Error
+        </div>
+        <div class="upload-table-head">
+          <div class="grid grid-template-col-5 text-color-grey plr-25 pb-15">
+            <h4>Status</h4>
+            <h4>Filename</h4>
+            <h4>Note</h4>
+          </div>
+
+          <ul class="border-top plr-25 ptb-15 upload-table-ele">
+            <li class="grid grid-template-col-5">
+              <h4 class="failure">Failed X</h4>
+              <h4>Filename</h4>
+              <h4>Note</h4>
+            </li>
+          </ul>
+
+          <ul class="border-top plr-25 ptb-15 upload-table-ele">
+            <li class="grid grid-template-col-5">
+              <h4 class="failure">Failed X</h4>
+              <h4>Filename</h4>
+              <h4>Note</h4>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="./js/mainjs.js"></script>
     <script src="./js/cookie.js"></script>
     <script src="./js/HeaderLoader.js"></script>
-    <script src="./js/mainjs.js"></script>
     <script src="./js/fileupload.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+      defer
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"
+    ></script>
   </body>
 </html>

@@ -1,12 +1,17 @@
-let containerList = document.getElementById("ContainerList");
-let Categorysvalue = document.getElementById("Categorys");
-let SubCategoryHeadingValue = document.getElementById(
-  "SubCategoryHeadingValue"
-);
-let SubCategoryHeading = document.getElementById("SubCategoryHeading");
-let SubContainerList = document.getElementById("SubContainerList");
-let SubCategorySection = document.getElementById("SubCategorySection");
-let CloseSubContainer = document.getElementById("CloseSubContainer");
+(function () {
+  containerList = document.getElementById("ContainerList");
+  Categorysvalue = document.getElementById("Categorys");
+  SubCategoryHeadingValue = document.getElementById("SubCategoryHeadingValue");
+  SubCategoryHeading = document.getElementById("SubCategoryHeading");
+  SubContainerList = document.getElementById("SubContainerList");
+  SubCategorySection = document.getElementById("SubCategorySection");
+  CloseSubContainer = document.getElementById("CloseSubContainer");
+  SubCategorySearchFilters = document.getElementById(
+    "SubCategorySearchFilters"
+  );
+  UploadResumes = document.getElementById("UploadResumes");
+  dialog = document.getElementById("dialog");
+})();
 
 // Category and SubCategory Data
 
@@ -17,42 +22,42 @@ Folders = {
 
 // Filter Api JSon
 
-const Filterdata = {
-  Candidate: {
-    check: [],
-    FirstName: [],
-    LastName: [],
-    experience: [],
-  },
+// const Filterdata = {
+//   Candidate: {
+//     check: [],
+//     FirstName: [],
+//     LastName: [],
+//     experience: [],
+//   },
 
-  WorkExperience: {
-    check: [],
-    Location: [],
-  },
+//   WorkExperience: {
+//     check: [],
+//     Location: [],
+//   },
 
-  Education: {
-    check: [],
-    Degree: [],
-    Score: [],
-    YearOfPassing: [],
-    Branch: [],
-    Institution: [],
-  },
-  Contact: {
-    check: [],
-    Contact_type: [],
-    Contact_value: [],
-  },
-  Skill: {
-    check: [],
-    // SkillName: ["Java", "Python"],
-    SkillName: [],
-  },
-  ResumeIdList: {
-    check: [],
-    ResumeIdValue: [],
-  },
-};
+//   Education: {
+//     check: [],
+//     Degree: [],
+//     Score: [],
+//     YearOfPassing: [],
+//     Branch: [],
+//     Institution: [],
+//   },
+//   Contact: {
+//     check: [],
+//     Contact_type: [],
+//     Contact_value: [],
+//   },
+//   Skill: {
+//     check: [],
+//     // SkillName: ["Java", "Python"],
+//     SkillName: [],
+//   },
+//   ResumeIdList: {
+//     check: [],
+//     ResumeIdValue: [],
+//   },
+// };
 
 // UniqueId
 function generateUniqueId() {
@@ -74,7 +79,16 @@ function generateUniqueId() {
 
 toDataPage = async (value) => {
   const encodedData = encodeURIComponent(JSON.stringify(value));
-  window.location.href = `data.html?data=${encodedData}`;
+  const url = `data.html?data=${encodedData}`;
+  // window.location.href = url;
+  FilteringData.onSelectSubFolder = value;
+  FilteringData.onFolderValue = false;
+  FilteringData.page = "data";
+  await triggerDOMContentLoaded();
+  // document.addEventListener("DOMContentLoaded", async () => {
+  //   await getContentHtml(url);
+  // });
+  // await ;
 };
 
 createListitems = (data, List, functions) => {
@@ -125,7 +139,7 @@ toDisplayFloder = (data) => {
   }
 };
 
-let toShowSubCategory = (id) => {
+toShowSubCategory = (id) => {
   SubCategoryHeading.textContent = id;
   SubCategorySection.style.display = "flex";
   SubContainerList.innerHTML = "";
@@ -165,7 +179,6 @@ function togetdata(id) {
   document
     .querySelectorAll("li")
     .forEach((li) => li.classList.remove("ContainerListactive"));
-  this.classList.add("ContainerListactive");
 }
 
 togetFolders = async () => {
@@ -232,7 +245,7 @@ function setIds() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await getHtml();
+  // await getHtml();
   setIds();
 });
 
@@ -252,13 +265,15 @@ tosetSuggestionData = (data) => {
 
 //  Search Functionality of Folders
 
-let SubCategorySearchFilters = document.getElementById(
-  "SubCategorySearchFilters"
-);
-
 SubCategorySearchFilters.addEventListener("input", function (event) {
   Data = Folders.SubCategory.filter((item) =>
     item.toLowerCase().includes(event.target.value.toLowerCase())
   );
   toDisplaySubCategory(Data);
+});
+
+// UploadResumes
+
+UploadResumes.addEventListener("click", () => {
+  dialog.showModal();
 });

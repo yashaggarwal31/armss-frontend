@@ -109,14 +109,18 @@ async function chat(event) {
       let send_data_str = JSON.stringify(send_data);
       let resumeids = JSON.stringify(data[0]);
       localStorage.setItem("send_data", send_data_str);
-      localStorage.setItem("resumeids", resumeids);
+      // localStorage.setItem("resumeids", resumeids);
+      FilteringData.chatbotResumeIds = resumeids;
+      FilteringData.chatbotData = true;
       // sessionStorage.setItem('send_data', send_data_json);
       console.log("after the mess");
       console.log(send_data);
-      let url = "resumeDisplay.html";
-      // Redirect to the new URL
-      // window.location.href = url;
-      window.location.replace(url);
+      // let url = "resumeDisplay.html";
+      // // Redirect to the new URL
+      // // window.location.href = url;
+      // window.location.replace(url);
+      FilteringData.page = "data";
+      await triggerDOMContentLoaded();
     }
     return data;
   } catch (error) {

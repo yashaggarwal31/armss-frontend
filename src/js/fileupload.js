@@ -232,3 +232,12 @@ function sha256(arrayBuffer) {
   const wordArray = CryptoJS.lib.WordArray.create(arrayBuffer);
   return CryptoJS.SHA256(wordArray).toString(CryptoJS.enc.Hex);
 }
+
+// close
+
+let CloseUploadResumesbtn = document.getElementById("CloseUploadResumesbtn");
+// let dialog = document.getElementById("dialog");
+
+CloseUploadResumesbtn.addEventListener("click", () => {
+  dialog.close();
+});
