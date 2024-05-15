@@ -143,7 +143,7 @@ button {
   border-radius: 2rem;
   padding: 0.6rem;
   height: 5vh;
-  width: 16.8%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -227,6 +227,10 @@ button {
   border-radius: 0.28rem;
   white-space: nowrap;
 }
+.section-MainPlusDropDropDown {
+  width: 16.8%;
+  position: relative;
+}
 
 .Icon {
   height: 1rem;
@@ -242,9 +246,9 @@ button {
 
 .dropdownVisible {
   height: 28.8vh;
-  width: 14%;
+  width: 100%;
   position: absolute;
-  right: 44.8%;
+  left: 0;
   bottom: 0%;
   border-radius: 0.6rem;
   box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
@@ -380,4 +384,34 @@ button {
   padding: 0.8rem;
   border-radius: 0.4rem;
   background-color: #0052f1;
+}
+
+.loader {
+  width: 50px;
+  padding: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #0052f1;
+  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: l3 1s infinite linear;
+}
+
+@keyframes l3 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.Loader-section {
+  position: absolute;
+  top: 12%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
 }/*# sourceMappingURL=Data.css.map */

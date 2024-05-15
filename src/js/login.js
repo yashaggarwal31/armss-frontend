@@ -35,9 +35,10 @@ toLoginValidate = (data) => {
     document.getElementById("LoginForm").reset();
     console.log(data);
     localStorage.setItem("Rsession_name", data.session_name);
+    localStorage.setItem("value", true);
     setCookie(data.session_name, data.session_token, data.validation_time);
 
-    window.location.replace("welcome.html");
+    window.location.replace("main.html");
 
     // document.getElementById("responsePara").textContent = "";
   } else {
