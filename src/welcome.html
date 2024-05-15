@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./scss/Header.css" />
     <link rel="stylesheet" href="./css/demop.css" />
     <link rel="stylesheet" href="css/chatbot.css" />
+    <link rel="stylesheet" href="./scss/Chat.css" />
     <link rel="stylesheet" href="./css/uploadfiles.css" />
   </head>
   <body class="body">
@@ -101,7 +102,11 @@
           <div class="section-inputContainer">
             <div class="section-AddFolderInputContainers">
               <label>Folder Name</label>
-              <input type="text" placeholder="Enter Role/Folder Name" />
+              <input
+                type="text"
+                placeholder="Enter Role/Folder Name"
+                id="AddFolderName"
+              />
             </div>
             <div class="section-AddFolderInputContainers">
               <label>Skills</label>
@@ -109,6 +114,7 @@
                 rows="4"
                 cols="20"
                 placeholder="Enter Skills by Comma Separator"
+                id="AddFolderSkills"
               ></textarea>
             </div>
             <button class="AddFloder" id="SubmitAddFloder">Add Folder</button>

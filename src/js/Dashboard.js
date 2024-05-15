@@ -6,6 +6,8 @@
   SubContainerList = document.getElementById("SubContainerList");
   SubCategorySection = document.getElementById("SubCategorySection");
   CloseSubContainer = document.getElementById("CloseSubContainer");
+  AddFolderSkills = document.getElementById("AddFolderSkills");
+  AddFolderName = document.getElementById("AddFolderName");
   SubCategorySearchFilters = document.getElementById(
     "SubCategorySearchFilters"
   );
@@ -283,6 +285,35 @@ document.getElementById("CategoryAddFolder").onclick = function () {
 //  close icon
 document.getElementById("CloseAddFolder").onclick = function () {
   document.getElementById("CreateFolders-SubFolders").style.display = "none";
+};
+
+async function addFolder(folderData) {
+  const response = await fetch("https://armss-be.exitest.com/add_folder/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(folderData),
+  });
+  if (response.ok) {
+    const data = await response.json();
+    console.log("Folder added successfully:", data);
+  } else {
+    console.error("Failed to add folder:", response.statusText);
+  }
+}
+document.getElementById("SubmitAddFloder").onclick = function () {
+  if (AddFolderName.value.length > 0 && AddFolderSkills.value.length > 0) {
+    const folderData = {
+      Name: "New Pos",
+      Skills: "Skill1, Skill2, Skill3",
+      ParentFolder: "",
+    };
+
+    addFolder(folderData);
+  } else {
+    alert("Please fill all the fields to crete Folder");
+  }
 };
 
 // UploadResumes
