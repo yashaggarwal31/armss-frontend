@@ -133,10 +133,11 @@
 }
 .ProfileContainer:hover .LogoutBtn {
   visibility: visible;
-  background-color: #2c2c2c;
-  color: white;
 }
-
+.LogoutBtn:hover {
+  background-color: #0050f1;
+  color: $white;
+}
 .SearchItems {
   justify-self: center;
   @include flex(flex, row, flex-start, baseline, 0.4rem);

@@ -3,7 +3,6 @@
     @include position(absolute, 0, 0, 0, null);
     height: 100vh;
     @include flex(flex, column, center, center);
-    border: 2px solid red;
     background-color: #3333332d;
     z-index: 40;
     display: none;

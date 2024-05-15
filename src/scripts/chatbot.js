@@ -113,7 +113,7 @@ async function chat(value) {
       // window.location.replace(url);
       const messageElement = document.createElement("p");
       messageElement.classList.add("left");
-      messageElement.textContent = "Your Results";
+      messageElement.textContent = "Your Results Displayed";
       chatSpace.appendChild(messageElement);
       FilteringData.page = "data";
       ChatbotContainer.style.display = "none";
