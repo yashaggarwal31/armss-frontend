@@ -62,7 +62,7 @@ toget = async (
     .then((data) => {
       console.log(data);
       FilteringData.FetchedData =
-        data.length > 0
+        data[1] !== null
           ? Object.keys(data[1]).map((item) => data[1][item])
           : [];
       toShowData(data, method);
@@ -617,6 +617,7 @@ FetchingSkills();
   SkillHeader = document.getElementById("Skill-Header");
   SkillList = document.getElementById("SkillList");
   SkillValue = document.getElementById("SkillValue");
+  ExperienceMainContainer = document.getElementById("ExperienceMainContainer");
 })();
 
 LocationdropdownFunction = () => {
@@ -644,7 +645,6 @@ ExperienceDropdownFunction = () => {
     ExperienceHeader.style.boxShadow = "0px 2px 2px 0px #f4f2ff";
     ExperienceDropdown.classList.add("dropdownVisible");
     ExperienceDropdown.style.display = "block";
-    ExperienceDropdown.style.right = "29.8%";
     downicon2.classList.add("IconStyles");
   }
 };
@@ -660,7 +660,6 @@ SkillDropdownFunction = () => {
     SkillHeader.style.boxShadow = "0px 2px 2px 0px #f4f2ff";
     SkillDropdown.classList.add("dropdownVisible");
     SkillDropdown.style.display = "block";
-    SkillDropdown.style.right = "14.8%";
     downicon3.classList.add("IconStyles");
     FetchingSkills();
   }
@@ -669,6 +668,17 @@ SkillDropdownFunction = () => {
 LocationHeader.addEventListener("click", LocationdropdownFunction);
 ExperienceHeader.addEventListener("click", ExperienceDropdownFunction);
 SkillHeader.addEventListener("click", SkillDropdownFunction);
+
+// SkillHeader.addEventListener("blur", () => {
+//   let interval = setTimeout(() => {
+//     SkillDropdownFunction();
+//   }, 100);
+//   SkillDropdown.addEventListener("mouseenter", () => {
+//     clearTimeout(interval);
+//   });
+//   SkillDropdown.addEventListener("mouseleave", SkillDropdownFunction);
+// });
+
 FetchingLocation();
 
 //  Fetching All Cities

@@ -78,11 +78,9 @@ function generateUniqueId() {
 // };
 
 toDataPage = async (value) => {
-  const encodedData = encodeURIComponent(JSON.stringify(value));
-  const url = `data.html?data=${encodedData}`;
   // window.location.href = url;
   FilteringData.onSelectSubFolder = value;
-  FilteringData.onFolderValue = false;
+  FilteringData.onFolderValue = true;
   FilteringData.page = "data";
   await triggerDOMContentLoaded();
   // document.addEventListener("DOMContentLoaded", async () => {
@@ -271,6 +269,21 @@ SubCategorySearchFilters.addEventListener("input", function (event) {
   );
   toDisplaySubCategory(Data);
 });
+
+// to create SubFolder
+document.getElementById("SubFolderAddFolder").onclick = function () {
+  document.getElementById("CreateFolders-SubFolders").style.display = "flex";
+  SubCategorySection.style.display = "none";
+};
+
+document.getElementById("CategoryAddFolder").onclick = function () {
+  document.getElementById("CreateFolders-SubFolders").style.display = "flex";
+};
+
+//  close icon
+document.getElementById("CloseAddFolder").onclick = function () {
+  document.getElementById("CreateFolders-SubFolders").style.display = "none";
+};
 
 // UploadResumes
 

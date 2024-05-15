@@ -28,25 +28,83 @@
         <div class="section-SubContainer">
           <h2 class="heading">Total: <span id="TotalValue"></span></h2>
           <div class="section-DropdownContainers">
-            <div class="section-dropdownContainer" id="Location-Header">
-              <p id="LocationValue">Location</p>
-              <svg class="Icon" id="DownIcon1">
-                <use xlink:href="./Icons/icons.svg#Downarrow" />
-              </svg>
+            <div class="section-MainPlusDropDropDown">
+              <div class="section-dropdownContainer" id="Location-Header">
+                <p id="LocationValue">Location</p>
+                <svg class="Icon" id="DownIcon1">
+                  <use xlink:href="./Icons/icons.svg#Downarrow" />
+                </svg>
+              </div>
+              <div
+                class="Locationdropdown"
+                id="Locationdropdown"
+                style="display: none"
+              >
+                <div class="section-SearchFilter">
+                  <svg class="Icon">
+                    <use xlink:href="./Icons/icons.svg#SkillSearchIcon" />
+                  </svg>
+                  <input
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                    id="SearchLocation"
+                  />
+                </div>
+                <ul class="Locationlist" id="Locationlist"></ul>
+              </div>
             </div>
-
-            <div class="section-dropdownContainer" id="Experience-Header">
-              <p id="ExperienceValue">Experience</p>
-              <svg class="Icon" id="DownIcon2">
-                <use xlink:href="./Icons/icons.svg#Downarrow" />
-              </svg>
+            <div
+              class="section-MainPlusDropDropDown"
+              id="ExperienceMainContainer"
+            >
+              <div class="section-dropdownContainer" id="Experience-Header">
+                <p id="ExperienceValue">Experience</p>
+                <svg class="Icon" id="DownIcon2">
+                  <use xlink:href="./Icons/icons.svg#Downarrow" />
+                </svg>
+              </div>
+              <div
+                class="section-dropdownContainer"
+                id="ExperienceDropdown"
+                style="display: none"
+              >
+                <ul class="dropdown-list" id="ExperienceList">
+                  <li id="All">All</li>
+                  <li id="item1">0 - 1 Year</li>
+                  <li id="item2">1 - 2 Year</li>
+                  <li id="item3">2 - 3 Year</li>
+                  <li id="item4">3 - 6 Year</li>
+                  <li id="item5">6 - 9 Year</li>
+                  <li id="item6">9+ Year</li>
+                </ul>
+              </div>
             </div>
-
-            <div class="section-dropdownContainer" id="Skill-Header">
-              <p id="SkillValue">Skills</p>
-              <svg class="Icon" id="DownIcon3">
-                <use xlink:href="./Icons/icons.svg#Downarrow" />
-              </svg>
+            <div class="section-MainPlusDropDropDown">
+              <div class="section-dropdownContainer" id="Skill-Header">
+                <p id="SkillValue">Skills</p>
+                <svg class="Icon" id="DownIcon3">
+                  <use xlink:href="./Icons/icons.svg#Downarrow" />
+                </svg>
+              </div>
+              <div
+                class="Locationdropdown"
+                id="SkillDropdown"
+                style="display: none"
+              >
+                <div class="section-SearchFilter">
+                  <svg class="Icon">
+                    <use xlink:href="./Icons/icons.svg#SkillSearchIcon" />
+                  </svg>
+                  <input
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                    id="SearchSkills"
+                  />
+                </div>
+                <ul class="dropdown-list" id="SkillList"></ul>
+              </div>
             </div>
             <button id="uploadresumes">
               <svg class="Icon" id="Icon">
@@ -54,60 +112,6 @@
               </svg>
               Upload Resumes
             </button>
-          </div>
-
-          <div
-            class="section-dropdownContainer"
-            id="ExperienceDropdown"
-            style="display: none"
-          >
-            <ul class="dropdown-list" id="ExperienceList">
-              <li id="All">All</li>
-              <li id="item1">0 - 1 Year</li>
-              <li id="item2">1 - 2 Year</li>
-              <li id="item3">2 - 3 Year</li>
-              <li id="item4">3 - 6 Year</li>
-              <li id="item5">6 - 9 Year</li>
-              <li id="item6">9+ Year</li>
-            </ul>
-          </div>
-
-          <div
-            class="Locationdropdown"
-            id="Locationdropdown"
-            style="display: none"
-          >
-            <div class="section-SearchFilter">
-              <svg class="Icon">
-                <use xlink:href="./Icons/icons.svg#SkillSearchIcon" />
-              </svg>
-              <input
-                type="text"
-                class="search-input"
-                placeholder="Search"
-                id="SearchLocation"
-              />
-            </div>
-            <ul class="Locationlist" id="Locationlist"></ul>
-          </div>
-
-          <div
-            class="Locationdropdown"
-            id="SkillDropdown"
-            style="display: none"
-          >
-            <div class="section-SearchFilter">
-              <svg class="Icon">
-                <use xlink:href="./Icons/icons.svg#SkillSearchIcon" />
-              </svg>
-              <input
-                type="text"
-                class="search-input"
-                placeholder="Search"
-                id="SearchSkills"
-              />
-            </div>
-            <ul class="dropdown-list" id="SkillList"></ul>
           </div>
         </div>
         <div class="section-SearchHistory" id="SearchHistoryContainer">

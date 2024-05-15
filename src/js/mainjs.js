@@ -10,6 +10,8 @@ const FilteringData = {
   chatbotData: false,
 };
 
+console.log(FilteringData);
+
 let loaded = false;
 
 window.onload = () => {
@@ -17,14 +19,14 @@ window.onload = () => {
 };
 document.addEventListener("DOMContentLoaded", async () => {
   if (FilteringData.page === "") {
-    FilteringData.page = "main";
+    // FilteringData.page = "main";
     await getHtml();
     await getMainHtml(true);
   } else if (FilteringData.page === "main") {
-    FilteringData.page = "data";
+    // FilteringData.page = "data";
     await getMainHtml(false);
   } else {
-    FilteringData.page = "main";
+    // FilteringData.page = "main";
     await getContentHtml();
   }
 });
@@ -34,6 +36,13 @@ async function triggerDOMContentLoaded() {
   console.log(FilteringData.page);
   document.dispatchEvent(DOMContentLoadedEvent);
 }
+
+// refresh
+
+window.addEventListener("beforeunload", function (event) {
+  // event.preventDefault();
+  return false;
+});
 
 const Filterdata = {
   Candidate: {

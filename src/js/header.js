@@ -41,6 +41,7 @@ let SubCategoriesSuggestions = document.getElementById(
   "SubCategoriesSuggestions"
 );
 toAppendSuggestionData = (data) => {
+  data = data.sort((a, b) => a.localeCompare(b));
   SubCategoriesSuggestions.innerHTML = "";
   for (let i of data) {
     let li = document.createElement("li");
@@ -103,15 +104,17 @@ FetchingSubcategories = () => {
 
 // SuggestionContainer
 const HoverSuggestionListContainer = () => {
-  SuggestionContainer.style.display = "block";
-  FetchingSubcategories();
+  if (SearchFilters.value.length > 0) {
+    SuggestionContainer.style.display = "block";
+  } else {
+    SuggestionContainer.style.display = "none";
+  }
 };
 const HideHoverSuggestionListContainer = () => {
-  setTimeout(() => {
-    SuggestionContainer.style.display = "none";
-    SearchFilters.value = "";
-  }, 280);
+  SuggestionContainer.style.display = "none";
+  SearchFilters.value = "";
 };
+FetchingSubcategories();
 
 // Search Filter
 let SearchFilters = document.getElementById("SearchFilters");
@@ -120,10 +123,13 @@ SearchFilters.addEventListener("focus", HoverSuggestionListContainer);
 SearchFilters.addEventListener("blur", HideHoverSuggestionListContainer);
 
 SearchFilters.addEventListener("input", function (event) {
-  data = MainSuggestionData.SubCategoriesData.filter((item) =>
-    item.toLowerCase().includes(event.target.value.toLowerCase())
-  );
-  toAppendSuggestionData(data);
+  HoverSuggestionListContainer();
+  if (event.target.value.length > 0) {
+    data = MainSuggestionData.SubCategoriesData.filter((item) =>
+      item.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    toAppendSuggestionData(data);
+  }
 });
 
 SearchFilters.addEventListener("keydown", function (event) {

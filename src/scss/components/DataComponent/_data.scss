@@ -43,7 +43,7 @@
     border: 1px solid #e1eaff;
     border-radius: 2rem;
     padding: 0.6rem;
-    @include width_height(5vh, 16.8%);
+    @include width_height(5vh, 100%);
     @include flex(flex, row, space-between, center);
 
     p {
@@ -105,6 +105,11 @@
       white-space: nowrap;
     }
   }
+
+  &-MainPlusDropDropDown {
+    @include width_height(null, 16.8%);
+    position: relative;
+  }
 }
 .Icon {
   @include width_height(1rem, 1rem);
@@ -118,8 +123,8 @@
 }
 
 .dropdownVisible {
-  @include width_height(28.8vh, 14%);
-  @include position(absolute, null, 44.8%, null, 0%);
+  @include width_height(28.8vh, 100%);
+  @include position(absolute, 0, null, null, 0%);
   border-radius: 0.6rem;
   box-shadow: 0 2px 4px 0px rgb(0, 0, 0, 0.3);
   background-color: $white;

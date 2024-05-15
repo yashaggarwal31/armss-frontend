@@ -143,7 +143,7 @@ button {
   border-radius: 2rem;
   padding: 0.6rem;
   height: 5vh;
-  width: 16.8%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -227,6 +227,10 @@ button {
   border-radius: 0.28rem;
   white-space: nowrap;
 }
+.section-MainPlusDropDropDown {
+  width: 16.8%;
+  position: relative;
+}
 
 .Icon {
   height: 1rem;
@@ -242,9 +246,9 @@ button {
 
 .dropdownVisible {
   height: 28.8vh;
-  width: 14%;
+  width: 100%;
   position: absolute;
-  right: 44.8%;
+  left: 0;
   bottom: 0%;
   border-radius: 0.6rem;
   box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
