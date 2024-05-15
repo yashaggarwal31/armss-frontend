@@ -17,6 +17,7 @@
     <dialog id="dialog" class="upload-dialog main-upload-div">
       <div class="upload-files-title-div">
         <span class="upload-files-title">Upload Files</span>
+
         <button
           aria-label="close"
           class="x close-button"
@@ -25,27 +26,20 @@
           ❌
         </button>
       </div>
-
       <div id="upload-zone" class="upload-zone-div div-center flex-col">
         <input class="isVisuallyHidden" type="file" id="fileInput" multiple />
-
         <img
           style="width: 50px; height: 50px"
           src="./assets/upload-icon.png"
           alt=""
         />
-
-        <div>
-          Drag & drop files,
-          <span style="cursor: pointer; color: blue">Browse</span>
-        </div>
+        <div>Drag & drop files, <a href="#">Browse</a></div>
         <div><span>Or</span></div>
         <div class="div-center gap-1">
           <a
             id="drivelink"
             href="drive.google.com"
-            target="
-            "
+            target="_blank"
             class="google-drive"
             >from Google Drive</a
           >
@@ -55,14 +49,11 @@
             alt=""
           />
         </div>
-
         <div class="upload-files-supported text-center">
           PNG, JPEG, PDF, TXT are supported
         </div>
       </div>
-
       <div id="fileList"></div>
-
       <div class="upload-files-button">
         <div>
           <h4 id="FileRefCount-div" class="display-none text-color-green">
@@ -73,7 +64,6 @@
           Upload
         </button>
       </div>
-
       <div id="upload-click-div" class="upload-files-after-click-div gap-4">
         <div class="div-center">
           <img src="./assets/uploading.png" alt="" />
@@ -83,6 +73,16 @@
           <div id="errorCount" class="text-right right-side-upload-files-div">
             <span id="errorTotal" style="color: #f69400">2</span>
             <span class="font-weight-500">ERRORS</span>
+          </div>
+          <div
+            id="successful-message"
+            class="text-right right-side-upload-files-div display-none"
+          >
+            <span style="color: #008e3d">SUCCESS</span>
+          </div>
+          <div id="cancel-upload-div" class="text-right">
+            <span id="cancel-upload-btn" style="color: blue">CANCEL</span>
+            <span id="cancelled" style="display: none">Cancelled</span>
           </div>
           <div>
             <progress
@@ -99,7 +99,6 @@
           </div>
         </div>
       </div>
-
       <div class="system-error-table pt-4">
         <div class="text-left mb-2 text-color-grey font-weight-600">
           System Error
@@ -110,7 +109,6 @@
             <h4>Filename</h4>
             <h4>Note</h4>
           </div>
-
           <ul class="border-top plr-25 ptb-15 upload-table-ele">
             <li class="grid grid-template-col-5">
               <h4 class="failure">Failed X</h4>
@@ -118,7 +116,6 @@
               <h4>Note</h4>
             </li>
           </ul>
-
           <ul class="border-top plr-25 ptb-15 upload-table-ele">
             <li class="grid grid-template-col-5">
               <h4 class="failure">Failed X</h4>
@@ -129,7 +126,6 @@
         </div>
       </div>
     </dialog>
-
     <script src="./js/mainjs.js"></script>
     <script src="./js/cookie.js"></script>
     <script src="./js/HeaderLoader.js"></script>
