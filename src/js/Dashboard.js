@@ -188,6 +188,7 @@ togetFolders = async () => {
   })
     .then((response) => response.json())
     .then((responseData) => {
+      console.log(responseData);
       Folders.MainCategory = responseData;
       toDisplayFloder(responseData);
     });
