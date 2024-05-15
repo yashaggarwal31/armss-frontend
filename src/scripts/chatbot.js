@@ -216,7 +216,6 @@ async function chat(value) {
 //         console.error("Error:", error);
 //     });
 function addQuestion(button) {
-  var queryInput = document.getElementById("querysearch");
   console.log();
   var paragraph = button.querySelector("p");
 
@@ -224,6 +223,7 @@ function addQuestion(button) {
 
   console.log(question);
   ChatbotSuggestedQuestions.style.display = "none";
+  chatSpace.style.minHeight = "40vh";
   chat(question);
 }
 function resetQuery() {
