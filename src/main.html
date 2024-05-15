@@ -18,9 +18,9 @@
       <div class="upload-files-title-div">
         <span class="upload-files-title">Upload Files</span>
         <button
+          onclick="window.dialog.close();"
           aria-label="close"
           class="x close-button"
-          id="CloseUploadResumesbtn"
         >
           ❌
         </button>
@@ -35,17 +35,13 @@
           alt=""
         />
 
-        <div>
-          Drag & drop files,
-          <span style="cursor: pointer; color: blue">Browse</span>
-        </div>
+        <div>Drag & drop files, <a href="#">Browse</a></div>
         <div><span>Or</span></div>
         <div class="div-center gap-1">
           <a
             id="drivelink"
             href="drive.google.com"
-            target="
-            "
+            target="_blank"
             class="google-drive"
             >from Google Drive</a
           >
@@ -84,6 +80,19 @@
             <span id="errorTotal" style="color: #f69400">2</span>
             <span class="font-weight-500">ERRORS</span>
           </div>
+
+          <div
+            id="successful-message"
+            class="text-right right-side-upload-files-div display-none"
+          >
+            <span style="color: #008e3d">SUCCESS</span>
+          </div>
+
+          <div id="cancel-upload-div" class="text-right">
+            <span id="cancel-upload-btn" style="color: blue">CANCEL</span>
+            <span id="cancelled" style="display: none">Cancelled</span>
+          </div>
+
           <div>
             <progress
               style="width: 100%"
@@ -129,7 +138,6 @@
         </div>
       </div>
     </dialog>
-
     <script src="./js/mainjs.js"></script>
     <script src="./js/cookie.js"></script>
     <script src="./js/HeaderLoader.js"></script>
