@@ -85,15 +85,9 @@
 .upload-table-ele {
 }
 
-<<<<<<< HEAD
 .system-error-table{
     overflow-x: hidden;
     display: none;
-=======
-.system-error-table {
-  overflow-x: hidden;
-  display: none;
->>>>>>> 1206ff1e7e76e20f7daafbce3fb950dd0e114bca
 }
 
 .text-color-grey {
