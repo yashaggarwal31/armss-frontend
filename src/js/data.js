@@ -874,13 +874,14 @@ toapplyfilters = (data) => {
 // fetch resume
 
 fetchviewdata = async (id) => {
+  let data = "";
   let idvalue = {
     fileID: id,
   };
   let url = new URL("https://armss-be.exitest.com/view-resume");
   url.search = new URLSearchParams(idvalue).toString();
   let response = await fetch(url);
-  let data = await response.json();
+  data = await response.json();
   if (data) {
     viewcandidatedata.src = data;
   }
