@@ -1,4 +1,10 @@
+.body {
+  overflow: hidden;
+}
+
 .section {
+  overflow-y: scroll;
+  overflow-x: hidden;
   padding: 1rem;
   font-family: "Inter";
 
@@ -178,7 +184,7 @@
   @include font_size_color(0.8rem, null, $Textblack, "Inter");
 }
 
-#listItems {
+#datalistItems {
   // border: 2px solid;
   max-height: 60vh;
   min-height: 60vh;
@@ -186,7 +192,7 @@
   overflow-x: hidden;
 }
 
-#listItems li:hover {
+#datalistItems li:hover {
   background-color: #cadbfc;
 
   .SkillsContainer {

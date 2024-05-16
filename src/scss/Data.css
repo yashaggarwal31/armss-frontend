@@ -57,10 +57,6 @@ p {
   font-family: "Inter";
 }
 
-body {
-  overflow-x: hidden;
-}
-
 label {
   padding-bottom: 0.4rem;
 }
@@ -87,7 +83,13 @@ button {
   visibility: hidden;
 }
 
+.body {
+  overflow: hidden;
+}
+
 .section {
+  overflow-y: scroll;
+  overflow-x: hidden;
   padding: 1rem;
   font-family: "Inter";
 }
@@ -312,17 +314,17 @@ button {
   font-family: "Inter";
 }
 
-#listItems {
+#datalistItems {
   max-height: 60vh;
   min-height: 60vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-#listItems li:hover {
+#datalistItems li:hover {
   background-color: #cadbfc;
 }
-#listItems li:hover .SkillsContainer {
+#datalistItems li:hover .SkillsContainer {
   background-color: #ffffff;
 }
 

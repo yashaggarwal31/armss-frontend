@@ -67,11 +67,14 @@ function submitQuery(event) {
 }
 
 async function chat(value) {
+  chatSpace.style.minHeight = "40vh";
   const query = value;
   const UserQuery = document.createElement("p");
   UserQuery.classList.add("right");
   UserQuery.textContent = query;
   chatSpace.appendChild(UserQuery);
+  chatSpace.scrollTop = chatSpace.scrollHeight;
+
   send_data["query"] = query;
   console.log("archit1", send_data);
   ////////////////////////////////////////
@@ -89,12 +92,16 @@ async function chat(value) {
     console.log("data fetched", data);
     if (data[0] === "exit") {
       ChatbotContainer.style.display = "none";
+      ChatbotSuggestedQuestions.style.display = "flex";
+      chatSpace.innerHTML = "";
+      chatSpace.style.minHeight = "0";
     } else if (typeof data[0] === "string") {
       console.log("check string");
       const messageElement = document.createElement("p");
       messageElement.classList.add("left");
       messageElement.textContent = data[0];
       chatSpace.appendChild(messageElement);
+      chatSpace.scrollTop = chatSpace.scrollHeight;
     } else {
       // resumes = data[0].slice(0, 10);
       send_data["resume_filters"] = data[1];
@@ -115,6 +122,7 @@ async function chat(value) {
       messageElement.classList.add("left");
       messageElement.textContent = "Your Results Displayed";
       chatSpace.appendChild(messageElement);
+      chatSpace.scrollTop = chatSpace.scrollHeight;
       FilteringData.page = "data";
       ChatbotContainer.style.display = "none";
       await triggerDOMContentLoaded();
@@ -228,7 +236,6 @@ function addQuestion(button) {
 
   console.log(question);
   ChatbotSuggestedQuestions.style.display = "none";
-  chatSpace.style.minHeight = "40vh";
   chat(question);
 }
 function resetQuery() {

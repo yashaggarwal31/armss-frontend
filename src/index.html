@@ -17,6 +17,7 @@
                 alt="CompanyLogo"
                 class="LoginPage-logo"
               />
+              <span class="LoginPage-border"></span>
               <h2 class="title">ARMS</h2>
             </div>
             <div class="LoginPage-Carousel">
@@ -78,7 +79,7 @@
                 <label for="Loginusername">Email ID / Username</label>
                 <div class="loginForm-input" id="Input1">
                   <input
-                    type="email"
+                    type="text"
                     id="Loginusername"
                     name="Email"
                     onfocus="toFocus()"
@@ -97,6 +98,7 @@
                     onfocus="toFocus()"
                     placeholder="Enter your Password"
                   />
+
                   <div id="Icon">
                     <svg class="PasswordIcon" id="IconValue">
                       <use xlink:href="./Icons/icons.svg#PasswordIcon" />
@@ -104,6 +106,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="CheckboxContainer">
                 <input
                   type="checkbox"
@@ -111,20 +114,29 @@
                   name="option1"
                   value="True"
                 />
+
                 <label for="checkbox">Remember Me</label>
               </div>
 
               <!-- <div class="extracontainer">
+
                 <div class="checkbox-container">
+
                   <input type="checkbox" id="rememberMe" />
+
                   <label for="rememberMe">Remember Me</label>
+
                 </div>
+
                 <a id="forgotPasswordLink">Forgot Password?</a>
+
               </div> -->
 
               <p id="responsePara" class="responsePara"></p>
+
               <button type="submit" class="btn">Login</button>
             </form>
+
             <img
               src="./assets/Bgdesign.png"
               alt="Login-Bgdesign"
@@ -134,6 +146,7 @@
         </div>
       </section>
     </main>
+
     <script src="./js/main.js"></script>
     <script src="./js/login.js"></script>
     <script src="./js/cookie.js"></script>

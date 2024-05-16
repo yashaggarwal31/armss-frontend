@@ -3,7 +3,8 @@
     @include position(absolute, 0, 0, 0, null);
     height: 100vh;
     @include flex(flex, column, center, center);
-    background-color: #3333332d;
+    background-color: #3333338b;
+    backdrop-filter: blur(0.6px);
     z-index: 40;
     display: none;
   }
@@ -55,12 +56,13 @@
         background-color: $white;
         border-radius: 10px;
         border: 0.02rem solid #7169ff37;
-        min-width: 400px;
+        min-width: 420px;
+        // max-width: 420px;
         flex-grow: 0;
         flex-shrink: 0;
 
         p {
-          @include font_size_color(0.6rem, 600, $Textblack, "Inter");
+          @include font_size_color(0.68rem, 600, $Textblack, "Inter");
         }
       }
     }

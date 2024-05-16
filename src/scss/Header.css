@@ -57,10 +57,6 @@ p {
   font-family: "Inter";
 }
 
-body {
-  overflow-x: hidden;
-}
-
 label {
   padding-bottom: 0.4rem;
 }
@@ -88,10 +84,11 @@ button {
 }
 
 .Header-Container {
-  padding-top: 1rem;
+  padding: 1.5rem 2rem;
   background-color: #ffffff;
-  display: grid;
-  grid-template-rows: 2fr 0.6fr;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 0.1px solid rgba(191, 191, 191, 0.7137254902);
   position: relative;
 }
@@ -114,17 +111,14 @@ button {
   padding: 0.2rem;
 }
 .Header-logoContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   font-size: 0.48rem;
   font-weight: 600;
   color: #333333;
   font-family: "Inter";
 }
 .Header-logo {
-  width: 48%;
+  height: 54px;
+  width: 89px;
 }
 .Header-dropdownContainer {
   border: 1px solid #e1eaff;

@@ -57,10 +57,6 @@ p {
   font-family: "Inter";
 }
 
-body {
-  overflow-x: hidden;
-}
-
 label {
   padding-bottom: 0.4rem;
 }
@@ -87,12 +83,22 @@ button {
   visibility: hidden;
 }
 
+body {
+  overflow: hidden;
+}
+
+.Dashboard {
+  max-height: 84.8vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 .Dashboard-container {
   padding: 1rem;
   background-color: #f7faff;
-  display: grid;
-  grid-template-rows: auto auto;
-  justify-content: 4rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
 }
 .Dashboard-welcomeContainer {
   margin-top: 0.6rem;
@@ -103,27 +109,24 @@ button {
   position: relative;
 }
 .Dashboard-welcomeContainer .textContainer {
-  padding: 20px 20px;
+  padding: 55px 26px;
   background-color: #0052f1;
   border-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 24vh;
   width: 92%;
 }
 .Dashboard-welcomeContainer .textContainer h2 {
-  font-size: 1.28rem;
+  font-size: 1.4rem;
   font-weight: 600;
   color: #ffffff;
+  margin-bottom: 2px;
 }
 .Dashboard-welcomeContainer .textContainer p {
   font-size: 0.88rem;
-  font-weight: lighter;
+  font-weight: 200;
   color: #ffffff;
 }
 .Dashboard-ContentContainer {
-  margin-top: 3rem;
+  background-color: #f7faff;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -133,12 +136,13 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  gap: 1rem;
   background-color: #ffffff;
   border-radius: 1rem;
   padding: 1.4rem;
 }
 .Dashboard-SubContentContainer .SubContentContainer-Elements {
-  padding: 1rem;
+  padding: 0.8rem 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -146,9 +150,9 @@ button {
 }
 .Dashboard-Image {
   position: absolute;
-  right: 4.8%;
-  top: 4%;
-  width: 24%;
+  right: 2.8%;
+  top: 10%;
+  width: 280px;
 }
 
 .Icon {
@@ -160,25 +164,22 @@ button {
   background-color: #f7faff;
   border-radius: 1rem;
   padding: 1.4rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1.2rem;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
+  gap: 20px;
 }
 
 .listItem {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
   padding: 1rem;
-  width: 18%;
-  max-height: 20vh;
-  min-height: 20vh;
+  min-width: 188px;
+  max-height: 140px;
+  min-height: 140px;
   background-color: #ffffff;
   border-radius: 10px;
+  position: relative;
 }
 .listItem h4 {
   width: 100%;
@@ -196,33 +197,41 @@ button {
 
 .listItem:hover {
   background-color: #0052f1;
+  cursor: pointer;
 }
 .listItem:hover h4 {
   color: #ffffff;
   white-space: wrap;
 }
-.listItem:hover .DashboardFolderIcon svg {
+.listItem:hover .DashboardFolderIcon {
   background-color: #ffffff;
 }
 .listItem:hover .DashboardFolderIcon2 {
   background-color: #ffffff;
 }
 
-.DashboardFolderIcon svg {
-  display: flex;
-  max-height: 6.4vh;
-  width: 34%;
-  padding: 0.6rem;
+.DashboardFolderIcon {
   background-color: #f7faff;
+  max-width: 40px;
+  max-height: 40px;
+  padding: 8px;
   border-radius: 50%;
+}
+.DashboardFolderIcon svg {
+  height: 2rem;
+  width: 2rem;
 }
 
 .DashboardFolderIcon2 {
-  max-height: 4.6vh;
-  width: 20%;
-  padding: 0.56rem;
+  max-width: 24px;
+  max-height: 24px;
+  padding: 4px;
   background-color: rgba(255, 235, 230, 0.4705882353);
   border-radius: 50%;
+}
+.DashboardFolderIcon2 svg {
+  height: 1rem;
+  width: 1rem;
 }
 
 .ContainerListactive {
@@ -281,8 +290,7 @@ button {
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 120%;
-  max-height: 120%;
+  min-height: 100%;
   overflow: hidden;
   background-color: rgba(51, 51, 51, 0.5450980392);
   -webkit-backdrop-filter: blur(0.6px);
@@ -298,13 +306,12 @@ button {
   cursor: pointer;
 }
 .section-CategorySubContainer {
-  width: 56%;
+  width: 64%;
   background-color: #ffffff;
   padding: 1.2rem;
   border-radius: 1rem;
-  max-height: 40%;
-  overflow-y: auto;
-  overflow-x: hidden;
+  max-height: 88%;
+  overflow: hidden;
   box-shadow: 0 2px 4px 0px #bfbfbf;
 }
 .section-CategorySubContainer .SubCategoryHeading {
@@ -322,8 +329,10 @@ button {
   margin-bottom: 1rem;
 }
 
-#SubContainerList li {
-  width: 30%;
+#SubContainerList {
+  max-height: 340px;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .section .AddfloderContainer {

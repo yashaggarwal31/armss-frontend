@@ -176,7 +176,6 @@ function generateUniqueId() {
 
 function toLoadContent() {
   loader.style.display = "flex";
-
   const dataString = FilteringData.onSelectSubFolder;
   const searchvalue = FilteringData.onFolderValue;
   const chatbotData = FilteringData.chatbotData;
@@ -207,6 +206,7 @@ function toLoadContent() {
     FilteringData.onFolderValue = false;
     let url = new URL("https://armss-be.exitest.com/full_resume_data");
     let method = "POST";
+    console.log(FilteringData.chatbotResumeIds);
     toget(url, method, JSON.parse(FilteringData.chatbotResumeIds), false);
   }
 }
@@ -417,7 +417,7 @@ DropdownSelectFunction = (data) => {
   for (var i = 0; i < listItems.length; i++) {
     listItems[i].setAttribute("data-value", lst[i]);
     listItems[i].addEventListener("click", function () {
-      Filterdata.Candidate.experience = [];
+      Filterdata.Candidate.Experience = [];
 
       let Value = document.getElementById(this.id).textContent;
       console.log(Value);
@@ -426,8 +426,8 @@ DropdownSelectFunction = (data) => {
       Experiencetitle.textContent = Value !== "All" ? Value : "Experience";
       ExperienceDropdownFunction();
 
-      if (data.experience === "All") {
-        Filterdata.Candidate.experience = [];
+      if (data.Experience === "All") {
+        Filterdata.Candidate.Experience = [];
         toapplyfilters(Filterdata);
       } else {
         const [start, end] = this.getAttribute("data-value")
@@ -435,9 +435,9 @@ DropdownSelectFunction = (data) => {
           .map(Number);
         function range(start, end) {
           for (var i = start; i <= end; i++) {
-            Filterdata.Candidate.experience.push({
+            Filterdata.Candidate.Experience.push({
               uniqueId: generateUniqueId(),
-              experience: i,
+              Experience: i,
             });
           }
         }
@@ -669,6 +669,20 @@ LocationHeader.addEventListener("click", LocationdropdownFunction);
 ExperienceHeader.addEventListener("click", ExperienceDropdownFunction);
 SkillHeader.addEventListener("click", SkillDropdownFunction);
 
+window.addEventListener("click", function (event) {
+  if (!event.target.closest(".section-MainPlusDropDropDown")) {
+    if (SkillDropdown.style.display === "block") {
+      SkillDropdownFunction();
+    }
+    if (ExperienceDropdown.style.display === "block") {
+      ExperienceDropdownFunction();
+    }
+    if (Locationdropdown.style.display === "block") {
+      LocationdropdownFunction();
+    }
+  }
+});
+
 // SkillHeader.addEventListener("blur", () => {
 //   let interval = setTimeout(() => {
 //     SkillDropdownFunction();
@@ -770,7 +784,7 @@ toCheckSearchHistory();
 document.getElementById("ClearHistory").addEventListener("click", function () {
   Filterdata.WorkExperience.Location = [];
   Filterdata.Skill.SkillName = [];
-  Filterdata.Candidate.experience = [];
+  Filterdata.Candidate.Experience = [];
   ExperienceValue.textContent = "Experience";
   LocationSearchHistory.innerHTML = "";
   SkillSearchHistory.innerHTML = "";
@@ -809,7 +823,7 @@ toapplyfilters = (data) => {
             }
             return false;
           });
-        } else if (i === "experience") {
+        } else if (i === "Experience") {
           sampleData = sampleData.filter((item) => {
             if (
               parseFloat(item["Experience"]) >=

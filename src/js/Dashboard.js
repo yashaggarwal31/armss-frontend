@@ -83,6 +83,7 @@ toDataPage = async (value) => {
   // window.location.href = url;
   FilteringData.onSelectSubFolder = value;
   FilteringData.onFolderValue = true;
+  FilteringData.chatbotData = false;
   FilteringData.page = "data";
   await triggerDOMContentLoaded();
   // document.addEventListener("DOMContentLoaded", async () => {

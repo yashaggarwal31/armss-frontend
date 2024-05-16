@@ -49,7 +49,7 @@ const Filterdata = {
     check: [],
     FirstName: [],
     LastName: [],
-    experience: [],
+    Experience: [],
   },
 
   WorkExperience: {

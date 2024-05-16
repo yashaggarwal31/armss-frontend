@@ -3,8 +3,9 @@
   align-self: center;
   justify-self: center;
   padding: 10px;
-  @include flex(flex, column, space-evenly, center);
+  @include flex(flex, column, center, start);
   @include position(relative);
+  padding: 50px 90px 50px 0;
 
   &-titles {
     width: 76%;
@@ -27,8 +28,9 @@
 }
 .loginForm {
   &-Container {
+    margin-top: 32px;
     padding: 1.8rem 1rem;
-    width: 60vh;
+    width: 100%;
     @include flex(flex, column, space-evenly, null, 1rem);
     border-radius: 6px;
     box-shadow: 0px 1px 2px 0px #a9bfeaeb;
