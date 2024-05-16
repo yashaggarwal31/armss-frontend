@@ -2,7 +2,7 @@
   CategoryCreate = document.getElementById("CategoryCreate");
   loader = document.getElementById("loader");
   datalistItems = document.getElementById("datalistItems");
-  viewcandidatedata = document.getElementById("viewcandidatedata");
+  // viewcandidatedata = document.getElementById("viewcandidatedata");
 })();
 
 // removeFunction = (id) => {
@@ -881,16 +881,26 @@ fetchviewdata = async (id) => {
   url.search = new URLSearchParams(idvalue).toString();
   let response = await fetch(url);
   let data = await response.json();
-  console.log(id);
-  document.getElementById("viewcandidatedata").data = data;
+  updateview(data);
   viewsection.style.display = "flex";
 };
+
+// update view option
+
+function updateview(value) {
+  let newobject = document.createElement("object");
+  newobject.setAttribute("type", "application/pdf");
+  newobject.setAttribute("data", value);
+  newobject.setAttribute("height", 600);
+  newobject.setAttribute("width", 800);
+  document.getElementById("viewid").appendChild(newobject);
+}
 
 // close viewdata
 
 viewdatacloseicon.addEventListener("click", () => {
   viewsection.style.display = "none";
-  viewcandidatedata.data = "";
+  document.getElementById("viewid").innerHTML = "";
 });
 
 // show modal

@@ -191,6 +191,7 @@ togetFolders = async () => {
     .then((response) => response.json())
     .then((responseData) => {
       console.log(responseData);
+      containerList.innerHTML = "";
       Folders.MainCategory = responseData;
       toDisplayFloder(responseData);
     });
@@ -289,6 +290,8 @@ document.getElementById("CategoryAddFolder").onclick = function () {
 document.getElementById("CloseAddFolder").onclick = function () {
   document.getElementById("CreateFolders-SubFolders").style.display = "none";
   FilteringData.onFolderSelect = "";
+  AddFolderName.value = "";
+  AddFolderSkills.value = "";
 };
 
 async function addFolder(folderData) {
@@ -320,7 +323,7 @@ document.getElementById("SubmitAddFloder").onclick = function () {
     FilteringData.onFolderSelect = "";
     document.getElementById("CreateFolders-SubFolders").style.display = "none";
     FilteringData.page = "main";
-    triggerDOMContentLoaded();
+    togetFolders();
   } else {
     alert("Please fill all the fields to crete Folder");
   }
