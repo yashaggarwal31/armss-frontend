@@ -2,6 +2,7 @@
   CategoryCreate = document.getElementById("CategoryCreate");
   loader = document.getElementById("loader");
   datalistItems = document.getElementById("datalistItems");
+  viewcandidatedata = document.getElementById("viewcandidatedata");
 })();
 
 // removeFunction = (id) => {
@@ -313,6 +314,10 @@ function toShowData(data, method = "POST") {
         "./Icons/icons.svg#ActionIcon"
       );
 
+      icon.addEventListener("click", () => {
+        fetchviewdata(li.id);
+      });
+
       let ul = document.createElement("li");
       ul.id = "SkillsContainer" + i;
       ul.classList.add("SkillsContainer");
@@ -549,8 +554,9 @@ toappendLocation = (data) => {
         toapplyfilters(Filterdata);
       } else {
         let values = Filterdata.WorkExperience.Location.find(
-          (item) => item.Location === li.id
+          (item) => item.Location === li.id.toLowerCase()
         );
+        console.log(values, li.id);
         if (!values) {
           Unique_id = generateUniqueId();
           toAppendHistory(li.id, Unique_id, LocationSearchHistory);
@@ -618,6 +624,8 @@ FetchingSkills();
   SkillList = document.getElementById("SkillList");
   SkillValue = document.getElementById("SkillValue");
   ExperienceMainContainer = document.getElementById("ExperienceMainContainer");
+  viewsection = document.getElementById("viewsection");
+  viewdatacloseicon = document.getElementById("viewdatacloseicon");
 })();
 
 LocationdropdownFunction = () => {
@@ -854,6 +862,28 @@ toapplyfilters = (data) => {
   }
   toShowData([sampleData.length, sampleData]);
 };
+
+// fetch resume
+
+fetchviewdata = async (id) => {
+  let idvalue = {
+    fileID: id,
+  };
+  let url = new URL("https://armss-be.exitest.com/view-resume");
+  url.search = new URLSearchParams(idvalue).toString();
+  let response = await fetch(url);
+  let data = await response.json();
+  console.log(id);
+  document.getElementById("viewcandidatedata").data = data;
+  viewsection.style.display = "flex";
+};
+
+// close viewdata
+
+viewdatacloseicon.addEventListener("click", () => {
+  viewsection.style.display = "none";
+  viewcandidatedata.data = "";
+});
 
 // show modal
 
