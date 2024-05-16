@@ -46,7 +46,12 @@ send_data = {
 };
 
 querysearch.addEventListener("keydown", (event) => {
-  if (event.key === "Enter" && event.target.value.length > 0) {
+  if (
+    event.key === "Enter" &&
+    event.target.value.length > 0 &&
+    !FilteringData.QueryonProcess
+  ) {
+    FilteringData.QueryonProcess = true;
     ChatbotSuggestedQuestions.style.display = "none";
     value = event.target.value.replace(/\s+/g, " ").trim();
     chat(value);
@@ -91,6 +96,7 @@ async function chat(value) {
     console.log("archit");
     console.log("data fetched", data);
     if (data[0] === "exit") {
+      FilteringData.QueryonProcess = false;
       ChatbotContainer.style.display = "none";
       ChatbotSuggestedQuestions.style.display = "flex";
       chatSpace.innerHTML = "";
@@ -102,6 +108,7 @@ async function chat(value) {
       messageElement.textContent = data[0];
       chatSpace.appendChild(messageElement);
       chatSpace.scrollTop = chatSpace.scrollHeight;
+      FilteringData.QueryonProcess = false;
     } else {
       // resumes = data[0].slice(0, 10);
       send_data["resume_filters"] = data[1];
@@ -124,6 +131,7 @@ async function chat(value) {
       chatSpace.appendChild(messageElement);
       chatSpace.scrollTop = chatSpace.scrollHeight;
       FilteringData.page = "data";
+      FilteringData.QueryonProcess = true;
       ChatbotContainer.style.display = "none";
       await triggerDOMContentLoaded();
     }
@@ -236,6 +244,7 @@ function addQuestion(button) {
 
   console.log(question);
   ChatbotSuggestedQuestions.style.display = "none";
+  FilteringData.QueryonProcess = true;
   chat(question);
 }
 function resetQuery() {
