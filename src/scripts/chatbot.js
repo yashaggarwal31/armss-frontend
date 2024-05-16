@@ -131,7 +131,7 @@ async function chat(value) {
       chatSpace.appendChild(messageElement);
       chatSpace.scrollTop = chatSpace.scrollHeight;
       FilteringData.page = "data";
-      FilteringData.QueryonProcess = true;
+      FilteringData.QueryonProcess = false;
       ChatbotContainer.style.display = "none";
       await triggerDOMContentLoaded();
     }
