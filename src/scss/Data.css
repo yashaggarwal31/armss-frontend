@@ -416,4 +416,41 @@ button {
   align-items: center;
   height: 100vh;
   width: 100vw;
+}
+
+.viewdatasection {
+  position: absolute;
+  top: 0%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(51, 51, 51, 0.8078431373);
+  -webkit-backdrop-filter: blur(0.6px);
+          backdrop-filter: blur(0.6px);
+  z-index: 80;
+}
+
+.viewdatasection div:first-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.viewdatacloseicon {
+  padding: 6px;
+  align-self: flex-start;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.viewdatacloseicon svg {
+  width: 1rem;
+  height: 1rem;
 }/*# sourceMappingURL=Data.css.map */

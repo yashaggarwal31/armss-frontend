@@ -266,3 +266,33 @@ button {
   height: 100vh;
   width: 100vw;
 }
+
+.viewdatasection {
+  @include position(absolute, null, null, 0%);
+  @include flex(flex, row, center, center);
+  height: 100vh;
+  width: 100vw;
+  // background-color: #000;
+  background-color: #333333ce;
+  backdrop-filter: blur(0.6px);
+  z-index: 80;
+}
+
+.viewdatasection div:first-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+.viewdatacloseicon {
+  padding: 6px;
+  align-self: flex-start;
+  background-color: $white;
+  border-radius: 50%;
+  @include flex(flex, row, center, center);
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
