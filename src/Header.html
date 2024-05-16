@@ -6,16 +6,16 @@
     <title>Header</title>
     <link rel="stylesheet" href="./scss/Header.css" />
     <link rel="stylesheet" href="css/chatbot.css" />
+    <link rel="stylesheet" href="./scss/Chat.css" />
   </head>
   <body>
     <div class="Header-Container" id="HeaderContainer">
       <div class="Header-SubContainer">
-        <a href="welcome.html">
-          <div class="Header-logoContainer">
-            <img src="./assets/Logo4.png" alt="Logo" class="Header-logo" />
-            <!-- <h1 class="Header-title">ARMS</h1> -->
-          </div>
-        </a>
+        <div class="Header-logoContainer" id="Logo">
+          <img src="./assets/Logo4.png" alt="Logo" class="Header-logo" />
+          <!-- <h1 class="Header-title">ARMS</h1> -->
+        </div>
+
         <div class="Header-Filters">
           <input
             type="text"
@@ -70,7 +70,7 @@
           <button class="LogoutBtn" onclick="Logout()">Logout</button>
         </div>
       </div>
-      <div class="SearchItems">
+      <div class="SearchItems" id="Header_SearchItemsContainer">
         <ul id="SearchItems" class="SearchItemsList"></ul>
         <h4 class="ClearFunction" id="ClearFunction">Clear All</h4>
       </div>
@@ -87,11 +87,10 @@
           <ul id="SubCategoriesSuggestions"></ul>
         </div>
       </div>
-      <div class="chatbot-modal">
-        <!-- <button id="myBtn">Open ChatBot</button> -->
+      <!-- <div class="chatbot-modal">
+       <button id="myBtn">Open ChatBot</button>
 
         <div id="myModal" class="chat-modal">
-          <!-- Modal content -->
           <div class="modal-content">
             <div class="head">
               <p>CHATBOT.</p>
@@ -132,10 +131,10 @@
             <div class="chat">
               <div class="chat-space">
                 <p class="left">Hlo User.</p>
-                <!-- <p class="right">Lorem ipsum dolor sit.</p> -->
+                <p class="right">Lorem ipsum dolor sit.</p>
                 <p class="left">What Can I do For you?</p>
-                <!-- <p class="right">Lorem ipsum dolor sit.</p> -->
-                <!-- <p class="left">Lorem ipsum dolor sit.</p> -->
+                <p class="right">Lorem ipsum dolor sit.</p> -->
+      <!-- <p class="left">Lorem ipsum dolor sit.</p>
               </div>
 
               <div class="chat-input">
@@ -159,6 +158,69 @@
             </div>
           </div>
         </div>
+      </div> -->
+
+      <div class="section-chatbot" id="ChatbotContainerMain">
+        <div class="section-contentContainer">
+          <div class="section-actionContainer">
+            <span>
+              <svg class="minimize">
+                <use xlink:href="./Icons/icons.svg#minimize" />
+              </svg>
+            </span>
+            <span class="closeSpan" id="closeChatbot">
+              <svg class="close">
+                <use xlink:href="./Icons/icons.svg#chatclose" />
+              </svg>
+            </span>
+          </div>
+          <div class="section-chatcontent" id="ChatbotSuggestedQuestions">
+            <h2>Some Recently Asked Questions</h2>
+            <ul>
+              <li onclick="addQuestion(this)">
+                <p>
+                  Can you help me find resumes with experience in “Java
+                  programming”?
+                </p>
+                <svg class="">
+                  <use xlink:href="./Icons/icons.svg#rightarrow" />
+                </svg>
+              </li>
+              <li onclick="addQuestion(this)">
+                <p>Find resumes with project management experience.</p>
+                <svg class="">
+                  <use xlink:href="./Icons/icons.svg#rightarrow" />
+                </svg>
+              </li>
+              <li onclick="addQuestion(this)">
+                <p>Show me resumes of candidates with UX/UI design skills.</p>
+                <svg class="">
+                  <use xlink:href="./Icons/icons.svg#rightarrow" />
+                </svg>
+              </li>
+              <li onclick="addQuestion(this)">
+                <p>Exit Chatbot</p>
+                <svg class="">
+                  <use xlink:href="./Icons/icons.svg#rightarrow" />
+                </svg>
+              </li>
+            </ul>
+          </div>
+          <div class="section-chatspace">
+            <div class="chatspace" id="Chat-space"></div>
+          </div>
+          <div class="section-questioncontent">
+            <h2>Find an answer yourself</h2>
+            <div>
+              <input
+                id="querysearch"
+                onkeypress="submitOnEnter(event)"
+                type="text"
+                placeholder="Search..."
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -168,10 +230,7 @@
       type="module"
       src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"
     ></script> -->
-    <script
-      nomodule
-      src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"
-    ></script>
+
     <!-- <script src="scripts/chatbot.js"></script> -->
     <script src="scripts/chatbot.js"></script>
     <script src="./js/header.js"></script>

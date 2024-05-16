@@ -4,9 +4,9 @@
     background-color: $white;
     @include grid(grid, null, 2fr 0.6fr);
     border-bottom: 0.1px solid #bfbfbfb6;
+    position: relative;
   }
   &-SubContainer {
-    position: relative;
     width: 100%;
     @include flex(flex, row, space-between, center);
   }
@@ -133,6 +133,8 @@
 }
 .ProfileContainer:hover .LogoutBtn {
   visibility: visible;
+  background-color: #2c2c2c;
+  color: white;
 }
 
 .SearchItems {
@@ -142,6 +144,7 @@
   border-radius: 1rem;
   margin-top: 0.2rem;
   margin-left: 4rem;
+  display: none;
 }
 .ClearFunction {
   cursor: pointer;
@@ -163,7 +166,7 @@
 }
 
 .SuggestionContainer {
-  @include position(absolute, 22.8%, null, 16%);
+  @include position(absolute, 22.8%, null, 104%);
   @include width_height(null, 20%);
   border-radius: 1rem;
   // @include flex(flex, row, space-around, center, 1rem);

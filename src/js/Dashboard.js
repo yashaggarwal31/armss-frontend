@@ -1,12 +1,19 @@
-let containerList = document.getElementById("ContainerList");
-let Categorysvalue = document.getElementById("Categorys");
-let SubCategoryHeadingValue = document.getElementById(
-  "SubCategoryHeadingValue"
-);
-let SubCategoryHeading = document.getElementById("SubCategoryHeading");
-let SubContainerList = document.getElementById("SubContainerList");
-let SubCategorySection = document.getElementById("SubCategorySection");
-let CloseSubContainer = document.getElementById("CloseSubContainer");
+(function () {
+  containerList = document.getElementById("ContainerList");
+  Categorysvalue = document.getElementById("Categorys");
+  SubCategoryHeadingValue = document.getElementById("SubCategoryHeadingValue");
+  SubCategoryHeading = document.getElementById("SubCategoryHeading");
+  SubContainerList = document.getElementById("SubContainerList");
+  SubCategorySection = document.getElementById("SubCategorySection");
+  CloseSubContainer = document.getElementById("CloseSubContainer");
+  AddFolderSkills = document.getElementById("AddFolderSkills");
+  AddFolderName = document.getElementById("AddFolderName");
+  SubCategorySearchFilters = document.getElementById(
+    "SubCategorySearchFilters"
+  );
+  UploadResumes = document.getElementById("UploadResumes");
+  dialog = document.getElementById("dialog");
+})();
 
 // Category and SubCategory Data
 
@@ -17,42 +24,42 @@ Folders = {
 
 // Filter Api JSon
 
-const Filterdata = {
-  Candidate: {
-    check: [],
-    FirstName: [],
-    LastName: [],
-    experience: [],
-  },
+// const Filterdata = {
+//   Candidate: {
+//     check: [],
+//     FirstName: [],
+//     LastName: [],
+//     experience: [],
+//   },
 
-  WorkExperience: {
-    check: [],
-    Location: [],
-  },
+//   WorkExperience: {
+//     check: [],
+//     Location: [],
+//   },
 
-  Education: {
-    check: [],
-    Degree: [],
-    Score: [],
-    YearOfPassing: [],
-    Branch: [],
-    Institution: [],
-  },
-  Contact: {
-    check: [],
-    Contact_type: [],
-    Contact_value: [],
-  },
-  Skill: {
-    check: [],
-    // SkillName: ["Java", "Python"],
-    SkillName: [],
-  },
-  ResumeIdList: {
-    check: [],
-    ResumeIdValue: [],
-  },
-};
+//   Education: {
+//     check: [],
+//     Degree: [],
+//     Score: [],
+//     YearOfPassing: [],
+//     Branch: [],
+//     Institution: [],
+//   },
+//   Contact: {
+//     check: [],
+//     Contact_type: [],
+//     Contact_value: [],
+//   },
+//   Skill: {
+//     check: [],
+//     // SkillName: ["Java", "Python"],
+//     SkillName: [],
+//   },
+//   ResumeIdList: {
+//     check: [],
+//     ResumeIdValue: [],
+//   },
+// };
 
 // UniqueId
 function generateUniqueId() {
@@ -63,18 +70,25 @@ function generateUniqueId() {
 }
 
 // Remove Function
-removeFunction = (id) => {
-  const para1 = document.getElementById(id);
-  console.log(para1);
-  para1.parentNode.removeChild(para1);
-  Filterdata.Skill.SkillName = Filterdata.Skill.SkillName.filter(
-    (item) => item.uniqueId !== id
-  );
-};
+// removeFunction = (id) => {
+//   const para1 = document.getElementById(id);
+//   console.log(para1);
+//   para1.parentNode.removeChild(para1);
+//   Filterdata.Skill.SkillName = Filterdata.Skill.SkillName.filter(
+//     (item) => item.uniqueId !== id
+//   );
+// };
 
 toDataPage = async (value) => {
-  const encodedData = encodeURIComponent(JSON.stringify(value));
-  window.location.href = `data.html?data=${encodedData}`;
+  // window.location.href = url;
+  FilteringData.onSelectSubFolder = value;
+  FilteringData.onFolderValue = true;
+  FilteringData.page = "data";
+  await triggerDOMContentLoaded();
+  // document.addEventListener("DOMContentLoaded", async () => {
+  //   await getContentHtml(url);
+  // });
+  // await ;
 };
 
 createListitems = (data, List, functions) => {
@@ -125,10 +139,11 @@ toDisplayFloder = (data) => {
   }
 };
 
-let toShowSubCategory = (id) => {
+toShowSubCategory = (id) => {
   SubCategoryHeading.textContent = id;
   SubCategorySection.style.display = "flex";
   SubContainerList.innerHTML = "";
+  document.getElementById("Dashboard").style.overflow = "hidden";
   togetSubcategory(id);
 };
 
@@ -164,7 +179,6 @@ function togetdata(id) {
   document
     .querySelectorAll("li")
     .forEach((li) => li.classList.remove("ContainerListactive"));
-  this.classList.add("ContainerListactive");
 }
 
 togetFolders = async () => {
@@ -186,6 +200,7 @@ togetFolders();
 CloseSubContainer.onclick = () => {
   SubCategorySection.style.display = "none";
   SubCategorySearchFilters.value = "";
+  document.getElementById("Dashboard").style.overflow = "auto";
 };
 
 window.onload = () => {
@@ -230,7 +245,7 @@ function setIds() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await getHtml();
+  // await getHtml();
   setIds();
 });
 
@@ -250,13 +265,59 @@ tosetSuggestionData = (data) => {
 
 //  Search Functionality of Folders
 
-let SubCategorySearchFilters = document.getElementById(
-  "SubCategorySearchFilters"
-);
-
 SubCategorySearchFilters.addEventListener("input", function (event) {
   Data = Folders.SubCategory.filter((item) =>
     item.toLowerCase().includes(event.target.value.toLowerCase())
   );
   toDisplaySubCategory(Data);
+});
+
+// to create SubFolder
+document.getElementById("SubFolderAddFolder").onclick = function () {
+  document.getElementById("CreateFolders-SubFolders").style.display = "flex";
+  SubCategorySection.style.display = "none";
+};
+
+document.getElementById("CategoryAddFolder").onclick = function () {
+  document.getElementById("CreateFolders-SubFolders").style.display = "flex";
+};
+
+//  close icon
+document.getElementById("CloseAddFolder").onclick = function () {
+  document.getElementById("CreateFolders-SubFolders").style.display = "none";
+};
+
+async function addFolder(folderData) {
+  const response = await fetch("https://armss-be.exitest.com/add_folder/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(folderData),
+  });
+  if (response.ok) {
+    const data = await response.json();
+    console.log("Folder added successfully:", data);
+  } else {
+    console.error("Failed to add folder:", response.statusText);
+  }
+}
+document.getElementById("SubmitAddFloder").onclick = function () {
+  if (AddFolderName.value.length > 0 && AddFolderSkills.value.length > 0) {
+    const folderData = {
+      Name: "New Pos",
+      Skills: "Skill1, Skill2, Skill3",
+      ParentFolder: "",
+    };
+
+    addFolder(folderData);
+  } else {
+    alert("Please fill all the fields to crete Folder");
+  }
+};
+
+// UploadResumes
+
+UploadResumes.addEventListener("click", () => {
+  dialog.showModal();
 });

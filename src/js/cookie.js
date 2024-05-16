@@ -27,7 +27,7 @@ getCookie = (name) => {
 isLogin = () => {
   let cookieData = localStorage.getItem("Rsession_name");
   if (getCookie(cookieData) !== null) {
-    window.location.replace("welcome.html");
+    window.location.replace("main.html");
   }
 };
 

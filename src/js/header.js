@@ -41,13 +41,20 @@ let SubCategoriesSuggestions = document.getElementById(
   "SubCategoriesSuggestions"
 );
 toAppendSuggestionData = (data) => {
+  data = data.sort((a, b) => a.localeCompare(b));
   SubCategoriesSuggestions.innerHTML = "";
   for (let i of data) {
     let li = document.createElement("li");
     li.textContent = i;
     li.id = i;
     li.addEventListener("click", () => {
-      toAppendSearchItems(li.textContent);
+      let items = [...SearchItems.childNodes];
+
+      items = items.find((item) => item.id === "Search" + li.id);
+      if (!items) {
+        toAppendSearchItems(li.textContent);
+        toDisplayClear();
+      }
     });
     SubCategoriesSuggestions.appendChild(li);
   }
@@ -55,9 +62,10 @@ toAppendSuggestionData = (data) => {
 
 // remove SearchItem
 
-removeFunction = (data) => {
+SearchremoveFunction = (data) => {
   let li = document.getElementById(data);
   li.remove();
+  toDisplayClear();
 };
 
 // Append Search History
@@ -79,7 +87,7 @@ toAppendSearchItems = (data) => {
   icon.appendChild(circle);
   icon.style.marginLeft = "0.4rem";
   li.addEventListener("click", () => {
-    removeFunction(li.id);
+    SearchremoveFunction(li.id);
   });
   li.appendChild(icon);
   SearchItems.appendChild(li);
@@ -96,15 +104,17 @@ FetchingSubcategories = () => {
 
 // SuggestionContainer
 const HoverSuggestionListContainer = () => {
-  SuggestionContainer.style.display = "block";
-  FetchingSubcategories();
+  if (SearchFilters.value.length > 0) {
+    SuggestionContainer.style.display = "block";
+  } else {
+    SuggestionContainer.style.display = "none";
+  }
 };
 const HideHoverSuggestionListContainer = () => {
-  setTimeout(() => {
-    SuggestionContainer.style.display = "none";
-    SearchFilters.value = "";
-  }, 280);
+  SuggestionContainer.style.display = "none";
+  SearchFilters.value = "";
 };
+FetchingSubcategories();
 
 // Search Filter
 let SearchFilters = document.getElementById("SearchFilters");
@@ -113,28 +123,51 @@ SearchFilters.addEventListener("focus", HoverSuggestionListContainer);
 SearchFilters.addEventListener("blur", HideHoverSuggestionListContainer);
 
 SearchFilters.addEventListener("input", function (event) {
-  data = MainSuggestionData.SubCategoriesData.filter((item) =>
-    item.toLowerCase().includes(event.target.value.toLowerCase())
-  );
-  toAppendSuggestionData(data);
+  HoverSuggestionListContainer();
+  if (event.target.value.length > 0) {
+    data = MainSuggestionData.SubCategoriesData.filter((item) =>
+      item.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    toAppendSuggestionData(data);
+  }
+});
+
+SearchFilters.addEventListener("keydown", function (event) {
+  if (event.key === "Enter" && event.target.value.length > 0) {
+    let data = event.target.value.toLowerCase();
+    let items = [...SearchItems.childNodes];
+
+    items = items.find((item) => item.id === "Search" + data);
+    if (!items) {
+      toAppendSearchItems(data);
+    }
+    SearchFilters.value = "";
+    FetchingSubcategories();
+    toDisplayClear();
+  }
 });
 
 // searchButton
 
-SearchButton.addEventListener("click", function () {
+SearchButton.addEventListener("click", async function () {
   let Value = SearchItems.childNodes;
   let data = [];
   for (let i of Value) {
     data.push(i.id.replace("Search", ""));
   }
-  data = data.join(" & ");
-
-  if (window.location.href === "https://armss.exitest.com/welcome.html") {
-    const encodedData = encodeURIComponent(JSON.stringify(data));
-    window.location.href = `data.html?data=${encodedData}`;
+  if (MainSuggestionData.SubCategoriesData.find((item) => item === data[0])) {
+    FilteringData.onFolderValue = true;
+    FilteringData.chatbotData = false;
   } else {
-    // toget();
-    console.log(window.location.href);
+    FilteringData.onFolderValue = false;
+    FilteringData.chatbotData = false;
+  }
+
+  data = data.join(" & ");
+  FilteringData.onSelectSubFolder = data;
+  if (data.length > 0) {
+    FilteringData.page = "data";
+    await triggerDOMContentLoaded();
   }
 
   // SearchItems.innerHTML = "";
@@ -145,7 +178,22 @@ let ClearFunction = document.getElementById("ClearFunction");
 
 ClearFunction.addEventListener("click", function () {
   SearchItems.innerHTML = "";
+  toDisplayClear();
 });
+
+// ClearDisplay
+function toDisplayClear() {
+  let Header_SearchItemsContainer = document.getElementById(
+    "Header_SearchItemsContainer"
+  );
+  let Value = SearchItems.childNodes;
+  if (Value.length > 0) {
+    Header_SearchItemsContainer.style.display = "flex";
+  } else {
+    Header_SearchItemsContainer.style.display = "none";
+  }
+}
+toDisplayClear();
 
 // Logout
 function Logout() {
@@ -153,3 +201,12 @@ function Logout() {
   setCookie(localStorage.getItem("Rsession_name"), " ", -1);
   localStorage.removeItem("Rsession_name");
 }
+
+// Logo
+
+let Logo = document.getElementById("Logo");
+
+Logo.addEventListener("click", function () {
+  FilteringData.page = "main";
+  triggerDOMContentLoaded();
+});
