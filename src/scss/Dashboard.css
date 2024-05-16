@@ -203,7 +203,7 @@ body {
   color: #ffffff;
   white-space: wrap;
 }
-.listItem:hover .DashboardFolderIcon svg {
+.listItem:hover .DashboardFolderIcon {
   background-color: #ffffff;
 }
 .listItem:hover .DashboardFolderIcon2 {
@@ -212,13 +212,10 @@ body {
 
 .DashboardFolderIcon {
   background-color: #f7faff;
-  max-width: 2.8rem;
-  max-height: 2.8rem;
-  border: 1px solid;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 2rem;
+  max-width: 40px;
+  max-height: 40px;
+  padding: 8px;
+  border-radius: 50%;
 }
 .DashboardFolderIcon svg {
   height: 2rem;
@@ -226,11 +223,15 @@ body {
 }
 
 .DashboardFolderIcon2 {
-  max-height: 4.6vh;
-  width: 20%;
-  padding: 0.56rem;
+  max-width: 24px;
+  max-height: 24px;
+  padding: 4px;
   background-color: rgba(255, 235, 230, 0.4705882353);
   border-radius: 50%;
+}
+.DashboardFolderIcon2 svg {
+  height: 1rem;
+  width: 1rem;
 }
 
 .ContainerListactive {
