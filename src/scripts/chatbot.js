@@ -67,6 +67,7 @@ function submitQuery(event) {
 }
 
 async function chat(value) {
+  chatSpace.style.minHeight = "40vh";
   const query = value;
   const UserQuery = document.createElement("p");
   UserQuery.classList.add("right");
@@ -89,6 +90,9 @@ async function chat(value) {
     console.log("data fetched", data);
     if (data[0] === "exit") {
       ChatbotContainer.style.display = "none";
+      ChatbotSuggestedQuestions.style.display = "flex";
+      chatSpace.innerHTML = "";
+      chatSpace.style.minHeight = "0";
     } else if (typeof data[0] === "string") {
       console.log("check string");
       const messageElement = document.createElement("p");
@@ -228,7 +232,6 @@ function addQuestion(button) {
 
   console.log(question);
   ChatbotSuggestedQuestions.style.display = "none";
-  chatSpace.style.minHeight = "40vh";
   chat(question);
 }
 function resetQuery() {
