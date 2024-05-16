@@ -542,6 +542,7 @@ toappendLocation = (data) => {
   data = data.States !== undefined ? data.States : data;
   for (let i of data) {
     let li = document.createElement("li");
+
     li.textContent = i;
     li.id = i;
     li.setAttribute("data-value", i);
@@ -762,7 +763,14 @@ removeFunction = (id, item) => {
 
 function toAppendHistory(data, id, list) {
   let li = document.createElement("li");
-  li.textContent = data;
+  let p = document.createElement("p");
+  p.textContent = data;
+  li.appendChild(p);
+
+  let span = document.createElement("span");
+  span.textContent = " X ";
+  li.appendChild(span);
+
   li.id = id;
   li.addEventListener("click", () => {
     removeFunction(li.id, list);

@@ -80,12 +80,12 @@
     h2 {
       @include font_size_color(1rem, bold, $Textblack, "Inter");
     }
-    div {
+    .input {
       @include width_height(null, 96%);
       border: 1px solid #d3e1fc;
       background-color: #d3e1fc55;
       border-radius: 2rem;
-
+      @include flex(flex, row, null, center, 1rem);
       input {
         width: 100%;
         padding: 1rem;
@@ -97,6 +97,10 @@
         @include font_size_color(null, $input-placeholder-gray);
       }
     }
+
+    span {
+      display: flex;
+    }
   }
   &-chatspace {
     @include flex(flex, column, center, center);
@@ -104,11 +108,11 @@
     overflow-y: auto;
     padding-top: 1rem;
     .chatspace {
+      @include flex(flex, column);
       max-height: 40vh;
       width: 96%;
       overflow-y: auto;
       padding: 0.4rem;
-      @include flex(flex, column, null, null, 1rem);
       background-color: #f0f1f43e;
       padding: 1rem;
       border-radius: 10px;
@@ -126,4 +130,20 @@
       border-radius: 10px;
     }
   }
+  &-input-reset {
+    @include flex(flex, row, null, center, 0.4rem);
+    background-color: $white;
+    width: 100%;
+
+    #reset {
+      padding: 8px;
+      background-color: #d3e1fcc6;
+      border-radius: 50%;
+    }
+  }
+}
+
+.reset {
+  height: 1.4rem;
+  width: 1.4rem;
 }

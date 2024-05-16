@@ -226,8 +226,16 @@ button {
   padding: 0.4rem;
   border: 1px solid #e0e0e1;
   background-color: #ffffff;
-  border-radius: 0.28rem;
+  border-radius: 0.288rem;
   white-space: nowrap;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0.2rem;
+}
+.section-SearchFiltersDisplay li span {
+  font-weight: bold;
 }
 .section-MainPlusDropDropDown {
   width: 16.8%;

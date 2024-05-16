@@ -107,8 +107,12 @@
       padding: 0.4rem;
       border: 1px solid #e0e0e1;
       background-color: $white;
-      border-radius: 0.28rem;
+      border-radius: 0.288rem;
       white-space: nowrap;
+      @include flex(flex, row, space-around, center, 0.2rem);
+      span {
+        font-weight: bold;
+      }
     }
   }
 

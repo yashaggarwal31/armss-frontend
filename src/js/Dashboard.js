@@ -145,6 +145,7 @@ toShowSubCategory = (id) => {
   SubCategorySection.style.display = "flex";
   SubContainerList.innerHTML = "";
   document.getElementById("Dashboard").style.overflow = "hidden";
+  FilteringData.onFolderSelect = id;
   togetSubcategory(id);
 };
 
@@ -287,6 +288,7 @@ document.getElementById("CategoryAddFolder").onclick = function () {
 //  close icon
 document.getElementById("CloseAddFolder").onclick = function () {
   document.getElementById("CreateFolders-SubFolders").style.display = "none";
+  FilteringData.onFolderSelect = "";
 };
 
 async function addFolder(folderData) {
@@ -307,12 +309,18 @@ async function addFolder(folderData) {
 document.getElementById("SubmitAddFloder").onclick = function () {
   if (AddFolderName.value.length > 0 && AddFolderSkills.value.length > 0) {
     const folderData = {
-      Name: "New Pos",
-      Skills: "Skill1, Skill2, Skill3",
-      ParentFolder: "",
+      Name: AddFolderName.value,
+      Skills: AddFolderSkills.value,
+      ParentFolder: FilteringData.onFolderSelect,
     };
 
     addFolder(folderData);
+    AddFolderName.value = "";
+    AddFolderSkills.value = "";
+    FilteringData.onFolderSelect = "";
+    document.getElementById("CreateFolders-SubFolders").style.display = "none";
+    FilteringData.page = "main";
+    triggerDOMContentLoaded();
   } else {
     alert("Please fill all the fields to crete Folder");
   }
