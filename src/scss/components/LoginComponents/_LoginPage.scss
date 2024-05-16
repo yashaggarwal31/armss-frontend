@@ -1,18 +1,22 @@
 .LoginPage {
   &-Container {
-    @include width_height(100vh, 100%);
+    @include width_height(100vh);
     @include grid(grid, 0.8fr 1fr);
+    gap: 86px;
     overflow: hidden;
   }
   &-LogoContainer {
     padding: 20px;
     @include font_size_color(1rem, 400, $white, "Inter");
-    @include flex(flex, row, null, baseline, 4px);
+    @include flex(flex, row, null, baseline);
   }
   &-logo {
-    padding-right: 6px;
-    border-right: 1px solid $white;
-    @include width_height(null, 10%);
+    @include width_height(52px, 52px);
+  }
+  &-border {
+    @include width_height(52px, 1px);
+    border: 1px solid $white;
+    margin: 0 10px;
   }
   &-CarouselContainer {
     background-image: radial-gradient(
@@ -24,7 +28,7 @@
       rgb(6, 86, 207, 100%)
     );
 
-    margin-left: 10%;
+    margin-left: 90px;
   }
 
   &-Carousel {

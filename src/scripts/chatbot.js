@@ -111,7 +111,12 @@ async function chat(value) {
       // // Redirect to the new URL
       // // window.location.href = url;
       // window.location.replace(url);
+      const messageElement = document.createElement("p");
+      messageElement.classList.add("left");
+      messageElement.textContent = "Your Results Displayed";
+      chatSpace.appendChild(messageElement);
       FilteringData.page = "data";
+      ChatbotContainer.style.display = "none";
       await triggerDOMContentLoaded();
     }
     return data;
