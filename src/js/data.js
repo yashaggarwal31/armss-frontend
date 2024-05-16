@@ -881,7 +881,9 @@ fetchviewdata = async (id) => {
   url.search = new URLSearchParams(idvalue).toString();
   let response = await fetch(url);
   let data = await response.json();
-  viewcandidatedata.src = data;
+  if (data) {
+    viewcandidatedata.src = data;
+  }
   viewsection.style.display = "flex";
 };
 
@@ -889,7 +891,7 @@ fetchviewdata = async (id) => {
 
 viewdatacloseicon.addEventListener("click", () => {
   viewsection.style.display = "none";
-  viewcandidatedata.src = "";
+  document.getElementById("viewcandidatedata").src = "";
 });
 
 // show modal
