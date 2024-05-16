@@ -48,10 +48,10 @@ toget = async (
     method === "GET"
       ? { method: method }
       : {
-          method: method,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        };
+        method: method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      };
   console.log(options);
   await fetch(url, options)
     .then((response) => {
@@ -315,6 +315,7 @@ function toShowData(data, method = "POST") {
       );
 
       icon.addEventListener("click", () => {
+        console.log('this is id', li.id)
         fetchviewdata(li.id);
       });
 
@@ -497,7 +498,7 @@ function setIds() {
   //   listItems.innerHTML = "";
   // });
 
-  chatbot.addEventListener("click", function () {});
+  chatbot.addEventListener("click", function () { });
 }
 
 toappendSkills = (data) => {
@@ -843,9 +844,9 @@ toapplyfilters = (data) => {
           sampleData = sampleData.filter((item) => {
             if (
               parseFloat(item["Experience"]) >=
-                parseFloat(data[key][i].slice(0, 1)) &&
+              parseFloat(data[key][i].slice(0, 1)) &&
               parseFloat(item["Experience"]) <
-                parseFloat(data[key][i].slice(-1))
+              parseFloat(data[key][i].slice(-1))
             ) {
               return true;
             }
@@ -874,23 +875,32 @@ toapplyfilters = (data) => {
 // fetch resume
 
 fetchviewdata = async (id) => {
+  let data = ''
   let idvalue = {
     fileID: id,
   };
   let url = new URL("https://armss-be.exitest.com/view-resume");
   url.search = new URLSearchParams(idvalue).toString();
   let response = await fetch(url);
-  let data = await response.json();
-  console.log(id);
-  document.getElementById("viewcandidatedata").data = data;
+  data = await response.json();
+  console.log('this is:', id, 'this is data: ', data);
+
+  if (data) {
+    // document.getElementById("viewcandidatedata").outerHTML = document.getElementById("viewcandidatedata").outerHTML.replace(/data="(.+?)"/, 'data="' + data + '"');
+    // console.log(document.getElementById("viewcandidatedata").getAttribute("data"))
+    viewcandidatedata.src = data;
+  }
   viewsection.style.display = "flex";
 };
+
+
 
 // close viewdata
 
 viewdatacloseicon.addEventListener("click", () => {
   viewsection.style.display = "none";
-  viewcandidatedata.data = "";
+  document.getElementById("viewcandidatedata").src = '';
+  // console.log(document.getElementById("viewcandidatedata").getAttribute("data"))
 });
 
 // show modal
