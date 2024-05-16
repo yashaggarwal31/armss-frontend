@@ -1,8 +1,18 @@
+body {
+  overflow: hidden;
+}
 .Dashboard {
+  // background-color: $white;
+  max-height: 84.8vh;
+
+  overflow-y: auto;
+  overflow-x: hidden !important;
+
   &-container {
     padding: 1rem;
     background-color: $mainBackground;
-    @include grid(grid, null, auto auto, null, 4rem);
+    width: 100%;
+    @include flex(flex, column, null, null, 80px);
   }
   &-welcomeContainer {
     margin-top: 0.6rem;
@@ -10,42 +20,42 @@
     @include flex(flex, row, center);
     @include position(relative);
     .textContainer {
-      padding: 20px 20px;
+      padding: 55px 26px;
       background-color: $backgraoundBlue;
       border-radius: 1rem;
 
-      @include flex(flex, column, center);
-      @include width_height(24vh, 92%);
+      @include width_height(null, 92%);
 
       h2 {
-        @include font_size_color(1.28rem, 600, $white);
+        @include font_size_color(1.4rem, 600, $white);
+        margin-bottom: 2px;
       }
 
       p {
-        @include font_size_color(0.88rem, lighter, $white);
+        @include font_size_color(0.88rem, 200, $white);
       }
     }
   }
   &-ContentContainer {
-    margin-top: 3rem;
+    background-color: $mainBackground;
     @include flex(flex, null, center);
     @include width_height(null, 100%);
   }
   &-SubContentContainer {
     @include width_height(null, 92%);
-    @include flex(flex, column, flex-start);
+    @include flex(flex, column, flex-start, null, 1rem);
     background-color: $white;
     border-radius: 1rem;
     padding: 1.4rem;
 
     .SubContentContainer-Elements {
-      padding: 1rem;
+      padding: 0.8rem 0;
       @include flex(flex, row, space-between, center);
     }
   }
   &-Image {
-    @include position(absolute, null, 4.8%, 4%, null);
-    @include width_height(null, 24%);
+    @include position(absolute, null, 2.8%, 10%, null);
+    @include width_height(null, 280px);
   }
 }
 
@@ -58,17 +68,21 @@
   background-color: $mainBackground;
   border-radius: 1rem;
   padding: 1.4rem;
-  @include flex(flex, row, flex-start, center, 1.2rem, wrap);
+  // @include flex(flex, row, flex-start, center, 1.2rem, wrap);
+  @include grid(grid);
+  grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
+  gap: 20px;
 }
 
 .listItem {
-  @include flex(flex, column, space-between, flex-start);
+  @include flex(flex, column, space-between);
   padding: 1rem;
-  width: 18%;
-  max-height: 20vh;
-  min-height: 20vh;
+  min-width: 188px;
+  max-height: 140px;
+  min-height: 140px;
   background-color: $white;
   border-radius: 10px;
+  position: relative;
 
   h4 {
     width: 100%;
@@ -87,6 +101,7 @@
 
 .listItem:hover {
   background-color: $backgraoundBlue;
+  cursor: pointer;
   h4 {
     color: $white;
     white-space: wrap;
@@ -103,13 +118,18 @@
 }
 
 .DashboardFolderIcon {
+  background-color: $mainBackground;
+  max-width: 2.8rem;
+  max-height: 2.8rem;
+  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
   svg {
-    display: flex;
-    max-height: 6.4vh;
-    width: 34%;
-    padding: 0.6rem;
-    background-color: $mainBackground;
-    border-radius: 50%;
+    // border: 2px solid;
+    height: 2rem;
+    width: 2rem;
   }
 }
 .DashboardFolderIcon2 {
@@ -155,11 +175,11 @@ button {
 // SubCategory
 
 .section {
-  @include position(absolute, null, null, 0%, 100%);
+  @include position(fixed, null, null, 0%, 100%);
   @include flex(flex, row, center, center);
   @include width_height(null, 100%);
-  min-height: 120%;
-  max-height: 120%;
+  min-height: 100%;
+  max-height: 100%;
   overflow: hidden;
   background-color: #3333338b;
   backdrop-filter: blur(0.6px);
@@ -172,13 +192,13 @@ button {
   }
 
   &-CategorySubContainer {
-    @include width_height(null, 56%);
+    @include width_height(null, 64%);
     background-color: $white;
     padding: 1.2rem;
     border-radius: 1rem;
-    max-height: 40%;
-    overflow-y: auto;
-    overflow-x: hidden;
+    max-height: 88%;
+
+    overflow: hidden;
     box-shadow: 0 2px 4px 0px #bfbfbf;
     .SubCategoryHeading {
       @include font_size_color(1.28rem, 600, $Textblack, "Inter");
@@ -190,8 +210,10 @@ button {
     margin-bottom: 1rem;
   }
 }
-#SubContainerList li {
-  width: 30%;
+#SubContainerList {
+  max-height: 340px;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .section {

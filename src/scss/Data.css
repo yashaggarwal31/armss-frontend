@@ -57,10 +57,6 @@ p {
   font-family: "Inter";
 }
 
-body {
-  overflow-x: hidden;
-}
-
 label {
   padding-bottom: 0.4rem;
 }
