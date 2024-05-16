@@ -1,6 +1,6 @@
 let ChatbotContainer = document.getElementById("ChatbotContainerMain");
 var btn = document.getElementById("Chatbot");
-let span = document.getElementById("closeChatbot");
+let spaner = document.getElementById("closeChatbot");
 let ChatbotSuggestedQuestions = document.getElementById(
   "ChatbotSuggestedQuestions"
 );
@@ -9,7 +9,7 @@ let querysearch = document.getElementById("querysearch");
 btn.onclick = function () {
   ChatbotContainer.style.display = "flex";
 };
-span.onclick = function () {
+spaner.onclick = function () {
   ChatbotContainer.style.display = "none";
 };
 
@@ -131,7 +131,7 @@ async function chat(value) {
       chatSpace.appendChild(messageElement);
       chatSpace.scrollTop = chatSpace.scrollHeight;
       FilteringData.page = "data";
-      FilteringData.QueryonProcess = true;
+      FilteringData.QueryonProcess = false;
       ChatbotContainer.style.display = "none";
       await triggerDOMContentLoaded();
     }
@@ -248,8 +248,20 @@ function addQuestion(button) {
   chat(question);
 }
 function resetQuery() {
-  var queryInput = document.getElementById("queryInput");
+  var queryInput = document.getElementById("querysearch");
   queryInput.value = "";
 }
 // window.send_data = send_data
 // chat()
+
+// reset
+
+let reseter = document.getElementById("reset");
+
+reseter.addEventListener("click", () => {
+  ChatbotSuggestedQuestions.style.display = "flex";
+  FilteringData.QueryonProcess = false;
+  chatSpace.innerHTML = "";
+  chatSpace.style.minHeight = "0";
+  resetQuery();
+});

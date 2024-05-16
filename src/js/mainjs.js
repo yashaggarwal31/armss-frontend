@@ -4,6 +4,7 @@ const FilteringData = {
   Skills: [],
   AllSkills: [],
   onSelectSubFolder: "",
+  onFolderSelect: "",
   onFolderValue: true,
   page: "",
   chatbotResumeIds: [],
