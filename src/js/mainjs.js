@@ -8,6 +8,7 @@ const FilteringData = {
   page: "",
   chatbotResumeIds: [],
   chatbotData: false,
+  QueryonProcess: false,
 };
 
 console.log(FilteringData);

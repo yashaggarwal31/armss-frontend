@@ -6,7 +6,7 @@ body {
   max-height: 84.8vh;
 
   overflow-y: auto;
-  overflow-x: hidden !important;
+  overflow-x: hidden;
 
   &-container {
     padding: 1rem;
@@ -177,11 +177,10 @@ button {
 // SubCategory
 
 .section {
-  @include position(fixed, null, null, 0%, 100%);
+  @include position(absolute, null, null, 0%, 100%);
   @include flex(flex, row, center, center);
   @include width_height(null, 100%);
   min-height: 100%;
-  max-height: 100%;
   overflow: hidden;
   background-color: #3333338b;
   backdrop-filter: blur(0.6px);

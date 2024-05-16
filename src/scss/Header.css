@@ -270,6 +270,11 @@ button {
   visibility: visible;
 }
 
+.LogoutBtn:hover {
+  background-color: #0050f1;
+  color: #ffffff;
+}
+
 .SearchItems {
   justify-self: center;
   display: flex;

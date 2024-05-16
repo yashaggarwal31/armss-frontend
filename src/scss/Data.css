@@ -314,17 +314,17 @@ button {
   font-family: "Inter";
 }
 
-#listItems {
+#datalistItems {
   max-height: 60vh;
   min-height: 60vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-#listItems li:hover {
+#datalistItems li:hover {
   background-color: #cadbfc;
 }
-#listItems li:hover .SkillsContainer {
+#datalistItems li:hover .SkillsContainer {
   background-color: #ffffff;
 }
 

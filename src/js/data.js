@@ -176,7 +176,6 @@ function generateUniqueId() {
 
 function toLoadContent() {
   loader.style.display = "flex";
-
   const dataString = FilteringData.onSelectSubFolder;
   const searchvalue = FilteringData.onFolderValue;
   const chatbotData = FilteringData.chatbotData;

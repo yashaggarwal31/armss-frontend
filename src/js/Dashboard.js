@@ -83,6 +83,7 @@ toDataPage = async (value) => {
   // window.location.href = url;
   FilteringData.onSelectSubFolder = value;
   FilteringData.onFolderValue = true;
+  FilteringData.chatbotData = false;
   FilteringData.page = "data";
   await triggerDOMContentLoaded();
   // document.addEventListener("DOMContentLoaded", async () => {
@@ -188,6 +189,7 @@ togetFolders = async () => {
   })
     .then((response) => response.json())
     .then((responseData) => {
+      console.log(responseData);
       Folders.MainCategory = responseData;
       toDisplayFloder(responseData);
     });
