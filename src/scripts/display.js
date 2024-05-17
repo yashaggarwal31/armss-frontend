@@ -2,7 +2,7 @@
 // let send_data_str = localStorage.getItem("send_data");
 // let send_data = JSON.parse(send_data_str);
 let all_resumes = localStorage.getItem("resumeids");
-let resumeids = JSON.parse(all_resumes);
+// let resumeids = JSON.parse(all_resumes);
 // sendDATA["count"] = 10
 // window.myVariable = sendDATA
 // console.log("Before change:", send_data);

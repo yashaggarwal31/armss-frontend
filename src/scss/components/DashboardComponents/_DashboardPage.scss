@@ -1,10 +1,18 @@
+body {
+  overflow: hidden;
+}
 .Dashboard {
-  background-color: $white;
+  // background-color: $white;
+  max-height: 84.8vh;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
   &-container {
-    padding: 2rem;
-    margin: auto;
+    padding: 1rem;
+    background-color: $mainBackground;
     width: 100%;
-    @include flex(flex, column,null, null, 70px, null);
+    @include flex(flex, column, null, null, 80px);
   }
   &-welcomeContainer {
     margin-top: 0.6rem;
@@ -12,82 +20,71 @@
     @include flex(flex, row, center);
     @include position(relative);
     .textContainer {
-      
       padding: 55px 26px;
       background-color: $backgraoundBlue;
       border-radius: 1rem;
 
-      @include width_height(null, 100%);
+      @include width_height(null, 92%);
 
       h2 {
-        @include font_size_color(32px, 600, $white);
-        margin-bottom: 11px;
+        @include font_size_color(1.4rem, 600, $white);
+        margin-bottom: 2px;
       }
 
       p {
-        @include font_size_color(18px, lighter, $white);
+        @include font_size_color(0.88rem, 200, $white);
       }
     }
   }
   &-ContentContainer {
     background-color: $mainBackground;
-    padding: 1.4rem;
     @include flex(flex, null, center);
     @include width_height(null, 100%);
   }
   &-SubContentContainer {
-    @include width_height(null, 100%);
-    @include flex(flex, column, flex-start,null,1rem);
+    @include width_height(null, 92%);
+    @include flex(flex, column, flex-start, null, 1rem);
+    background-color: $white;
     border-radius: 1rem;
+    padding: 1.4rem;
 
     .SubContentContainer-Elements {
-      padding: 10px 0;
+      padding: 0.8rem 0;
       @include flex(flex, row, space-between, center);
-      h2{
-        font-size: 24px;
-      }
-      .ButtonContainer {
-        @include flex(flex, row, space-between, center, 1rem);
-        .Add{
-          @include flex(flex,null,space-between,center,10px);
-          border-radius: 10px;
-        }
-        .upload{
-          @include flex(flex,null,space-between,center,10px);
-          border-radius: 10px;
-        }
-      }
-
     }
   }
   &-Image {
-    @include position(absolute, null, 10px, 32px, null);
-    @include width_height(auto, 328px);
+    @include position(absolute, null, 2.8%, 10%, null);
+    @include width_height(null, 280px);
   }
 }
 
+.Icon {
+  width: 8px;
+  height: 18px;
+}
 
 .ContainerList {
   background-color: $mainBackground;
   border-radius: 1rem;
+  padding: 1.4rem;
+  // @include flex(flex, row, flex-start, center, 1.2rem, wrap);
   @include grid(grid);
-  grid-template-columns: repeat(
-    auto-fill, minmax(233px, 1fr));
-    gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
+  gap: 20px;
 }
 
-
 .listItem {
-  @include flex(flex,column,space-between);
+  @include flex(flex, column, space-between);
   padding: 1rem;
-  min-width: 233px;
+  min-width: 188px;
+  max-height: 140px;
+  min-height: 140px;
   background-color: $white;
   border-radius: 10px;
   position: relative;
-  min-height: 142px;
 
   h4 {
-    font-size: 14px;
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
@@ -95,57 +92,55 @@
   }
 }
 
-// .listItem div:first-child {
-//   display: flex;
-//   justify-content: space-between;
-//   width: 100%;
-//   pointer-events: none;
-// }
+.listItem div:first-child {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  pointer-events: none;
+}
 
 .listItem:hover {
   background-color: $backgraoundBlue;
+  cursor: pointer;
   h4 {
     color: $white;
     white-space: wrap;
   }
-}
 
-.icon-container{
-  margin-bottom:10px ;
   .DashboardFolderIcon {
-      display: flex;
-      height: 50px;
-      width: 50px;
-      text-align: center;
-      padding: 0.6rem;
-      background-color: $mainBackground;
-      border-radius: 50%;
-      svg{
-        position: absolute;
-      top: 21%;
-      left: 11%;
-      }
+    background-color: $white;
   }
   .DashboardFolderIcon2 {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    height: 24px;
-    width: 24px;
-    display: flex;
-    text-align: center;
-    background-color: #ffebe678;
-    border-radius: 50%;
-    svg{
-      position: absolute;
-      top: 20%;
-      left: 20%;
-    }
+    background-color: $white;
   }
 }
 
+.DashboardFolderIcon {
+  background-color: $mainBackground;
+  max-width: 40px;
+  max-height: 40px;
+  padding: 8px;
+  border-radius: 50%;
 
-
+  svg {
+    height: 2rem;
+    width: 2rem;
+  }
+}
+.DashboardFolderIcon2 {
+  max-width: 24px;
+  max-height: 24px;
+  padding: 4px;
+  background-color: #ffebe678;
+  border-radius: 50%;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  svg {
+    height: 1rem;
+    width: 1rem;
+  }
+}
 
 .ContainerListactive {
   background-color: $backgraoundBlue;
@@ -160,7 +155,24 @@
   }
 }
 
+.ButtonContainer {
+  @include flex(flex, row, space-between, center, 1rem);
 
+  button.upload {
+    @include flex(flex, row, space-between, center, 1rem);
+    @include font_size_color(0.88rem, 400, $white, "Inter");
+    padding: 0.8rem;
+    border-radius: 0.4rem;
+    background-color: $darkblue;
+  }
+}
+button {
+  @include flex(flex, row, space-between, center, 1rem);
+  @include font_size_color(0.88rem, 400, $white, "Inter");
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  background-color: $darkblue;
+}
 
 // SubCategory
 
@@ -168,10 +180,9 @@
   @include position(absolute, null, null, 0%, 100%);
   @include flex(flex, row, center, center);
   @include width_height(null, 100%);
-  min-height: 120%;
-  max-height: 120%;
+  min-height: 100%;
   overflow: hidden;
-  background-color: #ffffff53;
+  background-color: #33333388;
   backdrop-filter: blur(0.6px);
 
   &-SubHeadingContainer {
@@ -182,13 +193,13 @@
   }
 
   &-CategorySubContainer {
-    @include width_height(null, 56%);
+    @include width_height(null, 64%);
     background-color: $white;
     padding: 1.2rem;
     border-radius: 1rem;
-    max-height: 40%;
-    overflow-y: auto;
-    overflow-x: hidden;
+    max-height: 88%;
+
+    overflow: hidden;
     box-shadow: 0 2px 4px 0px #bfbfbf;
     .SubCategoryHeading {
       @include font_size_color(1.28rem, 600, $Textblack, "Inter");
@@ -200,9 +211,49 @@
     margin-bottom: 1rem;
   }
 }
-#SubContainerList li {
- width: 30%;
+#SubContainerList {
+  max-height: 340px;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
+.section {
+  .AddfloderContainer {
+    width: 46%;
+  }
 
+  &-AddFolderInputContainers {
+    @include flex(flex, column, flex-start, null, 0.2rem);
 
+    label {
+      @include font_size_color(1rem, 480, $Textblack, "Inter");
+    }
+    input {
+      outline: none;
+      border: 0.08rem solid $input-border-gray;
+      padding: 0.8rem 0.6rem;
+      border-radius: 0.4rem;
+    }
+    input::placeholder {
+      color: $input-placeholder-gray;
+    }
+    textarea {
+      resize: none;
+      border: 0.08rem solid $input-border-gray;
+      padding: 0.8rem 0.6rem;
+      border-radius: 0.4rem;
+    }
+    textarea::placeholder {
+      color: $input-placeholder-gray;
+    }
+  }
+  button {
+    align-self: flex-end;
+    margin-top: 0.4rem;
+  }
+
+  &-inputContainer {
+    @include flex(flex, column, flex-start, null, 0.2rem);
+    margin: 1rem 0;
+  }
+}

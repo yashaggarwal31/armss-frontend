@@ -41,6 +41,7 @@ h2 {
   font-size: 1.4rem;
   color: #333333;
   font-family: "Inter";
+  padding-bottom: 6px;
 }
 
 h4 {
@@ -54,10 +55,6 @@ p {
   color: #333333;
   font-size: 0.8rem;
   font-family: "Inter";
-}
-
-body {
-  overflow-x: hidden;
 }
 
 label {
@@ -271,6 +268,11 @@ button {
 
 .ProfileContainer:hover .LogoutBtn {
   visibility: visible;
+}
+
+.LogoutBtn:hover {
+  background-color: #0050f1;
+  color: #ffffff;
 }
 
 .SearchItems {

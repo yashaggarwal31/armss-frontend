@@ -1,8 +1,8 @@
 .Header {
   &-Container {
-    padding:1.5rem 2rem;
+    padding: 1.5rem 2rem;
     background-color: $white;
-    @include flex(flex, null,space-between,center );
+    @include flex(flex, null, space-between, center);
     border-bottom: 0.1px solid #bfbfbfb6;
     position: relative;
   }
@@ -21,6 +21,7 @@
   }
   &-logoContainer {
     // @include width_height(null, 8%);
+    // @include flex(flex, column, center, center);
     @include font_size_color(0.48rem, 600, $Textblack, "Inter");
   }
   &-logo {
@@ -133,7 +134,10 @@
 .ProfileContainer:hover .LogoutBtn {
   visibility: visible;
 }
-
+.LogoutBtn:hover {
+  background-color: #0050f1;
+  color: $white;
+}
 .SearchItems {
   justify-self: center;
   @include flex(flex, row, flex-start, baseline, 0.4rem);

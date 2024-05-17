@@ -1,5 +1,6 @@
 h2 {
   @include font_size_color(1.4rem, null, $Textblack, "Inter");
+  padding-bottom: 6px;
 }
 h4 {
   @include font_size_color(0.8rem, null, $Textblack, "Inter");
@@ -9,10 +10,6 @@ p {
   color: $Textblack;
   font-size: 0.8rem;
   font-family: "Inter";
-}
-
-body {
-  overflow-x: hidden;
 }
 
 label {

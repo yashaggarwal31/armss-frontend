@@ -41,6 +41,7 @@ let SubCategoriesSuggestions = document.getElementById(
   "SubCategoriesSuggestions"
 );
 toAppendSuggestionData = (data) => {
+  data = data.sort((a, b) => a.localeCompare(b));
   SubCategoriesSuggestions.innerHTML = "";
   for (let i of data) {
     let li = document.createElement("li");
@@ -103,15 +104,17 @@ FetchingSubcategories = () => {
 
 // SuggestionContainer
 const HoverSuggestionListContainer = () => {
-  SuggestionContainer.style.display = "block";
-  FetchingSubcategories();
+  if (SearchFilters.value.length > 0) {
+    SuggestionContainer.style.display = "block";
+  } else {
+    SuggestionContainer.style.display = "none";
+  }
 };
 const HideHoverSuggestionListContainer = () => {
-  setTimeout(() => {
-    SuggestionContainer.style.display = "none";
-    SearchFilters.value = "";
-  }, 280);
+  SuggestionContainer.style.display = "none";
+  SearchFilters.value = "";
 };
+FetchingSubcategories();
 
 // Search Filter
 let SearchFilters = document.getElementById("SearchFilters");
@@ -120,10 +123,13 @@ SearchFilters.addEventListener("focus", HoverSuggestionListContainer);
 SearchFilters.addEventListener("blur", HideHoverSuggestionListContainer);
 
 SearchFilters.addEventListener("input", function (event) {
-  data = MainSuggestionData.SubCategoriesData.filter((item) =>
-    item.toLowerCase().includes(event.target.value.toLowerCase())
-  );
-  toAppendSuggestionData(data);
+  HoverSuggestionListContainer();
+  if (event.target.value.length > 0) {
+    data = MainSuggestionData.SubCategoriesData.filter((item) =>
+      item.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    toAppendSuggestionData(data);
+  }
 });
 
 SearchFilters.addEventListener("keydown", function (event) {
@@ -143,28 +149,25 @@ SearchFilters.addEventListener("keydown", function (event) {
 
 // searchButton
 
-SearchButton.addEventListener("click", function () {
+SearchButton.addEventListener("click", async function () {
   let Value = SearchItems.childNodes;
   let data = [];
   for (let i of Value) {
     data.push(i.id.replace("Search", ""));
   }
-  let value;
   if (MainSuggestionData.SubCategoriesData.find((item) => item === data[0])) {
-    value = true;
+    FilteringData.onFolderValue = true;
+    FilteringData.chatbotData = false;
   } else {
-    value = false;
+    FilteringData.onFolderValue = false;
+    FilteringData.chatbotData = false;
   }
 
   data = data.join(" & ");
+  FilteringData.onSelectSubFolder = data;
   if (data.length > 0) {
-    if (window.location.href === "https://armss.exitest.com/welcome.html") {
-      const encodedData = encodeURIComponent(JSON.stringify(data));
-      window.location.href = `data.html?data=${encodedData}&value=${value}`;
-    } else {
-      const encodedData = encodeURIComponent(JSON.stringify(data));
-      window.location.href = `data.html?data=${encodedData}&value=${value}`;
-    }
+    FilteringData.page = "data";
+    await triggerDOMContentLoaded();
   }
 
   // SearchItems.innerHTML = "";
@@ -198,3 +201,12 @@ function Logout() {
   setCookie(localStorage.getItem("Rsession_name"), " ", -1);
   localStorage.removeItem("Rsession_name");
 }
+
+// Logo
+
+let Logo = document.getElementById("Logo");
+
+Logo.addEventListener("click", function () {
+  FilteringData.page = "main";
+  triggerDOMContentLoaded();
+});

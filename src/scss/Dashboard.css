@@ -41,6 +41,7 @@ h2 {
   font-size: 1.4rem;
   color: #333333;
   font-family: "Inter";
+  padding-bottom: 6px;
 }
 
 h4 {
@@ -54,10 +55,6 @@ p {
   color: #333333;
   font-size: 0.8rem;
   font-family: "Inter";
-}
-
-body {
-  overflow-x: hidden;
 }
 
 label {
@@ -86,16 +83,22 @@ button {
   visibility: hidden;
 }
 
+body {
+  overflow: hidden;
+}
+
 .Dashboard {
-  background-color: #ffffff;
+  max-height: 84.8vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .Dashboard-container {
-  padding: 2rem;
-  margin: auto;
+  padding: 1rem;
+  background-color: #f7faff;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 70px;
+  gap: 80px;
 }
 .Dashboard-welcomeContainer {
   margin-top: 0.6rem;
@@ -109,78 +112,60 @@ button {
   padding: 55px 26px;
   background-color: #0052f1;
   border-radius: 1rem;
-  width: 100%;
+  width: 92%;
 }
 .Dashboard-welcomeContainer .textContainer h2 {
-  font-size: 32px;
+  font-size: 1.4rem;
   font-weight: 600;
   color: #ffffff;
-  margin-bottom: 11px;
+  margin-bottom: 2px;
 }
 .Dashboard-welcomeContainer .textContainer p {
-  font-size: 18px;
-  font-weight: lighter;
+  font-size: 0.88rem;
+  font-weight: 200;
   color: #ffffff;
 }
 .Dashboard-ContentContainer {
   background-color: #f7faff;
-  padding: 1.4rem;
   display: flex;
   justify-content: center;
   width: 100%;
 }
 .Dashboard-SubContentContainer {
-  width: 100%;
+  width: 92%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 1rem;
+  background-color: #ffffff;
   border-radius: 1rem;
+  padding: 1.4rem;
 }
 .Dashboard-SubContentContainer .SubContentContainer-Elements {
-  padding: 10px 0;
+  padding: 0.8rem 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-}
-.Dashboard-SubContentContainer .SubContentContainer-Elements h2 {
-  font-size: 24px;
-}
-.Dashboard-SubContentContainer .SubContentContainer-Elements .ButtonContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-}
-.Dashboard-SubContentContainer .SubContentContainer-Elements .ButtonContainer .Add {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  border-radius: 10px;
-}
-.Dashboard-SubContentContainer .SubContentContainer-Elements .ButtonContainer .upload {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  border-radius: 10px;
 }
 .Dashboard-Image {
   position: absolute;
-  right: 10px;
-  top: 32px;
-  height: auto;
-  width: 328px;
+  right: 2.8%;
+  top: 10%;
+  width: 280px;
+}
+
+.Icon {
+  width: 8px;
+  height: 18px;
 }
 
 .ContainerList {
   background-color: #f7faff;
   border-radius: 1rem;
+  padding: 1.4rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(233px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
   gap: 20px;
 }
 
@@ -189,60 +174,64 @@ button {
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
-  min-width: 233px;
+  min-width: 188px;
+  max-height: 140px;
+  min-height: 140px;
   background-color: #ffffff;
   border-radius: 10px;
   position: relative;
-  min-height: 142px;
 }
 .listItem h4 {
-  font-size: 14px;
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
+.listItem div:first-child {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  pointer-events: none;
+}
+
 .listItem:hover {
   background-color: #0052f1;
+  cursor: pointer;
 }
 .listItem:hover h4 {
   color: #ffffff;
   white-space: wrap;
 }
-
-.icon-container {
-  margin-bottom: 10px;
+.listItem:hover .DashboardFolderIcon {
+  background-color: #ffffff;
 }
-.icon-container .DashboardFolderIcon {
-  display: flex;
-  height: 50px;
-  width: 50px;
-  text-align: center;
-  padding: 0.6rem;
+.listItem:hover .DashboardFolderIcon2 {
+  background-color: #ffffff;
+}
+
+.DashboardFolderIcon {
   background-color: #f7faff;
+  max-width: 40px;
+  max-height: 40px;
+  padding: 8px;
   border-radius: 50%;
 }
-.icon-container .DashboardFolderIcon svg {
-  position: absolute;
-  top: 21%;
-  left: 11%;
+.DashboardFolderIcon svg {
+  height: 2rem;
+  width: 2rem;
 }
-.icon-container .DashboardFolderIcon2 {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  height: 24px;
-  width: 24px;
-  display: flex;
-  text-align: center;
+
+.DashboardFolderIcon2 {
+  max-width: 24px;
+  max-height: 24px;
+  padding: 4px;
   background-color: rgba(255, 235, 230, 0.4705882353);
   border-radius: 50%;
 }
-.icon-container .DashboardFolderIcon2 svg {
-  position: absolute;
-  top: 20%;
-  left: 20%;
+.DashboardFolderIcon2 svg {
+  height: 1rem;
+  width: 1rem;
 }
 
 .ContainerListactive {
@@ -255,6 +244,43 @@ button {
   background-color: #ffffff;
 }
 
+.ButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.ButtonContainer button.upload {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: #ffffff;
+  font-family: "Inter";
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  background-color: #0052f1;
+}
+
+button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: #ffffff;
+  font-family: "Inter";
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  background-color: #0052f1;
+}
+
 .section {
   position: absolute;
   top: 0%;
@@ -264,10 +290,9 @@ button {
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 120%;
-  max-height: 120%;
+  min-height: 100%;
   overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.3254901961);
+  background-color: rgba(51, 51, 51, 0.5333333333);
   -webkit-backdrop-filter: blur(0.6px);
           backdrop-filter: blur(0.6px);
 }
@@ -281,13 +306,12 @@ button {
   cursor: pointer;
 }
 .section-CategorySubContainer {
-  width: 56%;
+  width: 64%;
   background-color: #ffffff;
   padding: 1.2rem;
   border-radius: 1rem;
-  max-height: 40%;
-  overflow-y: auto;
-  overflow-x: hidden;
+  max-height: 88%;
+  overflow: hidden;
   box-shadow: 0 2px 4px 0px #bfbfbf;
 }
 .section-CategorySubContainer .SubCategoryHeading {
@@ -305,6 +329,59 @@ button {
   margin-bottom: 1rem;
 }
 
-#SubContainerList li {
-  width: 30%;
+#SubContainerList {
+  max-height: 340px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.section .AddfloderContainer {
+  width: 46%;
+}
+.section-AddFolderInputContainers {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.2rem;
+}
+.section-AddFolderInputContainers label {
+  font-size: 1rem;
+  font-weight: 480;
+  color: #333333;
+  font-family: "Inter";
+}
+.section-AddFolderInputContainers input {
+  outline: none;
+  border: 0.08rem solid rgba(117, 117, 117, 0.51);
+  padding: 0.8rem 0.6rem;
+  border-radius: 0.4rem;
+}
+.section-AddFolderInputContainers input::-moz-placeholder {
+  color: #a6a6a6;
+}
+.section-AddFolderInputContainers input::placeholder {
+  color: #a6a6a6;
+}
+.section-AddFolderInputContainers textarea {
+  resize: none;
+  border: 0.08rem solid rgba(117, 117, 117, 0.51);
+  padding: 0.8rem 0.6rem;
+  border-radius: 0.4rem;
+}
+.section-AddFolderInputContainers textarea::-moz-placeholder {
+  color: #a6a6a6;
+}
+.section-AddFolderInputContainers textarea::placeholder {
+  color: #a6a6a6;
+}
+.section button {
+  align-self: flex-end;
+  margin-top: 0.4rem;
+}
+.section-inputContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.2rem;
+  margin: 1rem 0;
 }/*# sourceMappingURL=Dashboard.css.map */
