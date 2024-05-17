@@ -10,6 +10,7 @@ const FilteringData = {
   chatbotResumeIds: [],
   chatbotData: false,
   QueryonProcess: false,
+  dataparaelement: "",
 };
 
 console.log(FilteringData);

@@ -293,13 +293,16 @@ function toShowData(data, method = "POST") {
       Experience.textContent = data[i].Experience + " Years";
 
       let Email = document.createElement("p");
+
       Email.textContent = data[i].Contact_Email;
 
       let Location = document.createElement("p");
-      Location.textContent = data[i].Location.join(", ");
+      Location.textContent =
+        data[i].Location === "" ? "delhi" : data[i].Location;
 
       let Phone_no = document.createElement("p");
-      Phone_no.textContent = data[i].Contact_Phone;
+      Phone_no.textContent =
+        data[i].Contact_Phone === null ? "" : data[i].Contact_Phone;
 
       let UploadDate = document.createElement("p");
       UploadDate.textContent = data[i].UploadDate;
@@ -602,13 +605,15 @@ FetchingSkills = () => {
     .then((data) => {
       console.log(data);
       if (value === false) {
-        console.log([...new Set(Object.values(data).flat())]);
         toappendSkills([...new Set(Object.values(data).flat())]);
         FilteringData.Skills = [...new Set(Object.values(data).flat())];
       } else {
         if (data[item]) {
           toappendSkills(data[item]);
           FilteringData.Skills = [...data[item]];
+        } else {
+          toappendSkills([...new Set(Object.values(data).flat())]);
+          FilteringData.Skills = [...new Set(Object.values(data).flat())];
         }
       }
     });
@@ -743,6 +748,32 @@ SearchLocation.addEventListener("input", (event) => {
   data = new Set(data);
   toappendLocation([...data]);
 });
+
+// Append Location by input
+
+// SearchLocation.addEventListener("keydown", (event) => {
+//   if (event.target.value.length > 0 && event.key === "Enter") {
+//     let values = Filterdata.WorkExperience.Location.find(
+//       (item) => item.Location === event.target.value.toLowerCase()
+//     );
+//     console.log(values, event.target.value);
+//     if (!values) {
+//       Unique_id = generateUniqueId();
+//       toAppendHistory(event.target.value, Unique_id, LocationSearchHistory);
+
+//       Filterdata.WorkExperience.Location.push({
+//         uniqueId: Unique_id,
+//         Location: li.id.toLowerCase(),
+//       });
+//       console.log(Filterdata.WorkExperience);
+//       toCheckSearchHistory();
+//     }
+//   }
+//   LocationdropdownFunction();
+//   // toget();
+//   toapplyfilters(Filterdata);
+//   Locationlist.appendChild(li);
+// });
 
 // Append Loaction History
 

@@ -185,9 +185,10 @@
   justify-items: start;
 
   p {
-    width: 94%;
-    overflow-x: scroll;
+    max-width: 94%;
+    overflow: hidden;
     white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   svg {
