@@ -1,5 +1,6 @@
 h2 {
-  @include font_size_color(1.4rem, null, $Textblack, "Inter");
+  @include font_size_color(32px, null, $Textblack, "Inter");
+  font-weight: 600;
   padding-bottom: 6px;
 }
 h4 {
@@ -12,9 +13,6 @@ p {
   font-family: "Inter";
 }
 
-label {
-  padding-bottom: 0.4rem;
-}
 
 button {
   cursor: pointer;
