@@ -23,6 +23,9 @@
             id="SearchFilters"
             placeholder=" Enter Keywords "
           />
+          <svg class="Icon" id="ClearSearchValue" style="display: none">
+            <use xlink:href="./Icons/icons.svg#close" />
+          </svg>
 
           <!-- <div class="dropdown" id="ExperienceDropdown" style="display: none">
             <ul class="dropdown-list" id="ExperienceList">
@@ -70,10 +73,6 @@
           <button class="LogoutBtn" onclick="Logout()">Logout</button>
         </div>
       </div>
-      <div class="SearchItems" id="Header_SearchItemsContainer">
-        <ul id="SearchItems" class="SearchItemsList"></ul>
-        <h4 class="ClearFunction" id="ClearFunction">Clear All</h4>
-      </div>
 
       <div class="Chatbot" id="Chatbot">
         <svg class="ChatbotIcon" id="Icon">
@@ -83,7 +82,6 @@
 
       <div class="SuggestionContainer" id="SuggestionContainer">
         <div>
-          <h4>SubCategories</h4>
           <ul id="SubCategoriesSuggestions"></ul>
         </div>
       </div>

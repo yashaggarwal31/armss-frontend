@@ -75,14 +75,6 @@ button {
   height: 0;
 }
 
-::-webkit-scrollbar-track {
-  visibility: hidden;
-}
-
-::-webkit-scrollbar-thumb {
-  visibility: hidden;
-}
-
 .section-chatbot {
   position: absolute;
   left: 0;
@@ -225,6 +217,7 @@ button {
 .section-chatspace .chatspace {
   display: flex;
   flex-direction: column;
+  gap: 0.4rem;
   max-height: 40vh;
   width: 96%;
   overflow-y: auto;

@@ -75,14 +75,6 @@ button {
   height: 0;
 }
 
-::-webkit-scrollbar-track {
-  visibility: hidden;
-}
-
-::-webkit-scrollbar-thumb {
-  visibility: hidden;
-}
-
 body {
   overflow: hidden;
 }
@@ -327,6 +319,13 @@ button {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+}
+.section-CategorySubContainer ::-webkit-scrollbar {
+  width: 6px;
+}
+.section-CategorySubContainer ::-webkit-scrollbar-thumb {
+  border-radius: 2rem;
+  background-color: #0052f1;
 }
 
 #SubContainerList {

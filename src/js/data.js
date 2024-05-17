@@ -3,6 +3,7 @@
   loader = document.getElementById("loader");
   datalistItems = document.getElementById("datalistItems");
   viewcandidatedata = document.getElementById("viewcandidatedata");
+  paraelemnet = document.getElementById("paraelemnet");
 })();
 
 // removeFunction = (id) => {
@@ -255,7 +256,7 @@ toHideSkillContainer = function (id, item) {
 function toShowData(data, method = "POST") {
   datalistItems.innerHTML = "";
   lst = [];
-  if (data.length !== 0) {
+  if (data.length !== 0 && data[1] !== null) {
     TotalValue.textContent = data[0];
     data = data[1];
     let interval;
@@ -346,6 +347,7 @@ function toShowData(data, method = "POST") {
       console.log(Filterdata);
     }
   } else {
+    TotalValue.textContent = data[0];
     let li = document.createElement("li");
     li.textContent = "No data";
     datalistItems.appendChild(li);
@@ -496,8 +498,6 @@ function setIds() {
   //   console.log(Filterdata);
   //   listItems.innerHTML = "";
   // });
-
-  chatbot.addEventListener("click", function () {});
 }
 
 toappendSkills = (data) => {
@@ -596,15 +596,20 @@ FetchingSkills = () => {
   const item = FilteringData.onSelectSubFolder;
   const value = FilteringData.onFolderValue;
 
+  console.log(item, value);
   fetch("https://armss-be.exitest.com/fetch_folder_skills")
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       if (value === false) {
+        console.log([...new Set(Object.values(data).flat())]);
         toappendSkills([...new Set(Object.values(data).flat())]);
         FilteringData.Skills = [...new Set(Object.values(data).flat())];
       } else {
-        toappendSkills(data[item]);
-        FilteringData.Skills = [...data[item]];
+        if (data[item]) {
+          toappendSkills(data[item]);
+          FilteringData.Skills = [...data[item]];
+        }
       }
     });
 };

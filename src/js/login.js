@@ -44,7 +44,7 @@ toLoginValidate = (data) => {
   } else {
     ErrorHandler(data.error);
     // document.getElementById("responsePara").textContent = data.error;
-    document.getElementById("LoginForm").reset();
+    // document.getElementById("LoginForm").reset();
   }
 };
 

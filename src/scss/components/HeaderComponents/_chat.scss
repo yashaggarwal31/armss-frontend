@@ -109,6 +109,7 @@
     padding-top: 1rem;
     .chatspace {
       @include flex(flex, column);
+      gap: 0.4rem;
       max-height: 40vh;
       width: 96%;
       overflow-y: auto;

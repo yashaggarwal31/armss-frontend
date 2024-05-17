@@ -209,6 +209,13 @@ button {
     @include flex(flex, row, space-between, center);
     margin-bottom: 1rem;
   }
+  &-CategorySubContainer ::-webkit-scrollbar {
+    width: 6px;
+  }
+  &-CategorySubContainer ::-webkit-scrollbar-thumb {
+    border-radius: 2rem;
+    background-color: $darkblue;
+  }
 }
 #SubContainerList {
   max-height: 340px;

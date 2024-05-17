@@ -323,6 +323,7 @@ document.getElementById("SubmitAddFloder").onclick = function () {
     FilteringData.onFolderSelect = "";
     document.getElementById("CreateFolders-SubFolders").style.display = "none";
     FilteringData.page = "main";
+    triggerDOMContentLoaded();
     togetFolders();
   } else {
     alert("Please fill all the fields to crete Folder");

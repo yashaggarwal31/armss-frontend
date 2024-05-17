@@ -75,14 +75,6 @@ button {
   height: 0;
 }
 
-::-webkit-scrollbar-track {
-  visibility: hidden;
-}
-
-::-webkit-scrollbar-thumb {
-  visibility: hidden;
-}
-
 .btn {
   width: 100%;
   color: #ffffff;

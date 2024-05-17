@@ -109,10 +109,31 @@ async function chat(value) {
       chatSpace.appendChild(messageElement);
       chatSpace.scrollTop = chatSpace.scrollHeight;
       FilteringData.QueryonProcess = false;
+    } else if (
+      typeof data[0] === "object" &&
+      data !== null &&
+      !Array.isArray(data[0])
+    ) {
+      datastring = Object.values(data[0])[0];
+      const messageElement = document.createElement("p");
+      messageElement.classList.add("left");
+      messageElement.textContent = "Your Results Displayed";
+      chatSpace.appendChild(messageElement);
+
+      FilteringData.onSelectSubFolder = datastring;
+      FilteringData.chatbotData = false;
+      FilteringData.onFolderValue = true;
+      FilteringData.QueryonProcess = false;
+      FilteringData.page = "data";
+      chatSpace.scrollTop = chatSpace.scrollHeight;
+      ChatbotContainer.style.display = "none";
+      await triggerDOMContentLoaded();
     } else {
       // resumes = data[0].slice(0, 10);
       send_data["resume_filters"] = data[1];
       send_data["count"] = data[2];
+      console.log(data[3]);
+      // document.getElementById("paraelemnet").textContent = data[3];
       // let send_data_str = JSON.stringify(send_data);
       let resumeids = JSON.stringify(data[0]);
 
@@ -127,7 +148,7 @@ async function chat(value) {
       // window.location.replace(url);
       const messageElement = document.createElement("p");
       messageElement.classList.add("left");
-      messageElement.textContent = "Your Results Displayed";
+      messageElement.textContent = "Results for " + data[3];
       chatSpace.appendChild(messageElement);
       chatSpace.scrollTop = chatSpace.scrollHeight;
       FilteringData.page = "data";

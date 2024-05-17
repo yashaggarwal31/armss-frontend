@@ -75,14 +75,6 @@ button {
   height: 0;
 }
 
-::-webkit-scrollbar-track {
-  visibility: hidden;
-}
-
-::-webkit-scrollbar-thumb {
-  visibility: hidden;
-}
-
 .Header-Container {
   padding: 1.5rem 2rem;
   background-color: #ffffff;
@@ -119,6 +111,7 @@ button {
 .Header-logo {
   height: 54px;
   width: 89px;
+  cursor: pointer;
 }
 .Header-dropdownContainer {
   border: 1px solid #e1eaff;
@@ -354,4 +347,8 @@ button {
 }
 .SuggestionContainer div ul li:hover {
   background-color: #e3e9f7;
+}
+
+#ClearSearchValue {
+  cursor: pointer;
 }/*# sourceMappingURL=Header.css.map */

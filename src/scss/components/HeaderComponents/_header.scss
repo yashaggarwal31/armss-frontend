@@ -26,6 +26,7 @@
   }
   &-logo {
     @include width_height(54px, 89px);
+    cursor: pointer;
   }
   &-dropdownContainer {
     border: 1px solid #e1eaff;
@@ -201,4 +202,8 @@
       background-color: #e3e9f7;
     }
   }
+}
+
+#ClearSearchValue {
+  cursor: pointer;
 }
