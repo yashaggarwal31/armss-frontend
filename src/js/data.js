@@ -420,7 +420,7 @@ function toCheckRecent(data) {
 
 DropdownSelectFunction = (data) => {
   var listItems = data.getElementsByTagName("li");
-  let lst = ["All", "0-1", "1-2", "2-3", "3-6", "6-9", "9-10"];
+  let lst = ["All", "0-1", "1-3", "3-5", "5-9", "9-20"];
   for (var i = 0; i < listItems.length; i++) {
     listItems[i].setAttribute("data-value", lst[i]);
     listItems[i].addEventListener("click", function () {

@@ -168,7 +168,7 @@
 }
 
 .SuggestionContainer {
-  @include position(absolute, 22.8%, null, 104%);
+  @include position(absolute, 20.8%, null, 80%);
   @include width_height(null, 20%);
   border-radius: 1rem;
   // @include flex(flex, row, space-around, center, 1rem);

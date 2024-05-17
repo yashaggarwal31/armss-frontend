@@ -81,8 +81,18 @@ function generateUniqueId() {
 
 toDataPage = async (value) => {
   // window.location.href = url;
-  FilteringData.onSelectSubFolder = value;
-  FilteringData.onFolderValue = true;
+  if (
+    MainSuggestionData.SubCategoriesData.find(
+      (item) => item.toLowerCase() === value.toLowerCase()
+    )
+  ) {
+    FilteringData.onSelectSubFolder = value;
+    FilteringData.onFolderValue = true;
+  } else {
+    FilteringData.onSelectSubFolder = value;
+    FilteringData.onFolderValue = false;
+  }
+
   FilteringData.chatbotData = false;
   FilteringData.page = "data";
   await triggerDOMContentLoaded();
