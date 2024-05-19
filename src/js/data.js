@@ -973,10 +973,40 @@ fetchviewdata = async (id) => {
   let response = await fetch(url);
   data = await response.json();
   if (data) {
-    viewcandidatedata.src = data;
+    viewcandidatedata.src = getFileViewerUrl(data);
   }
   viewsection.style.display = "flex";
 };
+
+
+function getFileViewerUrl(fileUrl) {
+  const decodedUrl = decodeURIComponent(fileUrl);
+  const fileExtension = getFileExtension(decodedUrl);
+
+  switch (fileExtension) {
+    case 'pdf':
+      return fileUrl;
+    case 'doc':
+    case 'docx':
+      return `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(fileUrl)}`;
+    case 'jpg':
+    case 'jpeg':
+    case 'png':
+    case 'gif':
+      return fileUrl;
+    default:
+      alert('File type not supported!');
+      return '';
+  }
+}
+
+function getFileExtension(url) {
+  const parts = url.split('.');
+  if (parts.length > 1) {
+    return parts.pop().toLowerCase().split('?')[0];
+  }
+  return '';
+}
 
 // close viewdata
 
