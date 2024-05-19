@@ -49,10 +49,10 @@ toget = async (
     method === "GET"
       ? { method: method }
       : {
-          method: method,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        };
+        method: method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      };
   console.log(options);
   await fetch(url, options)
     .then((response) => {
@@ -62,12 +62,12 @@ toget = async (
       return response.json();
     })
     .then((data) => {
-      console.log(data);
+      console.log('this is data js file: ', data);
       FilteringData.FetchedData =
         data[1] !== null
           ? Object.keys(data[1]).map((item) => data[1][item])
           : [];
-      toShowData(data, method);
+      displayItems(data, 1);
     });
 };
 
@@ -358,6 +358,59 @@ function toShowData(data, method = "POST") {
   loader.style.display = "none";
 }
 
+// ***********************Pagination Code Start***********************************
+
+
+const itemsPerPage = 10;
+let currentPage = 1;
+let paginationData;
+
+function displayItems(data, page) {
+  paginationData = data;
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const pageItems = Object.values(data[1]).slice(startIndex, endIndex);
+  console.log("page items ", pageItems);
+
+  toShowData([data[0], pageItems], method);
+
+  const pageContainer = document.getElementById('page-number');
+  pageContainer.textContent = `Page ${page} of ${Math.ceil(Object.keys(data[1]).length / itemsPerPage)}`;
+}
+
+function goToPreviousPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    displayItems(paginationData, currentPage);
+  }
+}
+
+function goToNextPage() {
+  if (currentPage < Math.ceil(Object.keys(paginationData[1]).length / itemsPerPage)) {
+    currentPage++;
+    displayItems(paginationData, currentPage);
+  }
+}
+
+function goToPage(page) {
+  if (page >= 1 && page <= Math.ceil(Object.keys(paginationData[1]).length / itemsPerPage)) {
+    currentPage = page;
+    displayItems(paginationData, currentPage);
+  }
+}
+
+// Attach event listeners
+document.getElementById('previous-button').addEventListener('click', goToPreviousPage);
+document.getElementById('next-button').addEventListener('click', goToNextPage);
+document.getElementById('jump-button').addEventListener('click', () => {
+  const input = document.getElementById('jump-input');
+  const pageNumber = parseInt(input.value);
+  goToPage(pageNumber);
+});
+
+
+
+// ***********************Pagination Code End*************************************
 // Check Recent
 
 function toCheckRecent(data) {
@@ -879,9 +932,9 @@ toapplyfilters = (data) => {
           sampleData = sampleData.filter((item) => {
             if (
               parseFloat(item["Experience"]) >=
-                parseFloat(data[key][i].slice(0, 1)) &&
+              parseFloat(data[key][i].slice(0, 1)) &&
               parseFloat(item["Experience"]) <
-                parseFloat(data[key][i].slice(-1))
+              parseFloat(data[key][i].slice(-1))
             ) {
               return true;
             }
@@ -904,7 +957,8 @@ toapplyfilters = (data) => {
       }
     }
   }
-  toShowData([sampleData.length, sampleData]);
+  // toShowData([sampleData.length, sampleData]);
+  displayItems([sampleData.length, sampleData], 1);
 };
 
 // fetch resume
