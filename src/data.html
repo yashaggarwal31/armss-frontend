@@ -128,6 +128,29 @@
                 <ul class="Locationlist" id="SkillList"></ul>
               </div>
             </div>
+            <div class="section-MainPlusDropDropDown" id="DateMainContainer">
+              <div class="section-dropdownContainer" id="Date-Header">
+                <p id="DateValue">Date</p>
+                <svg class="Icon" id="DownIcon4">
+                  <use xlink:href="./Icons/icons.svg#Downarrow" />
+                </svg>
+              </div>
+              <div
+                class="section-dropdownContainer"
+                id="DateDropdown"
+                style="display: none"
+              >
+                <ul class="dropdown-list" id="DateList">
+                  <li id="DateAll">All</li>
+                  <li id="Dateitem1">Today</li>
+                  <li id="Dateitem2">7 days</li>
+                  <li id="Dateitem3">30 days</li>
+                  <li id="Dateitem4">60 days</li>
+                  <li id="Dateitem5">6 Months</li>
+                  <li id="Dateitem6">12 Months</li>
+                </ul>
+              </div>
+            </div>
             <button id="uploadresumes">
               <svg class="Icon" id="Icon">
                 <use xlink:href="./Icons/icons.svg#plus" />
@@ -169,7 +192,7 @@
           <h4>E-mail</h4>
           <h4>Location</h4>
           <h4>Contact Number</h4>
-          <h4>Upload Date</h4>
+          <h4 id="DatasortUpdateDate">Upload Date</h4>
           <h4>Action</h4>
         </div>
 
@@ -194,7 +217,7 @@
             width="800"
             height="600"
             src=""
-          />
+          ></iframe>
 
           <div class="viewdatacloseicon" id="viewdatacloseicon">
             <svg>

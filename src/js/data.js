@@ -4,6 +4,11 @@
   datalistItems = document.getElementById("datalistItems");
   viewcandidatedata = document.getElementById("viewcandidatedata");
   paraelemnet = document.getElementById("paraelemnet");
+  sortedorder = "asc";
+  sortedordervalue = 0;
+  itemsPerPage = 10;
+  currentPage = 1;
+  paginationData = "";
 })();
 
 // removeFunction = (id) => {
@@ -62,7 +67,7 @@ toget = async (
       return response.json();
     })
     .then((data) => {
-      console.log('this is data js file: ', data);
+      console.log("this is data js file: ", data);
       FilteringData.FetchedData =
         data[1] !== null
           ? Object.keys(data[1]).map((item) => data[1][item])
@@ -254,6 +259,7 @@ toHideSkillContainer = function (id, item) {
   }, 50);
 };
 function toShowData(data, method = "POST") {
+  console.log(FilteringData.FetchedData);
   datalistItems.innerHTML = "";
   lst = [];
   if (data.length !== 0 && data[1] !== null) {
@@ -262,7 +268,7 @@ function toShowData(data, method = "POST") {
     let interval;
     for (let i in data) {
       let li = document.createElement("li");
-      li.id = i;
+      li.id = data[i].ResumeId;
       let FirstName = document.createElement("p");
       FirstName.textContent = data[i].FirstName;
 
@@ -293,16 +299,16 @@ function toShowData(data, method = "POST") {
       Experience.textContent = data[i].Experience + " Years";
 
       let Email = document.createElement("p");
-
-      Email.textContent = data[i].Contact_Email;
+      Email.textContent =
+        data[i].Contact_Email !== "" ? data[i].Contact_Email : "abc@email.com";
 
       let Location = document.createElement("p");
       Location.textContent =
-        data[i].Location === "" ? "delhi" : data[i].Location;
+        data[i].Location[0] === null ? "delhi" : data[i].Location;
 
       let Phone_no = document.createElement("p");
       Phone_no.textContent =
-        data[i].Contact_Phone === null ? "" : data[i].Contact_Phone;
+        data[i].Contact_Phone !== "" ? data[i].Contact_Phone : "9XXXXXXXXX";
 
       let UploadDate = document.createElement("p");
       UploadDate.textContent = data[i].UploadDate;
@@ -319,6 +325,7 @@ function toShowData(data, method = "POST") {
       );
 
       icon.addEventListener("click", () => {
+        li.classList.remove("RecentElements");
         fetchviewdata(li.id);
       });
 
@@ -360,22 +367,20 @@ function toShowData(data, method = "POST") {
 
 // ***********************Pagination Code Start***********************************
 
-
-const itemsPerPage = 10;
-let currentPage = 1;
-let paginationData;
-
 function displayItems(data, page) {
+  currentPage = page;
   paginationData = data;
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const pageItems = Object.values(data[1]).slice(startIndex, endIndex);
   console.log("page items ", pageItems);
 
-  toShowData([data[0], pageItems], method);
+  toShowData([data[0], pageItems]);
 
-  const pageContainer = document.getElementById('page-number');
-  pageContainer.textContent = `Page ${page} of ${Math.ceil(Object.keys(data[1]).length / itemsPerPage)}`;
+  const pageContainer = document.getElementById("page-number");
+  pageContainer.textContent = `Page ${page} of ${Math.ceil(
+    Object.keys(data[1]).length / itemsPerPage
+  )}`;
 }
 
 function goToPreviousPage() {
@@ -386,29 +391,35 @@ function goToPreviousPage() {
 }
 
 function goToNextPage() {
-  if (currentPage < Math.ceil(Object.keys(paginationData[1]).length / itemsPerPage)) {
+  if (
+    currentPage <
+    Math.ceil(Object.keys(paginationData[1]).length / itemsPerPage)
+  ) {
     currentPage++;
     displayItems(paginationData, currentPage);
   }
 }
 
 function goToPage(page) {
-  if (page >= 1 && page <= Math.ceil(Object.keys(paginationData[1]).length / itemsPerPage)) {
+  if (
+    page >= 1 &&
+    page <= Math.ceil(Object.keys(paginationData[1]).length / itemsPerPage)
+  ) {
     currentPage = page;
     displayItems(paginationData, currentPage);
   }
 }
 
 // Attach event listeners
-document.getElementById('previous-button').addEventListener('click', goToPreviousPage);
-document.getElementById('next-button').addEventListener('click', goToNextPage);
-document.getElementById('jump-button').addEventListener('click', () => {
-  const input = document.getElementById('jump-input');
+document
+  .getElementById("previous-button")
+  .addEventListener("click", goToPreviousPage);
+document.getElementById("next-button").addEventListener("click", goToNextPage);
+document.getElementById("jump-button").addEventListener("click", () => {
+  const input = document.getElementById("jump-input");
   const pageNumber = parseInt(input.value);
   goToPage(pageNumber);
 });
-
-
 
 // ***********************Pagination Code End*************************************
 // Check Recent
@@ -476,7 +487,7 @@ function toCheckRecent(data) {
 
 DropdownSelectFunction = (data) => {
   var listItems = data.getElementsByTagName("li");
-  let lst = ["All", "0-1", "1-3", "3-5", "5-9", "9-20"];
+  let lst = ["All", "0-1", "1-3", "3-5", "5-9", "9-30"];
   for (var i = 0; i < listItems.length; i++) {
     listItems[i].setAttribute("data-value", lst[i]);
     listItems[i].addEventListener("click", function () {
@@ -488,8 +499,7 @@ DropdownSelectFunction = (data) => {
 
       Experiencetitle.textContent = Value !== "All" ? Value : "Experience";
       ExperienceDropdownFunction();
-
-      if (data.Experience === "All") {
+      if (Value === "All") {
         Filterdata.Candidate.Experience = [];
         toapplyfilters(Filterdata);
       } else {
@@ -510,6 +520,47 @@ DropdownSelectFunction = (data) => {
     });
   }
 };
+
+DateDropdownSelectFunction = (data) => {
+  console.log(data);
+  var listItems = data.getElementsByTagName("li");
+  let lst = [
+    "All",
+    "1 days",
+    "7 days",
+    "30 days",
+    "60 days",
+    "180 days",
+    "360 days",
+  ];
+  for (var i = 0; i < listItems.length; i++) {
+    listItems[i].setAttribute("data-value", lst[i]);
+    listItems[i].addEventListener("click", function () {
+      Filterdata.Candidate.UploadDate = [];
+
+      let Value = document.getElementById(this.id).textContent;
+      let Datetitle = document.getElementById("DateValue");
+
+      Datetitle.textContent = Value !== "All" ? Value : "Date";
+      DateDropdownFunction();
+
+      if (Value === "All") {
+        Filterdata.Candidate.UploadDate = [];
+        toapplyfilters(Filterdata);
+      } else {
+        const start = this.getAttribute("data-value").split(" ")[0];
+        Filterdata.Candidate.UploadDate.push({
+          uniqueId: generateUniqueId(),
+          UploadDate: start,
+        });
+
+        console.log(Filterdata);
+      }
+      toapplyfilters(Filterdata);
+    });
+  }
+};
+
 setIds();
 function setIds() {
   SearchFilters = document.getElementById("SearchFilters");
@@ -520,6 +571,7 @@ function setIds() {
   SearchButton = document.getElementById("SearchButton");
   // listItems = document.getElementById("listItems");
   ExperienceList = document.getElementById("ExperienceList");
+  DateList = document.getElementById("DateList");
   SkillSuggestions = document.getElementById("SkillSuggestions");
   LocationSuggestions = document.getElementById("LocationSuggestions");
   SuggestionContainer = document.getElementById("SuggestionContainer");
@@ -527,6 +579,8 @@ function setIds() {
 
   console.log(SuggestionContainer);
   DropdownSelectFunction(ExperienceList);
+  DateDropdownSelectFunction(DateList);
+
   // SearchFilters.addEventListener("keydown", function (event) {
   //   if (event.key === "Enter") {
   //     let value = event.target.value;
@@ -679,12 +733,15 @@ FetchingSkills();
   downicon1 = document.getElementById("DownIcon1");
   downicon2 = document.getElementById("DownIcon2");
   downicon3 = document.getElementById("DownIcon3");
+  downicon4 = document.getElementById("DownIcon4");
   Locationdropdown = document.getElementById("Locationdropdown");
   ExperienceDropdown = document.getElementById("ExperienceDropdown");
   SkillDropdown = document.getElementById("SkillDropdown");
+  DateDropdown = document.getElementById("DateDropdown");
   LocationHeader = document.getElementById("Location-Header");
   ExperienceHeader = document.getElementById("Experience-Header");
   SkillHeader = document.getElementById("Skill-Header");
+  DateHeader = document.getElementById("Date-Header");
   SkillList = document.getElementById("SkillList");
   SkillValue = document.getElementById("SkillValue");
   ExperienceMainContainer = document.getElementById("ExperienceMainContainer");
@@ -737,9 +794,24 @@ SkillDropdownFunction = () => {
   }
 };
 
+DateDropdownFunction = () => {
+  if (DateDropdown.style.display === "block") {
+    DateDropdown.classList.remove("dropdownVisible");
+    DateDropdown.style.display = "none";
+    downicon4.classList.remove("IconStyles");
+    DateHeader.style.boxShadow = "none";
+  } else {
+    DateHeader.style.boxShadow = "0px 2px 2px 0px #f4f2ff";
+    DateDropdown.classList.add("dropdownVisible");
+    DateDropdown.style.display = "block";
+    downicon4.classList.add("IconStyles");
+  }
+};
+
 LocationHeader.addEventListener("click", LocationdropdownFunction);
 ExperienceHeader.addEventListener("click", ExperienceDropdownFunction);
 SkillHeader.addEventListener("click", SkillDropdownFunction);
+DateHeader.addEventListener("click", DateDropdownFunction);
 
 window.addEventListener("click", function (event) {
   if (!event.target.closest(".section-MainPlusDropDropDown")) {
@@ -951,8 +1023,18 @@ toapplyfilters = (data) => {
               return false;
             }
           });
+        } else if (i === "UploadDate") {
+          sampleData = sampleData.filter((item) => {
+            if (
+              tocheckUploadDate(item["UploadDate"]) < parseInt(data[key][i][0])
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          });
+          console.log(sampleData);
         }
-        console.log(sampleData);
         // toShowData([sampleData.length, sampleData]);
       }
     }
@@ -960,6 +1042,19 @@ toapplyfilters = (data) => {
   // toShowData([sampleData.length, sampleData]);
   displayItems([sampleData.length, sampleData], 1);
 };
+
+// Upload date filter
+
+function tocheckUploadDate(date) {
+  if (date) {
+    const [day, month, year] = date.split("-").map(Number);
+    let date1 = new Date(year, month - 1, day);
+    let date2 = new Date();
+    let difference = date2.getTime() - date1.getTime();
+    let days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    return days;
+  }
+}
 
 // fetch resume
 
@@ -973,40 +1068,40 @@ fetchviewdata = async (id) => {
   let response = await fetch(url);
   data = await response.json();
   if (data) {
-    console.log('for id ', id, ' file link: ', data)
     viewcandidatedata.src = getFileViewerUrl(data);
   }
   viewsection.style.display = "flex";
 };
-
 
 function getFileViewerUrl(fileUrl) {
   const decodedUrl = decodeURIComponent(fileUrl);
   const fileExtension = getFileExtension(decodedUrl);
 
   switch (fileExtension) {
-    case 'pdf':
+    case "pdf":
       return fileUrl;
-    case 'doc':
-    case 'docx':
-      return `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(fileUrl)}`;
-    case 'jpg':
-    case 'jpeg':
-    case 'png':
-    case 'gif':
+    case "doc":
+    case "docx":
+      return `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
+        fileUrl
+      )}`;
+    case "jpg":
+    case "jpeg":
+    case "png":
+    case "gif":
       return fileUrl;
     default:
-      alert('File type not supported!');
-      return '';
+      alert("File type not supported!");
+      return "";
   }
 }
 
 function getFileExtension(url) {
-  const parts = url.split('.');
+  const parts = url.split(".");
   if (parts.length > 1) {
-    return parts.pop().toLowerCase().split('?')[0];
+    return parts.pop().toLowerCase().split("?")[0];
   }
-  return '';
+  return "";
 }
 
 // close viewdata
@@ -1014,6 +1109,36 @@ function getFileExtension(url) {
 viewdatacloseicon.addEventListener("click", () => {
   viewsection.style.display = "none";
   document.getElementById("viewcandidatedata").src = "";
+});
+
+// sort by uploaddate
+
+function sortByUpload(a, b) {
+  dateA = new Date(a.UploadDate.split("-").reverse().join("-"));
+  dateB = new Date(b.UploadDate.split("-").reverse().join("-"));
+  console.log(sortedorder, sortedordervalue);
+  if (dateA > dateB) {
+    return 1 * sortedordervalue;
+  } else if (dateA < dateB) {
+    return -1 * sortedordervalue;
+  }
+  return 0;
+}
+
+document.getElementById("DatasortUpdateDate").addEventListener("click", () => {
+  if (sortedorder === "asc") {
+    sortedordervalue = 1;
+    sortedorder = "desc";
+  } else {
+    sortedordervalue = -1;
+    sortedorder = "asc";
+  }
+  FilteringData.FetchedData = FilteringData.FetchedData.sort(sortByUpload);
+
+  displayItems(
+    [FilteringData.FetchedData.length, FilteringData.FetchedData],
+    1
+  );
 });
 
 // show modal
