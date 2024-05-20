@@ -38,9 +38,10 @@ img {
 }
 
 h2 {
-  font-size: 1.4rem;
+  font-size: 32px;
   color: #333333;
   font-family: "Inter";
+  font-weight: 600;
   padding-bottom: 6px;
 }
 
@@ -55,10 +56,6 @@ p {
   color: #333333;
   font-size: 0.8rem;
   font-family: "Inter";
-}
-
-label {
-  padding-bottom: 0.4rem;
 }
 
 button {
