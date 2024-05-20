@@ -1,17 +1,19 @@
-const UploadWrapperChild = document.getElementById('upload-child-wrapper').innerHTML;
+const UploadWrapperChild = document.getElementById(
+  "upload-child-wrapper"
+).innerHTML;
 function fileuplodInit() {
-  const uploadDiv = document.getElementById('upload-zone');
-  const fileInput = document.getElementById('fileInput');
-  const drivelink = document.getElementById('drivelink');
-  const filesList = document.getElementById('fileList');
-  const uploadResetBtn = document.getElementById('upload-reset');
+  const uploadDiv = document.getElementById("upload-zone");
+  const fileInput = document.getElementById("fileInput");
+  const drivelink = document.getElementById("drivelink");
+  const filesList = document.getElementById("fileList");
+  const uploadResetBtn = document.getElementById("upload-reset");
 
-  uploadResetBtn.addEventListener('click', function (event) {
+  uploadResetBtn.addEventListener("click", function (event) {
     uploadReset();
-  })
+    document.getElementById("dialog").close();
+  });
 
-  uploadDiv.addEventListener('click', function (event) {
-
+  uploadDiv.addEventListener("click", function (event) {
     if (event.target !== drivelink) {
       // If not, trigger the file input click event
       fileInput.click();
@@ -19,21 +21,21 @@ function fileuplodInit() {
   });
 
   // Add drag-and-drop event listeners to the div
-  uploadDiv.addEventListener('dragover', function (event) {
+  uploadDiv.addEventListener("dragover", function (event) {
     // Prevent default behavior to allow dropping
     event.preventDefault();
-    uploadDiv.classList.add('dragging');
+    uploadDiv.classList.add("dragging");
   });
 
-  uploadDiv.addEventListener('dragleave', function () {
+  uploadDiv.addEventListener("dragleave", function () {
     // Remove dragging style when drag leaves the div
-    uploadDiv.classList.remove('dragging');
+    uploadDiv.classList.remove("dragging");
   });
 
-  uploadDiv.addEventListener('drop', function (event) {
+  uploadDiv.addEventListener("drop", function (event) {
     // Prevent default behavior and stop event propagation
     event.preventDefault();
-    uploadDiv.classList.remove('dragging');
+    uploadDiv.classList.remove("dragging");
 
     // Access the dropped files
     const files = event.dataTransfer.files;
@@ -41,30 +43,28 @@ function fileuplodInit() {
     // Set the dropped files in the file input element
     fileInput.files = files;
 
-    document.getElementById('FileRefCount').innerHTML = fileInput.files.length;
-    document.getElementById('FileRefCount-div').style.display = 'block'
+    document.getElementById("FileRefCount").innerHTML = fileInput.files.length;
+    document.getElementById("FileRefCount-div").style.display = "block";
 
     // Optional: Handle the file selection
     if (files.length > 0) {
-      console.log('Dropped files:', files);
+      console.log("Dropped files:", files);
       // Perform desired action with the files (e.g., uploading)
     }
   });
 
-  fileInput.addEventListener('change', function () {
-
-    document.getElementById('upload-btn').disabled = false;
-    document.getElementById('upload-btn').style.display = 'block';
-    document.getElementById('upload-click-div').style.display = 'none';
+  fileInput.addEventListener("change", function () {
+    document.getElementById("upload-btn").disabled = false;
+    document.getElementById("upload-btn").style.display = "block";
+    document.getElementById("upload-click-div").style.display = "none";
 
     const files = fileInput.files;
     // console.log('files length', files.length)
-    document.getElementById('FileRefCount').innerHTML = files.length;
-    document.getElementById('FileRefCount-div').style.display = 'block'
-
+    document.getElementById("FileRefCount").innerHTML = files.length;
+    document.getElementById("FileRefCount-div").style.display = "block";
 
     // Clear previous list
-    filesList.innerHTML = '';
+    filesList.innerHTML = "";
 
     // if (files.length > 0) {
     //     // Apply CSS class when files are selected
@@ -84,16 +84,13 @@ function fileuplodInit() {
     // }
   });
 
-
-  document.getElementById('upload-btn').addEventListener('click', function (event) {
-    event.preventDefault();
-    console.log('Upload button clicked, about to call upload function.');
-    upload();
-
-  });
-
-
-
+  document
+    .getElementById("upload-btn")
+    .addEventListener("click", function (event) {
+      event.preventDefault();
+      console.log("Upload button clicked, about to call upload function.");
+      upload();
+    });
 
   let uploadedCount = 0;
   let totalFileCount = 0;
@@ -101,30 +98,27 @@ function fileuplodInit() {
   let progressBarOverall;
   let currentUploadCancelled = false;
   const maxFileSize = 2000 * 1024 * 1024; //2MB
-  const uploadingDIV = document.getElementById('upload-click-div');
-  const uploadCount = document.getElementById('uploadCount');
-  const totalCount = document.getElementById('totalCount')
-  const errorCounter = document.getElementById('errorCount');
-  const errorTotal = document.getElementById('errorTotal');
+  const uploadingDIV = document.getElementById("upload-click-div");
+  const uploadCount = document.getElementById("uploadCount");
+  const totalCount = document.getElementById("totalCount");
+  const errorCounter = document.getElementById("errorCount");
+  const errorTotal = document.getElementById("errorTotal");
 
-  document.getElementById('cancel-upload-btn').addEventListener('click', () => {
+  document.getElementById("cancel-upload-btn").addEventListener("click", () => {
     currentUploadCancelled = true;
-    document.getElementById('cancel-upload-btn').style.display = 'none';
-    document.getElementById('cancelled').style.display = 'inline';
-
-  })
+    document.getElementById("cancel-upload-btn").style.display = "none";
+    document.getElementById("cancelled").style.display = "inline";
+  });
 
   const uploadReset = () => {
-    document.getElementById('upload-parent-wrapper').innerHTML = '';
-    document.getElementById('upload-parent-wrapper').innerHTML = UploadWrapperChild;
+    document.getElementById("upload-parent-wrapper").innerHTML = "";
+    document.getElementById("upload-parent-wrapper").innerHTML =
+      UploadWrapperChild;
 
-    document.getElementById('upload-btn').disabled = false;
+    document.getElementById("upload-btn").disabled = false;
 
     fileuplodInit();
-  }
-
-
-
+  };
 
   const upload = async () => {
     currentUploadCancelled = false;
@@ -133,44 +127,31 @@ function fileuplodInit() {
     totalFileCount = 0;
     errorCount = 0;
 
-    const fileList = document.getElementById('fileInput').files;
+    const fileList = document.getElementById("fileInput").files;
     if (fileList.length == 0) return;
     const total = fileList.length;
     totalFileCount = total;
-    console.log('ssssddfdvdvdvdvdvddvdv', totalFileCount)
+    console.log("ssssddfdvdvdvdvdvddvdv", totalFileCount);
 
     // const { sessionId, sessionTime } = await getSession();
-
-
-
-
-
 
     uploadCount.innerHTML = uploadedCount;
     totalCount.innerHTML = total;
 
+    uploadingDIV.style.display = "grid";
 
-    uploadingDIV.style.display = 'grid';
+    document.getElementById("upload-btn").disabled = true;
+    document.getElementById("upload-btn").style.display = "none";
 
-    document.getElementById('upload-btn').disabled = true;
-    document.getElementById('upload-btn').style.display = 'none';
-
-
-
-    progressBarOverall = document.getElementById('progressBarOverall');
-
+    progressBarOverall = document.getElementById("progressBarOverall");
 
     progressBarOverall.max = total;
 
-
-
     for (let i = 0; i < fileList.length; i++) {
-
       if (currentUploadCancelled) {
-        console.log('upload cancelled')
+        console.log("upload cancelled");
         break;
       }
-
 
       //selecting individual file
       // const uploadedFile = fileList[i];
@@ -180,37 +161,28 @@ function fileuplodInit() {
       // const newName = `[${sessionId}]-` + uploadedFile.name;
       // const file = new File([uploadedFile], newName, { type: uploadedFile.type });
 
-
-
-      const fileHash = await calculateHash(file)
+      const fileHash = await calculateHash(file);
 
       // Database query to check if file exists in db already
       //If so continue and dont proceed further
 
-      console.log(fileHash)
+      console.log(fileHash);
 
       if (file.size > maxFileSize) {
-        alert('File Uploaded exceeds limit', file.name);
+        alert("File Uploaded exceeds limit", file.name);
         continue;
       }
 
       const fileID = file.name + file.type + i;
 
-
       console.log(file.name);
-
 
       try {
         getUploadLink(file.name).then((link) => {
-          console.log('link reached', link.presignedUrl)
-          const response = uploadFileThroughLink(link.presignedUrl, file)
-        })
-
-
-
-
+          console.log("link reached", link.presignedUrl);
+          const response = uploadFileThroughLink(link.presignedUrl, file);
+        });
       } catch (error) {
-
         console.error(`Failed to upload file ${file.name}: ${error}`);
       }
 
@@ -222,16 +194,16 @@ function fileuplodInit() {
       // }
     }
 
-
-
     // setTimeout(() => {
-    //     
+    //
     // }, 20000)
   };
 
   async function getSession() {
     try {
-      const response = await fetch('https://armss-be.exitest.com/upload/create-session');
+      const response = await fetch(
+        "https://armss-be.exitest.com/upload/create-session"
+      );
       const data = await response.json();
       const sessionId = data.sessionId;
       const sessionTime = data.sessionTime;
@@ -239,86 +211,82 @@ function fileuplodInit() {
       console.log("Session ID:", sessionId);
       console.log("Session Time:", sessionTime);
 
-
       return { sessionId, sessionTime };
     } catch (error) {
-      console.error('Error fetching session:', error);
+      console.error("Error fetching session:", error);
     }
   }
 
-
-
   const getUploadLink = async (filename) => {
-    console.log(`this is filename, ${filename}`)
+    console.log(`this is filename, ${filename}`);
     const requestData = {
-      name: filename
+      name: filename,
     };
 
-    return fetch('https://armss-be.exitest.com/presignedUrl/', {
-      method: 'POST', // Change the method to POST
+    return fetch("https://armss-be.exitest.com/presignedUrl/", {
+      method: "POST", // Change the method to POST
       headers: {
-        'Content-Type': 'application/json' // Specify the Content-Type
+        "Content-Type": "application/json", // Specify the Content-Type
       },
-      body: JSON.stringify({ input: filename })
+      body: JSON.stringify({ input: filename }),
     })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         // Handle the fetched object here
         console.log(data);
-        return data
+        return data;
       })
-      .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
         errorCount++;
       });
-
-
-  }
-
+  };
 
   const uploadFileThroughLink = (url, file) => {
-
     fetch(url, {
-      method: 'PUT',
-      body: file
-    }).then((data) => {
-      console.log(data);
+      method: "PUT",
+      body: file,
+    })
+      .then((data) => {
+        console.log(data);
 
-      if (data.status === 200) {
-        uploadedCount++;
-        if (progressBarOverall) {
-          progressBarOverall.value = uploadedCount;
-          uploadCount.innerHTML = uploadedCount;
+        if (data.status === 200) {
+          uploadedCount++;
+          if (progressBarOverall) {
+            progressBarOverall.value = uploadedCount;
+            uploadCount.innerHTML = uploadedCount;
+          }
+
+          console.log(
+            "Uploaded Count:",
+            uploadedCount,
+            "\nTotal File Count: ",
+            totalFileCount
+          );
+
+          if (uploadedCount === totalFileCount && errorCount === 0) {
+            document.getElementById("cancel-upload-div").style.display = "none";
+            document.getElementById("successful-message").style.display =
+              "block";
+            console.log("Reached here");
+          }
+        } else {
+          errorCount++;
+          errorTotal.innerHTML = errorCount;
+          document.getElementById("cancel-upload-div").style.display = "none";
+          errorCounter.style.display = "block";
         }
-
-        console.log('Uploaded Count:', uploadedCount, '\nTotal File Count: ', totalFileCount);
-
-        if (uploadedCount === totalFileCount && errorCount === 0) {
-          document.getElementById('cancel-upload-div').style.display = 'none';
-          document.getElementById('successful-message').style.display = 'block';
-          console.log('Reached here')
-        }
-      }
-      else {
+      })
+      .catch((e) => {
+        console.error(e);
         errorCount++;
-        errorTotal.innerHTML = errorCount;
-        document.getElementById('cancel-upload-div').style.display = 'none';
-        errorCounter.style.display = 'block';
-      }
-
-    }).catch((e) => {
-      console.error(e);
-      errorCount++;
-    });
-
-
-
-  }
+      });
+  };
 
   function calculateHash(file) {
     return new Promise((resolve, reject) => {
@@ -339,7 +307,6 @@ function fileuplodInit() {
     const wordArray = CryptoJS.lib.WordArray.create(arrayBuffer);
     return CryptoJS.SHA256(wordArray).toString(CryptoJS.enc.Hex);
   }
-
 }
 
 fileuplodInit();

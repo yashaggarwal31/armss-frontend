@@ -76,10 +76,11 @@ button {
 }
 
 .body {
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .section {
+  max-height: 86vh;
   overflow-y: scroll;
   overflow-x: hidden;
   padding: 1rem;
@@ -332,8 +333,8 @@ button {
 }
 
 #datalistItems {
-  max-height: 60vh;
-  min-height: 60vh;
+  max-height: 48vh;
+  min-height: 48vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -479,4 +480,36 @@ button {
 .viewdatacloseicon svg {
   width: 1rem;
   height: 1rem;
+}
+
+#controls {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: #333333;
+  font-family: "Inter";
+}
+#controls button {
+  padding: 0.6rem;
+  font-size: 0.68rem;
+  color: #ffffff;
+  font-family: "Inter";
+  border-radius: 0.28rem;
+}
+
+#jump-input {
+  width: 60px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  padding: 0.4rem;
+}
+
+#page-number {
+  font-size: 0.68rem;
+  font-weight: bold;
 }/*# sourceMappingURL=Data.css.map */
