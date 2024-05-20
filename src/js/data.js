@@ -5,6 +5,10 @@
   viewcandidatedata = document.getElementById("viewcandidatedata");
   paraelemnet = document.getElementById("paraelemnet");
   sortedorder = "asc";
+  sortedordervalue = 0;
+  itemsPerPage = 10;
+  currentPage = 1;
+  paginationData = "";
 })();
 
 // removeFunction = (id) => {
@@ -50,10 +54,10 @@ toget = async (
     method === "GET"
       ? { method: method }
       : {
-        method: method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      };
+          method: method,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        };
   console.log(options);
   await fetch(url, options)
     .then((response) => {
@@ -63,7 +67,7 @@ toget = async (
       return response.json();
     })
     .then((data) => {
-      console.log('this is data js file: ', data);
+      console.log("this is data js file: ", data);
       FilteringData.FetchedData =
         data[1] !== null
           ? Object.keys(data[1]).map((item) => data[1][item])
@@ -264,7 +268,7 @@ function toShowData(data, method = "POST") {
     let interval;
     for (let i in data) {
       let li = document.createElement("li");
-      li.id = i;
+      li.id = data[i].ResumeId;
       let FirstName = document.createElement("p");
       FirstName.textContent = data[i].FirstName;
 
@@ -363,22 +367,20 @@ function toShowData(data, method = "POST") {
 
 // ***********************Pagination Code Start***********************************
 
-
-const itemsPerPage = 10;
-let currentPage = 1;
-let paginationData;
-
 function displayItems(data, page) {
+  currentPage = page;
   paginationData = data;
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const pageItems = Object.values(data[1]).slice(startIndex, endIndex);
   console.log("page items ", pageItems);
 
-  toShowData([data[0], pageItems], method);
+  toShowData([data[0], pageItems]);
 
-  const pageContainer = document.getElementById('page-number');
-  pageContainer.textContent = `Page ${page} of ${Math.ceil(Object.keys(data[1]).length / itemsPerPage)}`;
+  const pageContainer = document.getElementById("page-number");
+  pageContainer.textContent = `Page ${page} of ${Math.ceil(
+    Object.keys(data[1]).length / itemsPerPage
+  )}`;
 }
 
 function goToPreviousPage() {
@@ -389,29 +391,35 @@ function goToPreviousPage() {
 }
 
 function goToNextPage() {
-  if (currentPage < Math.ceil(Object.keys(paginationData[1]).length / itemsPerPage)) {
+  if (
+    currentPage <
+    Math.ceil(Object.keys(paginationData[1]).length / itemsPerPage)
+  ) {
     currentPage++;
     displayItems(paginationData, currentPage);
   }
 }
 
 function goToPage(page) {
-  if (page >= 1 && page <= Math.ceil(Object.keys(paginationData[1]).length / itemsPerPage)) {
+  if (
+    page >= 1 &&
+    page <= Math.ceil(Object.keys(paginationData[1]).length / itemsPerPage)
+  ) {
     currentPage = page;
     displayItems(paginationData, currentPage);
   }
 }
 
 // Attach event listeners
-document.getElementById('previous-button').addEventListener('click', goToPreviousPage);
-document.getElementById('next-button').addEventListener('click', goToNextPage);
-document.getElementById('jump-button').addEventListener('click', () => {
-  const input = document.getElementById('jump-input');
+document
+  .getElementById("previous-button")
+  .addEventListener("click", goToPreviousPage);
+document.getElementById("next-button").addEventListener("click", goToNextPage);
+document.getElementById("jump-button").addEventListener("click", () => {
+  const input = document.getElementById("jump-input");
   const pageNumber = parseInt(input.value);
   goToPage(pageNumber);
 });
-
-
 
 // ***********************Pagination Code End*************************************
 // Check Recent
@@ -996,9 +1004,9 @@ toapplyfilters = (data) => {
           sampleData = sampleData.filter((item) => {
             if (
               parseFloat(item["Experience"]) >=
-              parseFloat(data[key][i].slice(0, 1)) &&
+                parseFloat(data[key][i].slice(0, 1)) &&
               parseFloat(item["Experience"]) <
-              parseFloat(data[key][i].slice(-1))
+                parseFloat(data[key][i].slice(-1))
             ) {
               return true;
             }
@@ -1065,34 +1073,35 @@ fetchviewdata = async (id) => {
   viewsection.style.display = "flex";
 };
 
-
 function getFileViewerUrl(fileUrl) {
   const decodedUrl = decodeURIComponent(fileUrl);
   const fileExtension = getFileExtension(decodedUrl);
 
   switch (fileExtension) {
-    case 'pdf':
+    case "pdf":
       return fileUrl;
-    case 'doc':
-    case 'docx':
-      return `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(fileUrl)}`;
-    case 'jpg':
-    case 'jpeg':
-    case 'png':
-    case 'gif':
+    case "doc":
+    case "docx":
+      return `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
+        fileUrl
+      )}`;
+    case "jpg":
+    case "jpeg":
+    case "png":
+    case "gif":
       return fileUrl;
     default:
-      alert('File type not supported!');
-      return '';
+      alert("File type not supported!");
+      return "";
   }
 }
 
 function getFileExtension(url) {
-  const parts = url.split('.');
+  const parts = url.split(".");
   if (parts.length > 1) {
-    return parts.pop().toLowerCase().split('?')[0];
+    return parts.pop().toLowerCase().split("?")[0];
   }
-  return '';
+  return "";
 }
 
 // close viewdata
@@ -1105,18 +1114,9 @@ viewdatacloseicon.addEventListener("click", () => {
 // sort by uploaddate
 
 function sortByUpload(a, b) {
-  let sortedordervalue;
   dateA = new Date(a.UploadDate.split("-").reverse().join("-"));
   dateB = new Date(b.UploadDate.split("-").reverse().join("-"));
-
-  if (sortedorder === "asc") {
-    sortedordervalue = 1;
-    sortedorder = "desc";
-  } else {
-    sortedordervalue = -1;
-    sortedorder = "asc";
-  }
-
+  console.log(sortedorder, sortedordervalue);
   if (dateA > dateB) {
     return 1 * sortedordervalue;
   } else if (dateA < dateB) {
@@ -1126,8 +1126,19 @@ function sortByUpload(a, b) {
 }
 
 document.getElementById("DatasortUpdateDate").addEventListener("click", () => {
+  if (sortedorder === "asc") {
+    sortedordervalue = 1;
+    sortedorder = "desc";
+  } else {
+    sortedordervalue = -1;
+    sortedorder = "asc";
+  }
   FilteringData.FetchedData = FilteringData.FetchedData.sort(sortByUpload);
-  toShowData([FilteringData.FetchedData.length, FilteringData.FetchedData]);
+
+  displayItems(
+    [FilteringData.FetchedData.length, FilteringData.FetchedData],
+    1
+  );
 });
 
 // show modal
