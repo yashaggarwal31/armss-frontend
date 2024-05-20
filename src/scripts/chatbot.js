@@ -155,6 +155,7 @@ async function chat(value) {
       FilteringData.QueryonProcess = false;
       ChatbotContainer.style.display = "none";
       await triggerDOMContentLoaded();
+      FilteringData.dataparaelement = data[3];
     }
     return data;
   } catch (error) {

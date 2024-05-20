@@ -76,7 +76,7 @@ button {
 }
 
 .body {
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .section {
@@ -311,9 +311,10 @@ button {
   justify-items: start;
 }
 .elementStyle p {
-  width: 94%;
-  overflow-x: scroll;
+  max-width: 94%;
+  overflow: hidden;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .elementStyle svg {
   cursor: pointer;
