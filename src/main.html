@@ -19,14 +19,19 @@
           <div id="upload-child-wrapper">
             <div class="upload-files-title-div">
               <span class="upload-files-title">Upload Files</span>
-              <button id="upload-reset">Close</button>
-              <button
-                onclick="window.dialog.close();"
-                aria-label="close"
-                class="x close-button"
-              >
-                ❌
-              </button>
+              <div>
+                <svg onclick="window.dialog.close();" class="upload-minimize">
+                  <use xlink:href="./Icons/icons.svg#upload-minimize" />
+                </svg>
+
+                <button
+                  id="upload-reset"
+                  aria-label="close"
+                  class="x close-button"
+                >
+                  ❌
+                </button>
+              </div>
             </div>
 
             <div id="upload-zone" class="upload-zone-div div-center flex-col">

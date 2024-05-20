@@ -11,29 +11,6 @@
     <link rel="stylesheet" href="css/chatbot.css" />
     <link rel="stylesheet" href="./scss/Chat.css" />
 
-    <style>
-      #controls {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin: 20px 0;
-        font-family: Arial, sans-serif;
-      }
-
-      #jump-input {
-        width: 60px;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 14px;
-      }
-
-      #page-number {
-        font-size: 16px;
-        font-weight: bold;
-      }
-    </style>
-
     <title>Document</title>
   </head>
   <body>
@@ -200,7 +177,7 @@
 
         <div id="controls">
           <button id="previous-button">Previous</button>
-          <span id="page-number"></span>
+          <span id="page-number">Page_of_</span>
           <button id="next-button">Next</button>
           <input type="number" id="jump-input" placeholder="Page number" />
           <button id="jump-button">Jump</button>

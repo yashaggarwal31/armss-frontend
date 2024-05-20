@@ -1146,3 +1146,18 @@ document.getElementById("DatasortUpdateDate").addEventListener("click", () => {
 document.getElementById("uploadresumes").onclick = () => {
   dialog.showModal();
 };
+
+// // check lat item
+
+// const listItems = document.querySelectorAll("#datalistItems li");
+// const lastItem = listItems[listItems.length - 1];
+// window.addEventListener("scroll", function () {
+//   const rect = lastItem.getBoundingClientRect();
+//   if (rect.bottom <= window.innerHeight) {
+//     // Last item has reached the end of the screen
+//     lastItem.classList.add("highlight");
+//   } else {
+//     // Last item is still on the screen
+//     lastItem.classList.remove("highlight");
+//   }
+// });
