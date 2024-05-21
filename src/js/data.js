@@ -661,6 +661,7 @@ toappendSkills = (data) => {
 toappendLocation = (data) => {
   Locationlist.innerHTML = "";
   data = data.States !== undefined ? data.States : data;
+  data = data.sort((a, b) => a.localeCompare(b));
   for (let i of data) {
     let li = document.createElement("li");
 
