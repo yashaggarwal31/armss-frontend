@@ -133,7 +133,7 @@ function fileuplodInit() {
     totalFileCount = total
     console.log("ssssddfdvdvdvdvdvddvdv", totalFileCount)
 
-    const { notificationId } = await createNotification(fileList.length)
+    const notificationId = await createNotification(fileList.length)
 
     uploadCount.innerHTML = uploadedCount
     totalCount.innerHTML = total
@@ -155,7 +155,7 @@ function fileuplodInit() {
 
       //selecting individual file
       const uploadedFile = fileList[i]
-      const fileHash = await calculateHash(file)
+      const fileHash = await calculateHash(uploadedFile)
       // Database query to check if file exists in db already *****pending
       //If so continue and dont proceed further
 
@@ -208,7 +208,7 @@ function fileuplodInit() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: fileCount,
+          body: JSON.stringify({ fileCount: fileCount })
         }
       )
 
@@ -217,7 +217,7 @@ function fileuplodInit() {
 
       console.log("Notification ID:", notificationId)
 
-      return { notificationId }
+      return notificationId;
     } catch (error) {
       console.error("Error fetching NotificationID:", error)
     }
