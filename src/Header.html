@@ -20,10 +20,12 @@
 
         <div class="Header-Filters">
           <input
+            name="mainsaerchbar"
             type="text"
             class="Header-keywords"
             id="SearchFilters"
             placeholder=" Enter Keywords "
+            autocomplete="off"
           />
           <svg class="Icon" id="ClearSearchValue" style="display: none">
             <use xlink:href="./Icons/icons.svg#close" />
@@ -211,6 +213,7 @@
               <input
                 style="width: 1.5rem; height: 1.5rem; background: blue"
                 type="checkbox"
+                autocomplete="off"
               />
               <div class="both-files-grid">
                 <div class="duplicate-record-file-div">
@@ -255,6 +258,7 @@
               <input
                 style="width: 1.5rem; height: 1.5rem; background: blue"
                 type="checkbox"
+                autocomplete="off"
               />
               <div class="both-files-grid">
                 <div class="duplicate-record-file-div">
@@ -426,7 +430,13 @@
             <h2>Find an answer yourself</h2>
             <div class="section-input-reset">
               <div class="input">
-                <input id="querysearch" type="text" placeholder="Search..." />
+                <input
+                  name="querysearchchatbot"
+                  id="querysearch"
+                  type="text"
+                  placeholder="Search..."
+                  autocomplete="off"
+                />
               </div>
               <span id="reset">
                 <svg class="reset">

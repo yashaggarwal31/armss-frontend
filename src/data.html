@@ -29,7 +29,13 @@
             <svg>
               <use xlink:href="./Icons/icons.svg#DataSearchIcon" />
             </svg>
-            <input type="text" id="searchbyname" placeholder="Search" />
+            <input
+              name="DatasearchContainer"
+              type="text"
+              id="searchbyname"
+              placeholder="Search"
+              autocomplete="off"
+            />
           </div>
         </div>
         <div class="Datasection-SubContainer">
@@ -53,9 +59,11 @@
                   </svg>
                   <input
                     type="text"
+                    name="searchlocations"
                     class="search-input"
                     placeholder="Search"
                     id="SearchLocation"
+                    autocomplete="off"
                   />
                 </div>
                 <ul class="Locationlist" id="Locationlist"></ul>
@@ -103,10 +111,12 @@
                     <use xlink:href="./Icons/icons.svg#SkillSearchIcon" />
                   </svg>
                   <input
+                    name="searchskills"
                     type="text"
                     class="search-input"
                     placeholder="Search"
                     id="SearchSkills"
+                    autocomplete="off"
                   />
                 </div>
                 <ul class="Locationlist" id="SkillList"></ul>
@@ -208,7 +218,13 @@
               <use xlink:href="./Icons/icons.svg#arrow" />
             </svg>
           </button>
-          <input type="number" id="jump-input" placeholder="Page number" />
+          <input
+            name="pageno"
+            type="number"
+            id="jump-input"
+            placeholder="Page number"
+            autocomplete="off"
+          />
           <button id="jump-button">Jump</button>
         </div>
       </section>
