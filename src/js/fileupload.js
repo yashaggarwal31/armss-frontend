@@ -133,7 +133,7 @@ function fileuplodInit() {
     totalFileCount = total;
     console.log("ssssddfdvdvdvdvdvddvdv", totalFileCount);
 
-    // const { sessionId, sessionTime } = await getSession();
+    // const { sessionId, sessionTime } = await createNotification();
 
     uploadCount.innerHTML = uploadedCount;
     totalCount.innerHTML = total;
@@ -199,10 +199,10 @@ function fileuplodInit() {
     // }, 20000)
   };
 
-  async function getSession() {
+  async function createNotification() {
     try {
       const response = await fetch(
-        "https://armss-be.exitest.com/upload/create-session"
+        "https://armss-be.exitest.com/create-notification"
       );
       const data = await response.json();
       const sessionId = data.sessionId;
