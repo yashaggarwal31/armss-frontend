@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Header</title>
     <link rel="stylesheet" href="./scss/Notification.css" />
+
     <link rel="stylesheet" href="./scss/Header.css" />
     <link rel="stylesheet" href="css/chatbot.css" />
     <link rel="stylesheet" href="./scss/Chat.css" />
@@ -66,9 +67,84 @@
           </svg>
         </div> -->
         <div>
-          <button onclick="window.uploadDialog.showModal()">
+          <!-- <button onclick="window.uploadDialog.showModal()">
             Notification Bell
-          </button>
+          </button> -->
+          <div class="notification">
+            <a href="#">
+              <div class="notBtn" href="#">
+                <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
+                <div class="number">2</div>
+                <svg style="height: 1rem; width: 1rem">
+                  <use xlink:href="./Icons/icons.svg#bellIcon" />
+                </svg>
+                <div class="box">
+                  <div class="display">
+                    <div class="nothing">
+                      <i class="fas fa-child stick"></i>
+                      <div class="cent">Looks Like your all caught up!</div>
+                    </div>
+                    <div class="cont">
+                      <!-- Fold this div and try deleting evrything inbetween -->
+                      <div class="sec new">
+                        <div class="txt">
+                          A new upload session of 42 files was created!
+                        </div>
+                        <div class="txt sub">Upload is InProgress</div>
+                      </div>
+
+                      <div class="sec">
+                        <div class="txt">
+                          A new upload session of 12 files was created!
+                        </div>
+                        <div class="txt sub">Upload is InProgress</div>
+                      </div>
+
+                      <div class="sec">
+                        <div class="txt">
+                          A new upload session of 58 files was created!
+                        </div>
+                        <div class="txt sub">
+                          Upload is Completed!
+                          <a style="color: blue" href="">View Details</a>
+                        </div>
+                      </div>
+
+                      <div class="sec">
+                        <div class="txt">
+                          A new upload session of 120 files was created!
+                        </div>
+                        <div class="txt sub">
+                          Upload is Completed!
+                          <a style="color: blue" href="">View Details</a>
+                        </div>
+                      </div>
+
+                      <div class="sec">
+                        <div class="txt">
+                          A new upload session of 120 files was created!
+                        </div>
+                        <div class="txt sub">
+                          Upload is Completed!
+                          <a style="color: blue" href="">View Details</a>
+                        </div>
+                      </div>
+
+                      <div class="sec">
+                        <div class="txt">
+                          A new upload session of 120 files was created!
+                        </div>
+                        <div class="txt sub">
+                          Upload is Completed!
+                          <a style="color: blue" href="">View Details</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
         <div class="ProfileContainer">
           <img
