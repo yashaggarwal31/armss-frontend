@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./scss/Header.css" />
     <link rel="stylesheet" href="css/chatbot.css" />
     <link rel="stylesheet" href="./scss/Chat.css" />
+    <link rel="stylesheet" href="./scss/Notification.css" />
   </head>
   <body>
     <div class="Header-Container" id="HeaderContainer">
@@ -64,6 +65,11 @@
             <use xlink:href="./Icons/icons.svg#Downarrow" />
           </svg>
         </div> -->
+        <div>
+          <button onclick="window.uploadDialog.showModal()">
+            Notification Bell
+          </button>
+        </div>
         <div class="ProfileContainer">
           <img
             src="./assets/Profile.png"
@@ -85,6 +91,124 @@
           <ul id="SubCategoriesSuggestions"></ul>
         </div>
       </div>
+
+      <!-- Upload Logging Modal -->
+
+      <dialog id="uploadDialog" class="upload-log-dialog">
+        <div class="upload-logs-wrapper-div">
+          <div class="upload-log-div-top">
+            <span class="error">Error</span>
+            <button class="x" onclick="window.uploadDialog.close()">❌</button>
+          </div>
+
+          <div class="group-replace">
+            <div class="error-message">
+              <span class="error-message-title">File Already Exists</span>
+              <span class="error-message-description"
+                >A file with this name already exists. Would you like to discard
+                the upload or replace the existing file?</span
+              >
+            </div>
+            <div class="cta">
+              <button class="replace-btn">Replace</button>
+              <button class="discard-btn">Discard</button>
+            </div>
+          </div>
+
+          <div id="duplicate-records" class="records-duplicate">
+            <div class="duplicate-record">
+              <input
+                style="width: 1.5rem; height: 1.5rem; background: blue"
+                type="checkbox"
+              />
+              <div class="both-files-grid">
+                <div class="duplicate-record-file-div">
+                  <div class="duplicate-record-file-details">
+                    <span class="duplicate-record-file-details-name"
+                      >File Name</span
+                    >
+                    <span class="duplicate-record-file-details-datetime"
+                      >Date and Time</span
+                    >
+                  </div>
+                  <div class="flex items-center">
+                    <svg class="duplicate-action">
+                      <use xlink:href="./Icons/icons.svg#ActionIcon" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="duplicate-record-file-div">
+                  <div class="duplicate-record-file-details">
+                    <span class="duplicate-record-file-details-name"
+                      >File Name</span
+                    >
+                    <span class="duplicate-record-file-details-datetime"
+                      >Date and Time</span
+                    >
+                  </div>
+                  <div class="second-duplicate-cta-actions">
+                    <div class="flex items-center">
+                      <svg class="duplicate-action">
+                        <use xlink:href="./Icons/icons.svg#ActionIcon" />
+                      </svg>
+                    </div>
+                    <span style="color: blue; text-decoration: underline"
+                      >Compare</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="duplicate-record">
+              <input
+                style="width: 1.5rem; height: 1.5rem; background: blue"
+                type="checkbox"
+              />
+              <div class="both-files-grid">
+                <div class="duplicate-record-file-div">
+                  <div class="duplicate-record-file-details">
+                    <span class="duplicate-record-file-details-name"
+                      >File Name</span
+                    >
+                    <span class="duplicate-record-file-details-datetime"
+                      >Date and Time</span
+                    >
+                  </div>
+                  <div class="flex items-center">
+                    <svg class="duplicate-action">
+                      <use xlink:href="./Icons/icons.svg#ActionIcon" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="duplicate-record-file-div">
+                  <div class="duplicate-record-file-details">
+                    <span class="duplicate-record-file-details-name"
+                      >File Name</span
+                    >
+                    <span class="duplicate-record-file-details-datetime"
+                      >Date and Time</span
+                    >
+                  </div>
+                  <div class="second-duplicate-cta-actions">
+                    <div class="flex items-center">
+                      <svg class="duplicate-action">
+                        <use xlink:href="./Icons/icons.svg#ActionIcon" />
+                      </svg>
+                    </div>
+                    <span style="color: blue; text-decoration: underline"
+                      >Compare</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </dialog>
+
+      <!-- Upload Logging Modal End -->
+
       <!-- <div class="chatbot-modal">
        <button id="myBtn">Open ChatBot</button>
 
@@ -234,5 +358,6 @@
     <!-- <script src="scripts/chatbot.js"></script> -->
     <script src="scripts/chatbot.js"></script>
     <script src="./js/header.js"></script>
+    <script src="./js/notification.js"></script>
   </body>
 </html>
