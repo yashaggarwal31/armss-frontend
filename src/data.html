@@ -16,20 +16,26 @@
   <body>
     <header class="Header-Container" id="Header"></header>
     <main id="dataMain">
-      <section class="section">
-        <div class="section-TitleContainer">
-          <div class="section-RoleContainer">
+      <section class="Datasection">
+        <div class="Datasection-TitleContainer">
+          <div class="Datasection-RoleContainer">
             <h2 id="heading" class="heading"></h2>
             <p id="paraelemnet">
               Here are Tailored Results Based on Your Search
             </p>
           </div>
+          <div class="Datasearchcontainer">
+            <svg>
+              <use xlink:href="./Icons/icons.svg#DataSearchIcon" />
+            </svg>
+            <input type="text" id="searchbyname" placeholder="Search" />
+          </div>
         </div>
-        <div class="section-SubContainer">
+        <div class="Datasection-SubContainer">
           <h2 class="heading">Total: <span id="TotalValue"></span></h2>
-          <div class="section-DropdownContainers">
-            <div class="section-MainPlusDropDropDown">
-              <div class="section-dropdownContainer" id="Location-Header">
+          <div class="Datasection-DropdownContainers">
+            <div class="Datasection-MainPlusDropDropDown">
+              <div class="Datasection-dropdownContainer" id="Location-Header">
                 <p id="LocationValue">Location</p>
                 <svg class="Icon" id="DownIcon1">
                   <use xlink:href="./Icons/icons.svg#Downarrow" />
@@ -40,7 +46,7 @@
                 id="Locationdropdown"
                 style="display: none"
               >
-                <div class="section-SearchFilter">
+                <div class="Datasection-SearchFilter">
                   <svg class="Icon">
                     <use xlink:href="./Icons/icons.svg#SkillSearchIcon" />
                   </svg>
@@ -55,17 +61,17 @@
               </div>
             </div>
             <div
-              class="section-MainPlusDropDropDown"
+              class="Datasection-MainPlusDropDropDown"
               id="ExperienceMainContainer"
             >
-              <div class="section-dropdownContainer" id="Experience-Header">
+              <div class="Datasection-dropdownContainer" id="Experience-Header">
                 <p id="ExperienceValue">Experience</p>
                 <svg class="Icon" id="DownIcon2">
                   <use xlink:href="./Icons/icons.svg#Downarrow" />
                 </svg>
               </div>
               <div
-                class="section-dropdownContainer"
+                class="Datasection-dropdownContainer"
                 id="ExperienceDropdown"
                 style="display: none"
               >
@@ -79,8 +85,8 @@
                 </ul>
               </div>
             </div>
-            <div class="section-MainPlusDropDropDown">
-              <div class="section-dropdownContainer" id="Skill-Header">
+            <div class="Datasection-MainPlusDropDropDown">
+              <div class="Datasection-dropdownContainer" id="Skill-Header">
                 <p id="SkillValue">Skills</p>
                 <svg class="Icon" id="DownIcon3">
                   <use xlink:href="./Icons/icons.svg#Downarrow" />
@@ -91,7 +97,7 @@
                 id="SkillDropdown"
                 style="display: none"
               >
-                <div class="section-SearchFilter">
+                <div class="Datasection-SearchFilter">
                   <svg class="Icon">
                     <use xlink:href="./Icons/icons.svg#SkillSearchIcon" />
                   </svg>
@@ -105,15 +111,18 @@
                 <ul class="Locationlist" id="SkillList"></ul>
               </div>
             </div>
-            <div class="section-MainPlusDropDropDown" id="DateMainContainer">
-              <div class="section-dropdownContainer" id="Date-Header">
+            <div
+              class="Datasection-MainPlusDropDropDown"
+              id="DateMainContainer"
+            >
+              <div class="Datasection-dropdownContainer" id="Date-Header">
                 <p id="DateValue">Date</p>
                 <svg class="Icon" id="DownIcon4">
                   <use xlink:href="./Icons/icons.svg#Downarrow" />
                 </svg>
               </div>
               <div
-                class="section-dropdownContainer"
+                class="Datasection-dropdownContainer"
                 id="DateDropdown"
                 style="display: none"
               >
@@ -136,11 +145,11 @@
             </button>
           </div>
         </div>
-        <div class="section-SearchHistory" id="SearchHistoryContainer">
+        <div class="Datasection-SearchHistory" id="SearchHistoryContainer">
           <div>
             <h4>Skills</h4>
             <ul
-              class="section-SearchFiltersDisplay"
+              class="Datasection-SearchFiltersDisplay"
               id="SkillSearchHistory"
             ></ul>
           </div>
@@ -154,31 +163,50 @@
           <div>
             <h4>Location</h4>
             <ul
-              class="section-SearchFiltersDisplay"
+              class="Datasection-SearchFiltersDisplay"
               id="LocationSearchHistory"
             ></ul>
           </div>
           <button id="ClearHistory">Clear</button>
         </div>
+        <div class="Datasection-maindataContainer">
+          <div class="Datasection-headingContainer">
+            <h4>Name</h4>
+            <h4>Role</h4>
+            <h4>Skills</h4>
+            <h4>Experience</h4>
+            <h4>E-mail</h4>
+            <h4>Location</h4>
+            <h4>Contact Number</h4>
+            <h4 id="DatasortUpdateDate">Upload Date</h4>
+            <h4>Action</h4>
+          </div>
 
-        <div class="section-headingContainer">
-          <h4>Name</h4>
-          <h4>Role</h4>
-          <h4>Skills</h4>
-          <h4>Experience</h4>
-          <h4>E-mail</h4>
-          <h4>Location</h4>
-          <h4>Contact Number</h4>
-          <h4 id="DatasortUpdateDate">Upload Date</h4>
-          <h4>Action</h4>
+          <ul id="datalistItems"></ul>
         </div>
-
-        <ul id="datalistItems"></ul>
-
         <div id="controls">
-          <button id="previous-button">Previous</button>
+          <div class="PerPage-records">
+            <select id="perPageRecords">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+              <option value="40">40</option>
+              <option value="50">50</option>
+            </select>
+            <p>Records</p>
+          </div>
+          <button id="previous-button">
+            <svg class="sidearrow">
+              <use xlink:href="./Icons/icons.svg#arrow" />
+            </svg>
+          </button>
+
           <span id="page-number">Page_of_</span>
-          <button id="next-button">Next</button>
+          <button id="next-button">
+            <svg class="sidearrow leftsidearrow">
+              <use xlink:href="./Icons/icons.svg#arrow" />
+            </svg>
+          </button>
           <input type="number" id="jump-input" placeholder="Page number" />
           <button id="jump-button">Jump</button>
         </div>

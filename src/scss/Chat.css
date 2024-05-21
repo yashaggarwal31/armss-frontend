@@ -155,6 +155,7 @@ button {
   min-width: 420px;
   flex-grow: 0;
   flex-shrink: 0;
+  cursor: pointer;
 }
 .section-chatcontent ul li p {
   font-size: 0.68rem;

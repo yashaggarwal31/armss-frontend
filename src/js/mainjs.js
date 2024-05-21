@@ -11,6 +11,7 @@ const FilteringData = {
   chatbotData: false,
   QueryonProcess: false,
   dataparaelement: "",
+  TemporaryData: [],
 };
 
 console.log(FilteringData);
