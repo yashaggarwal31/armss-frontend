@@ -2,7 +2,7 @@
   overflow: hidden;
 }
 
-.section {
+.Datasection {
   max-height: 86vh;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -207,12 +207,19 @@
 }
 
 #datalistItems {
-  // border: 2px solid;
-  max-height: 48vh;
-  min-height: 48vh;
+  min-height: 44.8vh;
+  max-height: 44.8vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
+
+// #datalistItems::-webkit-scrollbar {
+//   width: 6px;
+// }
+// #datalistItems::-webkit-scrollbar-thumb {
+//   border-radius: 2rem;
+//   background-color: $darkblue;
+// }
 
 #datalistItems li:hover {
   background-color: #cadbfc;
@@ -237,7 +244,7 @@
   @include flex(flex, row, null, null, 0.6rem, wrap);
   background-color: $white;
   width: 20%;
-  max-height: 28vh;
+  max-height: 24vh;
   overflow-y: auto;
   padding: 0.4rem;
   border: 1px solid #7169ff35;
@@ -245,6 +252,9 @@
   @include position(absolute, 28%, null, 10%, null);
   z-index: 20;
   display: none;
+}
+.at-end-skill-container {
+  @include position(absolute, 28%, null, null, 0%);
 }
 .SkillsContainer::-webkit-scrollbar {
   width: 6px;
@@ -332,7 +342,7 @@ button {
   @include font_size_color(0.8rem, null, $Textblack, "Inter");
 
   button {
-    padding: 0.6rem;
+    padding: 0.48rem;
     @include font_size_color(0.68rem, null, $white, "Inter");
     border-radius: 0.28rem;
   }
@@ -348,4 +358,40 @@ button {
 #page-number {
   font-size: 0.68rem;
   font-weight: bold;
+}
+
+.sidearrow {
+  width: 1rem;
+  height: 1rem;
+  transform: rotate(0.26turn);
+}
+.leftsidearrow {
+  transform: rotate(0.76turn);
+}
+
+.PerPage-records {
+  @include flex(flex, row, space-around, center, 10px);
+  @include font_size_color(0.68rem, null, $Textblack, "Inter");
+  font-weight: bold;
+
+  select {
+    padding: 0.28rem;
+    border-radius: 0.28rem;
+    outline: none;
+  }
+}
+.Datasearchcontainer {
+  @include flex(flex, row, null, center, 2px);
+  border: 1px solid;
+  padding: 0 4px;
+  border-radius: 4px;
+  input {
+    border: none;
+    outline: none;
+    padding: 0.6rem 0;
+  }
+  svg {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
 }

@@ -60,6 +60,7 @@
         // max-width: 420px;
         flex-grow: 0;
         flex-shrink: 0;
+        cursor: pointer;
 
         p {
           @include font_size_color(0.68rem, 600, $Textblack, "Inter");

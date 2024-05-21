@@ -225,6 +225,11 @@ let Logo = document.getElementById("Logo");
 
 Logo.addEventListener("click", function () {
   FilteringData.page = "main";
+  Filterdata.Candidate.UploadDate = [];
+  Filterdata.Skill.SkillName = [];
+  Filterdata.WorkExperience.Location = [];
+  Filterdata.Candidate.Experience = [];
+  FilteringData.TemporaryData = [];
   triggerDOMContentLoaded();
 });
 

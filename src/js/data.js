@@ -72,6 +72,7 @@ toget = async (
         data[1] !== null
           ? Object.keys(data[1]).map((item) => data[1][item])
           : [];
+      FilteringData.TemporaryData = FilteringData.FetchedData;
       displayItems(data, 1);
     });
 };
@@ -223,6 +224,13 @@ toUpdateSkillContainer = function (data, id, item) {
   let Listid = document.getElementById(id);
   let Listitem = document.getElementById(item);
 
+  // let boundaries = Listid.getBoundingClientRect();
+  // if (boundaries.top > window.innerHeight - 220) {
+  //   Listitem.classList.add("at-end-skill-container");
+  // } else {
+  //   Listitem.classList.remove("at-end-skill-container");
+  // }
+
   data = data.sort((a, b) => a.length - b.length);
 
   Listitem.innerHTML = "";
@@ -243,6 +251,7 @@ toHideSkillContainer = function (id, item) {
   // Listid.removeChild(Listitem);
 
   Listitem.addEventListener("mouseover", () => {
+    // console.log(Listitem.getBoundingClientRect());
     Listitem.style.display = "flex";
     Listid.style.position = "relative";
     clearTimeout(interval);
@@ -304,11 +313,11 @@ function toShowData(data, method = "POST") {
 
       let Location = document.createElement("p");
       Location.textContent =
-        data[i].Location[0] === null ? "delhi" : data[i].Location;
+        data[i].Location[0] === null ? "Unknown" : data[i].Location;
 
       let Phone_no = document.createElement("p");
       Phone_no.textContent =
-        data[i].Contact_Phone !== "" ? data[i].Contact_Phone : "9XXXXXXXXX";
+        data[i].Contact_Phone !== "" ? data[i].Contact_Phone : "XXXXXXXXXX";
 
       let UploadDate = document.createElement("p");
       UploadDate.textContent = data[i].UploadDate;
@@ -348,7 +357,6 @@ function toShowData(data, method = "POST") {
       className =
         toCheckRecent(data[i].UploadDate) < 3 ? "RecentElements" : "None";
       li.classList.add("elementStyle", className);
-
       datalistItems.appendChild(li);
     }
 
@@ -814,7 +822,7 @@ SkillHeader.addEventListener("click", SkillDropdownFunction);
 DateHeader.addEventListener("click", DateDropdownFunction);
 
 window.addEventListener("click", function (event) {
-  if (!event.target.closest(".section-MainPlusDropDropDown")) {
+  if (!event.target.closest(".Datasection-MainPlusDropDropDown")) {
     if (SkillDropdown.style.display === "block") {
       SkillDropdownFunction();
     }
@@ -823,6 +831,9 @@ window.addEventListener("click", function (event) {
     }
     if (Locationdropdown.style.display === "block") {
       LocationdropdownFunction();
+    }
+    if (DateDropdown.style.display === "block") {
+      DateDropdownFunction();
     }
   }
 });
@@ -989,16 +1000,28 @@ toapplyfilters = (data) => {
   for (let key in data) {
     if (data[key]["check"].length > 0 && key !== "ResumeIdList") {
       for (let i of data[key]["check"]) {
-        if (i === "Location") {
+        if (i === "FirstName") {
           sampleData = sampleData.filter((item) => {
-            if (
-              item["Location"].some((item2) =>
-                data[key][i].includes(item2.toLowerCase())
-              )
-            ) {
+            if (item["FirstName"].toLowerCase().includes(data[key][i])) {
               return true;
             }
             return false;
+          });
+        } else if (i === "Location") {
+          sampleData = sampleData.filter((item) => {
+            if (
+              data[key][i].some((item2) => {
+                console.log(
+                  item["Location"].join(",").includes(item2.toLowerCase())
+                );
+
+                return item["Location"].join(",").includes(item2.toLowerCase());
+              })
+            )
+              return true;
+            else {
+              return false;
+            }
           });
         } else if (i === "Experience") {
           sampleData = sampleData.filter((item) => {
@@ -1039,8 +1062,12 @@ toapplyfilters = (data) => {
       }
     }
   }
+  FilteringData.TemporaryData = sampleData;
   // toShowData([sampleData.length, sampleData]);
-  displayItems([sampleData.length, sampleData], 1);
+  displayItems(
+    [FilteringData.TemporaryData.length, FilteringData.TemporaryData],
+    1
+  );
 };
 
 // Upload date filter
@@ -1134,9 +1161,9 @@ document.getElementById("DatasortUpdateDate").addEventListener("click", () => {
     sortedorder = "asc";
   }
   FilteringData.FetchedData = FilteringData.FetchedData.sort(sortByUpload);
-
+  FilteringData.TemporaryData = FilteringData.FetchedData;
   displayItems(
-    [FilteringData.FetchedData.length, FilteringData.FetchedData],
+    [FilteringData.TemporaryData.length, FilteringData.TemporaryData],
     1
   );
 });
@@ -1147,17 +1174,17 @@ document.getElementById("uploadresumes").onclick = () => {
   dialog.showModal();
 };
 
-// // check lat item
+document.getElementById("perPageRecords").addEventListener("change", () => {
+  itemsPerPage = document.getElementById("perPageRecords").value;
+  displayItems(
+    [FilteringData.TemporaryData.length, FilteringData.TemporaryData],
+    1
+  );
+});
 
-// const listItems = document.querySelectorAll("#datalistItems li");
-// const lastItem = listItems[listItems.length - 1];
-// window.addEventListener("scroll", function () {
-//   const rect = lastItem.getBoundingClientRect();
-//   if (rect.bottom <= window.innerHeight) {
-//     // Last item has reached the end of the screen
-//     lastItem.classList.add("highlight");
-//   } else {
-//     // Last item is still on the screen
-//     lastItem.classList.remove("highlight");
-//   }
-// });
+document
+  .getElementById("searchbyname")
+  .addEventListener("input", function (event) {
+    Filterdata.Candidate.FirstName = [{ FirstName: event.target.value }];
+    toapplyfilters(Filterdata);
+  });
