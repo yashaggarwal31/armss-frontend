@@ -281,6 +281,24 @@ a{
     color: #d63031;
   }
   
+  .flex-span {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Adjust as needed */
+}
+
+.UploadinProgress{
+  color:rgba(255, 166, 23, 0.721)
+}
+
+.UploadSuccess{
+  color:rgba(56, 236, 56, 0.582)
+}
+
+.UploadErrors{
+  color:rgba(255, 44, 44, 0.582)
+}
+
   /* .notBtn > .box{
     height: 60vh
   } */

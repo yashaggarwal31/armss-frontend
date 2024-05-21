@@ -284,21 +284,28 @@ async function notificationsInIt() {
     const notificationDiv = document.createElement('div');
     notificationDiv.classList.add('sec');
 
-    // Create the first child div with class 'txt' and set its content
     const txtDiv = document.createElement('div');
     txtDiv.classList.add('txt');
     txtDiv.textContent = `A new upload session of ${fileCount} file${fileCount == 1 ? '' : 's'} was created!`;
 
-    // Append the first child div to the main div
     notificationDiv.appendChild(txtDiv);
 
-    // Create the second child div with class 'txt sub' and set its content
     const subDiv = document.createElement('div');
+    subDiv.classList.add('txt', 'sub', 'flex-span');
 
-    subDiv.classList.add('txt', 'sub');
-    subDiv.textContent = `Upload is InProgress, created at: ${formattedDate}`;
+    const dateSpan = document.createElement('span');
+    dateSpan.textContent = formattedDate;
 
-    // Append the second child div to the main div
+    const statusSpan = document.createElement('span');
+    statusSpan.textContent = 'InProgress';
+    statusSpan.classList.add('UploadinProgress');
+
+
+    subDiv.appendChild(dateSpan);
+    subDiv.appendChild(statusSpan);
+
+
+
     notificationDiv.appendChild(subDiv);
 
     notificationList.appendChild(notificationDiv)
