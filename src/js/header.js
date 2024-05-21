@@ -241,3 +241,156 @@ clearsearchvalue.addEventListener("click", function () {
   SearchFilters.value = "";
   SearchFilters.focus();
 });
+
+async function getNotifications() {
+  try {
+    const response = await fetch("https://armss-be.exitest.com/get-notifications", {
+      method: 'POST'
+    });
+    const data = await response.json();
+
+    console.log(data);
+
+    return data;
+  }
+  catch (error) {
+    console.log('failed to fetch notifications: ', error)
+  }
+
+
+}
+
+
+
+async function notificationsInIt() {
+
+  document.getElementById('notification-container').style.height = '60vh';
+
+  const data = await getNotifications();
+  console.log('data:', data)
+  const notificationList = document.getElementById('notifications-list');
+
+  notificationList.innerHTML = '';
+
+  for (i of data) {
+
+    const tempJson = i[2];
+    const formattedDate = formatDateTimeString(i[4]);
+    console.log(i[2]);
+    const notificationJson = JSON.parse(tempJson);
+
+    const fileCount = notificationJson.fileCount;
+
+    const notificationDiv = document.createElement('div');
+    notificationDiv.classList.add('sec');
+
+    // Create the first child div with class 'txt' and set its content
+    const txtDiv = document.createElement('div');
+    txtDiv.classList.add('txt');
+    txtDiv.textContent = `A new upload session of ${fileCount} file${fileCount == 1 ? '' : 's'} was created!`;
+
+    // Append the first child div to the main div
+    notificationDiv.appendChild(txtDiv);
+
+    // Create the second child div with class 'txt sub' and set its content
+    const subDiv = document.createElement('div');
+
+    subDiv.classList.add('txt', 'sub');
+    subDiv.textContent = `Upload is InProgress, created at: ${formattedDate}`;
+
+    // Append the second child div to the main div
+    notificationDiv.appendChild(subDiv);
+
+    notificationList.appendChild(notificationDiv)
+  }
+
+
+
+}
+
+
+
+window.addEventListener("click", function (event) {
+  const notificationContainer = document.getElementById('notification-container');
+  const icon = document.getElementById('icon');
+
+  if (!notificationContainer.contains(event.target) && !icon.contains(event.target)) {
+    notificationContainer.style.height = '0';
+  }
+});
+
+
+// const formatDateTimeString = (utcDateString) => {
+//   if (!utcDateString) return ''
+
+//   const utcDate = new Date(utcDateString)
+
+//   // Create a new Date object representing the UTC date and time
+//   const utcOffsetMinutes = utcDate.getTimezoneOffset()
+//   const istOffsetMinutes = utcOffsetMinutes + 330 // IST is UTC + 5:30 which is 330 minutes
+
+//   const istDate = new Date(utcDate.getTime() + istOffsetMinutes * 60 * 1000)
+
+//   const month = istDate.getMonth() + 1 // getMonth() is zero-based
+//   const year = istDate.getFullYear()
+//   const day = istDate.getDate()
+
+//   const hours = istDate.getHours()
+//   const minutes = istDate.getMinutes()
+//   const seconds = istDate.getSeconds()
+
+//   const monthNames = [
+//     'January',
+//     'February',
+//     'March',
+//     'April',
+//     'May',
+//     'June',
+//     'July',
+//     'August',
+//     'September',
+//     'October',
+//     'November',
+//     'December'
+//   ]
+//   const monthName = monthNames[month - 1]
+
+//   const formattedDate = `${monthName} ${day}, ${year}`
+//   const formattedTime = `${String(hours).padStart(2, '0')}:${String(
+//     minutes
+//   ).padStart(2, '0')}:${String(seconds).padStart(2, '0')} IST`
+
+//   return `${formattedDate} ${formattedTime}`
+// }
+
+const formatDateTimeString = (utcDateString) => {
+  if (!utcDateString) return '';
+
+  const utcDate = new Date(utcDateString);
+
+  // Convert UTC time to IST by adding 5 hours and 30 minutes (19800000 milliseconds)
+  const istOffsetMilliseconds = 5.5 * 60 * 60 * 1000;
+  const istDate = new Date(utcDate.getTime() + istOffsetMilliseconds);
+
+  const month = istDate.getMonth() + 1; // getMonth() is zero-based
+  const year = istDate.getFullYear();
+  const day = istDate.getDate();
+
+  const hours = istDate.getHours();
+  const minutes = istDate.getMinutes();
+  const seconds = istDate.getSeconds();
+
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+  const monthName = monthNames[month - 1];
+
+  const formattedDate = `${monthName} ${day}, ${year}`;
+  const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} IST`;
+
+  return `${formattedDate} ${formattedTime}`;
+};
+
+// Example usage
+console.log(formatDateTimeString("2024-05-21T12:00:00Z")); // Outputs: May 21, 2024 17:30:00 IST
