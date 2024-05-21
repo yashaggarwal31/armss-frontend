@@ -54,10 +54,10 @@ toget = async (
     method === "GET"
       ? { method: method }
       : {
-          method: method,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        };
+        method: method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      };
   console.log(options);
   await fetch(url, options)
     .then((response) => {
@@ -1027,9 +1027,9 @@ toapplyfilters = (data) => {
           sampleData = sampleData.filter((item) => {
             if (
               parseFloat(item["Experience"]) >=
-                parseFloat(data[key][i].slice(0, 1)) &&
+              parseFloat(data[key][i].slice(0, 1)) &&
               parseFloat(item["Experience"]) <
-                parseFloat(data[key][i].slice(-1))
+              parseFloat(data[key][i].slice(-1))
             ) {
               return true;
             }
