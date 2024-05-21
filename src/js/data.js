@@ -54,10 +54,10 @@ toget = async (
     method === "GET"
       ? { method: method }
       : {
-        method: method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      };
+          method: method,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        };
   console.log(options);
   await fetch(url, options)
     .then((response) => {
@@ -380,14 +380,17 @@ function displayItems(data, page) {
   paginationData = data;
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const pageItems = Object.values(data[1]).slice(startIndex, endIndex);
+  const pageItems =
+    data[1] !== null
+      ? Object.values(data[1]).slice(startIndex, endIndex)
+      : null;
   console.log("page items ", pageItems);
 
   toShowData([data[0], pageItems]);
 
   const pageContainer = document.getElementById("page-number");
   pageContainer.textContent = `Page ${page} of ${Math.ceil(
-    Object.keys(data[1]).length / itemsPerPage
+    data[0] === 0 ? 1 : data[0] / itemsPerPage
   )}`;
 }
 
@@ -1027,9 +1030,9 @@ toapplyfilters = (data) => {
           sampleData = sampleData.filter((item) => {
             if (
               parseFloat(item["Experience"]) >=
-              parseFloat(data[key][i].slice(0, 1)) &&
+                parseFloat(data[key][i].slice(0, 1)) &&
               parseFloat(item["Experience"]) <
-              parseFloat(data[key][i].slice(-1))
+                parseFloat(data[key][i].slice(-1))
             ) {
               return true;
             }
