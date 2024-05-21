@@ -66,26 +66,39 @@
             <use xlink:href="./Icons/icons.svg#Downarrow" />
           </svg>
         </div> -->
-        <div>
+        <div class="div-contaning-bell-and-profile">
           <!-- <button onclick="window.uploadDialog.showModal()">
             Notification Bell
           </button> -->
           <div class="notification">
             <a href="#">
-              <div class="notBtn" href="#">
+              <div
+                onclick="notificationsInIt()"
+                id="icon"
+                class="notBtn"
+                href="#"
+              >
                 <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
-                <svg style="height: 2rem; width: 2rem">
-                  <use xlink:href="./Icons/icons.svg#bellIcon" />
-                </svg>
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <svg style="height: 1.5rem; width: 1.5rem">
+                    <use xlink:href="./Icons/icons.svg#bellIcon" />
+                  </svg>
+                </div>
                 <!-- <div class="number">2</div> -->
 
-                <div class="box">
+                <div id="notification-container" class="box">
                   <div class="display">
                     <div class="nothing">
                       <i class="fas fa-child stick"></i>
                       <div class="cent">Looks Like your all caught up!</div>
                     </div>
-                    <div class="cont">
+                    <div id="notifications-list" class="cont">
                       <!-- Fold this div and try deleting evrything inbetween -->
                       <div class="sec new">
                         <div class="txt">
@@ -146,14 +159,15 @@
               </div>
             </a>
           </div>
-        </div>
-        <div class="ProfileContainer">
-          <img
-            src="./assets/Profile.png"
-            alt="Profile"
-            class="Header-Profile"
-          />
-          <button class="LogoutBtn" onclick="Logout()">Logout</button>
+
+          <div class="ProfileContainer">
+            <img
+              src="./assets/Profile.png"
+              alt="Profile"
+              class="Header-Profile"
+            />
+            <button class="LogoutBtn" onclick="Logout()">Logout</button>
+          </div>
         </div>
       </div>
 
