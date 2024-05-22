@@ -564,4 +564,8 @@ button {
 .Datasearchcontainer svg {
   width: 1.4rem;
   height: 1.4rem;
+}
+
+.ondisablebutton {
+  background-color: #779ae0;
 }/*# sourceMappingURL=Data.css.map */

@@ -385,7 +385,18 @@ function displayItems(data, page) {
       ? Object.values(data[1]).slice(startIndex, endIndex)
       : null;
   console.log("page items ", pageItems);
-
+  if (currentPage === 1) {
+    document.getElementById("previous-button").classList.add("ondisablebutton");
+  } else {
+    document
+      .getElementById("previous-button")
+      .classList.remove("ondisablebutton");
+  }
+  if (currentPage === Math.ceil(data[0] === 0 ? 1 : data[0] / itemsPerPage)) {
+    document.getElementById("next-button").classList.add("ondisablebutton");
+  } else {
+    document.getElementById("next-button").classList.remove("ondisablebutton");
+  }
   toShowData([data[0], pageItems]);
 
   const pageContainer = document.getElementById("page-number");
@@ -621,6 +632,26 @@ function setIds() {
   // });
 }
 
+function toSkillsclick(value) {
+  if (value === "All") {
+    Filterdata.Skill.SkillName = [];
+  } else {
+    let values = Filterdata.Skill.SkillName.find(
+      (item) => item.SkillName === value
+    );
+    console.log(values);
+    if (!values) {
+      let Unique_id = generateUniqueId();
+      Filterdata.Skill.SkillName.push({
+        uniqueId: Unique_id,
+        SkillName: value.toLowerCase(),
+      });
+      toAppendHistory(value, Unique_id, SkillSearchHistory);
+      toCheckSearchHistory();
+    }
+  }
+}
+
 toappendSkills = (data) => {
   console.log(data);
   SkillList.innerHTML = "";
@@ -632,23 +663,8 @@ toappendSkills = (data) => {
     li.id = i;
     li.setAttribute("data-value", i);
     li.addEventListener("click", () => {
-      if (li.id === "All") {
-        Filterdata.Skill.SkillName = [];
-      } else {
-        let values = Filterdata.Skill.SkillName.find(
-          (item) => item.SkillName === li.id
-        );
-        console.log(values);
-        if (!values) {
-          let Unique_id = generateUniqueId();
-          Filterdata.Skill.SkillName.push({
-            uniqueId: Unique_id,
-            SkillName: li.id.toLowerCase(),
-          });
-          toAppendHistory(li.id, Unique_id, SkillSearchHistory);
-          toCheckSearchHistory();
-        }
-      }
+      value = li.id;
+      toSkillsclick(value);
       toapplyfilters(Filterdata);
 
       SkillDropdownFunction();
@@ -996,6 +1012,17 @@ document
     toappendSkills(data);
   });
 
+// Search Skills by Enter
+document
+  .getElementById("SearchSkills")
+  .addEventListener("keydown", function (event) {
+    if (event.key === "Enter" && event.target.value.length > 0) {
+      toSkillsclick(event.target.value);
+      document.getElementById("SearchSkills").value = "";
+      FetchingSkills();
+      toapplyfilters(Filterdata);
+    }
+  });
 // toapplyFilters
 
 toapplyfilters = (data) => {

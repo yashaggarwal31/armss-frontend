@@ -165,6 +165,7 @@ SearchFilters.addEventListener("keydown", function (event) {
 
 // functionality
 async function onSubmiting() {
+  SearchFilters.blur();
   value = SearchFilters.value.replace(/\s+/g, " ").trim();
 
   data = value.split(" and ");

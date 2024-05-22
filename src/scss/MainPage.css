@@ -566,6 +566,10 @@ button {
   height: 1.4rem;
 }
 
+.ondisablebutton {
+  background-color: #779ae0;
+}
+
 .Header-Container {
   padding: 1.5rem 2rem;
   background-color: #ffffff;
