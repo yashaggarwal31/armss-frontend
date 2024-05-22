@@ -519,6 +519,7 @@ DropdownSelectFunction = (data) => {
       // Experiencetitle.textContent = Value !== "All" ? Value : "Experience";
       ExperienceDropdownFunction();
       if (Value === "All") {
+        ExperienceSearchHistory.innerHTML = "";
         Filterdata.Candidate.Experience = [];
         toapplyfilters(Filterdata);
       } else {
@@ -640,6 +641,7 @@ function setIds() {
 
 // adding skill function
 function toSkillsclick(value) {
+  value = value.trim();
   if (value === "All") {
     Filterdata.Skill.SkillName = [];
   } else {
@@ -684,6 +686,7 @@ toappendSkills = (data) => {
 // adding location function
 
 function tolocationclick(value) {
+  value = value.trim();
   if (value === "All") {
     LocationSearchHistory.innerHTML = "";
     Filterdata.WorkExperience.Location = [];
