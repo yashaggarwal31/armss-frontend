@@ -1164,8 +1164,8 @@ document.getElementById("DatasortUpdateDate").addEventListener("click", () => {
     sortedordervalue = -1;
     sortedorder = "asc";
   }
-  FilteringData.FetchedData = FilteringData.FetchedData.sort(sortByUpload);
-  FilteringData.TemporaryData = FilteringData.FetchedData;
+  FilteringData.TemporaryData = FilteringData.TemporaryData.sort(sortByUpload);
+  // FilteringData.TemporaryData = FilteringData.FetchedData;
   displayItems(
     [FilteringData.TemporaryData.length, FilteringData.TemporaryData],
     1
