@@ -37,11 +37,22 @@ img {
   color: unset;
 }
 
-h2 {
-  font-size: 1.4rem;
+h1 {
+  font-size: 32px;
   color: #333333;
   font-family: "Inter";
-  padding-bottom: 6px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #333333;
+  font-family: "Inter";
+}
+
+h3 {
+  font-size: 22px;
+  color: #333333;
+  font-family: "Inter";
 }
 
 h4 {
@@ -80,17 +91,18 @@ body {
 }
 
 .Dashboard {
-  max-height: 84.8vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
 .Dashboard-container {
-  padding: 1rem;
-  background-color: #f7faff;
+  height: calc(100vh - 110px);
+  overflow-y: auto;
+  padding: 2rem;
+  background-color: #ffffff;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 72px;
 }
 .Dashboard-welcomeContainer {
   margin-top: 0.6rem;
@@ -104,17 +116,17 @@ body {
   padding: 55px 26px;
   background-color: #0052f1;
   border-radius: 1rem;
-  width: 92%;
+  width: 100%;
 }
 .Dashboard-welcomeContainer .textContainer h2 {
-  font-size: 1.4rem;
+  font-size: 32px;
   font-weight: 600;
   color: #ffffff;
-  margin-bottom: 2px;
+  margin-bottom: 11px;
 }
 .Dashboard-welcomeContainer .textContainer p {
-  font-size: 0.88rem;
-  font-weight: 200;
+  font-size: 18px;
+  font-weight: 400;
   color: #ffffff;
 }
 .Dashboard-ContentContainer {
@@ -122,28 +134,32 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
+  border-radius: 1rem;
 }
 .Dashboard-SubContentContainer {
-  width: 92%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 1rem;
-  background-color: #ffffff;
-  border-radius: 1rem;
-  padding: 1.4rem;
+  border-radius: 16px;
+  padding: 24px;
 }
 .Dashboard-SubContentContainer .SubContentContainer-Elements {
-  padding: 0.8rem 0;
+  padding: 1rem 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
+.Dashboard-SubContentContainer .SubContentContainer-Elements h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
 .Dashboard-Image {
   position: absolute;
   right: 2.8%;
-  top: 10%;
+  top: 32px;
   width: 280px;
 }
 
@@ -157,7 +173,7 @@ body {
   border-radius: 1rem;
   padding: 1.4rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(233px, 1fr));
   gap: 20px;
 }
 
@@ -166,14 +182,15 @@ body {
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
-  min-width: 188px;
   max-height: 140px;
   min-height: 140px;
   background-color: #ffffff;
-  border-radius: 10px;
+  border-radius: 1rem;
   position: relative;
 }
 .listItem h4 {
+  font-size: 14px;
+  font-weight: 500;
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
@@ -189,6 +206,7 @@ body {
 
 .listItem:hover {
   background-color: #0052f1;
+  transition: 0.4s ease-in;
   cursor: pointer;
 }
 .listItem:hover h4 {
@@ -210,8 +228,8 @@ body {
   border-radius: 50%;
 }
 .DashboardFolderIcon svg {
-  height: 2rem;
-  width: 2rem;
+  height: 25px;
+  width: 25px;
 }
 
 .DashboardFolderIcon2 {
@@ -249,8 +267,8 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  font-size: 0.88rem;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 500;
   color: #ffffff;
   font-family: "Inter";
   padding: 0.8rem;
@@ -264,8 +282,8 @@ button {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  font-size: 0.88rem;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 500;
   color: #ffffff;
   font-family: "Inter";
   padding: 0.8rem;

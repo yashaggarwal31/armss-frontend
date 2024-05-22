@@ -37,11 +37,22 @@ img {
   color: unset;
 }
 
-h2 {
-  font-size: 1.4rem;
+h1 {
+  font-size: 32px;
   color: #333333;
   font-family: "Inter";
-  padding-bottom: 6px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #333333;
+  font-family: "Inter";
+}
+
+h3 {
+  font-size: 22px;
+  color: #333333;
+  font-family: "Inter";
 }
 
 h4 {

@@ -24,7 +24,7 @@
             type="text"
             class="Header-keywords"
             id="SearchFilters"
-            placeholder=" Enter Keywords "
+            placeholder=" Enter skills /designations"
             autocomplete="off"
           />
           <svg class="Icon" id="ClearSearchValue" style="display: none">
@@ -163,11 +163,15 @@
           </div>
 
           <div class="ProfileContainer">
-            <img
+            <div class="ProfileContainer_name">
+              <img
               src="./assets/Profile.png"
               alt="Profile"
               class="Header-Profile"
             />
+            <span>Profile Name</span>
+            </div>
+            
             <button class="LogoutBtn" onclick="Logout()">Logout</button>
           </div>
         </div>

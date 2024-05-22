@@ -193,13 +193,13 @@ a{
     border-radius: 5px
   }
   
-  header{
+  /* header{
     -moz-box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.1);
     box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.1);
     height: 110px;
     vertical-align: middle;
   }
-  
+   */
   h1{
    float: left;
     padding: 10px 30px

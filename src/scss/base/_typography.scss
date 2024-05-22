@@ -1,7 +1,13 @@
-h2 {
-  @include font_size_color(1.4rem, null, $Textblack, "Inter");
-  padding-bottom: 6px;
+h1 {
+  @include font_size_color(32px, null, $Textblack, "Inter");
 }
+h2{
+  @include font_size_color(24px, null, $Textblack, "Inter");
+}
+h3{
+  @include font_size_color(22px, null, $Textblack, "Inter");
+}
+
 h4 {
   @include font_size_color(0.8rem, null, $Textblack, "Inter");
   padding-bottom: 6px;
