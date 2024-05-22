@@ -277,6 +277,8 @@ async function notificationsInIt() {
 
   for (i of data) {
 
+    console.log(i[6])
+
     const tempJson = i[2];
     const formattedDate = formatDateTimeString(i[4]);
     console.log(i[2]);
