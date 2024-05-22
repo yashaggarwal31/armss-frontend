@@ -632,6 +632,7 @@ function setIds() {
   // });
 }
 
+// adding skill function
 function toSkillsclick(value) {
   if (value === "All") {
     Filterdata.Skill.SkillName = [];
@@ -674,6 +675,32 @@ toappendSkills = (data) => {
   }
 };
 
+// adding location function
+
+function tolocationclick(value) {
+  if (value === "All") {
+    LocationSearchHistory.innerHTML = "";
+    Filterdata.WorkExperience.Location = [];
+    toCheckSearchHistory();
+    toapplyfilters(Filterdata);
+  } else {
+    let values = Filterdata.WorkExperience.Location.find(
+      (item) => item.Location === value.toLowerCase()
+    );
+    console.log(values, value);
+    if (!values) {
+      Unique_id = generateUniqueId();
+      toAppendHistory(value, Unique_id, LocationSearchHistory);
+
+      Filterdata.WorkExperience.Location.push({
+        uniqueId: Unique_id,
+        Location: value.toLowerCase(),
+      });
+      console.log(Filterdata.WorkExperience);
+      toCheckSearchHistory();
+    }
+  }
+}
 toappendLocation = (data) => {
   Locationlist.innerHTML = "";
   data = data.States !== undefined ? data.States : data;
@@ -686,28 +713,8 @@ toappendLocation = (data) => {
     li.setAttribute("data-value", i);
     li.addEventListener("click", () => {
       // LocationValue.textContent = li.id === "All" ? "Location" : li.id;
-      if (li.id === "All") {
-        LocationSearchHistory.innerHTML = "";
-        Filterdata.WorkExperience.Location = [];
-        toCheckSearchHistory();
-        toapplyfilters(Filterdata);
-      } else {
-        let values = Filterdata.WorkExperience.Location.find(
-          (item) => item.Location === li.id.toLowerCase()
-        );
-        console.log(values, li.id);
-        if (!values) {
-          Unique_id = generateUniqueId();
-          toAppendHistory(li.id, Unique_id, LocationSearchHistory);
-
-          Filterdata.WorkExperience.Location.push({
-            uniqueId: Unique_id,
-            Location: li.id.toLowerCase(),
-          });
-          console.log(Filterdata.WorkExperience);
-          toCheckSearchHistory();
-        }
-      }
+      value = li.id;
+      tolocationclick(value);
       LocationdropdownFunction();
       // toget();
       toapplyfilters(Filterdata);
@@ -903,6 +910,15 @@ SearchLocation.addEventListener("input", (event) => {
   );
   data = new Set(data);
   toappendLocation([...data]);
+});
+
+SearchLocation.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && event.target.value.length > 0) {
+    tolocationclick(event.target.value);
+    toapplyfilters(Filterdata);
+    SearchLocation.value = "";
+    FetchingLocation();
+  }
 });
 
 // Append Location by input
