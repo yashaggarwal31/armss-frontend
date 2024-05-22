@@ -509,17 +509,14 @@ function toCheckRecent(data) {
 
 DropdownSelectFunction = (data) => {
   var listItems = data.getElementsByTagName("li");
-  let lst = ["All", "0-1", "1-3", "3-5", "5-9", "9-30"];
+  let lst = ["All", "0-1", "1-3", "3-5", "5-9", "9-50"];
   for (var i = 0; i < listItems.length; i++) {
     listItems[i].setAttribute("data-value", lst[i]);
     listItems[i].addEventListener("click", function () {
-      Filterdata.Candidate.Experience = [];
-
       let Value = document.getElementById(this.id).textContent;
-      console.log(Value);
-      let Experiencetitle = document.getElementById("ExperienceValue");
+      // let Experiencetitle = document.getElementById("ExperienceValue");
 
-      Experiencetitle.textContent = Value !== "All" ? Value : "Experience";
+      // Experiencetitle.textContent = Value !== "All" ? Value : "Experience";
       ExperienceDropdownFunction();
       if (Value === "All") {
         Filterdata.Candidate.Experience = [];
@@ -528,17 +525,23 @@ DropdownSelectFunction = (data) => {
         const [start, end] = this.getAttribute("data-value")
           .split("-")
           .map(Number);
-        function range(start, end) {
-          for (var i = start; i <= end; i++) {
-            Filterdata.Candidate.Experience.push({
-              uniqueId: generateUniqueId(),
-              Experience: i,
-            });
-          }
+        let items = Filterdata.Candidate.Experience.find(
+          (item) => item.Experience[0] === start && item.Experience[1] === end
+        );
+
+        if (!items) {
+          let Unique_id = generateUniqueId();
+          Filterdata.Candidate.Experience.push({
+            uniqueId: Unique_id,
+            Experience: [start, end],
+          });
+
+          toAppendHistory(Value, Unique_id, ExperienceSearchHistory);
+          toapplyfilters(Filterdata);
         }
-        range(start, end);
       }
-      toapplyfilters(Filterdata);
+
+      toCheckSearchHistory();
     });
   }
 };
@@ -598,6 +601,9 @@ function setIds() {
   LocationSuggestions = document.getElementById("LocationSuggestions");
   SuggestionContainer = document.getElementById("SuggestionContainer");
   LocationValue = document.getElementById("LocationValue");
+  LocationSearchHistory = document.getElementById("LocationSearchHistory");
+  SkillSearchHistory = document.getElementById("SkillSearchHistory");
+  ExperienceSearchHistory = document.getElementById("ExperienceSearchHistory");
 
   console.log(SuggestionContainer);
   DropdownSelectFunction(ExperienceList);
@@ -958,6 +964,10 @@ removeFunction = (id, item) => {
   if (item.id === "LocationSearchHistory") {
     Filterdata.WorkExperience.Location =
       Filterdata.WorkExperience.Location.filter((item) => item.uniqueId !== id);
+  } else if (item.id === "ExperienceSearchHistory") {
+    Filterdata.Candidate.Experience = Filterdata.Candidate.Experience.filter(
+      (item) => item.uniqueId !== id
+    );
   } else {
     Filterdata.Skill.SkillName = Filterdata.Skill.SkillName.filter(
       (item) => item.uniqueId !== id
@@ -993,9 +1003,9 @@ SearchHistoryContainer = document.getElementById("SearchHistoryContainer");
 function toCheckSearchHistory() {
   let LocationHistory = Filterdata.WorkExperience.Location.length;
   let SkillHistory = Filterdata.Skill.SkillName.length;
-  // let ExperienceHistory = Filterdata.Candidate.experience.length;
+  let ExperienceHistory = Filterdata.Candidate.Experience.length;
 
-  if (LocationHistory + SkillHistory === 0) {
+  if (LocationHistory + ExperienceHistory + SkillHistory === 0) {
     SearchHistoryContainer.style.display = "none";
   } else {
     SearchHistoryContainer.style.display = "grid";
@@ -1009,9 +1019,9 @@ document.getElementById("ClearHistory").addEventListener("click", function () {
   Filterdata.WorkExperience.Location = [];
   Filterdata.Skill.SkillName = [];
   Filterdata.Candidate.Experience = [];
-  ExperienceValue.textContent = "Experience";
   LocationSearchHistory.innerHTML = "";
   SkillSearchHistory.innerHTML = "";
+  ExperienceSearchHistory.innerHTML = "";
   SearchHistoryContainer.style.display = "none";
   // toget();
   toapplyfilters(Filterdata);
@@ -1072,15 +1082,16 @@ toapplyfilters = (data) => {
           });
         } else if (i === "Experience") {
           sampleData = sampleData.filter((item) => {
-            if (
-              parseFloat(item["Experience"]) >=
-                parseFloat(data[key][i].slice(0, 1)) &&
-              parseFloat(item["Experience"]) <
-                parseFloat(data[key][i].slice(-1))
-            ) {
-              return true;
+            let status = false;
+            for (let j of data[key][i]) {
+              if (
+                parseFloat(item["Experience"]) >= parseFloat(j.slice(0, 1)) &&
+                parseFloat(item["Experience"]) < parseFloat(j.slice(-1))
+              ) {
+                status = true;
+              }
             }
-            return false;
+            return status;
           });
         } else if (i === "SkillName") {
           sampleData = sampleData.filter((item) => {

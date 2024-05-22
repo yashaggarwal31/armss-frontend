@@ -179,7 +179,7 @@ button {
 }
 .Datasection-SearchHistory {
   display: grid;
-  grid-template-columns: 46% 46% 4%;
+  grid-template-columns: 32% 32% 30% 4%;
   gap: space-around;
   align-items: center;
   margin: 2rem 0;
