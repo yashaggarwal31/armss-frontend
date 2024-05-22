@@ -1,14 +1,19 @@
 .LoginPage {
+  @include position(relative);
   &-Container {
     @include width_height(100vh);
     @include grid(grid, 0.8fr 1fr);
-    gap: 86px;
     overflow: hidden;
+    padding: 0 4rem;
   }
   &-LogoContainer {
-    padding: 20px;
+    padding: 38px 35px;
     @include font_size_color(1rem, 400, $white, "Inter");
     @include flex(flex, row, null, baseline);
+    h2 {
+      font-size: 32px;
+      font-weight: 500;
+    }
   }
   &-logo {
     @include width_height(52px, 52px);
@@ -16,7 +21,7 @@
   &-border {
     @include width_height(52px, 1px);
     border: 1px solid $white;
-    margin: 0 10px;
+    margin: 0 12px 0 16px;
   }
   &-CarouselContainer {
     background-image: radial-gradient(
@@ -27,8 +32,6 @@
       rgb(6, 86, 207, 100%),
       rgb(6, 86, 207, 100%)
     );
-
-    margin-left: 90px;
   }
 
   &-Carousel {
@@ -40,7 +43,11 @@
   &-CarouselImages {
     min-width: 40px;
     flex: 1 0 100%;
+    margin-bottom: 20px;
     @include flex(flex, column, center, center);
+    img {
+      margin-bottom: 20px;
+    }
     h4 {
       @include font_size_color(1.4rem, 600, #fff, "Inter");
       text-align: center;
@@ -48,10 +55,10 @@
 
     p {
       width: 100%;
-      padding: 10px 30px;
       line-height: 1rem;
       text-align: center;
-      @include font_size_color(0.6rem, null, #fff, "Inter");
+      line-height: 24px;
+      @include font_size_color(1rem, 400, rgba(255, 255, 255, 0.9), "Inter");
     }
   }
 }
@@ -61,14 +68,13 @@
   padding: 0px;
 }
 .CarouselImg {
-  width: 100%;
+  width: 88%;
   text-align: center;
 }
 
 .dots {
   position: absolute;
-  bottom: 0px;
-  left: 44%;
+  bottom: 35px;
   display: flex;
   align-items: center;
 }
