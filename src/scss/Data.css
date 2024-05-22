@@ -179,7 +179,7 @@ button {
 }
 .Datasection-SearchHistory {
   display: grid;
-  grid-template-columns: 46% 46% 4%;
+  grid-template-columns: 32% 32% 30% 4%;
   gap: space-around;
   align-items: center;
   margin: 2rem 0;
@@ -564,4 +564,8 @@ button {
 .Datasearchcontainer svg {
   width: 1.4rem;
   height: 1.4rem;
+}
+
+.ondisablebutton {
+  background-color: #779ae0;
 }/*# sourceMappingURL=Data.css.map */

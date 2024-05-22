@@ -385,7 +385,18 @@ function displayItems(data, page) {
       ? Object.values(data[1]).slice(startIndex, endIndex)
       : null;
   console.log("page items ", pageItems);
-
+  if (currentPage === 1) {
+    document.getElementById("previous-button").classList.add("ondisablebutton");
+  } else {
+    document
+      .getElementById("previous-button")
+      .classList.remove("ondisablebutton");
+  }
+  if (currentPage === Math.ceil(data[0] === 0 ? 1 : data[0] / itemsPerPage)) {
+    document.getElementById("next-button").classList.add("ondisablebutton");
+  } else {
+    document.getElementById("next-button").classList.remove("ondisablebutton");
+  }
   toShowData([data[0], pageItems]);
 
   const pageContainer = document.getElementById("page-number");
@@ -498,17 +509,14 @@ function toCheckRecent(data) {
 
 DropdownSelectFunction = (data) => {
   var listItems = data.getElementsByTagName("li");
-  let lst = ["All", "0-1", "1-3", "3-5", "5-9", "9-30"];
+  let lst = ["All", "0-1", "1-3", "3-5", "5-9", "9-50"];
   for (var i = 0; i < listItems.length; i++) {
     listItems[i].setAttribute("data-value", lst[i]);
     listItems[i].addEventListener("click", function () {
-      Filterdata.Candidate.Experience = [];
-
       let Value = document.getElementById(this.id).textContent;
-      console.log(Value);
-      let Experiencetitle = document.getElementById("ExperienceValue");
+      // let Experiencetitle = document.getElementById("ExperienceValue");
 
-      Experiencetitle.textContent = Value !== "All" ? Value : "Experience";
+      // Experiencetitle.textContent = Value !== "All" ? Value : "Experience";
       ExperienceDropdownFunction();
       if (Value === "All") {
         Filterdata.Candidate.Experience = [];
@@ -517,17 +525,23 @@ DropdownSelectFunction = (data) => {
         const [start, end] = this.getAttribute("data-value")
           .split("-")
           .map(Number);
-        function range(start, end) {
-          for (var i = start; i <= end; i++) {
-            Filterdata.Candidate.Experience.push({
-              uniqueId: generateUniqueId(),
-              Experience: i,
-            });
-          }
+        let items = Filterdata.Candidate.Experience.find(
+          (item) => item.Experience[0] === start && item.Experience[1] === end
+        );
+
+        if (!items) {
+          let Unique_id = generateUniqueId();
+          Filterdata.Candidate.Experience.push({
+            uniqueId: Unique_id,
+            Experience: [start, end],
+          });
+
+          toAppendHistory(Value, Unique_id, ExperienceSearchHistory);
+          toapplyfilters(Filterdata);
         }
-        range(start, end);
       }
-      toapplyfilters(Filterdata);
+
+      toCheckSearchHistory();
     });
   }
 };
@@ -587,6 +601,9 @@ function setIds() {
   LocationSuggestions = document.getElementById("LocationSuggestions");
   SuggestionContainer = document.getElementById("SuggestionContainer");
   LocationValue = document.getElementById("LocationValue");
+  LocationSearchHistory = document.getElementById("LocationSearchHistory");
+  SkillSearchHistory = document.getElementById("SkillSearchHistory");
+  ExperienceSearchHistory = document.getElementById("ExperienceSearchHistory");
 
   console.log(SuggestionContainer);
   DropdownSelectFunction(ExperienceList);
@@ -621,6 +638,27 @@ function setIds() {
   // });
 }
 
+// adding skill function
+function toSkillsclick(value) {
+  if (value === "All") {
+    Filterdata.Skill.SkillName = [];
+  } else {
+    let values = Filterdata.Skill.SkillName.find(
+      (item) => item.SkillName === value
+    );
+    console.log(values);
+    if (!values) {
+      let Unique_id = generateUniqueId();
+      Filterdata.Skill.SkillName.push({
+        uniqueId: Unique_id,
+        SkillName: value.toLowerCase(),
+      });
+      toAppendHistory(value, Unique_id, SkillSearchHistory);
+      toCheckSearchHistory();
+    }
+  }
+}
+
 toappendSkills = (data) => {
   console.log(data);
   SkillList.innerHTML = "";
@@ -632,23 +670,8 @@ toappendSkills = (data) => {
     li.id = i;
     li.setAttribute("data-value", i);
     li.addEventListener("click", () => {
-      if (li.id === "All") {
-        Filterdata.Skill.SkillName = [];
-      } else {
-        let values = Filterdata.Skill.SkillName.find(
-          (item) => item.SkillName === li.id
-        );
-        console.log(values);
-        if (!values) {
-          let Unique_id = generateUniqueId();
-          Filterdata.Skill.SkillName.push({
-            uniqueId: Unique_id,
-            SkillName: li.id.toLowerCase(),
-          });
-          toAppendHistory(li.id, Unique_id, SkillSearchHistory);
-          toCheckSearchHistory();
-        }
-      }
+      value = li.id;
+      toSkillsclick(value);
       toapplyfilters(Filterdata);
 
       SkillDropdownFunction();
@@ -658,6 +681,32 @@ toappendSkills = (data) => {
   }
 };
 
+// adding location function
+
+function tolocationclick(value) {
+  if (value === "All") {
+    LocationSearchHistory.innerHTML = "";
+    Filterdata.WorkExperience.Location = [];
+    toCheckSearchHistory();
+    toapplyfilters(Filterdata);
+  } else {
+    let values = Filterdata.WorkExperience.Location.find(
+      (item) => item.Location === value.toLowerCase()
+    );
+    console.log(values, value);
+    if (!values) {
+      Unique_id = generateUniqueId();
+      toAppendHistory(value, Unique_id, LocationSearchHistory);
+
+      Filterdata.WorkExperience.Location.push({
+        uniqueId: Unique_id,
+        Location: value.toLowerCase(),
+      });
+      console.log(Filterdata.WorkExperience);
+      toCheckSearchHistory();
+    }
+  }
+}
 toappendLocation = (data) => {
   Locationlist.innerHTML = "";
   data = data.States !== undefined ? data.States : data;
@@ -670,28 +719,8 @@ toappendLocation = (data) => {
     li.setAttribute("data-value", i);
     li.addEventListener("click", () => {
       // LocationValue.textContent = li.id === "All" ? "Location" : li.id;
-      if (li.id === "All") {
-        LocationSearchHistory.innerHTML = "";
-        Filterdata.WorkExperience.Location = [];
-        toCheckSearchHistory();
-        toapplyfilters(Filterdata);
-      } else {
-        let values = Filterdata.WorkExperience.Location.find(
-          (item) => item.Location === li.id.toLowerCase()
-        );
-        console.log(values, li.id);
-        if (!values) {
-          Unique_id = generateUniqueId();
-          toAppendHistory(li.id, Unique_id, LocationSearchHistory);
-
-          Filterdata.WorkExperience.Location.push({
-            uniqueId: Unique_id,
-            Location: li.id.toLowerCase(),
-          });
-          console.log(Filterdata.WorkExperience);
-          toCheckSearchHistory();
-        }
-      }
+      value = li.id;
+      tolocationclick(value);
       LocationdropdownFunction();
       // toget();
       toapplyfilters(Filterdata);
@@ -889,6 +918,15 @@ SearchLocation.addEventListener("input", (event) => {
   toappendLocation([...data]);
 });
 
+SearchLocation.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && event.target.value.length > 0) {
+    tolocationclick(event.target.value);
+    toapplyfilters(Filterdata);
+    SearchLocation.value = "";
+    FetchingLocation();
+  }
+});
+
 // Append Location by input
 
 // SearchLocation.addEventListener("keydown", (event) => {
@@ -926,6 +964,10 @@ removeFunction = (id, item) => {
   if (item.id === "LocationSearchHistory") {
     Filterdata.WorkExperience.Location =
       Filterdata.WorkExperience.Location.filter((item) => item.uniqueId !== id);
+  } else if (item.id === "ExperienceSearchHistory") {
+    Filterdata.Candidate.Experience = Filterdata.Candidate.Experience.filter(
+      (item) => item.uniqueId !== id
+    );
   } else {
     Filterdata.Skill.SkillName = Filterdata.Skill.SkillName.filter(
       (item) => item.uniqueId !== id
@@ -961,9 +1003,9 @@ SearchHistoryContainer = document.getElementById("SearchHistoryContainer");
 function toCheckSearchHistory() {
   let LocationHistory = Filterdata.WorkExperience.Location.length;
   let SkillHistory = Filterdata.Skill.SkillName.length;
-  // let ExperienceHistory = Filterdata.Candidate.experience.length;
+  let ExperienceHistory = Filterdata.Candidate.Experience.length;
 
-  if (LocationHistory + SkillHistory === 0) {
+  if (LocationHistory + ExperienceHistory + SkillHistory === 0) {
     SearchHistoryContainer.style.display = "none";
   } else {
     SearchHistoryContainer.style.display = "grid";
@@ -977,9 +1019,9 @@ document.getElementById("ClearHistory").addEventListener("click", function () {
   Filterdata.WorkExperience.Location = [];
   Filterdata.Skill.SkillName = [];
   Filterdata.Candidate.Experience = [];
-  ExperienceValue.textContent = "Experience";
   LocationSearchHistory.innerHTML = "";
   SkillSearchHistory.innerHTML = "";
+  ExperienceSearchHistory.innerHTML = "";
   SearchHistoryContainer.style.display = "none";
   // toget();
   toapplyfilters(Filterdata);
@@ -996,6 +1038,17 @@ document
     toappendSkills(data);
   });
 
+// Search Skills by Enter
+document
+  .getElementById("SearchSkills")
+  .addEventListener("keydown", function (event) {
+    if (event.key === "Enter" && event.target.value.length > 0) {
+      toSkillsclick(event.target.value);
+      document.getElementById("SearchSkills").value = "";
+      FetchingSkills();
+      toapplyfilters(Filterdata);
+    }
+  });
 // toapplyFilters
 
 toapplyfilters = (data) => {
@@ -1029,15 +1082,16 @@ toapplyfilters = (data) => {
           });
         } else if (i === "Experience") {
           sampleData = sampleData.filter((item) => {
-            if (
-              parseFloat(item["Experience"]) >=
-                parseFloat(data[key][i].slice(0, 1)) &&
-              parseFloat(item["Experience"]) <
-                parseFloat(data[key][i].slice(-1))
-            ) {
-              return true;
+            let status = false;
+            for (let j of data[key][i]) {
+              if (
+                parseFloat(item["Experience"]) >= parseFloat(j.slice(0, 1)) &&
+                parseFloat(item["Experience"]) < parseFloat(j.slice(-1))
+              ) {
+                status = true;
+              }
             }
-            return false;
+            return status;
           });
         } else if (i === "SkillName") {
           sampleData = sampleData.filter((item) => {

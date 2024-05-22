@@ -165,7 +165,10 @@ SearchFilters.addEventListener("keydown", function (event) {
 
 // functionality
 async function onSubmiting() {
-  data = SearchFilters.value.split(" and ");
+  SearchFilters.blur();
+  value = SearchFilters.value.replace(/\s+/g, " ").trim();
+
+  data = value.split(" and ");
   if (
     MainSuggestionData.SubCategoriesData.find(
       (item) => item.toLowerCase() === data[0].toLowerCase()
@@ -244,36 +247,32 @@ clearsearchvalue.addEventListener("click", function () {
 
 async function getNotifications() {
   try {
-    const response = await fetch("https://armss-be.exitest.com/get-notifications", {
-      method: 'POST'
-    });
+    const response = await fetch(
+      "https://armss-be.exitest.com/get-notifications",
+      {
+        method: "POST",
+      }
+    );
     const data = await response.json();
 
     console.log(data);
 
     return data;
+  } catch (error) {
+    console.log("failed to fetch notifications: ", error);
   }
-  catch (error) {
-    console.log('failed to fetch notifications: ', error)
-  }
-
-
 }
 
-
-
 async function notificationsInIt() {
-
-  document.getElementById('notification-container').style.height = '60vh';
+  document.getElementById("notification-container").style.height = "60vh";
 
   const data = await getNotifications();
-  console.log('data:', data)
-  const notificationList = document.getElementById('notifications-list');
+  console.log("data:", data);
+  const notificationList = document.getElementById("notifications-list");
 
-  notificationList.innerHTML = '';
+  notificationList.innerHTML = "";
 
   for (i of data) {
-
     const tempJson = i[2];
     const formattedDate = formatDateTimeString(i[4]);
     console.log(i[2]);
@@ -281,8 +280,8 @@ async function notificationsInIt() {
 
     const fileCount = notificationJson.fileCount;
 
-    const notificationDiv = document.createElement('div');
-    notificationDiv.classList.add('sec');
+    const notificationDiv = document.createElement("div");
+    notificationDiv.classList.add("sec");
 
     const txtDiv = document.createElement('div');
     txtDiv.classList.add('txt');
@@ -308,24 +307,23 @@ async function notificationsInIt() {
 
     notificationDiv.appendChild(subDiv);
 
-    notificationList.appendChild(notificationDiv)
+    notificationList.appendChild(notificationDiv);
   }
-
-
-
 }
 
-
-
 window.addEventListener("click", function (event) {
-  const notificationContainer = document.getElementById('notification-container');
-  const icon = document.getElementById('icon');
+  const notificationContainer = document.getElementById(
+    "notification-container"
+  );
+  const icon = document.getElementById("icon");
 
-  if (!notificationContainer.contains(event.target) && !icon.contains(event.target)) {
-    notificationContainer.style.height = '0';
+  if (
+    !notificationContainer.contains(event.target) &&
+    !icon.contains(event.target)
+  ) {
+    notificationContainer.style.height = "0";
   }
 });
-
 
 // const formatDateTimeString = (utcDateString) => {
 //   if (!utcDateString) return ''
@@ -371,7 +369,7 @@ window.addEventListener("click", function (event) {
 // }
 
 const formatDateTimeString = (utcDateString) => {
-  if (!utcDateString) return '';
+  if (!utcDateString) return "";
 
   const utcDate = new Date(utcDateString);
 
@@ -388,13 +386,25 @@ const formatDateTimeString = (utcDateString) => {
   const seconds = istDate.getSeconds();
 
   const monthNames = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
   const monthName = monthNames[month - 1];
 
   const formattedDate = `${monthName} ${day}, ${year}`;
-  const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} IST`;
+  const formattedTime = `${String(hours).padStart(2, "0")}:${String(
+    minutes
+  ).padStart(2, "0")}:${String(seconds).padStart(2, "0")} IST`;
 
   return `${formattedDate} ${formattedTime}`;
 };
