@@ -263,7 +263,10 @@ async function getNotifications() {
   }
 }
 
+
+
 async function notificationsInIt() {
+
   document.getElementById("notification-container").style.height = "60vh";
 
   const data = await getNotifications();
@@ -273,6 +276,7 @@ async function notificationsInIt() {
   notificationList.innerHTML = "";
 
   for (i of data) {
+
     const tempJson = i[2];
     const formattedDate = formatDateTimeString(i[4]);
     console.log(i[2]);
@@ -296,6 +300,10 @@ async function notificationsInIt() {
     dateSpan.textContent = formattedDate;
 
     const statusSpan = document.createElement('span');
+    // statusSpan.addEventListener('click', () => {
+    //   viewUploadErrorDetails();
+    // })
+
     statusSpan.textContent = 'InProgress';
     statusSpan.classList.add('UploadinProgress');
 
@@ -411,3 +419,9 @@ const formatDateTimeString = (utcDateString) => {
 
 // Example usage
 console.log(formatDateTimeString("2024-05-21T12:00:00Z")); // Outputs: May 21, 2024 17:30:00 IST
+
+
+
+function viewUploadErrorDetails() {
+  uploadDialog.showModal();
+}
