@@ -916,11 +916,6 @@ body {
   width: 280px;
 }
 
-.Icon {
-  width: 8px;
-  height: 18px;
-}
-
 .ContainerList {
   background-color: #f7faff;
   border-radius: 1rem;
@@ -1336,4 +1331,4 @@ button {
   height: 1.4rem;
   width: 1.4rem;
   cursor: pointer;
-}/*# sourceMappingURL=MainPage.css.map */
+}/*# sourceMappingURL=--MainPage.css.map */
