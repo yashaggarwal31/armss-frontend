@@ -36,6 +36,9 @@ send_data = {
     Skill: {
       check: [],
     },
+    Address: {
+      check: [],
+    },
     ResumeIdList: {
       check: [],
       ResumeIdValue: [],
