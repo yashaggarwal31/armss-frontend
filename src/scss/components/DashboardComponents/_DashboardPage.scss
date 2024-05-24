@@ -58,10 +58,9 @@ body {
   }
 }
 
-// .Icon {
-//   width: 8px;
-//   height: 18px;
-// }
+.Icon {
+  @include width_height(1rem, 1rem);
+}
 
 .ContainerList {
   background-color: $mainBackground;

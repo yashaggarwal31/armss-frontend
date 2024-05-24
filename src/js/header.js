@@ -165,30 +165,32 @@ SearchFilters.addEventListener("keydown", function (event) {
 
 // functionality
 async function onSubmiting() {
-  SearchFilters.blur();
-  value = SearchFilters.value.replace(/\s+/g, " ").trim();
+  if (SearchFilters.value.length > 0) {
+    SearchFilters.blur();
+    value = SearchFilters.value.replace(/\s+/g, " ").trim();
 
-  data = value.split(" and ");
-  if (
-    MainSuggestionData.SubCategoriesData.find(
-      (item) => item.toLowerCase() === data[0].toLowerCase()
-    )
-  ) {
-    FilteringData.onFolderValue = true;
-    FilteringData.onSelectSubFolder = data.join(" & ");
-    FilteringData.chatbotData = false;
-  } else {
-    FilteringData.onFolderValue = false;
-    FilteringData.onSelectSubFolder = data.join(" and ");
+    data = value.split(" and ");
+    if (
+      MainSuggestionData.SubCategoriesData.find(
+        (item) => item.toLowerCase() === data[0].toLowerCase()
+      )
+    ) {
+      FilteringData.onFolderValue = true;
+      FilteringData.onSelectSubFolder = data.join(" & ");
+      FilteringData.chatbotData = false;
+    } else {
+      FilteringData.onFolderValue = false;
+      FilteringData.onSelectSubFolder = data.join(" and ");
 
-    FilteringData.chatbotData = false;
+      FilteringData.chatbotData = false;
+    }
+    if (data.length > 0) {
+      FilteringData.page = "data";
+      await triggerDOMContentLoaded();
+    }
+
+    // SearchItems.innerHTML = "";
   }
-  if (data.length > 0) {
-    FilteringData.page = "data";
-    await triggerDOMContentLoaded();
-  }
-
-  // SearchItems.innerHTML = "";
 }
 
 SearchButton.addEventListener("click", onSubmiting);

@@ -183,39 +183,44 @@ function generateUniqueId() {
 // }
 
 function toLoadContent() {
-  loader.style.display = "flex";
-  const dataString = FilteringData.onSelectSubFolder;
-  const searchvalue = FilteringData.onFolderValue;
-  const chatbotData = FilteringData.chatbotData;
-  console.log(dataString, searchvalue, chatbotData);
-  if (dataString && !chatbotData) {
-    const data = dataString;
-    document.getElementById("heading").textContent = data;
-    console.log(searchvalue);
-    if (searchvalue === false) {
-      let data1 = {
-        query: data,
-      };
-      console.log(data1);
-      let url = new URL("https://armss-be.exitest.com/search_query/");
-      const method = "POST";
-      toget(url, method, data1, false);
+  try {
+    loader.style.display = "flex";
+    const dataString = FilteringData.onSelectSubFolder;
+    const searchvalue = FilteringData.onFolderValue;
+    const chatbotData = FilteringData.chatbotData;
+    console.log(dataString, searchvalue, chatbotData);
+    if (dataString && !chatbotData) {
+      const data = dataString;
+      document.getElementById("heading").textContent = data;
+      console.log(searchvalue);
+      if (searchvalue === false) {
+        let data1 = {
+          query: data,
+        };
+        console.log(data1);
+        let url = new URL("https://armss-be.exitest.com/search_query/");
+        const method = "POST";
+        toget(url, method, data1, false);
+      } else {
+        let data1 = {
+          category_data: data,
+        };
+        let url = new URL("https://armss-be.exitest.com/displayskillmap/");
+        url.search = new URLSearchParams(data1).toString();
+        method = "GET";
+        toget(url, method);
+      }
     } else {
-      let data1 = {
-        category_data: data,
-      };
-      let url = new URL("https://armss-be.exitest.com/displayskillmap/");
-      url.search = new URLSearchParams(data1).toString();
-      method = "GET";
-      toget(url, method);
+      document.getElementById("heading").textContent = "Chatbot Results";
+      FilteringData.onFolderValue = false;
+      let url = new URL("https://armss-be.exitest.com/full_resume_data");
+      let method = "POST";
+      console.log(FilteringData.chatbotResumeIds);
+      toget(url, method, JSON.parse(FilteringData.chatbotResumeIds), false);
     }
-  } else {
-    document.getElementById("heading").textContent = "Chatbot Results";
-    FilteringData.onFolderValue = false;
-    let url = new URL("https://armss-be.exitest.com/full_resume_data");
-    let method = "POST";
-    console.log(FilteringData.chatbotResumeIds);
-    toget(url, method, JSON.parse(FilteringData.chatbotResumeIds), false);
+  } catch (e) {
+    alert(e.toString());
+    loader.style.display = "none";
   }
 }
 toLoadContent();
