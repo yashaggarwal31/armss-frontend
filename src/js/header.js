@@ -265,7 +265,10 @@ async function getNotifications() {
   }
 }
 
+
+
 async function notificationsInIt() {
+
   document.getElementById("notification-container").style.height = "60vh";
 
   const data = await getNotifications();
@@ -275,6 +278,9 @@ async function notificationsInIt() {
   notificationList.innerHTML = "";
 
   for (i of data) {
+
+    console.log(i[6])
+
     const tempJson = i[2];
     const formattedDate = formatDateTimeString(i[4]);
     console.log(i[2]);
@@ -285,23 +291,32 @@ async function notificationsInIt() {
     const notificationDiv = document.createElement("div");
     notificationDiv.classList.add("sec");
 
-    // Create the first child div with class 'txt' and set its content
-    const txtDiv = document.createElement("div");
-    txtDiv.classList.add("txt");
-    txtDiv.textContent = `A new upload session of ${fileCount} file${
-      fileCount == 1 ? "" : "s"
-    } was created!`;
+    const txtDiv = document.createElement('div');
+    txtDiv.classList.add('txt');
+    txtDiv.textContent = `A new upload session of ${fileCount} file${fileCount == 1 ? '' : 's'} was created!`;
 
-    // Append the first child div to the main div
     notificationDiv.appendChild(txtDiv);
 
-    // Create the second child div with class 'txt sub' and set its content
-    const subDiv = document.createElement("div");
+    const subDiv = document.createElement('div');
+    subDiv.classList.add('txt', 'sub', 'flex-span');
 
-    subDiv.classList.add("txt", "sub");
-    subDiv.textContent = `Upload is InProgress, created at: ${formattedDate}`;
+    const dateSpan = document.createElement('span');
+    dateSpan.textContent = formattedDate;
 
-    // Append the second child div to the main div
+    const statusSpan = document.createElement('span');
+    // statusSpan.addEventListener('click', () => {
+    //   viewUploadErrorDetails();
+    // })
+
+    statusSpan.textContent = 'InProgress';
+    statusSpan.classList.add('UploadinProgress');
+
+
+    subDiv.appendChild(dateSpan);
+    subDiv.appendChild(statusSpan);
+
+
+
     notificationDiv.appendChild(subDiv);
 
     notificationList.appendChild(notificationDiv);
@@ -408,3 +423,9 @@ const formatDateTimeString = (utcDateString) => {
 
 // Example usage
 console.log(formatDateTimeString("2024-05-21T12:00:00Z")); // Outputs: May 21, 2024 17:30:00 IST
+
+
+
+function viewUploadErrorDetails() {
+  uploadDialog.showModal();
+}
