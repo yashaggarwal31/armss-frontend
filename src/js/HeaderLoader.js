@@ -72,10 +72,10 @@ getMainHtml = async (value) => {
     const data = await response.text();
     const parser = new DOMParser();
     const htmlDocument = parser.parseFromString(data, "text/html");
-    document.head.innerHTML = "";
+    // document.head.innerHTML = "";
 
-    const headContent = htmlDocument.querySelector("head").innerHTML;
-    document.head.innerHTML = headContent;
+    // const headContent = htmlDocument.querySelector("head").innerHTML;
+    // document.head.innerHTML = headContent;
 
     var script = document.createElement("script");
     script.src = "./js/Dashboard.js";
@@ -127,10 +127,10 @@ getContentHtml = async () => {
     const parser = new DOMParser();
     const htmlDocument = parser.parseFromString(data, "text/html");
     console.log(htmlDocument);
-    document.head.innerHTML = "";
+    // document.head.innerHTML = "";
 
-    const headContent = htmlDocument.querySelector("head").innerHTML;
-    document.head.innerHTML = headContent;
+    // const headContent = htmlDocument.querySelector("head").innerHTML;
+    // document.head.innerHTML = headContent;
     // const temContainer = document.createElement("div");
     // temContainer.innerHTML = data;
 
