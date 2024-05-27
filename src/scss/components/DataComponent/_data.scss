@@ -3,26 +3,28 @@
 }
 
 .Datasection {
-  max-height: 86vh;
+  // max-height: 86vh;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 1rem;
+  padding: 2rem;
   font-family: "Inter";
 
   &-TitleContainer {
     @include flex(flex, row, space-between, center);
+    margin-bottom: 2rem;
   }
 
   &-RoleContainer {
     .heading {
-      @include font_size_color(1.4rem, 700, $backgraoundBlue, "Inter");
+      @include font_size_color(2rem, 600, $backgraoundBlue, "Inter");
+      margin-bottom: 8px;
     }
   }
 
   &-headingContainer {
     padding: 1rem;
     background-color: #f4f7ff;
-    @include font_size_color(0.8rem, 600, $Textblack, "Inter");
+    @include font_size_color(1rem, 600, $Textblack, "Inter");
     @include grid(
       grid,
       10% 12.8% 8.8% 10.4% 18% 12% 14% 10% 6%,
@@ -202,7 +204,6 @@
 }
 
 #paraelemnet {
-  padding-bottom: 10px;
   @include font_size_color(0.8rem, null, $Textblack, "Inter");
 }
 

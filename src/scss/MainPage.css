@@ -42,7 +42,6 @@ h2 {
   font-size: 1.4rem;
   color: #333333;
   font-family: "Inter";
-  padding-bottom: 6px;
 }
 
 h4 {
@@ -1413,10 +1412,9 @@ button.primary {
 }
 
 .Datasection {
-  max-height: 86vh;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 1rem;
+  padding: 2rem;
   font-family: "Inter";
 }
 .Datasection-TitleContainer {
@@ -1424,17 +1422,19 @@ button.primary {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 2rem;
 }
 .Datasection-RoleContainer .heading {
-  font-size: 1.4rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 600;
   color: #0052f1;
   font-family: "Inter";
+  margin-bottom: 8px;
 }
 .Datasection-headingContainer {
   padding: 1rem;
   background-color: #f4f7ff;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #333333;
   font-family: "Inter";
@@ -1659,7 +1659,6 @@ button.primary {
 }
 
 #paraelemnet {
-  padding-bottom: 10px;
   font-size: 0.8rem;
   color: #333333;
   font-family: "Inter";
