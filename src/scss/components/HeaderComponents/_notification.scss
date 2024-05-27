@@ -275,6 +275,24 @@ body {
   color: #d63031;
 }
 
+.flex-span {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Adjust as needed */
+}
+
+.UploadinProgress {
+  color: rgba(255, 166, 23, 0.721);
+}
+
+.UploadSuccess {
+  color: rgba(56, 236, 56, 0.582);
+}
+
+.UploadErrors {
+  color: rgba(255, 44, 44, 0.582);
+}
+
 /* .notBtn > .box{
   height: 60vh
 } */
@@ -366,3 +384,43 @@ body {
 }
 
 /* CSS BELL END */
+
+.div-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.div-center-specific {
+  margin-top: 11rem;
+}
+
+.loader {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  --c: no-repeat linear-gradient(#0052f1 0 0);
+  background: var(--c) center/100% 10px, var(--c) center/10px 100%;
+}
+.loader:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--c) 0 0, var(--c) 100% 0, var(--c) 0 100%, var(--c) 100% 100%;
+  background-size: 15.5px 15.5px;
+  animation: l16 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+}
+@keyframes l16 {
+  33% {
+    inset: -10px;
+    transform: rotate(0deg);
+  }
+  66% {
+    inset: -10px;
+    transform: rotate(90deg);
+  }
+  100% {
+    inset: 0;
+    transform: rotate(90deg);
+  }
+}

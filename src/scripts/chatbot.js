@@ -8,6 +8,7 @@ let querysearch = document.getElementById("querysearch");
 
 btn.onclick = function () {
   ChatbotContainer.style.display = "flex";
+  querysearch.focus();
 };
 spaner.onclick = function () {
   ChatbotContainer.style.display = "none";
