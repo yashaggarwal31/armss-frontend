@@ -59,8 +59,7 @@ body {
 }
 
 .Icon {
-  width: 8px;
-  height: 18px;
+  @include width_height(1rem, 1rem);
 }
 
 .ContainerList {
