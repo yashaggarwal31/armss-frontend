@@ -994,7 +994,7 @@ function toAppendHistory(data, id, list) {
   li.appendChild(p);
 
   let span = document.createElement("span");
-  span.textContent = " X ";
+  span.textContent = "❌";
   li.appendChild(span);
 
   li.id = id;

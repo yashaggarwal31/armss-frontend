@@ -4,7 +4,6 @@ h2 {
 }
 h4 {
   @include font_size_color(0.8rem, null, $Textblack, "Inter");
-  padding-bottom: 6px;
 }
 p {
   color: $Textblack;

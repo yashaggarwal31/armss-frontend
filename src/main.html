@@ -18,13 +18,14 @@
       <dialog id="dialog" class="upload-dialog main-upload-div">
         <div id="upload-parent-wrapper">
           <div id="upload-child-wrapper">
-            <div class="upload-files-title-div">
-              <span class="upload-files-title">Upload Files</span>
-              <div>
+            <div  class="upload-title">
+              <div class="upload-files-title-div">
+                <span class="upload-files-title">Upload Files</span>
+              </div>
+              <div class="close-icon">
                 <svg onclick="window.dialog.close();" class="upload-minimize">
                   <use xlink:href="./Icons/icons.svg#upload-minimize" />
                 </svg>
-
                 <button
                   id="upload-reset"
                   aria-label="close"
@@ -34,7 +35,6 @@
                 </button>
               </div>
             </div>
-
             <div id="upload-zone" class="upload-zone-div div-center flex-col">
               <input
                 class="isVisuallyHidden"
@@ -50,25 +50,29 @@
                 src="./assets/upload-icon.png"
                 alt=""
               />
+              <div class="text-center upload-text">
+                <p>
+                  Drag & drop files, <span style="color: blue">Browse</span>
+                </p>
+                <p><span>Or</span></p>
+                <div class="div-center gap-1">
+                  <a
+                    id="drivelink"
+                    href="drive.google.com"
+                    target="_blank"
+                    class="google-drive"
+                    >from Google Drive</a
+                  >
+                  <img
+                    style="display: inline; width: 20px; height: 20px"
+                    src="./assets/google-drive.png"
+                    alt=""
+                  />
+                </div>
+              </div>
 
-              <div>
-                Drag & drop files, <span style="color: blue">Browse</span>
-              </div>
-              <div><span>Or</span></div>
-              <div class="div-center gap-1">
-                <a
-                  id="drivelink"
-                  href="drive.google.com"
-                  target="_blank"
-                  class="google-drive"
-                  >from Google Drive</a
-                >
-                <img
-                  style="display: inline; width: 20px; height: 20px"
-                  src="./assets/google-drive.png"
-                  alt=""
-                />
-              </div>
+             
+              
 
               <div class="upload-files-supported text-center">
                 PNG, JPEG, PDF, TXT are supported
@@ -163,6 +167,8 @@
                 </ul>
               </div>
             </div>
+          </div>
+          
           </div>
         </div>
       </dialog>
