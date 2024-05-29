@@ -1,4 +1,4 @@
-const FilteringData = {
+let FilteringData = {
   FetchedData: [],
   LocationCities: [],
   Skills: [],
@@ -14,14 +14,17 @@ const FilteringData = {
   TemporaryData: [],
 };
 
-console.log(FilteringData);
-
 let loaded = false;
 
 window.onload = () => {
   isLogout();
 };
 document.addEventListener("DOMContentLoaded", async () => {
+  if (sessionStorage.getItem("data")) {
+    FilteringData = JSON.parse(sessionStorage.getItem("data"));
+    sessionStorage.removeItem("data");
+    await getHtml();
+  }
   if (FilteringData.page === "") {
     // FilteringData.page = "main";
     await getHtml();
@@ -44,8 +47,10 @@ async function triggerDOMContentLoaded() {
 // refresh
 
 window.addEventListener("beforeunload", function (event) {
-  // event.preventDefault();
-  return false;
+  let data = FilteringData;
+  data = JSON.stringify(data);
+  this.sessionStorage.setItem("data", data);
+  event.preventDefault();
 });
 
 const Filterdata = {
