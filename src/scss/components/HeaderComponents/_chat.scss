@@ -85,6 +85,7 @@
 
     h2 {
       @include font_size_color(14px, 400, $Textblack, "Inter");
+      margin-bottom: 10px;
     }
     .input {
       @include width_height(null, 96%);

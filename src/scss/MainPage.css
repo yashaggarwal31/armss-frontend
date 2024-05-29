@@ -1133,6 +1133,7 @@ h4.failure {
   outline: none;
   visibility: hidden;
   transition: visibility 0.6s;
+  z-index: 20;
 }
 
 .ProfileContainer:hover .LogoutBtn {
@@ -2191,6 +2192,7 @@ button {
   font-weight: 400;
   color: #333333;
   font-family: "Inter";
+  margin-bottom: 10px;
 }
 .section-questioncontent .input {
   width: 96%;
