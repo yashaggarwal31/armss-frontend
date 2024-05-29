@@ -3,15 +3,16 @@ body {
 }
 .Dashboard {
   // background-color: $white;
-  max-height: 84.8vh;
   overflow-y: auto;
   overflow-x: hidden;
 
   &-container {
-    padding: 1rem;
-    background-color: $mainBackground;
+    height: calc(100vh - 110px);
+    overflow-y: auto;
+    padding: 2rem;
+    background-color: $white;
     width: 100%;
-    @include flex(flex, column, null, null, 80px);
+    @include flex(flex, column, null, null, 72px);
   }
   &-welcomeContainer {
     margin-top: 0.6rem;
@@ -23,15 +24,15 @@ body {
       background-color: $backgraoundBlue;
       border-radius: 1rem;
 
-      @include width_height(null, 92%);
+      @include width_height(null, 100%);
 
       h2 {
-        @include font_size_color(1.4rem, 600, $white);
-        margin-bottom: 2px;
+        @include font_size_color(32px, 600, $white);
+        margin-bottom: 11px;
       }
 
       p {
-        @include font_size_color(0.88rem, 200, $white);
+        @include font_size_color(18px, 400, $white);
       }
     }
   }
@@ -39,27 +40,31 @@ body {
     background-color: $mainBackground;
     @include flex(flex, null, center);
     @include width_height(null, 100%);
+    border-radius: 1rem;
   }
   &-SubContentContainer {
-    @include width_height(null, 92%);
+    @include width_height(null, 100%);
     @include flex(flex, column, flex-start, null, 1rem);
-    background-color: $white;
     border-radius: 1rem;
-    padding: 1.4rem;
+    padding: 24px;
 
     .SubContentContainer-Elements {
-      padding: 0.8rem 0;
+      padding: 1rem 0;
       @include flex(flex, row, space-between, center);
+      h2 {
+        font-size: 24px;
+        font-weight: 600;
+      }
     }
   }
   &-Image {
-    @include position(absolute, null, 2.8%, 10%, null);
+    @include position(absolute, null, 2.8%, 32px, null);
     @include width_height(null, 280px);
   }
 }
 
-.Icon {
-  @include width_height(1rem, 1rem);
+.Icon2 {
+  @include width_height(8px, 18px);
 }
 
 .ContainerList {
@@ -68,21 +73,23 @@ body {
   padding: 1.4rem;
   // @include flex(flex, row, flex-start, center, 1.2rem, wrap);
   @include grid(grid);
-  grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(233px, 1fr));
   gap: 20px;
 }
 
 .listItem {
   @include flex(flex, column, space-between);
   padding: 1rem;
-  min-width: 188px;
+  // min-width: 188px;
   max-height: 140px;
   min-height: 140px;
   background-color: $white;
-  border-radius: 10px;
+  border-radius: 1rem;
   position: relative;
 
   h4 {
+    font-size: 14px;
+    font-weight: 500;
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
@@ -99,6 +106,7 @@ body {
 
 .listItem:hover {
   background-color: $backgraoundBlue;
+  transition: 0.4s ease-in;
   cursor: pointer;
   h4 {
     color: $white;
@@ -121,8 +129,8 @@ body {
   border-radius: 50%;
 
   svg {
-    height: 2rem;
-    width: 2rem;
+    height: 25px;
+    width: 25px;
   }
 }
 .DashboardFolderIcon2 {
@@ -158,16 +166,16 @@ body {
 
   button.upload {
     @include flex(flex, row, space-between, center, 1rem);
-    @include font_size_color(0.88rem, 400, $white, "Inter");
-    padding: 0.8rem;
+    @include font_size_color(14px, 500, $white, "Inter");
+    padding: 0.6rem;
     border-radius: 0.4rem;
     background-color: $darkblue;
   }
 }
 button {
   @include flex(flex, row, space-between, center, 1rem);
-  @include font_size_color(0.88rem, 400, $white, "Inter");
-  padding: 0.8rem;
+  @include font_size_color(14px, 500, $white, "Inter");
+  padding: 0.6rem;
   border-radius: 0.4rem;
   background-color: $darkblue;
 }
@@ -231,7 +239,7 @@ button {
     @include flex(flex, column, flex-start, null, 0.2rem);
 
     label {
-      @include font_size_color(1rem, 480, $Textblack, "Inter");
+      @include font_size_color(14px, 400, $Textblack, "Inter");
     }
     input {
       outline: none;
@@ -240,7 +248,7 @@ button {
       border-radius: 0.4rem;
     }
     input::placeholder {
-      color: $input-placeholder-gray;
+      @include font_size_color(14px, 400, $input-placeholder-gray, "Inter");
     }
     textarea {
       resize: none;
@@ -249,7 +257,7 @@ button {
       border-radius: 0.4rem;
     }
     textarea::placeholder {
-      color: $input-placeholder-gray;
+      @include font_size_color(14px, 400, $input-placeholder-gray, "Inter");
     }
   }
   button {
@@ -259,6 +267,6 @@ button {
 
   &-inputContainer {
     @include flex(flex, column, flex-start, null, 0.2rem);
-    margin: 1rem 0;
+    // margin: 1rem 0;
   }
 }

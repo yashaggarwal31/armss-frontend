@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Header</title>
-    <link rel="stylesheet" href="./scss/Notification.css" />
+    <!-- <link rel="stylesheet" href="./scss/Notification.css" />
 
     <link rel="stylesheet" href="./scss/Header.css" />
     <link rel="stylesheet" href="css/chatbot.css" />
-    <link rel="stylesheet" href="./scss/Chat.css" />
+    <link rel="stylesheet" href="./scss/Chat.css" /> -->
   </head>
   <body>
     <div class="Header-Container" id="HeaderContainer">
@@ -113,11 +113,15 @@
           </div>
 
           <div class="ProfileContainer">
-            <img
-              src="./assets/Profile.png"
-              alt="Profile"
-              class="Header-Profile"
-            />
+            <div class="ProfileContainer_name">
+              <img
+                src="./assets/Profile.png"
+                alt="Profile"
+                class="Header-Profile"
+              />
+              <span>Profile Name</span>
+            </div>
+
             <button class="LogoutBtn" onclick="Logout()">Logout</button>
           </div>
         </div>

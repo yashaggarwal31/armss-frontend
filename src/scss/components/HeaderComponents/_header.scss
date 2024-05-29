@@ -3,8 +3,9 @@
     padding: 1.5rem 2rem;
     background-color: $white;
     @include flex(flex, null, space-between, center);
-    border-bottom: 0.1px solid #bfbfbfb6;
+    // border-bottom: 0.1px solid #bfbfbfb6;
     position: relative;
+    box-shadow: 0 0 8px 0 #00000026;
   }
   &-SubContainer {
     width: 100%;
@@ -14,10 +15,11 @@
   &-Filters {
     @include width_height(null, 60%);
     @include flex(flex, row, space-between, center);
-    background-color: rgb(232, 238, 251, 44%);
+    background-color: #f4f7ff;
     border: 0.8px solid #e1eaff;
     border-radius: 2rem;
     padding: 0.2rem;
+    gap: 5px;
   }
   &-logoContainer {
     // @include width_height(null, 8%);
@@ -40,7 +42,6 @@
     }
   }
   &-FilterButton {
-    padding: 8px;
     border-radius: 50%;
     background-color: $backgraoundBlue;
     border: none;
@@ -49,21 +50,19 @@
     @include flex(flex, row, space-between, center);
   }
   &-keywords {
-    @include font_size_color(1rem, null, null, "Inter");
-    @include width_height(5vh, 88%);
+    @include font_size_color(14px, 400, null, "Inter");
+    @include width_height(null, 100%);
     background-color: transparent;
-    padding: 0rem 0.8rem;
-    margin-bottom: 2.8px;
+    padding: 14px 1rem;
     border: none;
     outline: none;
     border-radius: 1.6rem 0 0 1.6rem;
   }
   &-keywords::placeholder {
-    @include font_size_color(0.88rem, 400, rgb(51, 51, 51, 60%), "Inter");
+    @include font_size_color(14px, 400, #33333399, "Inter");
   }
 
   &-Profile {
-    @include width_height(null, 40%);
     border-radius: 50%;
   }
 }
@@ -71,7 +70,7 @@
   @include width_height(2rem, 1.4rem);
 }
 .Icon {
-  @include width_height(1rem, 1rem);
+  @include width_height(17px, 17px);
   transform: rotate(0turn);
   transition: transform 0.6s ease;
 }
@@ -109,19 +108,29 @@
 
 .Chatbot {
   @include position(fixed, null, 2%, 90.8%, 2%);
-  @include width_height(null, 4%);
+  @include width_height(50px, 50px);
   @include flex(flex, row, center, center);
   border-radius: 50%;
   padding: 0.4rem;
   background-color: $darkblue;
   z-index: 10;
+  cursor: pointer;
 }
 .ProfileContainer {
   @include position(relative);
+  &_name {
+    @include flex(flex, null, center, center, 9px);
+    img {
+      @include width_height(48px, 48px);
+    }
+    span {
+      @include font_size_color(14px, 600, #012365, "Inter");
+    }
+  }
 }
 
 .ProfileContainer .LogoutBtn {
-  @include position(absolute, -6%, null, null, -80%);
+  @include position(absolute, 0%, null, null, -80%);
   @include font_size_color(0.8rem, 480, $Textblack, "Inter");
   padding: 0.4rem;
   background-color: $white;
@@ -201,6 +210,15 @@
     li:hover {
       background-color: #e3e9f7;
     }
+  }
+}
+
+.sec {
+  .txt {
+    @include font_size_color(14px, 480, null, "Inter");
+  }
+  .sub {
+    @include font_size_color(12px, 480, null, "Inter");
   }
 }
 
