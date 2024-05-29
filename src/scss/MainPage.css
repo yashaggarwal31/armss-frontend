@@ -1083,7 +1083,8 @@ h4.failure {
   right: 2%;
   top: 90.8%;
   bottom: 2%;
-  width: 4%;
+  height: 50px;
+  width: 50px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -1092,6 +1093,7 @@ h4.failure {
   padding: 0.4rem;
   background-color: #0052f1;
   z-index: 10;
+  cursor: pointer;
 }
 
 .ProfileContainer {
@@ -2086,10 +2088,16 @@ button {
   z-index: 40;
   display: none;
 }
+.section-chatbot h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
 .section-contentContainer {
+  gap: 16px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  width: 74%;
+  width: 423px;
   border-radius: 16px;
   background-color: #ffffff;
 }
@@ -2099,7 +2107,6 @@ button {
   justify-content: flex-end;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 1rem 0 1rem;
 }
 .section-actionContainer span {
   display: flex;
@@ -2113,8 +2120,10 @@ button {
 .section-actionContainer span .minimize {
   width: 1.4rem;
   height: 1.4rem;
+  cursor: pointer;
 }
 .section-actionContainer span .close {
+  cursor: pointer;
   width: 1rem;
   height: 1rem;
 }
@@ -2126,7 +2135,6 @@ button {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding: 1rem;
 }
 .section-chatcontent ul {
   list-style: none;
@@ -2137,41 +2145,43 @@ button {
   gap: 1rem;
   flex-wrap: wrap;
   padding-top: 0.4rem;
+  height: 218px;
+  overflow-y: auto;
 }
 .section-chatcontent ul li {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   padding: 1rem;
   background-color: #ffffff;
   border-radius: 10px;
   border: 0.02rem solid rgba(113, 105, 255, 0.2156862745);
-  min-width: 420px;
   flex-grow: 0;
   flex-shrink: 0;
   cursor: pointer;
 }
 .section-chatcontent ul li p {
-  font-size: 0.68rem;
-  font-weight: 600;
-  color: #333333;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(60, 64, 72, 0.8);
   font-family: "Inter";
 }
 .section-chatcontent svg {
-  height: 1.2rem;
-  width: 1.2rem;
+  height: 24px;
+  width: 24px;
 }
 .section-questioncontent {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding: 1rem;
 }
 .section-questioncontent h2 {
-  font-size: 1rem;
-  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 400;
   color: #333333;
   font-family: "Inter";
 }

@@ -7,16 +7,22 @@
     backdrop-filter: blur(0.6px);
     z-index: 40;
     display: none;
+    h2{
+      font-size: 18px;
+      font-weight: 600;
+    }
   }
   &-contentContainer {
+    gap: 16px;
+    padding: 16px;
     @include flex(flex, column, null);
-    @include width_height(null, 74%);
+    @include width_height(null, 423px);
     border-radius: 16px;
     background-color: $white;
   }
   &-actionContainer {
     @include flex(flex, row, flex-end, center, 1rem);
-    padding: 1rem 1rem 0 1rem;
+    // padding: 1rem 1rem 0 1rem;
     span {
       @include flex(flex, column, center, center);
       background-color: #eef3fd58;
@@ -26,10 +32,11 @@
       .minimize {
         width: 1.4rem;
         height: 1.4rem;
-        // cursor: pointer;
+        cursor: pointer;
         // border: 2px solid green;
       }
       .close {
+        cursor: pointer;
         width: 1rem;
         height: 1rem;
         // border: 2px solid green;
@@ -43,44 +50,49 @@
   &-chatcontent {
     @include flex(flex, column, null, flex-start);
     @include width_height(null, 100%);
-    padding: 1rem;
+    // padding: 1rem;
 
     ul {
       list-style: none;
       @include width_height(null, 100%);
       @include flex(flex, row, null, center, 1rem, wrap);
       padding-top: 0.4rem;
+      height: 218px;
+      overflow-y: auto;
 
       li {
         @include flex(flex, row, space-between, center);
+        width: 100%;
         padding: 1rem;
         background-color: $white;
         border-radius: 10px;
         border: 0.02rem solid #7169ff37;
-        min-width: 420px;
+        // min-width: 420px;
         // max-width: 420px;
         flex-grow: 0;
         flex-shrink: 0;
         cursor: pointer;
 
         p {
-          @include font_size_color(0.68rem, 600, $Textblack, "Inter");
+          @include font_size_color(12px, 400, #3C4048CC, "Inter");
         }
       }
     }
 
     svg {
-      height: 1.2rem;
-      width: 1.2rem;
+      height: 24px;
+      width: 24px;
     }
   }
   &-questioncontent {
     @include flex(flex, column, null, flex-start);
     @include width_height(null, 100%);
-    padding: 1rem;
+    // margin-top: 16px;
+    // padding: 1rem;
 
     h2 {
-      @include font_size_color(1rem, bold, $Textblack, "Inter");
+      margin-bottom: 10px;
+      @include font_size_color(14px, 400, $Textblack, "Inter");
     }
     .input {
       @include width_height(null, 96%);

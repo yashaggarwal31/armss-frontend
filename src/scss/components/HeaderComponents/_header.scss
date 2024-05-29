@@ -108,12 +108,13 @@
 
 .Chatbot {
   @include position(fixed, null, 2%, 90.8%, 2%);
-  @include width_height(null, 4%);
+  @include width_height(50px, 50px);
   @include flex(flex, row, center, center);
   border-radius: 50%;
   padding: 0.4rem;
   background-color: $darkblue;
   z-index: 10;
+  cursor: pointer;
 }
 .ProfileContainer {
   @include position(relative);

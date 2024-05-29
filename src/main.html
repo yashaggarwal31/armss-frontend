@@ -22,7 +22,19 @@
               <div class="upload-files-title-div">
                 <span class="upload-files-title">Upload Files</span>
               </div>
-              <div class="close-icon">
+              <div class="section-actionContainer">
+                <span>
+                  <svg onclick="window.dialog.close();" class="upload-minimize">
+                    <use xlink:href="./Icons/icons.svg#minimize"></use>
+                  </svg>
+                </span>
+                <span class="closeSpan" id="upload-reset">
+                  <svg class="close">
+                    <use xlink:href="./Icons/icons.svg#chatclose"></use>
+                  </svg>
+                </span>
+              </div>
+              <!-- <div class="close-icon">
                 <svg onclick="window.dialog.close();" class="upload-minimize">
                   <use xlink:href="./Icons/icons.svg#upload-minimize" />
                 </svg>
@@ -33,7 +45,7 @@
                 >
                   ❌
                 </button>
-              </div>
+              </div> -->
             </div>
             <div id="upload-zone" class="upload-zone-div div-center flex-col">
               <input
