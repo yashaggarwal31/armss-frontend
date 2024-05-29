@@ -7,6 +7,10 @@
     backdrop-filter: blur(0.6px);
     z-index: 40;
     display: none;
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+    }
   }
   &-contentContainer {
     @include flex(flex, column, null);
@@ -70,8 +74,8 @@
     }
 
     svg {
-      height: 1.2rem;
-      width: 1.2rem;
+      height: 24px;
+      width: 24px;
     }
   }
   &-questioncontent {
@@ -80,7 +84,7 @@
     padding: 1rem;
 
     h2 {
-      @include font_size_color(1rem, bold, $Textblack, "Inter");
+      @include font_size_color(14px, 400, $Textblack, "Inter");
     }
     .input {
       @include width_height(null, 96%);

@@ -166,16 +166,16 @@ body {
 
   button.upload {
     @include flex(flex, row, space-between, center, 1rem);
-    @include font_size_color(16px, 500, $white, "Inter");
-    padding: 0.8rem;
+    @include font_size_color(14px, 500, $white, "Inter");
+    padding: 0.6rem;
     border-radius: 0.4rem;
     background-color: $darkblue;
   }
 }
 button {
   @include flex(flex, row, space-between, center, 1rem);
-  @include font_size_color(16px, 500, $white, "Inter");
-  padding: 0.8rem;
+  @include font_size_color(14px, 500, $white, "Inter");
+  padding: 0.6rem;
   border-radius: 0.4rem;
   background-color: $darkblue;
 }
@@ -239,7 +239,7 @@ button {
     @include flex(flex, column, flex-start, null, 0.2rem);
 
     label {
-      @include font_size_color(1rem, 480, $Textblack, "Inter");
+      @include font_size_color(14px, 400, $Textblack, "Inter");
     }
     input {
       outline: none;
@@ -248,7 +248,7 @@ button {
       border-radius: 0.4rem;
     }
     input::placeholder {
-      color: $input-placeholder-gray;
+      @include font_size_color(14px, 400, $input-placeholder-gray, "Inter");
     }
     textarea {
       resize: none;
@@ -257,7 +257,7 @@ button {
       border-radius: 0.4rem;
     }
     textarea::placeholder {
-      color: $input-placeholder-gray;
+      @include font_size_color(14px, 400, $input-placeholder-gray, "Inter");
     }
   }
   button {
@@ -267,6 +267,6 @@ button {
 
   &-inputContainer {
     @include flex(flex, column, flex-start, null, 0.2rem);
-    margin: 1rem 0;
+    // margin: 1rem 0;
   }
 }
