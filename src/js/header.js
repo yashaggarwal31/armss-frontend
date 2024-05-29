@@ -264,7 +264,6 @@ async function getNotifications() {
 }
 
 
-
 async function notificationsInIt() {
 
   document.getElementById("notification-container").style.height = "60vh";
@@ -277,7 +276,8 @@ async function notificationsInIt() {
 
   for (i of data) {
 
-    console.log(i[6])
+    console.log('error for notification: ', i, ' ', i[6])
+    const status = i[6].status;
 
     const tempJson = i[2];
     const formattedDate = formatDateTimeString(i[4]);
@@ -302,11 +302,27 @@ async function notificationsInIt() {
     dateSpan.textContent = formattedDate;
 
     const statusSpan = document.createElement('span');
+    statusSpan.setAttribute('data-values', JSON.stringify(i[6]));
+
+    if (status == 'error') {
+      statusSpan.addEventListener('click', (event) => {
+        const dataValues = event.target.getAttribute('data-values');
+        console.log('onclick ', dataValues)
+        viewUploadErrorDetails(dataValues);
+      })
+      statusSpan.textContent = 'Error';
+    }
+    else if (status == 'inProgress') {
+      statusSpan.textContent = 'InProgress';
+    }
+    else if (status == 'success') {
+      statusSpan.textContent = 'Success';
+    }
     // statusSpan.addEventListener('click', () => {
     //   viewUploadErrorDetails();
     // })
 
-    statusSpan.textContent = 'InProgress';
+
     statusSpan.classList.add('UploadinProgress');
 
 
@@ -424,6 +440,126 @@ console.log(formatDateTimeString("2024-05-21T12:00:00Z")); // Outputs: May 21, 2
 
 
 
-function viewUploadErrorDetails() {
+function viewUploadErrorDetails(errorDetailsObj) {
+  // document.getElementById('duplicate-records').textContent = '';
+  errors = JSON.parse(errorDetailsObj)
+  console.log('these are error details: ', errors.errors)
+  for (error of errors.errors) {
+    files = error.split(',');
+    console.log('error: ', error)
+    console.log('these are files: ', files)
+    if (files.length < 2) {
+      console.log('file length less than 2??');
+      continue;
+    }
+    createDuplicateRecord(files[0], files[1]);
+  }
+
   uploadDialog.showModal();
 }
+
+function createDuplicateRecord(file1, file2) {
+  filename1 = file1;
+  filename2 = file2;
+  // filename1 = file1.split('!@&')[1]
+  // filename2 = file2.split('!@&')[1]
+
+  // Create main container div
+
+  const duplicateRecord = document.createElement('div');
+  duplicateRecord.className = 'duplicate-record';
+
+  // Create checkbox
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.style.width = '1.5rem';
+  checkbox.style.height = '1.5rem';
+  checkbox.style.background = 'blue';
+  checkbox.autocomplete = 'off';
+  duplicateRecord.appendChild(checkbox);
+
+  // Create grid container
+  const bothFilesGrid = document.createElement('div');
+  bothFilesGrid.className = 'both-files-grid';
+  duplicateRecord.appendChild(bothFilesGrid);
+
+  // Create first file div
+  const fileDiv1 = document.createElement('div');
+  fileDiv1.className = 'duplicate-record-file-div';
+  bothFilesGrid.appendChild(fileDiv1);
+
+  // Create first file details
+  const fileDetails1 = document.createElement('div');
+  fileDetails1.className = 'duplicate-record-file-details';
+  fileDiv1.appendChild(fileDetails1);
+
+  const fileName1 = document.createElement('span');
+  fileName1.className = 'duplicate-record-file-details-name';
+  fileName1.textContent = filename1;
+  fileDetails1.appendChild(fileName1);
+
+  const fileDateTime1 = document.createElement('span');
+  fileDateTime1.className = 'duplicate-record-file-details-datetime';
+  fileDateTime1.textContent = 'Date and Time';
+  fileDetails1.appendChild(fileDateTime1);
+
+  // Create first file action
+  const flex1 = document.createElement('div');
+  flex1.className = 'flex items-center';
+  fileDiv1.appendChild(flex1);
+
+  const svg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg1.classList.add('duplicate-action');
+  const use1 = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+  use1.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', './Icons/icons.svg#ActionIcon');
+  svg1.appendChild(use1);
+  flex1.appendChild(svg1);
+
+  // Create second file div
+  const fileDiv2 = document.createElement('div');
+  fileDiv2.className = 'duplicate-record-file-div';
+  bothFilesGrid.appendChild(fileDiv2);
+
+  // Create second file details
+  const fileDetails2 = document.createElement('div');
+  fileDetails2.className = 'duplicate-record-file-details';
+  fileDiv2.appendChild(fileDetails2);
+
+  const fileName2 = document.createElement('span');
+  fileName2.className = 'duplicate-record-file-details-name';
+  fileName2.textContent = filename2;
+  fileDetails2.appendChild(fileName2);
+
+  const fileDateTime2 = document.createElement('span');
+  fileDateTime2.className = 'duplicate-record-file-details-datetime';
+  fileDateTime2.textContent = 'Date and Time';
+  fileDetails2.appendChild(fileDateTime2);
+
+  // Create second file actions
+  const secondActions = document.createElement('div');
+  secondActions.className = 'second-duplicate-cta-actions';
+  fileDiv2.appendChild(secondActions);
+
+  const flex2 = document.createElement('div');
+  flex2.className = 'flex items-center';
+  secondActions.appendChild(flex2);
+
+  const svg2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg2.classList.add('duplicate-action');
+  const use2 = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+  use2.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', './Icons/icons.svg#ActionIcon');
+  svg2.appendChild(use2);
+  flex2.appendChild(svg2);
+
+  const compareSpan = document.createElement('span');
+  compareSpan.style.color = 'blue';
+  compareSpan.style.textDecoration = 'underline';
+  compareSpan.textContent = 'Compare';
+  secondActions.appendChild(compareSpan);
+
+  // Append the complete structure to the container
+  document.getElementById('duplicate-records').appendChild(duplicateRecord);
+}
+
+// createDuplicateRecord();
+// createDuplicateRecord();

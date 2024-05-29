@@ -161,7 +161,7 @@ function fileuplodInit() {
 
       // const file = fileList[i];
 
-      const newName = `[${notificationId}]-` + `${fileHash}` + uploadedFile.name
+      const newName = `[${notificationId}]-` + `${fileHash}` + `!@&` + uploadedFile.name
       const file = new File([uploadedFile], newName, {
         type: uploadedFile.type,
       })
