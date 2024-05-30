@@ -470,30 +470,32 @@ async function createDuplicateRecord(file1, file2) {
   filename1Display += '...'
   filename2Display += '...'
 
-  // let data;
-  // try {
-  //   const response = await fetch('https://armss-be.exitest.com/getLinkAndDateFromFileName', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({ 'file1': filename1, 'file2': filename2 })
-  //   });
+  let data;
+  try {
+    const response = await fetch('https://armss-be.exitest.com/getLinkAndDateFromFileName', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ "file1": file1, "file2": file2 })
+    });
 
-  //   if (!response.ok) {
-  //     throw new Error('Network response was not ok');
-  //   }
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
 
-  //   data = await response.json();
-  // }
-  // catch (error) {
-  //   console.log(error);
-  // }
+    data = await response.json();
+  }
+  catch (error) {
+    console.log(error);
+  }
 
-  // filelink1 = data.filelink1;
-  // filelink2 = data.filelink2;
-  // datetime1 = data.datetime1;
-  // datetime2 = data.datetime2;
+  filelink1 = data.filelink1;
+  filelink2 = data.filelink2;
+  datetime1 = formatDateTimeString(data.filetime1);
+  datetime2 = formatDateTimeString(data.filetime2);
+
+  console.log('response from error api****', data)
 
 
   // Create main container div
@@ -532,7 +534,7 @@ async function createDuplicateRecord(file1, file2) {
 
   const fileDateTime1 = document.createElement('span');
   fileDateTime1.className = 'duplicate-record-file-details-datetime';
-  fileDateTime1.textContent = 'date and time';
+  fileDateTime1.textContent = datetime1;
   fileDetails1.appendChild(fileDateTime1);
 
   // Create first file action
@@ -546,6 +548,15 @@ async function createDuplicateRecord(file1, file2) {
   use1.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', './Icons/icons.svg#ActionIcon');
   svg1.appendChild(use1);
   flex1.appendChild(svg1);
+
+  svg1.setAttribute('data-values', JSON.stringify(filelink1));
+
+  svg1.addEventListener('click', (event) => {
+    const dataValues = event.target.getAttribute('data-values');
+    console.log('svg clicked: ', dataValues)
+    openSingleFileViewer('https://minio-endpoint.skilldify.ai/armss-dev/%5B130%5D-dc3bff9653a0a19f5b054cf810297d27ee152a11affc9fa92d7d4e91c8673c96%21%40%26Shraddha.rr.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=gNT1ijYwEy1ZcEmX%2F20240530%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240530T092143Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=9f9545b5981628514b29e7a71e87264cacec8ac812aa1671f937293c33ae9b6a')
+  })
+
 
   // Create second file div
   const fileDiv2 = document.createElement('div');
@@ -564,7 +575,7 @@ async function createDuplicateRecord(file1, file2) {
 
   const fileDateTime2 = document.createElement('span');
   fileDateTime2.className = 'duplicate-record-file-details-datetime';
-  fileDateTime2.textContent = 'date and time';
+  fileDateTime2.textContent = datetime2;
   fileDetails2.appendChild(fileDateTime2);
 
   // Create second file actions
@@ -583,11 +594,30 @@ async function createDuplicateRecord(file1, file2) {
   svg2.appendChild(use2);
   flex2.appendChild(svg2);
 
+  svg2.setAttribute('data-values', JSON.stringify(filelink2));
+
+  svg2.addEventListener('click', (event) => {
+    const dataValues = event.target.getAttribute('data-values');
+    console.log('svg clicked: ', dataValues)
+    openSingleFileViewer(dataValues)
+  })
+
+
   const compareSpan = document.createElement('span');
   compareSpan.style.color = 'blue';
   compareSpan.style.textDecoration = 'underline';
   compareSpan.textContent = 'Compare';
   secondActions.appendChild(compareSpan);
+
+  compareSpan.setAttribute('data-values', JSON.stringify(`${filelink1}]!@&[${filelink2}`));
+
+  compareSpan.addEventListener('click', (event) => {
+    const dataValues = event.target.getAttribute('data-values');
+    firstDataValueLink = dataValues.split(']!@&[')[0]
+    secondDataValueLink = dataValues.split(']!@&[')[0]
+    console.log('compare button clicked: ', firstDataValueLink, ' ', secondDataValueLink)
+    // openSingleFileViewer(dataValues)
+  })
 
   // Append the complete structure to the container
   document.getElementById('duplicate-records').appendChild(duplicateRecord);
@@ -597,22 +627,27 @@ async function createDuplicateRecord(file1, file2) {
 // createDuplicateRecord();
 
 
-fetchviewdata = async (filename) => {
-  let data = "";
 
-  let url = new URL("https://armss-be.exitest.com/view-resume");
-  url.search = new URLSearchParams(idvalue).toString();
-  let response = await fetch(url);
-  data = await response.json();
-  if (data) {
-    viewcandidatedata.src = getFileViewerUrl(data);
-  }
-  viewsection.style.display = "flex";
-};
+
+
+// fetchviewdata = async (filename) => {
+//   let data = "";
+
+//   let url = new URL("https://armss-be.exitest.com/view-resume");
+//   url.search = new URLSearchParams(idvalue).toString();
+//   let response = await fetch(url);
+//   data = await response.json();
+//   if (data) {
+//     viewcandidatedata.src = getFileViewerUrl(data);
+//   }
+//   viewsection.style.display = "flex";
+// };
 
 function getFileViewerUrl(fileUrl) {
   const decodedUrl = decodeURIComponent(fileUrl);
+  console.log('decoded url: ', decodedUrl)
   const fileExtension = getFileExtension(decodedUrl);
+  console.log('extension after decoding: ', fileExtension)
 
   switch (fileExtension) {
     case "pdf":
@@ -628,7 +663,26 @@ function getFileViewerUrl(fileUrl) {
     case "gif":
       return fileUrl;
     default:
+      return fileUrl;
       alert("File type not supported!");
       return "";
   }
+}
+
+function getFileExtension(url) {
+  const parts = url.split(".");
+  console.log('moon', parts)
+  if (parts.length > 1) {
+    return parts.pop().toLowerCase().split("?")[0];
+  }
+  return "";
+}
+
+
+function openSingleFileViewer(fileLink) {
+  console.log(fileLink)
+
+  document.getElementById('viewresssdata').src = fileLink;
+  console.log('html view resume', document.getElementById('viewresssdata'))
+  document.getElementById('viewResumesection').style.display = "flex"
 }
