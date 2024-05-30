@@ -144,21 +144,26 @@
             <button class="x" onclick="window.uploadDialog.close()">❌</button>
           </div>
 
-          <div class="group-replace">
-            <div class="error-message">
-              <span class="error-message-title">File Already Exists</span>
-              <span class="error-message-description"
-                >A file with this name already exists. Would you like to discard
-                the upload or replace the existing file?</span
-              >
+          <form id="replaceOrDiscard">
+            <div class="group-replace">
+              <div class="error-message">
+                <span class="error-message-title">File Already Exists</span>
+                <span class="error-message-description"
+                  >A file with this name already exists. Would you like to
+                  discard the upload or replace the existing file?</span
+                >
+              </div>
+              <div class="cta">
+                <button id="replaceBtn" type="submit" class="replace-btn">
+                  Replace
+                </button>
+                <button id="discardBtn" type="submit" class="discard-btn">
+                  Discard
+                </button>
+              </div>
             </div>
-            <div class="cta">
-              <button class="replace-btn">Replace</button>
-              <button class="discard-btn">Discard</button>
-            </div>
-          </div>
 
-          <div id="duplicate-records" class="records-duplicate">
+            <div id="duplicate-records" class="records-duplicate"></div>
             <!-- <div class="duplicate-record">
               <input
                 style="width: 1.5rem; height: 1.5rem; background: blue"
@@ -248,7 +253,7 @@
                 </div>
               </div>
             </div> -->
-          </div>
+          </form>
         </div>
       </dialog>
 

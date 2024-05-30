@@ -33,6 +33,8 @@
 
 // SubCategories
 
+let clickedButton = ''
+
 let MainSuggestionData = {
   SubCategoriesData: [],
 };
@@ -305,6 +307,8 @@ async function notificationsInIt() {
     statusSpan.setAttribute('data-values', JSON.stringify(i[6]));
 
     if (status == 'error') {
+      statusSpan.classList.add('errorSpan')
+
       statusSpan.addEventListener('click', (event) => {
         const dataValues = event.target.getAttribute('data-values');
         console.log('onclick ', dataValues)
@@ -342,10 +346,20 @@ window.addEventListener("click", function (event) {
     "notification-container"
   );
   const icon = document.getElementById("icon");
+  const uploadErrorDialog = document.getElementById('uploadDialog');
+
+  const singleResumeViewer = document.getElementById('viewResumesection');
+  const multipleResumeViewer = document.getElementById('compareViewResume');
+
+  // console.log('single viewer ', singleResumeViewer)
+  // console.log('multiple viewer ', multipleResumeViewer)
 
   if (
     !notificationContainer.contains(event.target) &&
-    !icon.contains(event.target)
+    !icon.contains(event.target) &&
+    !uploadErrorDialog.contains(event.target) &&
+    !singleResumeViewer.contains(event.target) &&
+    !multipleResumeViewer.contains(event.target)
   ) {
     notificationContainer.style.height = "0";
   }
@@ -510,6 +524,9 @@ async function createDuplicateRecord(file1, file2) {
   checkbox.style.height = '1.5rem';
   checkbox.style.background = 'blue';
   checkbox.autocomplete = 'off';
+  checkbox.name = 'checkbox'
+  checkbox.setAttribute('data-values', JSON.stringify({ 'file1': file1, 'file2': file2 }));
+
   duplicateRecord.appendChild(checkbox);
 
   // Create grid container
@@ -550,11 +567,13 @@ async function createDuplicateRecord(file1, file2) {
   flex1.appendChild(svg1);
 
   svg1.setAttribute('data-values', JSON.stringify(filelink1));
+  svg1.style.cursor = 'pointer';
+
 
   svg1.addEventListener('click', (event) => {
     const dataValues = event.target.getAttribute('data-values');
-    console.log('svg clicked: ', dataValues)
-    openSingleFileViewer('https://minio-endpoint.skilldify.ai/armss-dev/%5B130%5D-dc3bff9653a0a19f5b054cf810297d27ee152a11affc9fa92d7d4e91c8673c96%21%40%26Shraddha.rr.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=gNT1ijYwEy1ZcEmX%2F20240530%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240530T092143Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=9f9545b5981628514b29e7a71e87264cacec8ac812aa1671f937293c33ae9b6a')
+    const dataValueslink = JSON.parse(dataValues)
+    openSingleFileViewer(dataValueslink)
   })
 
 
@@ -595,11 +614,12 @@ async function createDuplicateRecord(file1, file2) {
   flex2.appendChild(svg2);
 
   svg2.setAttribute('data-values', JSON.stringify(filelink2));
+  svg2.style.cursor = 'pointer';
 
   svg2.addEventListener('click', (event) => {
     const dataValues = event.target.getAttribute('data-values');
-    console.log('svg clicked: ', dataValues)
-    openSingleFileViewer(dataValues)
+    const dataValueslink = JSON.parse(dataValues)
+    openSingleFileViewer(dataValueslink)
   })
 
 
@@ -609,19 +629,53 @@ async function createDuplicateRecord(file1, file2) {
   compareSpan.textContent = 'Compare';
   secondActions.appendChild(compareSpan);
 
+  compareSpan.style.cursor = 'pointer'
+
+
   compareSpan.setAttribute('data-values', JSON.stringify(`${filelink1}]!@&[${filelink2}`));
 
   compareSpan.addEventListener('click', (event) => {
     const dataValues = event.target.getAttribute('data-values');
-    firstDataValueLink = dataValues.split(']!@&[')[0]
-    secondDataValueLink = dataValues.split(']!@&[')[0]
+    const dataValueslink = JSON.parse(dataValues)
+
+    firstDataValueLink = dataValueslink.split(']!@&[')[0]
+    secondDataValueLink = dataValueslink.split(']!@&[')[0]
+
+
+
+
     console.log('compare button clicked: ', firstDataValueLink, ' ', secondDataValueLink)
-    // openSingleFileViewer(dataValues)
+    openResumeComparer(firstDataValueLink, secondDataValueLink)
   })
 
   // Append the complete structure to the container
   document.getElementById('duplicate-records').appendChild(duplicateRecord);
 }
+
+document.getElementById('discardBtn').addEventListener('click', (event) => {
+  clickedButton = 'discard'
+})
+
+document.getElementById('replaceBtn').addEventListener('click', (event) => {
+  clickedButton = 'replace'
+})
+
+
+document.getElementById('replaceOrDiscard').addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  var selectedCheckboxes = document.querySelectorAll('input[name="checkbox"]:checked');
+  var dataValues = [];
+
+  selectedCheckboxes.forEach(function (checkbox) {
+    dataValues.push(checkbox.dataset.values);
+  });
+
+  console.log(dataValues);
+
+  console.log('clickedButton', clickedButton)
+});
+
 
 // createDuplicateRecord();
 // createDuplicateRecord();
@@ -681,8 +735,29 @@ function getFileExtension(url) {
 
 function openSingleFileViewer(fileLink) {
   console.log(fileLink)
+  console.log('before src: ', fileLink.length)
 
-  document.getElementById('viewresssdata').src = fileLink;
+  document.getElementById('viewresssdata').src = getFileViewerUrl(fileLink);
   console.log('html view resume', document.getElementById('viewresssdata'))
   document.getElementById('viewResumesection').style.display = "flex"
 }
+
+document.getElementById('viewdatacloseicon').addEventListener("click", () => {
+  document.getElementById('viewResumesection').style.display = "none";
+  document.getElementById("viewcandidatedata").src = "";
+});
+
+
+
+function openResumeComparer(filelink1, filelink2) {
+  document.getElementById('resumeViewOne').src = getFileViewerUrl(filelink1);
+  document.getElementById('resumeViewTwo').src = getFileViewerUrl(filelink2);
+
+  document.getElementById('compareViewResume').style.display = 'flex';
+}
+
+document.getElementById('CompareViewClose').addEventListener("click", () => {
+  document.getElementById('resumeViewOne').src = '';
+  document.getElementById('resumeViewTwo').src = '';
+  document.getElementById('compareViewResume').style.display = 'none';
+})
