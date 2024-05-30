@@ -104,6 +104,20 @@ body {
   pointer-events: none;
 }
 
+.listContentContainer {
+  @include flex(flex, column, null, null, 8px);
+}
+
+.Justadded {
+  padding: 3px 5px;
+  color: #e08700;
+  font-weight: bold;
+  font-size: 10px;
+  background-color: #ffe3ba57;
+  border-radius: 27px;
+  align-self: end;
+}
+
 .listItem:hover {
   background-color: $backgraoundBlue;
   transition: 0.4s ease-in;
@@ -118,6 +132,11 @@ body {
   }
   .DashboardFolderIcon2 {
     background-color: $white;
+  }
+
+  span {
+    background-color: $white;
+    color: $darkblue;
   }
 }
 

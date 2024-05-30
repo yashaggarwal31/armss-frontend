@@ -68,7 +68,7 @@ button {
 }
 
 ::-webkit-scrollbar {
-  width: 0;
+  width: 30;
 }
 
 ::-webkit-scrollbar {
@@ -1874,6 +1874,22 @@ body {
   pointer-events: none;
 }
 
+.listContentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.Justadded {
+  padding: 3px 5px;
+  color: #e08700;
+  font-weight: bold;
+  font-size: 10px;
+  background-color: rgba(255, 227, 186, 0.3411764706);
+  border-radius: 27px;
+  align-self: end;
+}
+
 .listItem:hover {
   background-color: #0052f1;
   transition: 0.4s ease-in;
@@ -1888,6 +1904,10 @@ body {
 }
 .listItem:hover .DashboardFolderIcon2 {
   background-color: #ffffff;
+}
+.listItem:hover span {
+  background-color: #ffffff;
+  color: #0052f1;
 }
 
 .DashboardFolderIcon {

@@ -102,7 +102,8 @@ toDataPage = async (value) => {
   // await ;
 };
 
-createListitems = (data, List, functions) => {
+createListitems = (data, List, functions, flagvalue) => {
+  console.log(flagvalue);
   let li = document.createElement("li");
   li.classList.add("listItem");
   let MainDiv = document.createElement("div");
@@ -127,16 +128,25 @@ createListitems = (data, List, functions) => {
     MainDiv.appendChild(div);
   }
 
+  let div = document.createElement("div");
+  div.classList.add("listContentContainer");
+
   let h4 = document.createElement("h4");
   // icon.setAttribute("class", "DashboardFolderIcon");
 
   h4.textContent = data;
 
+  if (flagvalue[data] !== 0) {
+    let createspan = document.createElement("span");
+    createspan.textContent = `${flagvalue[data]} Just Added`;
+    createspan.classList.add("Justadded");
+    div.appendChild(createspan);
+  }
+
+  div.appendChild(h4);
   li.appendChild(MainDiv);
-  li.appendChild(h4);
-
+  li.appendChild(div);
   li.id = i;
-
   li.addEventListener("click", () => {
     functions(data);
   });
@@ -144,9 +154,9 @@ createListitems = (data, List, functions) => {
 };
 
 toDisplayFloder = (data) => {
-  Categorysvalue.textContent = data.length;
-  for (i of data) {
-    createListitems(i, containerList, toShowSubCategory);
+  Categorysvalue.textContent = Object.keys(data).length;
+  for (i of Object.keys(data)) {
+    createListitems(i, containerList, toShowSubCategory, data);
   }
 };
 
@@ -163,14 +173,14 @@ togetSubcategory = async (data) => {
   data = {
     category: data,
   };
-  let url = new URL("https://armss-be.exitest.com/skillmapCategory/");
+  let url = new URL("https://armss-be.exitest.com/subCategoryflag/");
   url.search = new URLSearchParams(data).toString();
   await fetch(url, {
     method: "GET",
   })
     .then((response) => response.json())
     .then((responseData) => {
-      Folders.SubCategory = responseData;
+      Folders.SubCategory = Object.keys(responseData);
       toDisplaySubCategory(responseData);
     });
 };
@@ -178,15 +188,16 @@ togetSubcategory = async (data) => {
 // SubCategory
 
 toDisplaySubCategory = (data) => {
-  console.log(data);
+  console.log(Object.keys(data));
   SubContainerList.innerHTML = "";
-  SubCategoryHeadingValue.textContent = data.length;
-  for (let i of data) {
-    createListitems(i, SubContainerList, togetdata);
+  SubCategoryHeadingValue.textContent = Object.keys(data).length;
+  for (let i of Object.keys(data)) {
+    createListitems(i, SubContainerList, togetdata, data);
   }
 };
 
 function togetdata(id) {
+  getFlag();
   toDataPage(id);
   document
     .querySelectorAll("li")
@@ -194,7 +205,7 @@ function togetdata(id) {
 }
 
 togetFolders = async () => {
-  let url = new URL("https://armss-be.exitest.com/SkillMappers");
+  let url = new URL("https://armss-be.exitest.com/CategoryFlag");
   await fetch(url, {
     method: "GET",
   })
@@ -202,7 +213,7 @@ togetFolders = async () => {
     .then((responseData) => {
       console.log(responseData);
       containerList.innerHTML = "";
-      Folders.MainCategory = responseData;
+      Folders.MainCategory = Object.keys(responseData);
       toDisplayFloder(responseData);
     });
 };
@@ -346,3 +357,24 @@ document.getElementById("SubmitAddFloder").onclick = function () {
 UploadResumes.addEventListener("click", () => {
   dialog.showModal();
 });
+
+// Update Flag
+
+async function getFlag() {
+  const response = await fetch(
+    "https://armss-be.exitest.com/updateNewDataFlag/",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ Folder: FilteringData.onSelectSubFolder }),
+    }
+  );
+  if (response.ok) {
+    const data = await response.json();
+    console.log(data);
+  } else {
+    console.error("Failed to get flag:", response.statusText);
+  }
+}

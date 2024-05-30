@@ -1161,6 +1161,7 @@ fetchviewdata = async (id) => {
   let response = await fetch(url);
   data = await response.json();
   if (data) {
+    console.log(data);
     viewcandidatedata.src = getFileViewerUrl(data);
   }
   viewsection.style.display = "flex";
