@@ -441,7 +441,7 @@ console.log(formatDateTimeString("2024-05-21T12:00:00Z")); // Outputs: May 21, 2
 
 
 function viewUploadErrorDetails(errorDetailsObj) {
-  // document.getElementById('duplicate-records').textContent = '';
+  document.getElementById('duplicate-records').textContent = '';
   errors = JSON.parse(errorDetailsObj)
   console.log('these are error details: ', errors.errors)
   for (error of errors.errors) {
@@ -459,12 +459,17 @@ function viewUploadErrorDetails(errorDetailsObj) {
 }
 
 async function createDuplicateRecord(file1, file2) {
-  filename1 = file1;
-  filename2 = file2;
+  // filename1 = file1;
+  // filename2 = file2;
 
   // fetch('getLinkAndDateFromFileName', { method: 'POST', body: { 'file1': `${filename1}`, 'file2': `${filename2}` } })
-  // filename1 = file1.split('!@&')[1]
-  // filename2 = file2.split('!@&')[1]
+  filename1 = file1.split('!@&')[1]
+  filename2 = file2.split('!@&')[1]
+  filename1Display = filename1.slice(0, 18);
+  filename2Display = filename2.slice(0, 18);
+  filename1Display += '...'
+  filename2Display += '...'
+
   // let data;
   // try {
   //   const response = await fetch('https://armss-be.exitest.com/getLinkAndDateFromFileName', {
@@ -522,7 +527,7 @@ async function createDuplicateRecord(file1, file2) {
 
   const fileName1 = document.createElement('span');
   fileName1.className = 'duplicate-record-file-details-name';
-  fileName1.textContent = filename1;
+  fileName1.textContent = filename1Display;
   fileDetails1.appendChild(fileName1);
 
   const fileDateTime1 = document.createElement('span');
@@ -554,7 +559,7 @@ async function createDuplicateRecord(file1, file2) {
 
   const fileName2 = document.createElement('span');
   fileName2.className = 'duplicate-record-file-details-name';
-  fileName2.textContent = filename2;
+  fileName2.textContent = filename2Display;
   fileDetails2.appendChild(fileName2);
 
   const fileDateTime2 = document.createElement('span');
