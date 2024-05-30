@@ -79,6 +79,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  overflow: hidden;
 }
 
 .error {
@@ -150,6 +151,7 @@ button {
   border: 0;
   box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.1);
   animation: fadeIn 1s ease both;
+  z-index: 50;
 }
 
 .upload-log-dialog .x {
@@ -197,7 +199,18 @@ button {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  max-height: 12rem;
+  overflow-y: auto;
   /* justify-content: space-between; */
+}
+
+.records-duplicate::-webkit-scrollbar {
+  width: 3px;
+}
+
+.records-duplicate::-webkit-scrollbar-thumb {
+  border-radius: 2rem;
+  background-color: #0052f1;
 }
 
 .duplicate-record {
@@ -366,8 +379,8 @@ body {
 }
 
 /* .notBtn > .box{
-  height: 60vh
-} */
+    height: 60vh
+  } */
 .content {
   padding: 20px;
   color: black;
@@ -496,6 +509,91 @@ body {
     transform: rotate(90deg);
   }
 }
+/* Notification */
+.viewresumesection {
+  position: absolute;
+  top: 0%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(51, 51, 51, 0.8078431373);
+  -webkit-backdrop-filter: blur(0.6px);
+  backdrop-filter: blur(0.6px);
+  z-index: 80;
+}
+
+.viewresumesection div:first-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.viewresumecloseicon {
+  padding: 6px;
+  align-self: flex-start;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.viewresumecloseicon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.errorSpan {
+  cursor: pointer;
+}
+
+.errorSpan:hover {
+  color: #fc7c31;
+}
+
+.viewdatasection {
+  position: absolute;
+  top: 0%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(51, 51, 51, 0.8078431373);
+  -webkit-backdrop-filter: blur(0.6px);
+  backdrop-filter: blur(0.6px);
+  z-index: 80;
+}
+
+.viewdatasection div:first-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.viewdatacloseicon {
+  padding: 6px;
+  align-self: flex-start;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.viewdatacloseicon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
 :root {
   --vs-primary: 29 92 255;
 }

@@ -102,7 +102,7 @@ toDataPage = async (value) => {
   // await ;
 };
 
-createListitems = (data, List, functions, flagvalue) => {
+createListitems = (data, List, functions, flagvalue, value = undefined) => {
   console.log(flagvalue);
   let li = document.createElement("li");
   li.classList.add("listItem");
@@ -135,6 +135,7 @@ createListitems = (data, List, functions, flagvalue) => {
   // icon.setAttribute("class", "DashboardFolderIcon");
 
   h4.textContent = data;
+  div.appendChild(h4);
 
   if (flagvalue[data] !== 0) {
     let createspan = document.createElement("span");
@@ -143,12 +144,14 @@ createListitems = (data, List, functions, flagvalue) => {
     div.appendChild(createspan);
   }
 
-  div.appendChild(h4);
   li.appendChild(MainDiv);
   li.appendChild(div);
   li.id = i;
   li.addEventListener("click", () => {
     functions(data);
+    if (value) {
+      getFlag();
+    }
   });
   List.append(li);
 };
@@ -192,12 +195,11 @@ toDisplaySubCategory = (data) => {
   SubContainerList.innerHTML = "";
   SubCategoryHeadingValue.textContent = Object.keys(data).length;
   for (let i of Object.keys(data)) {
-    createListitems(i, SubContainerList, togetdata, data);
+    createListitems(i, SubContainerList, togetdata, data, "Sub Folder");
   }
 };
 
 function togetdata(id) {
-  getFlag();
   toDataPage(id);
   document
     .querySelectorAll("li")
@@ -368,7 +370,7 @@ async function getFlag() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ Folder: FilteringData.onSelectSubFolder }),
+      body: JSON.stringify({ folder: FilteringData.onSelectSubFolder }),
     }
   );
   if (response.ok) {
