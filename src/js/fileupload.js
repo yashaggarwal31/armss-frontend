@@ -87,6 +87,7 @@ function fileuplodInit() {
   document
     .getElementById("upload-btn")
     .addEventListener("click", async function async(event) {
+      document.getElementById("upload-btn").disabled = true;
       event.preventDefault()
       console.log("Upload button clicked, about to call upload function.")
       await upload()
@@ -178,10 +179,13 @@ function fileuplodInit() {
       console.log(file.name)
 
       try {
-        getUploadLink(file.name).then((link) => {
-          console.log("link reached", link.presignedUrl)
-          const response = uploadFileThroughLink(link.presignedUrl, file)
-        })
+        // getUploadLink(file.name).then((link) => {
+        //   console.log("link reached", link.presignedUrl)
+        //   const response = uploadFileThroughLink(link.presignedUrl, file)
+        // })
+
+        const link = await getUploadLink(file.name);
+        const response = await uploadFileThroughLink(link.presignedUrl, file)
       } catch (error) {
         console.error(`Failed to upload file ${file.name}: ${error}`)
       }
@@ -255,7 +259,7 @@ function fileuplodInit() {
       })
   }
 
-  const uploadFileThroughLink = (url, file) => {
+  const uploadFileThroughLink = async (url, file) => {
     fetch(url, {
       method: "PUT",
       body: file,
