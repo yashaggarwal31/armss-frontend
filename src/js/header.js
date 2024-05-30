@@ -458,11 +458,38 @@ function viewUploadErrorDetails(errorDetailsObj) {
   uploadDialog.showModal();
 }
 
-function createDuplicateRecord(file1, file2) {
+async function createDuplicateRecord(file1, file2) {
   filename1 = file1;
   filename2 = file2;
+
+  // fetch('getLinkAndDateFromFileName', { method: 'POST', body: { 'file1': `${filename1}`, 'file2': `${filename2}` } })
   // filename1 = file1.split('!@&')[1]
   // filename2 = file2.split('!@&')[1]
+  // let data;
+  // try {
+  //   const response = await fetch('https://armss-be.exitest.com/getLinkAndDateFromFileName', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({ 'file1': filename1, 'file2': filename2 })
+  //   });
+
+  //   if (!response.ok) {
+  //     throw new Error('Network response was not ok');
+  //   }
+
+  //   data = await response.json();
+  // }
+  // catch (error) {
+  //   console.log(error);
+  // }
+
+  // filelink1 = data.filelink1;
+  // filelink2 = data.filelink2;
+  // datetime1 = data.datetime1;
+  // datetime2 = data.datetime2;
+
 
   // Create main container div
 
@@ -500,7 +527,7 @@ function createDuplicateRecord(file1, file2) {
 
   const fileDateTime1 = document.createElement('span');
   fileDateTime1.className = 'duplicate-record-file-details-datetime';
-  fileDateTime1.textContent = 'Date and Time';
+  fileDateTime1.textContent = 'date and time';
   fileDetails1.appendChild(fileDateTime1);
 
   // Create first file action
@@ -532,7 +559,7 @@ function createDuplicateRecord(file1, file2) {
 
   const fileDateTime2 = document.createElement('span');
   fileDateTime2.className = 'duplicate-record-file-details-datetime';
-  fileDateTime2.textContent = 'Date and Time';
+  fileDateTime2.textContent = 'date and time';
   fileDetails2.appendChild(fileDateTime2);
 
   // Create second file actions
@@ -563,3 +590,40 @@ function createDuplicateRecord(file1, file2) {
 
 // createDuplicateRecord();
 // createDuplicateRecord();
+
+
+fetchviewdata = async (filename) => {
+  let data = "";
+
+  let url = new URL("https://armss-be.exitest.com/view-resume");
+  url.search = new URLSearchParams(idvalue).toString();
+  let response = await fetch(url);
+  data = await response.json();
+  if (data) {
+    viewcandidatedata.src = getFileViewerUrl(data);
+  }
+  viewsection.style.display = "flex";
+};
+
+function getFileViewerUrl(fileUrl) {
+  const decodedUrl = decodeURIComponent(fileUrl);
+  const fileExtension = getFileExtension(decodedUrl);
+
+  switch (fileExtension) {
+    case "pdf":
+      return fileUrl;
+    case "doc":
+    case "docx":
+      return `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
+        fileUrl
+      )}`;
+    case "jpg":
+    case "jpeg":
+    case "png":
+    case "gif":
+      return fileUrl;
+    default:
+      alert("File type not supported!");
+      return "";
+  }
+}
