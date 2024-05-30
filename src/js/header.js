@@ -235,6 +235,8 @@ Logo.addEventListener("click", function () {
   Filterdata.WorkExperience.Location = [];
   Filterdata.Candidate.Experience = [];
   FilteringData.TemporaryData = [];
+  FilteringData.onFolderSelect = "";
+
   triggerDOMContentLoaded();
 });
 
