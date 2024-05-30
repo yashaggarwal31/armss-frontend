@@ -86,10 +86,10 @@ function fileuplodInit() {
 
   document
     .getElementById("upload-btn")
-    .addEventListener("click", function (event) {
+    .addEventListener("click", async function async(event) {
       event.preventDefault()
       console.log("Upload button clicked, about to call upload function.")
-      upload()
+      await upload()
     })
 
   let uploadedCount = 0
