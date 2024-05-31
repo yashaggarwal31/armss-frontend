@@ -340,6 +340,7 @@ function toShowData(data, method = "POST") {
 
       icon.addEventListener("click", () => {
         li.classList.remove("RecentElements");
+        updateView(li.id, true);
         fetchviewdata(li.id);
       });
 
@@ -1255,3 +1256,21 @@ document
     Filterdata.Candidate.FirstName = [{ FirstName: event.target.value }];
     toapplyfilters(Filterdata);
   });
+
+//  Update View
+
+async function updateView(id, view) {
+  data = {
+    id: li.id,
+    isviewed: view,
+  };
+
+  let response = await fetch("https://armss-be.exitest.com/Isviewed", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return await response.json();
+}
