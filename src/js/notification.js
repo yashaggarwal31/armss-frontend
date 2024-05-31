@@ -41,9 +41,8 @@ async function notificationsInIt() {
 
     const txtDiv = document.createElement("div");
     txtDiv.classList.add("txt");
-    txtDiv.textContent = `A new upload session of ${fileCount} file${
-      fileCount == 1 ? "" : "s"
-    } was created!`;
+    txtDiv.textContent = `A new upload session of ${fileCount} file${fileCount == 1 ? "" : "s"
+      } was created!`;
 
     notificationDiv.appendChild(txtDiv);
 
@@ -198,17 +197,18 @@ console.log(formatDateTimeString("2024-05-21T12:00:00Z")); // Outputs: May 21, 2
 
 function viewUploadErrorDetails(errorDetailsObj) {
   document.getElementById("duplicate-records").textContent = "";
+  document.getElementById('duplicate-loader').style.display = 'block';
   errors = JSON.parse(errorDetailsObj);
   console.log("these are error details: ", errors.errors);
   for (error of errors.errors) {
     files = error.split(",");
     console.log("error: ", error);
     console.log("these are files: ", files);
-    if (files.length < 2) {
-      console.log("file length less than 2??");
+    if (files.length < 3) {
+      console.log("file length less than 3??");
       continue;
     }
-    createDuplicateRecord(files[0], files[1]);
+    createDuplicateRecord(files[0], files[1], files[2]);
   }
 
   document.getElementById("showerrordialog").style.display = "flex";
@@ -218,15 +218,15 @@ document.getElementById("closeerror-btn").addEventListener("click", () => {
   document.getElementById("showerrordialog").style.display = "none";
 });
 
-async function createDuplicateRecord(file1, file2) {
+async function createDuplicateRecord(file1, file2, logId) {
   // filename1 = file1;
   // filename2 = file2;
 
   // fetch('getLinkAndDateFromFileName', { method: 'POST', body: { 'file1': `${filename1}`, 'file2': `${filename2}` } })
-  filename1 = file1.split("!@&")[1];
-  filename2 = file2.split("!@&")[1];
-  filename1Display = filename1.slice(0, 18);
-  filename2Display = filename2.slice(0, 18);
+  let filename1 = file1.split("!@&")[1];
+  let filename2 = file2.split("!@&")[1];
+  let filename1Display = filename1.slice(0, 18);
+  let filename2Display = filename2.slice(0, 18);
   filename1Display += "...";
   filename2Display += "...";
 
@@ -274,7 +274,7 @@ async function createDuplicateRecord(file1, file2) {
   checkbox.name = "checkbox";
   checkbox.setAttribute(
     "data-values",
-    JSON.stringify({ file1: file1, file2: file2 })
+    JSON.stringify({ file1: file1, file2: file2, logId: logId })
   );
 
   duplicateRecord.appendChild(checkbox);
@@ -408,8 +408,12 @@ async function createDuplicateRecord(file1, file2) {
   });
 
   // Append the complete structure to the container
+  document.getElementById('duplicate-loader').style.display = 'none';
   document.getElementById("duplicate-records").appendChild(duplicateRecord);
 }
+
+
+// End of the above function here
 
 document.getElementById("discardBtn").addEventListener("click", (event) => {
   clickedButton = "discard";
