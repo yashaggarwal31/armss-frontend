@@ -222,6 +222,9 @@ function Logout() {
   window.location.replace("index.html");
   setCookie(localStorage.getItem("Rsession_name"), " ", -1);
   localStorage.removeItem("Rsession_name");
+  if (sessionStorage.getItem("data") != null) {
+    sessionStorage.removeItem("data");
+  }
 }
 
 // Logo

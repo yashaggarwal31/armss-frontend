@@ -51,6 +51,7 @@ window.addEventListener("beforeunload", function (event) {
   data = JSON.stringify(data);
   this.sessionStorage.setItem("data", data);
   event.preventDefault();
+  return false;
 });
 
 const Filterdata = {
