@@ -41,7 +41,6 @@ h2 {
   font-size: 1.4rem;
   color: #333333;
   font-family: "Inter";
-  padding-bottom: 6px;
 }
 
 h4 {
@@ -68,7 +67,7 @@ button {
 }
 
 ::-webkit-scrollbar {
-  width: 0;
+  width: 30;
 }
 
 ::-webkit-scrollbar {
@@ -321,4 +320,4 @@ button {
   display: flex;
   width: 68%;
   overflow: hidden;
-}/*# sourceMappingURL=main.css.map */
+}/*# sourceMappingURL=Login.css.map */

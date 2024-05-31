@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Header</title>
-    <link rel="stylesheet" href="./scss/Notification.css" />
+    <!-- <link rel="stylesheet" href="./scss/Notification.css" />
 
     <link rel="stylesheet" href="./scss/Header.css" />
     <link rel="stylesheet" href="css/chatbot.css" />
-    <link rel="stylesheet" href="./scss/Chat.css" />
+    <link rel="stylesheet" href="./scss/Chat.css" /> -->
   </head>
   <body>
     <div class="Header-Container" id="HeaderContainer">
@@ -49,6 +49,7 @@
             </svg>
           </button>
         </div>
+
         <!-- <div class="Header-dropdownContainer" id="Location-Header">
           <p id="LocationValue">Location</p>
           <svg class="Icon" id="DownIcon1">
@@ -68,58 +69,62 @@
             <use xlink:href="./Icons/icons.svg#Downarrow" />
           </svg>
         </div> -->
-        <div class="div-contaning-bell-and-profile">
-          <!-- <button onclick="window.uploadDialog.showModal()">
-            Notification Bell
-          </button> -->
-          <div class="notification">
-            <a href="#">
+       
+      <div class="div-contaning-bell-and-profile">
+        <!-- <button onclick="window.uploadDialog.showModal()">
+          Notification Bell
+        </button> -->
+        <div class="notification">
+          <a href="#">
+            <div
+              onclick="notificationsInIt()"
+              id="icon"
+              class="notBtn"
+              href="#"
+            >
+              <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
               <div
-                onclick="notificationsInIt()"
-                id="icon"
-                class="notBtn"
-                href="#"
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
               >
-                <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                  "
-                >
-                  <svg style="height: 1.5rem; width: 1.5rem">
-                    <use xlink:href="./Icons/icons.svg#bellIcon" />
-                  </svg>
-                </div>
-                <!-- <div class="number">2</div> -->
+                <svg style="height: 1.5rem; width: 1.5rem">
+                  <use xlink:href="./Icons/icons.svg#bellIcon" />
+                </svg>
+              </div>
+              <!-- <div class="number">2</div> -->
 
-                <div id="notification-container" class="box">
-                  <div class="display">
-                    <div class="nothing">
-                      <i class="fas fa-child stick"></i>
-                      <div class="cent">Looks Like your all caught up!</div>
-                    </div>
-                    <div id="notifications-list" class="cont">
-                      <!-- Notification Records here -->
-                      <div class="div-center div-center-specific">
-                        <div class="loader"></div>
-                      </div>
+              <div id="notification-container" class="box">
+                <div class="display">
+                  <div class="nothing">
+                    <i class="fas fa-child stick"></i>
+                    <div class="cent">Looks Like your all caught up!</div>
+                  </div>
+                  <div id="notifications-list" class="cont">
+                    <!-- Notification Records here -->
+                    <div class="div-center div-center-specific">
+                      <div class="loader"></div>
                     </div>
                   </div>
                 </div>
               </div>
-            </a>
-          </div>
+            </div>
+          </a>
+        </div>
 
-          <div class="ProfileContainer">
+        <div class="ProfileContainer">
+          <div class="ProfileContainer_name">
             <img
               src="./assets/Profile.png"
               alt="Profile"
               class="Header-Profile"
             />
-            <button class="LogoutBtn" onclick="Logout()">Logout</button>
+            <span>Profile Name</span>
           </div>
+
+          <button class="LogoutBtn" onclick="Logout()">Logout</button>
         </div>
       </div>
 
@@ -136,127 +141,6 @@
       </div>
 
       <!-- Upload Logging Modal -->
-
-      <dialog id="uploadDialog" class="upload-log-dialog">
-        <div class="upload-logs-wrapper-div">
-          <div class="upload-log-div-top">
-            <span class="error">Error</span>
-            <button class="x" onclick="window.uploadDialog.close()">❌</button>
-          </div>
-
-          <form id="replaceOrDiscard">
-            <div class="group-replace">
-              <div class="error-message">
-                <span class="error-message-title">File Already Exists</span>
-                <span class="error-message-description"
-                  >A file with this name already exists. Would you like to
-                  discard the upload or replace the existing file?</span
-                >
-              </div>
-              <div class="cta">
-                <button id="replaceBtn" type="submit" class="replace-btn">
-                  Replace
-                </button>
-                <button id="discardBtn" type="submit" class="discard-btn">
-                  Discard
-                </button>
-              </div>
-            </div>
-
-            <div id="duplicate-records" class="records-duplicate"></div>
-            <!-- <div class="duplicate-record">
-              <input
-                style="width: 1.5rem; height: 1.5rem; background: blue"
-                type="checkbox"
-                autocomplete="off"
-              />
-              <div class="both-files-grid">
-                <div class="duplicate-record-file-div">
-                  <div class="duplicate-record-file-details">
-                    <span class="duplicate-record-file-details-name"
-                      >File Name</span
-                    >
-                    <span class="duplicate-record-file-details-datetime"
-                      >Date and Time</span
-                    >
-                  </div>
-                  <div class="flex items-center">
-                    <svg class="duplicate-action">
-                      <use xlink:href="./Icons/icons.svg#ActionIcon" />
-                    </svg>
-                  </div>
-                </div>
-                <div class="duplicate-record-file-div">
-                  <div class="duplicate-record-file-details">
-                    <span class="duplicate-record-file-details-name"
-                      >File Name</span
-                    >
-                    <span class="duplicate-record-file-details-datetime"
-                      >Date and Time</span
-                    >
-                  </div>
-                  <div class="second-duplicate-cta-actions">
-                    <div class="flex items-center">
-                      <svg class="duplicate-action">
-                        <use xlink:href="./Icons/icons.svg#ActionIcon" />
-                      </svg>
-                    </div>
-                    <span style="color: blue; text-decoration: underline"
-                      >Compare</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="duplicate-record">
-              <input
-                style="width: 1.5rem; height: 1.5rem; background: blue"
-                type="checkbox"
-                autocomplete="off"
-              />
-              <div class="both-files-grid">
-                <div class="duplicate-record-file-div">
-                  <div class="duplicate-record-file-details">
-                    <span class="duplicate-record-file-details-name"
-                      >File Name</span
-                    >
-                    <span class="duplicate-record-file-details-datetime"
-                      >Date and Time</span
-                    >
-                  </div>
-                  <div class="flex items-center">
-                    <svg class="duplicate-action">
-                      <use xlink:href="./Icons/icons.svg#ActionIcon" />
-                    </svg>
-                  </div>
-                </div>
-                <div class="duplicate-record-file-div">
-                  <div class="duplicate-record-file-details">
-                    <span class="duplicate-record-file-details-name"
-                      >File Name</span
-                    >
-                    <span class="duplicate-record-file-details-datetime"
-                      >Date and Time</span
-                    >
-                  </div>
-                  <div class="second-duplicate-cta-actions">
-                    <div class="flex items-center">
-                      <svg class="duplicate-action">
-                        <use xlink:href="./Icons/icons.svg#ActionIcon" />
-                      </svg>
-                    </div>
-                    <span style="color: blue; text-decoration: underline"
-                      >Compare</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div> -->
-          </form>
-        </div>
-      </dialog>
-
       <!-- Upload Logging Modal End -->
 
       <!-- <div class="chatbot-modal">

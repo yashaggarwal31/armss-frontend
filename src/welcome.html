@@ -4,54 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./scss/Dashboard.css" />
-    <!-- <link rel="stylesheet" href="../dist/css/Dashboard.min.css" /> -->
-    <link rel="stylesheet" href="./scss/Header.css" />
-    <link rel="stylesheet" href="./scss/Notification.css" />
-    <link rel="stylesheet" href="./css/demop.css" />
-    <link rel="stylesheet" href="css/chatbot.css" />
-    <link rel="stylesheet" href="./scss/Chat.css" />
-    <link rel="stylesheet" href="./css/uploadfiles.css" />
+    <link rel="stylesheet" href="./scss/MainPage.css" />
   </head>
   <body class="body">
     <header class="Header-Container" id="Header"></header>
     <main id="WelcomeMain">
-      <section id="Dashboard" class="Dashboard">
-        <div class="Dashboard-container">
-          <div class="Dashboard-welcomeContainer">
-            <div class="textContainer">
-              <h2>Attract top talent effortlessly</h2>
-              <p>Simplify recruitment and find your next hero for the team</p>
-            </div>
-            <img
-              src="./assets/DashboardPng2.png"
-              class="Dashboard-Image"
-              alt="DashboardPng"
-            />
+      <section id="Dashboard" class="Dashboard-container">
+        <div class="Dashboard-welcomeContainer">
+          <div class="textContainer">
+            <h2>Attract top talent effortlessly</h2>
+            <p>Simplify recruitment and find your next hero for the team</p>
           </div>
-          <div class="Dashboard-ContentContainer">
-            <div class="Dashboard-SubContentContainer">
-              <div class="SubContentContainer-Elements">
-                <h2>Resume Category (<span id="Categorys"></span>)</h2>
+          <img
+            src="./assets/DashboardPng2.png"
+            class="Dashboard-Image"
+            alt="DashboardPng"
+          />
+        </div>
+        <div class="Dashboard-ContentContainer">
+          <div class="Dashboard-SubContentContainer">
+            <div class="SubContentContainer-Elements">
+              <h2>Resume Category (<span id="Categorys"></span>)</h2>
 
-                <div class="ButtonContainer">
-                  <button class="Add" id="CategoryAddFolder">
-                    <svg class="Icon">
-                      <use xlink:href="./Icons/icons.svg#plus" />
-                    </svg>
-                    Add Folder
-                  </button>
+              <div class="ButtonContainer">
+                <button class="Add" id="CategoryAddFolder">
+                  <svg class="Icon">
+                    <use xlink:href="./Icons/icons.svg#plus" />
+                  </svg>
+                  Add Folder
+                </button>
 
-                  <button class="upload primary" id="UploadResumes">
-                    <svg class="Icon">
-                      <use xlink:href="./Icons/icons.svg#plus" />
-                    </svg>
-                    Upload Resumes
-                  </button>
-                </div>
+                <button class="upload primary" id="UploadResumes">
+                  <svg class="Icon">
+                    <use xlink:href="./Icons/icons.svg#plus" />
+                  </svg>
+                  Upload Resumes
+                </button>
               </div>
-              <ul id="ContainerList" class="ContainerList"></ul>
             </div>
+            <ul id="ContainerList" class="ContainerList"></ul>
           </div>
         </div>
       </section>
