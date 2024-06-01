@@ -65,6 +65,10 @@
   gap: 1rem;
 }
 
+.upload-zone-div-disabled{
+  filter:grayscale(1) !important;
+}
+
 .upload-files-supported {
   background: #dee9ff;
   padding: 0.5rem;

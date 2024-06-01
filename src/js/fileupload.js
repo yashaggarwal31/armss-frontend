@@ -2,16 +2,23 @@ const UploadWrapperChild = document.getElementById(
   "upload-child-wrapper"
 ).innerHTML;
 function fileuplodInit() {
+  document.getElementById('fileInput').disabled = false;
   const uploadDiv = document.getElementById("upload-zone");
   const fileInput = document.getElementById("fileInput");
   const drivelink = document.getElementById("drivelink");
   const filesList = document.getElementById("fileList");
   const uploadResetBtn = document.getElementById("upload-reset");
+  const uploadMoreFiles = document.getElementById('upload-more-files');
 
   uploadResetBtn.addEventListener("click", function (event) {
     uploadReset();
     document.getElementById("dialog").close();
   });
+
+  uploadMoreFiles.addEventListener('click', function (event) {
+    uploadReset();
+    uploadMoreFiles.style.display = 'none';
+  })
 
   uploadDiv.addEventListener("click", function (event) {
     if (event.target !== drivelink) {
@@ -88,6 +95,11 @@ function fileuplodInit() {
     .getElementById("upload-btn")
     .addEventListener("click", async function async(event) {
       document.getElementById("upload-btn").disabled = true;
+      document.getElementById('fileInput').disabled = true;
+      document.getElementById('to-collapse-upload').style.display = 'none';
+      document.getElementById('upload-zone').classList.add('upload-zone-div-disabled')
+      document.getElementById('upload-more-files').style.display = 'block';
+
       event.preventDefault();
       console.log("Upload button clicked, about to call upload function.");
       await upload();

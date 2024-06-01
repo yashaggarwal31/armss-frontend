@@ -62,25 +62,37 @@
                 src="./assets/upload-icon.png"
                 alt=""
               />
-              <div class="text-center upload-text">
-                <p>
-                  Drag & drop files, <span style="color: blue">Browse</span>
-                </p>
-                <p><span>Or</span></p>
+              <div id="to-collapse-upload" class="text-center upload-text">
+                <span style="color: blue">Browse</span>
+                <p><span>or</span></p>
+                <p>Drag & Drop files</p>
+
                 <div class="div-center gap-1">
-                  <a
+                  <!-- <a
                     id="drivelink"
                     href="drive.google.com"
                     target="_blank"
                     class="google-drive"
                     >from Google Drive</a
-                  >
-                  <img
+                  > -->
+                  <!-- <img
                     style="display: inline; width: 20px; height: 20px"
                     src="./assets/google-drive.png"
                     alt=""
-                  />
+                  /> -->
                 </div>
+              </div>
+
+              <div
+                id="upload-more-files"
+                style="
+                  display: none;
+                  color: blue;
+                  filter: grayscale(0) !important;
+                  cursor: pointer;
+                "
+              >
+                Upload more Files
               </div>
 
               <div class="upload-files-supported text-center">
