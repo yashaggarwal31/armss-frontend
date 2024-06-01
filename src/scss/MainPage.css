@@ -176,6 +176,7 @@ button {
   display: flex;
   justify-content: space-between;
   gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .error-message {
