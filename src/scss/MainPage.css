@@ -199,6 +199,7 @@ button {
   gap: 0.5rem;
   max-height: 12rem;
   overflow-y: auto;
+  margin-bottom: 2rem;
   /* justify-content: space-between; */
 }
 
