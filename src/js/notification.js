@@ -205,6 +205,7 @@ function viewUploadErrorDetails(errorDetailsObj) {
     console.log("error: ", error);
     console.log("these are files: ", files);
     if (files.length < 3) {
+      createCorruptRecord(error);
       console.log("file length less than 3??");
       continue;
     }
@@ -217,6 +218,16 @@ function viewUploadErrorDetails(errorDetailsObj) {
 document.getElementById("closeerror-btn").addEventListener("click", () => {
   document.getElementById("showerrordialog").style.display = "none";
 });
+
+function createCorruptRecord(error) {
+  console.log("\n Corrupt record error", error, " \n")
+  filename = error.split("!@&")[1]
+  // <div class="duplicate-record-file-div">Hello world</div>
+  let duplicateFileDiv = document.createElement("div")
+  duplicateFileDiv.className = "duplicate-record-file-div"
+  duplicateFileDiv.textContent = filename
+  document.getElementById("corrupt-records").appendChild(duplicateFileDiv)
+}
 
 async function createDuplicateRecord(file1, file2, logId) {
   // filename1 = file1;
