@@ -326,7 +326,8 @@ async function createDuplicateRecord(file1, file2, logId) {
   checkbox.name = "checkbox"
   checkbox.setAttribute(
     "data-values",
-    JSON.stringify({ file1: file1, file2: file2, logId: logId })
+    `${file1},${file2},${logId}`
+    // JSON.stringify({ file1: file1, file2: file2, logId: logId })
   )
 
   duplicateRecord.appendChild(checkbox)
