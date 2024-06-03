@@ -234,6 +234,7 @@ console.log(formatDateTimeString("2024-05-21T12:00:00Z")) // Outputs: May 21, 20
 
 function viewUploadErrorDetails(errorDetailsObj) {
   document.getElementById("duplicate-records").textContent = ""
+  document.getElementById('corrupt-records').textContent = ''
   document.getElementById("duplicate-loader").style.display = "block"
   errors = JSON.parse(errorDetailsObj)
   console.log("these are error details: ", errors.errors)
