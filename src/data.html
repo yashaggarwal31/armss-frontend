@@ -173,53 +173,52 @@
           <button id="ClearHistory">Clear</button>
         </div>
         <div class="Datasection-maindataContainer">
-          <div class="Datasection-headingContainer">
-            <h4>Name</h4>
-            <h4>Role</h4>
-            <h4>Skills</h4>
-            <h4>Experience</h4>
-            <h4>E-mail</h4>
-            <h4>Location</h4>
-            <h4>Contact Number</h4>
-            <h4 id="DatasortUpdateDate">Upload Date</h4>
-            <h4>Action</h4>
-          </div>
-
           <ul class="datalistemsclass">
+            <div class="Datasection-headingContainer">
+              <h4>Name</h4>
+              <h4>Role</h4>
+              <h4>Skills</h4>
+              <h4>Experience</h4>
+              <h4>E-mail</h4>
+              <h4>Location</h4>
+              <h4>Contact Number</h4>
+              <h4 id="DatasortUpdateDate">Upload Date</h4>
+              <h4>Action</h4>
+            </div>
             <div id="datalistItems"></div>
           </ul>
-        </div>
-        <div id="controls">
-          <div class="PerPage-records">
-            <select id="perPageRecords">
-              <option value="10">10</option>
-              <option value="20">20</option>
-              <option value="30">30</option>
-              <option value="40">40</option>
-              <option value="50">50</option>
-            </select>
-            <p>Records</p>
-          </div>
-          <button id="previous-button">
-            <svg class="sidearrow">
-              <use xlink:href="./Icons/icons.svg#arrow" />
-            </svg>
-          </button>
+          <div id="controls">
+            <div class="PerPage-records">
+              <select id="perPageRecords">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+              </select>
+              <p>Records</p>
+            </div>
+            <button id="previous-button">
+              <svg class="sidearrow">
+                <use xlink:href="./Icons/icons.svg#arrow" />
+              </svg>
+            </button>
 
-          <span id="page-number">Page_of_</span>
-          <button id="next-button">
-            <svg class="sidearrow leftsidearrow">
-              <use xlink:href="./Icons/icons.svg#arrow" />
-            </svg>
-          </button>
-          <input
-            name="pageno"
-            type="number"
-            id="jump-input"
-            placeholder="Page number"
-            autocomplete="off"
-          />
-          <button id="jump-button">Jump</button>
+            <span id="page-number">Page_of_</span>
+            <button id="next-button">
+              <svg class="sidearrow leftsidearrow">
+                <use xlink:href="./Icons/icons.svg#arrow" />
+              </svg>
+            </button>
+            <input
+              name="pageno"
+              type="number"
+              id="jump-input"
+              placeholder="Page number"
+              autocomplete="off"
+            />
+            <button id="jump-button">Jump</button>
+          </div>
         </div>
       </section>
       <section class="Loader-section" id="loader" style="display: none">

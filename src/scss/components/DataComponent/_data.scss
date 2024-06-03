@@ -26,14 +26,7 @@
     padding: 1rem;
     background-color: #f4f7ff;
     @include font_size_color(1rem, 600, $Textblack, "Inter");
-    @include grid(
-      grid,
-      10% 12.8% 8.8% 10.4% 18% 12% 14% 10% 6%,
-      null,
-      null,
-      null,
-      center
-    );
+    @include grid(grid, 10% 12% 9% 11% 18% 11% 14% 10% 4%, null, null);
     margin-top: 2%;
 
     h4 {
@@ -189,13 +182,13 @@
 }
 
 .elementStyle {
-  padding: 1rem;
+  padding: 0.4rem;
   border: 1px solid #f4f2ff;
   margin: 0.4rem 0;
   border-radius: 0.4rem;
   @include font_size_color(14px, 480, #474643, "Inter");
-  @include grid(grid, 10% 12% 10% 10% 18% 12% 14% 10% 4%, 1rem);
-  align-items: start;
+  @include grid(grid, 10% 12% 10% 10% 18% 12% 14% 10% 4%, null);
+  align-items: center;
   justify-items: start;
 
   p {
@@ -209,8 +202,9 @@
     cursor: pointer;
     width: 14px;
     height: 14px;
-    justify-self: center;
-    text-align: center;
+    justify-self: flex-start;
+    // text-align: center;
+    align-self: center;
   }
 }
 
@@ -222,12 +216,12 @@
   @include font_size_color(0.8rem, null, $Textblack, "Inter");
 }
 
-.datalistemsclass {
-  max-height: calc(100vh - 402px);
-}
+// .datalistemsclass {
+//   max-height: calc(100vh - 402px);
+// }
 
 #datalistItems {
-  height: calc(100vh - 402px);
+  height: calc(100vh - 400px);
   overflow-y: auto;
   overflow-x: hidden;
 }

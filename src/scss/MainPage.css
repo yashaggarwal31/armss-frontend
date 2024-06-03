@@ -911,7 +911,7 @@ button.primary {
 }
 
 .upload-zone-div-disabled {
-  background: rgba(158, 158, 158, 0.87) !important;
+  filter: grayscale(1) !important;
 }
 
 .upload-files-supported {
@@ -1394,8 +1394,7 @@ h4.failure {
   color: #333333;
   font-family: "Inter";
   display: grid;
-  grid-template-columns: 10% 12.8% 8.8% 10.4% 18% 12% 14% 10% 6%;
-  align-items: center;
+  grid-template-columns: 10% 12% 9% 11% 18% 11% 14% 10% 4%;
   margin-top: 2%;
 }
 .Datasection-headingContainer h4 {
@@ -1596,7 +1595,7 @@ h4.failure {
 }
 
 .elementStyle {
-  padding: 1rem;
+  padding: 0.4rem;
   border: 1px solid #f4f2ff;
   margin: 0.4rem 0;
   border-radius: 0.4rem;
@@ -1606,8 +1605,7 @@ h4.failure {
   font-family: "Inter";
   display: grid;
   grid-template-columns: 10% 12% 10% 10% 18% 12% 14% 10% 4%;
-  grid-template-rows: 1rem;
-  align-items: start;
+  align-items: center;
   justify-items: start;
 }
 .elementStyle p {
@@ -1620,8 +1618,8 @@ h4.failure {
   cursor: pointer;
   width: 14px;
   height: 14px;
-  justify-self: center;
-  text-align: center;
+  justify-self: flex-start;
+  align-self: center;
 }
 
 .RecentElements {
@@ -1634,12 +1632,8 @@ h4.failure {
   font-family: "Inter";
 }
 
-.datalistemsclass {
-  max-height: calc(100vh - 402px);
-}
-
 #datalistItems {
-  height: calc(100vh - 402px);
+  height: calc(100vh - 400px);
   overflow-y: auto;
   overflow-x: hidden;
 }

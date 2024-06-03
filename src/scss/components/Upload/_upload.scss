@@ -74,10 +74,9 @@
   gap: 19px;
 }
 
-.upload-zone-div-disabled{
-  background: rgba(158, 158, 158, 0.87) !important;
+.upload-zone-div-disabled {
+  filter: grayscale(1) !important;
 }
-
 
 .upload-files-supported {
   background: #dee9ff;
