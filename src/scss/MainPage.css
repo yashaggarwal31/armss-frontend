@@ -176,6 +176,7 @@ button {
   display: flex;
   justify-content: space-between;
   gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .error-message {
@@ -198,6 +199,7 @@ button {
   gap: 0.5rem;
   max-height: 12rem;
   overflow-y: auto;
+  margin-bottom: 2rem;
   /* justify-content: space-between; */
 }
 
