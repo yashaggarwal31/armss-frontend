@@ -68,7 +68,7 @@ button {
 }
 
 ::-webkit-scrollbar {
-  width: 30;
+  width: 0;
 }
 
 ::-webkit-scrollbar {
@@ -199,7 +199,6 @@ button {
   gap: 0.5rem;
   max-height: 12rem;
   overflow-y: auto;
-  margin-bottom: 2rem;
   /* justify-content: space-between; */
 }
 
@@ -911,6 +910,10 @@ button.primary {
   gap: 19px;
 }
 
+.upload-zone-div-disabled {
+  background: rgba(158, 158, 158, 0.87) !important;
+}
+
 .upload-files-supported {
   background: #dee9ff;
   padding: 0.5rem;
@@ -1362,6 +1365,7 @@ h4.failure {
 }
 
 .Datasection {
+  max-height: 86vh;
   overflow-y: scroll;
   overflow-x: hidden;
   padding: 2rem;
@@ -1601,7 +1605,7 @@ h4.failure {
   color: #474643;
   font-family: "Inter";
   display: grid;
-  grid-template-columns: 10% 12% 10% 10% 18% 12% 14% 12% 6%;
+  grid-template-columns: 10% 12% 10% 10% 18% 12% 14% 10% 4%;
   grid-template-rows: 1rem;
   align-items: start;
   justify-items: start;
@@ -1614,6 +1618,10 @@ h4.failure {
 }
 .elementStyle svg {
   cursor: pointer;
+  width: 14px;
+  height: 14px;
+  justify-self: center;
+  text-align: center;
 }
 
 .RecentElements {
@@ -1624,6 +1632,10 @@ h4.failure {
   font-size: 0.8rem;
   color: #333333;
   font-family: "Inter";
+}
+
+.datalistemsclass {
+  max-height: calc(100vh - 402px);
 }
 
 #datalistItems {
@@ -1684,6 +1696,7 @@ h4.failure {
 .at-end-skill-container {
   position: absolute;
   left: 28%;
+  top: auto;
   bottom: 0%;
 }
 
@@ -2388,6 +2401,13 @@ button {
   padding: 10px;
   border: 2px solid #0052f1;
   border-radius: 10px;
+}
+.section-chatspace ::-webkit-scrollbar {
+  width: 6px;
+}
+.section-chatspace ::-webkit-scrollbar-thumb {
+  border-radius: 2rem;
+  background-color: #0052f1;
 }
 .section-input-reset {
   display: flex;

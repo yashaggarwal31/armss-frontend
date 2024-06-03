@@ -193,7 +193,11 @@ async function onSubmiting() {
   // SearchItems.innerHTML = "";
 }
 
-SearchButton.addEventListener("click", onSubmiting);
+SearchButton.addEventListener("click", () => {
+  if (SearchFilters.value.length > 0) {
+    onSubmiting();
+  }
+});
 
 // // ClearFunction
 // let ClearFunction = document.getElementById("ClearFunction");

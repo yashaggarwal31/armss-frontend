@@ -229,12 +229,12 @@ toUpdateSkillContainer = function (data, id, item) {
   let Listid = document.getElementById(id);
   let Listitem = document.getElementById(item);
 
-  // let boundaries = Listid.getBoundingClientRect();
-  // if (boundaries.top > window.innerHeight - 220) {
-  //   Listitem.classList.add("at-end-skill-container");
-  // } else {
-  //   Listitem.classList.remove("at-end-skill-container");
-  // }
+  let boundaries = Listid.getBoundingClientRect();
+  if (boundaries.top > window.innerHeight - 180) {
+    Listitem.classList.add("at-end-skill-container");
+  } else {
+    Listitem.classList.remove("at-end-skill-container");
+  }
 
   data = data.sort((a, b) => a.length - b.length);
 
@@ -244,6 +244,7 @@ toUpdateSkillContainer = function (data, id, item) {
     li.textContent = i;
     Listitem.appendChild(li);
   }
+
   // Listid.appendChild(Listitem);
   Listitem.style.display = "flex";
   Listid.style.position = "relative";
@@ -252,7 +253,6 @@ toUpdateSkillContainer = function (data, id, item) {
 toHideSkillContainer = function (id, item) {
   let Listid = document.getElementById(id);
   let Listitem = document.getElementById(item);
-
   // Listid.removeChild(Listitem);
 
   Listitem.addEventListener("mouseover", () => {
@@ -340,6 +340,7 @@ function toShowData(data, method = "POST") {
 
       icon.addEventListener("click", () => {
         li.classList.remove("RecentElements");
+        updateView(li.id, true);
         fetchviewdata(li.id);
       });
 
@@ -1255,3 +1256,21 @@ document
     Filterdata.Candidate.FirstName = [{ FirstName: event.target.value }];
     toapplyfilters(Filterdata);
   });
+
+//  Update View
+
+async function updateView(id, view) {
+  data = {
+    id: id,
+    isviewed: view,
+  };
+
+  let response = await fetch("https://armss-be.exitest.com/Isviewed", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return await response.json();
+}
