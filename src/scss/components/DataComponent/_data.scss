@@ -194,7 +194,7 @@
   margin: 0.4rem 0;
   border-radius: 0.4rem;
   @include font_size_color(14px, 480, #474643, "Inter");
-  @include grid(grid, 10% 12% 10% 10% 18% 12% 14% 12% 6%, 1rem);
+  @include grid(grid, 10% 12% 10% 10% 18% 12% 14% 10% 4%, 1rem);
   align-items: start;
   justify-items: start;
 
@@ -207,6 +207,10 @@
 
   svg {
     cursor: pointer;
+    width: 14px;
+    height: 14px;
+    justify-self: center;
+    text-align: center;
   }
 }
 
@@ -269,7 +273,7 @@
   display: none;
 }
 .at-end-skill-container {
-  @include position(absolute, 28%, null, null, 0%);
+  @include position(absolute, 28%, null, auto, 0%);
 }
 .SkillsContainer::-webkit-scrollbar {
   width: 8px;

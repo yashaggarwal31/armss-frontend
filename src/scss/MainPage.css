@@ -199,7 +199,6 @@ button {
   gap: 0.5rem;
   max-height: 12rem;
   overflow-y: auto;
-  margin-bottom: 2rem;
   /* justify-content: space-between; */
 }
 
@@ -911,6 +910,10 @@ button.primary {
   gap: 19px;
 }
 
+.upload-zone-div-disabled {
+  background: rgba(158, 158, 158, 0.87) !important;
+}
+
 .upload-files-supported {
   background: #dee9ff;
   padding: 0.5rem;
@@ -1602,7 +1605,7 @@ h4.failure {
   color: #474643;
   font-family: "Inter";
   display: grid;
-  grid-template-columns: 10% 12% 10% 10% 18% 12% 14% 12% 6%;
+  grid-template-columns: 10% 12% 10% 10% 18% 12% 14% 10% 4%;
   grid-template-rows: 1rem;
   align-items: start;
   justify-items: start;
@@ -1615,6 +1618,10 @@ h4.failure {
 }
 .elementStyle svg {
   cursor: pointer;
+  width: 14px;
+  height: 14px;
+  justify-self: center;
+  text-align: center;
 }
 
 .RecentElements {
@@ -1689,6 +1696,7 @@ h4.failure {
 .at-end-skill-container {
   position: absolute;
   left: 28%;
+  top: auto;
   bottom: 0%;
 }
 
