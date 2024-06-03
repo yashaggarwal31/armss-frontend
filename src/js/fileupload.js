@@ -199,7 +199,39 @@ function fileuplodInit() {
 
         const link = await getUploadLink(file.name);
         const response = await uploadFileThroughLink(link.presignedUrl, file);
+        console.log('response is ', response)
+
+        if (response == 'success') {
+          uploadedCount++;
+          if (progressBarOverall) {
+            progressBarOverall.value = uploadedCount;
+            uploadCount.innerHTML = uploadedCount;
+          }
+
+          console.log(
+            "Uploaded Count:",
+            uploadedCount,
+            "\nTotal File Count: ",
+            totalFileCount
+          );
+
+          if (uploadedCount === totalFileCount && errorCount === 0) {
+            document.getElementById("cancel-upload-div").style.display = "none";
+            document.getElementById("successful-message").style.display =
+              "block";
+            console.log("Reached here");
+          }
+        }
+        else {
+          errorCount++;
+          errorTotal.innerHTML = errorCount;
+          document.getElementById("cancel-upload-div").style.display = "none";
+          errorCounter.style.display = "block";
+        }
+
+
       } catch (error) {
+        errorCount++;
         console.error(`Failed to upload file ${file.name}: ${error}`);
       }
 
@@ -271,44 +303,30 @@ function fileuplodInit() {
   };
 
   const uploadFileThroughLink = async (url, file) => {
-    fetch(url, {
-      method: "PUT",
-      body: file,
-    })
-      .then((data) => {
-        console.log(data);
 
-        if (data.status === 200) {
-          uploadedCount++;
-          if (progressBarOverall) {
-            progressBarOverall.value = uploadedCount;
-            uploadCount.innerHTML = uploadedCount;
-          }
-
-          console.log(
-            "Uploaded Count:",
-            uploadedCount,
-            "\nTotal File Count: ",
-            totalFileCount
-          );
-
-          if (uploadedCount === totalFileCount && errorCount === 0) {
-            document.getElementById("cancel-upload-div").style.display = "none";
-            document.getElementById("successful-message").style.display =
-              "block";
-            console.log("Reached here");
-          }
-        } else {
-          errorCount++;
-          errorTotal.innerHTML = errorCount;
-          document.getElementById("cancel-upload-div").style.display = "none";
-          errorCounter.style.display = "block";
-        }
+    try {
+      const data = await fetch(url, {
+        method: "PUT",
+        body: file,
       })
-      .catch((e) => {
-        console.error(e);
-        errorCount++;
-      });
+
+      console.log(data);
+
+      if (data.status === 200) {
+        return 'success'
+      } else {
+        return 'error'
+      }
+    }
+    catch (error) {
+      console.error(error);
+      throw Error();
+
+    }
+
+
+
+
   };
 
   function calculateHash(file) {
