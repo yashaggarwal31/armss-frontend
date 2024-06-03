@@ -476,7 +476,7 @@ document.getElementById("replaceBtn").addEventListener("click", (event) => {
 
 document
   .getElementById("replaceOrDiscard")
-  .addEventListener("submit", function (event) {
+  .addEventListener("submit", async function (event) {
     event.preventDefault()
 
     var selectedCheckboxes = document.querySelectorAll(
@@ -487,6 +487,18 @@ document
     selectedCheckboxes.forEach(function (checkbox) {
       dataValues.push(checkbox.dataset.values)
     })
+
+    if (clickedButton = "replace") {
+      const data = await fetch('https://armss-be.exitest.com/replace_resume', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataValues),
+      })
+
+      console.log('resume replaced?', data)
+    }
 
     console.log(dataValues)
 

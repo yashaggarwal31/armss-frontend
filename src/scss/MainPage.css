@@ -199,6 +199,7 @@ button {
   gap: 0.5rem;
   max-height: 12rem;
   overflow-y: auto;
+  margin-bottom: 2rem;
   /* justify-content: space-between; */
 }
 
@@ -910,8 +911,13 @@ button.primary {
   gap: 19px;
 }
 
-.upload-zone-div-disabled {
-  background: rgba(158, 158, 158, 0.87) !important;
+.upload-zone-div-disabled{
+  filter:grayscale(1) !important;
+}
+.upload-zone-div-disabled .upload-more-files{
+  filter:brightness(1);
+  color: blue;
+  cursor: pointer;
 }
 
 .upload-files-supported {

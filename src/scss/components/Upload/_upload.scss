@@ -75,7 +75,12 @@
 }
 
 .upload-zone-div-disabled{
-  background: rgba(158, 158, 158, 0.87) !important;
+  filter:grayscale(1) !important;
+}
+.upload-zone-div-disabled .upload-more-files{
+  filter:none;
+  color: blue;
+  cursor: pointer;
 }
 
 
