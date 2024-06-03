@@ -1,3 +1,6 @@
+// let notificationData;
+notificationLength = 0;
+
 async function getNotifications() {
   try {
     const response = await fetch(
@@ -16,11 +19,40 @@ async function getNotifications() {
   }
 }
 
-async function notificationsInIt() {
-  document.getElementById("notification-container").style.height = "60vh"
+async function getNotificationLength() {
+  try {
+    const response = await fetch(
+      "https://armss-be.exitest.com/get-notification-length",
+      {
+        method: "POST",
+      }
+    )
+    const data = await response.json()
 
-  const data = await getNotifications()
-  console.log("data:", data)
+    console.log('notification length:', data)
+
+    return data
+  } catch (error) {
+    console.log("failed to fetch notifications: ", error)
+  }
+}
+
+setInterval(async () => {
+  const notificationLen = await getNotificationLength();
+  if (notificationLen > notificationLength) {
+    console.log('dot set');
+    document.getElementById('notification-dot').style.display = 'block';
+  }
+  notificationLength = notificationLen;
+}, 10000);
+
+async function notificationsInIt() {
+  document.getElementById('notification-dot').style.display = 'none';
+  document.getElementById("notification-container").style.height = "60vh"
+  data = await getNotifications()
+  notificationLength = data.length
+
+  console.log("data length:", data.length)
   const notificationList = document.getElementById("notifications-list")
 
   notificationList.innerHTML = ""
@@ -107,6 +139,11 @@ window.addEventListener("click", function (event) {
     notificationContainer.style.height = "0"
   }
 })
+
+// document.getElementById("icon").addEventListener("click", () => {
+//   //mark all notifications as seen
+// })
+
 
 // const formatDateTimeString = (utcDateString) => {
 //   if (!utcDateString) return ''
