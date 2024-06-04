@@ -1258,7 +1258,7 @@ h4.failure {
 }
 
 .continue-upload {
-  display: none;
+  /* display: none; */
   position: fixed;
   right: 2%;
   top: 84.8%;
