@@ -47,6 +47,7 @@ setInterval(async () => {
 }, 10000);
 
 async function notificationsInIt() {
+
   document.getElementById('notification-dot').style.display = 'none';
   document.getElementById("notification-container").style.height = "60vh"
   data = await getNotifications()
@@ -86,15 +87,19 @@ async function notificationsInIt() {
 
     const statusSpan = document.createElement("span")
     statusSpan.id = i[0];
-    statusSpan.setAttribute("data-values", JSON.stringify(i[6]))
+    statusSpan.setAttribute("data-values", JSON.stringify({ data: i[6], statusId: i[0], filecount: fileCount }))
+
+    console.log('this is???', i[6])
 
     if (status == "error") {
       statusSpan.classList.add("errorSpan")
 
       statusSpan.addEventListener("click", (event) => {
         const dataValues = event.target.getAttribute("data-values")
-        console.log("onclick ", dataValues)
-        viewUploadErrorDetails(dataValues, i[0], fileCount)
+        const dataValuesFinal = JSON.parse(dataValues)
+        console.log(dataValuesFinal)
+        console.log("onclick ", dataValuesFinal['data'], dataValuesFinal['statusId'], dataValuesFinal['filecount'])
+        viewUploadErrorDetails(dataValuesFinal['data'], dataValuesFinal['statusId'], dataValuesFinal['filecount'])
       })
       statusSpan.textContent = "Error"
     } else if (status == "inProgress") {
@@ -233,14 +238,14 @@ formatDateTimeString = (utcDateString) => {
 // Example usage
 console.log(formatDateTimeString("2024-05-21T12:00:00Z")) // Outputs: May 21, 2024 17:30:00 IST
 
-function viewUploadErrorDetails(errorDetailsObj, statusId, filecount) {
+function viewUploadErrorDetails(errors, statusId, filecount) {
   let countCorruptRecords = 0;
   let countDuplicateRecords = 0;
 
   document.getElementById("duplicate-records").textContent = ""
   document.getElementById('corrupt-records').textContent = ''
   document.getElementById("duplicate-loader").style.display = "block"
-  errors = JSON.parse(errorDetailsObj)
+  // errors = JSON.parse(errorDetailsObj)
   console.log("these are error details: ", errors.errors)
   for (error of errors.errors) {
     files = error.split(",")
@@ -330,6 +335,7 @@ async function createDuplicateRecord(file1, file2, logId, statusId, filecount) {
 
   const duplicateRecord = document.createElement("div")
   duplicateRecord.className = "duplicate-record"
+  duplicateRecord.id = logId
 
   // Create checkbox
   const checkbox = document.createElement("input")
@@ -341,7 +347,7 @@ async function createDuplicateRecord(file1, file2, logId, statusId, filecount) {
   checkbox.name = "checkbox"
   checkbox.setAttribute(
     "data-values",
-    JSON.stringify({ data: `${file1},${file2},${logId}`, statusId: statusId, filecount: filecount })
+    JSON.stringify({ data: `${file1},${file2},${logId}`, statusId: statusId, filecount: filecount, logId: logId })
   )
 
   duplicateRecord.appendChild(checkbox)
@@ -504,9 +510,19 @@ document
     selectedCheckboxes.forEach(function (checkbox) {
       const obj = JSON.parse(checkbox.dataset.values)
       statusId = obj['statusId'];
-      filecount = obj['filecount']
+      filecount = obj['filecount'];
+      // let node = document.getElementById(obj['logId'])
+      // console.log('logid: ', obj['logId'])
+      // node.parentNode.removeChild(node)
+      // document.getElementById('bothErrorGrid').style.display = 'none';
+      // document.getElementById('replaceordiscardLoader').style.display = 'block';
       dataValues.push(obj['data'])
     })
+
+    // if (document.getElementById('duplicate-records').innerHTML === '') {
+    //   document.getElementById('duplicate-wrapper').style.display = 'none';
+    // }
+
 
     console.log(dataValues)
 
@@ -519,13 +535,18 @@ document
         body: JSON.stringify(dataValues),
       })
 
+
       await notificationsInIt();
 
+      // document.getElementById('bothErrorGrid').style.display = 'block';
+      // document.getElementById('replaceordiscardLoader').style.display = 'none';
+
       console.log('status id: ', statusId)
+      console.log('fileCount: ', filecount)
 
 
 
-      restartModal(statusId);
+      await restartModal(statusId, filecount);
 
       console.log('resume replaced?', data)
     }
@@ -536,7 +557,19 @@ document
   })
 
 
-function restartModal(statusId) {
+async function restartModal(statusId, filecount) {
+
+  const data = await fetch('http://localhost:8000/refresh-modal', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ 'statusId': `${statusId}`, 'filecount': `${filecount}` }),
+  })
+
+  const dataval = await data.json();
+
+  console.log('api data: ', dataval)
 
 
 
@@ -544,7 +577,9 @@ function restartModal(statusId) {
 
   // const dataValues = document.getElementById(statusId).getAttribute("data-values")
   // console.log('data values are: ', dataValues)
-  // viewUploadErrorDetails(dataValues, statusId)
+  viewUploadErrorDetails(dataval, statusId)
+  // document.getElementById('bothErrorGrid').style.display = 'block';
+  // document.getElementById('replaceordiscardLoader').style.display = 'none';
 
 }
 // createDuplicateRecord();
