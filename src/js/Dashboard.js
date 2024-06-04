@@ -228,6 +228,7 @@ CloseSubContainer.onclick = () => {
   SubCategorySection.style.display = "none";
   SubCategorySearchFilters.value = "";
   document.getElementById("Dashboard").style.overflow = "auto";
+  FilteringData.onFolderSelect = "";
 };
 
 window.onload = () => {

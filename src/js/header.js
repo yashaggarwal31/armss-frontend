@@ -115,10 +115,7 @@ FetchingSubcategories = () => {
 
 // SuggestionContainer
 const HoverSuggestionListContainer = () => {
-  if (
-    SearchFilters.value.split(" ").slice(-1)[0].trim() !== "" &&
-    SubCategoriesSuggestions.querySelectorAll("li").length > 0
-  ) {
+  if (SearchFilters.value.split(" ").slice(-1)[0].trim() !== "") {
     SuggestionContainer.style.display = "block";
     console.log(SubCategoriesSuggestions.innerHTML);
   } else {
@@ -140,7 +137,6 @@ SearchFilters.addEventListener("focus", HoverSuggestionListContainer);
 SearchFilters.addEventListener("blur", HideHoverSuggestionListContainer);
 
 SearchFilters.addEventListener("input", function (event) {
-  HoverSuggestionListContainer();
   if (event.target.value.length > 0) {
     SubCategoriesSuggestions.innerHTML = "";
     clearsearchvalue.style.display = "block";
@@ -150,8 +146,13 @@ SearchFilters.addEventListener("input", function (event) {
     data = MainSuggestionData.SubCategoriesData.filter((item) =>
       item.toLowerCase().includes(targetvalue[0].toLowerCase())
     );
-
-    toAppendSuggestionData(data);
+    if (data.length == 0) {
+      SuggestionContainer.style.display = "none";
+      SubCategoriesSuggestions.innerHTML = "";
+    } else {
+      SuggestionContainer.style.display = "block";
+      toAppendSuggestionData(data);
+    }
   } else {
     clearsearchvalue.style.display = "none";
   }
@@ -242,6 +243,9 @@ Logo.addEventListener("click", function () {
   Filterdata.WorkExperience.Location = [];
   Filterdata.Candidate.Experience = [];
   FilteringData.TemporaryData = [];
+  FilteringData.onFolderValue = false;
+  FilteringData.onSelectSubFolder = "";
+  FilteringData.onFolderSelect = "";
   triggerDOMContentLoaded();
 });
 

@@ -77,6 +77,11 @@
 .upload-zone-div-disabled {
   filter: grayscale(1) !important;
 }
+.upload-zone-div-disabled .upload-more-files {
+  filter: none;
+  color: blue;
+  cursor: pointer;
+}
 
 .upload-files-supported {
   background: #dee9ff;

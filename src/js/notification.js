@@ -234,6 +234,7 @@ console.log(formatDateTimeString("2024-05-21T12:00:00Z")) // Outputs: May 21, 20
 
 function viewUploadErrorDetails(errorDetailsObj) {
   document.getElementById("duplicate-records").textContent = ""
+  document.getElementById('corrupt-records').textContent = ''
   document.getElementById("duplicate-loader").style.display = "block"
   errors = JSON.parse(errorDetailsObj)
   console.log("these are error details: ", errors.errors)
@@ -325,7 +326,8 @@ async function createDuplicateRecord(file1, file2, logId) {
   checkbox.name = "checkbox"
   checkbox.setAttribute(
     "data-values",
-    JSON.stringify({ file1: file1, file2: file2, logId: logId })
+    `${file1},${file2},${logId}`
+    // JSON.stringify({ file1: file1, file2: file2, logId: logId })
   )
 
   duplicateRecord.appendChild(checkbox)
@@ -475,7 +477,7 @@ document.getElementById("replaceBtn").addEventListener("click", (event) => {
 
 document
   .getElementById("replaceOrDiscard")
-  .addEventListener("submit", function (event) {
+  .addEventListener("submit", async function (event) {
     event.preventDefault()
 
     var selectedCheckboxes = document.querySelectorAll(
@@ -486,6 +488,18 @@ document
     selectedCheckboxes.forEach(function (checkbox) {
       dataValues.push(checkbox.dataset.values)
     })
+
+    if (clickedButton = "replace") {
+      const data = await fetch('https://armss-be.exitest.com/replace_resume', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataValues),
+      })
+
+      console.log('resume replaced?', data)
+    }
 
     console.log(dataValues)
 

@@ -199,6 +199,7 @@ button {
   gap: 0.5rem;
   max-height: 12rem;
   overflow-y: auto;
+  margin-bottom: 2rem;
   /* justify-content: space-between; */
 }
 
@@ -914,6 +915,12 @@ button.primary {
   filter: grayscale(1) !important;
 }
 
+.upload-zone-div-disabled .upload-more-files {
+  filter: none;
+  color: blue;
+  cursor: pointer;
+}
+
 .upload-files-supported {
   background: #dee9ff;
   padding: 0.5rem;
@@ -1436,6 +1443,7 @@ h4.failure {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 }
 .Datasection-dropdownContainer p {
   font-size: 0.88rem;

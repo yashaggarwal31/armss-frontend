@@ -52,6 +52,7 @@
     padding: 0.6rem;
     @include width_height(5vh, 100%);
     @include flex(flex, row, space-between, center);
+    cursor: pointer;
 
     p {
       @include font_size_color(0.88rem, 400, $Textblack, "Inter");

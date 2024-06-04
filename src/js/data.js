@@ -361,7 +361,9 @@ function toShowData(data, method = "POST") {
       li.appendChild(ul);
 
       className =
-        toCheckRecent(data[i].UploadDate) < 3 ? "RecentElements" : "None";
+        toCheckRecent(data[i].UploadDate) < 3 && !data[i].IsViewed
+          ? "RecentElements"
+          : "None";
       li.classList.add("elementStyle", className);
       datalistItems.appendChild(li);
     }
