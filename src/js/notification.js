@@ -1,3 +1,12 @@
+// ;(function () {
+//   initialNotifications = []
+//   flag = 0
+// })()
+
+// getNotifications().then((data) => {
+//   initialNotifications = data
+// })
+
 // let notificationData;
 notificationLength = 0
 
