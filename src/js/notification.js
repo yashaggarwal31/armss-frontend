@@ -94,7 +94,7 @@ async function notificationsInIt() {
       statusSpan.addEventListener("click", (event) => {
         const dataValues = event.target.getAttribute("data-values")
         console.log("onclick ", dataValues)
-        viewUploadErrorDetails(dataValues, i[0])
+        viewUploadErrorDetails(dataValues, i[0], fileCount)
       })
       statusSpan.textContent = "Error"
     } else if (status == "inProgress") {
@@ -233,7 +233,10 @@ formatDateTimeString = (utcDateString) => {
 // Example usage
 console.log(formatDateTimeString("2024-05-21T12:00:00Z")) // Outputs: May 21, 2024 17:30:00 IST
 
-function viewUploadErrorDetails(errorDetailsObj, statusId) {
+function viewUploadErrorDetails(errorDetailsObj, statusId, filecount) {
+  let countCorruptRecords = 0;
+  let countDuplicateRecords = 0;
+
   document.getElementById("duplicate-records").textContent = ""
   document.getElementById('corrupt-records').textContent = ''
   document.getElementById("duplicate-loader").style.display = "block"
@@ -244,11 +247,22 @@ function viewUploadErrorDetails(errorDetailsObj, statusId) {
     console.log("error: ", error)
     console.log("these are files: ", files)
     if (files.length < 3) {
+      countCorruptRecords++;
       createCorruptRecord(error)
       console.log("file length less than 3??")
       continue
     }
-    createDuplicateRecord(files[0], files[1], files[2], statusId)
+    countDuplicateRecords++;
+    createDuplicateRecord(files[0], files[1], files[2], statusId, filecount)
+  }
+
+  if (countDuplicateRecords == 0) {
+    document.getElementById("duplicate-loader").style.display = "none"
+    document.getElementById('duplicate-records').textContent = "No Records To Show";
+  }
+
+  if (countCorruptRecords == 0) {
+    document.getElementById('corrupt-records').textContent = "No Records To Show";
   }
 
   document.getElementById("showerrordialog").style.display = "flex"
@@ -271,7 +285,7 @@ function createCorruptRecord(error) {
   document.getElementById("corrupt-records").appendChild(duplicateFileDiv)
 }
 
-async function createDuplicateRecord(file1, file2, logId, statusId) {
+async function createDuplicateRecord(file1, file2, logId, statusId, filecount) {
   // filename1 = file1;
   // filename2 = file2;
 
@@ -327,7 +341,7 @@ async function createDuplicateRecord(file1, file2, logId, statusId) {
   checkbox.name = "checkbox"
   checkbox.setAttribute(
     "data-values",
-    JSON.stringify({ data: `${file1},${file2},${logId}`, statusId: statusId })
+    JSON.stringify({ data: `${file1},${file2},${logId}`, statusId: statusId, filecount: filecount })
   )
 
   duplicateRecord.appendChild(checkbox)
@@ -485,10 +499,12 @@ document
     )
     var dataValues = []
     let statusId;
+    let filecount;
 
     selectedCheckboxes.forEach(function (checkbox) {
       const obj = JSON.parse(checkbox.dataset.values)
       statusId = obj['statusId'];
+      filecount = obj['filecount']
       dataValues.push(obj['data'])
     })
 
@@ -500,12 +516,16 @@ document
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(dataValues.data),
+        body: JSON.stringify(dataValues),
       })
 
       await notificationsInIt();
 
-      // document.getElementById(statusId).click();
+      console.log('status id: ', statusId)
+
+
+
+      restartModal(statusId);
 
       console.log('resume replaced?', data)
     }
@@ -515,6 +535,18 @@ document
     console.log("clickedButton", clickedButton)
   })
 
+
+function restartModal(statusId) {
+
+
+
+  console.log('restart Modal status')
+
+  // const dataValues = document.getElementById(statusId).getAttribute("data-values")
+  // console.log('data values are: ', dataValues)
+  // viewUploadErrorDetails(dataValues, statusId)
+
+}
 // createDuplicateRecord();
 // createDuplicateRecord();
 
