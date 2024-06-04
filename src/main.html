@@ -190,6 +190,9 @@
         </div>
       </dialog>
     </div>
+
+
+
     <section class="errordialog" id="showerrordialog" style="display: none">
       <div id="uploadDialog" class="upload-log-dialog">
         <div class="upload-logs-wrapper-div">
@@ -198,132 +201,153 @@
             <button class="x" id="closeerror-btn">❌</button>
           </div>
 
-          <form id="replaceOrDiscard">
-            <div class="group-replace">
-              <div class="error-message">
-                <span class="error-message-title">File Already Exists</span>
-                <span class="error-message-description"
-                  >A file with this name already exists. Would you like to
-                  discard the upload or replace the existing file?</span
-                >
+
+          <!-- <div id="replaceordiscardLoader">
+            Fetching Updated Data....
+          </div> -->
+          
+
+          
+
+
+            <div id="bothErrorGrid">
+              
+              <form id="replaceOrDiscard">
+                <div id="duplicate-wrapper">
+                <div class="group-replace">
+                  <div class="error-message">
+                    <span class="error-message-title">File Already Exists</span>
+                    <span class="error-message-description"
+                      >A file with this name already exists. Would you like to
+                      discard the upload or replace the existing file?</span
+                    >
+                  </div>
+                  <div class="cta">
+                    <button id="replaceBtn" type="submit" class="replace-btn">
+                      Replace
+                    </button>
+                    <button id="discardBtn" type="submit" class="discard-btn">
+                      Discard
+                    </button>
+                  </div>
+                </div>
+    
+                <div id="duplicate-loader">Loading...</div>
+    
+                <div id="duplicate-records" class="records-duplicate"></div>
+          </div>
+  
+              <div class="corrupt-wrapper">
+                <div class="error-message">
+                  <span class="error-message-title">Corrupt Files Error</span>
+                  <span class="error-message-description"
+                    >One or more files you uploaded, may be corrupted</span
+                  >
+                </div>
+                <div id="corrupt-records" class="records-duplicate"></div>
               </div>
-              <div class="cta">
-                <button id="replaceBtn" type="submit" class="replace-btn">
-                  Replace
-                </button>
-                <button id="discardBtn" type="submit" class="discard-btn">
-                  Discard
-                </button>
-              </div>
+  
+              <!-- <div class="duplicate-record">
+        <input
+          style="width: 1.5rem; height: 1.5rem; background: blue"
+          type="checkbox"
+          autocomplete="off"
+        />
+        <div class="both-files-grid">
+          <div class="duplicate-record-file-div">
+            <div class="duplicate-record-file-details">
+              <span class="duplicate-record-file-details-name"
+                >File Name</span
+              >
+              <span class="duplicate-record-file-details-datetime"
+                >Date and Time</span
+              >
             </div>
-
-            <div id="duplicate-loader">Loading...</div>
-
-            <div id="duplicate-records" class="records-duplicate"></div>
-
-            <div class="corrupt-wrapper">
-              <div class="error-message">
-                <span class="error-message-title">Corrupt Files Error</span>
-                <span class="error-message-description"
-                  >One or more files you uploaded, may be corrupted</span
-                >
-              </div>
-              <div id="corrupt-records" class="records-duplicate"></div>
-            </div>
-
-            <!-- <div class="duplicate-record">
-      <input
-        style="width: 1.5rem; height: 1.5rem; background: blue"
-        type="checkbox"
-        autocomplete="off"
-      />
-      <div class="both-files-grid">
-        <div class="duplicate-record-file-div">
-          <div class="duplicate-record-file-details">
-            <span class="duplicate-record-file-details-name"
-              >File Name</span
-            >
-            <span class="duplicate-record-file-details-datetime"
-              >Date and Time</span
-            >
-          </div>
-          <div class="flex items-center">
-            <svg class="duplicate-action">
-              <use xlink:href="./Icons/icons.svg#ActionIcon" />
-            </svg>
-          </div>
-        </div>
-        <div class="duplicate-record-file-div">
-          <div class="duplicate-record-file-details">
-            <span class="duplicate-record-file-details-name"
-              >File Name</span
-            >
-            <span class="duplicate-record-file-details-datetime"
-              >Date and Time</span
-            >
-          </div>
-          <div class="second-duplicate-cta-actions">
             <div class="flex items-center">
               <svg class="duplicate-action">
                 <use xlink:href="./Icons/icons.svg#ActionIcon" />
               </svg>
             </div>
-            <span style="color: blue; text-decoration: underline"
-              >Compare</span
-            >
+          </div>
+          <div class="duplicate-record-file-div">
+            <div class="duplicate-record-file-details">
+              <span class="duplicate-record-file-details-name"
+                >File Name</span
+              >
+              <span class="duplicate-record-file-details-datetime"
+                >Date and Time</span
+              >
+            </div>
+            <div class="second-duplicate-cta-actions">
+              <div class="flex items-center">
+                <svg class="duplicate-action">
+                  <use xlink:href="./Icons/icons.svg#ActionIcon" />
+                </svg>
+              </div>
+              <span style="color: blue; text-decoration: underline"
+                >Compare</span
+              >
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="duplicate-record">
-      <input
-        style="width: 1.5rem; height: 1.5rem; background: blue"
-        type="checkbox"
-        autocomplete="off"
-      />
-      <div class="both-files-grid">
-        <div class="duplicate-record-file-div">
-          <div class="duplicate-record-file-details">
-            <span class="duplicate-record-file-details-name"
-              >File Name</span
-            >
-            <span class="duplicate-record-file-details-datetime"
-              >Date and Time</span
-            >
-          </div>
-          <div class="flex items-center">
-            <svg class="duplicate-action">
-              <use xlink:href="./Icons/icons.svg#ActionIcon" />
-            </svg>
-          </div>
-        </div>
-        <div class="duplicate-record-file-div">
-          <div class="duplicate-record-file-details">
-            <span class="duplicate-record-file-details-name"
-              >File Name</span
-            >
-            <span class="duplicate-record-file-details-datetime"
-              >Date and Time</span
-            >
-          </div>
-          <div class="second-duplicate-cta-actions">
+  
+      <div class="duplicate-record">
+        <input
+          style="width: 1.5rem; height: 1.5rem; background: blue"
+          type="checkbox"
+          autocomplete="off"
+        />
+        <div class="both-files-grid">
+          <div class="duplicate-record-file-div">
+            <div class="duplicate-record-file-details">
+              <span class="duplicate-record-file-details-name"
+                >File Name</span
+              >
+              <span class="duplicate-record-file-details-datetime"
+                >Date and Time</span
+              >
+            </div>
             <div class="flex items-center">
               <svg class="duplicate-action">
                 <use xlink:href="./Icons/icons.svg#ActionIcon" />
               </svg>
             </div>
-            <span style="color: blue; text-decoration: underline"
-              >Compare</span
-            >
+          </div>
+          <div class="duplicate-record-file-div">
+            <div class="duplicate-record-file-details">
+              <span class="duplicate-record-file-details-name"
+                >File Name</span
+              >
+              <span class="duplicate-record-file-details-datetime"
+                >Date and Time</span
+              >
+            </div>
+            <div class="second-duplicate-cta-actions">
+              <div class="flex items-center">
+                <svg class="duplicate-action">
+                  <use xlink:href="./Icons/icons.svg#ActionIcon" />
+                </svg>
+              </div>
+              <span style="color: blue; text-decoration: underline"
+                >Compare</span
+              >
+            </div>
           </div>
         </div>
-      </div>
-    </div> -->
-          </form>
+      </div> -->
+            </form>
+          </div>
+
+          
+
+
         </div>
       </div>
     </section>
+
+
+
     <section
       class="viewdatasection"
       id="viewResumesection"
