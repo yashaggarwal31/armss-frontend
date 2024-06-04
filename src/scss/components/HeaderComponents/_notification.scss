@@ -3,8 +3,8 @@
   flex-direction: column;
   gap: 2rem;
   overflow: hidden;
-  min-width: 4rem;
-  min-height: 4rem;
+  min-width: 48rem;
+  min-height: 16rem;
 }
 
 .error {
@@ -413,35 +413,65 @@ body {
   margin-top: 11rem;
 }
 
+
 .loader {
-  width: 40px;
-  height: 40px;
-  position: relative;
-  --c: no-repeat linear-gradient(#0052f1 0 0);
-  background: var(--c) center/100% 10px, var(--c) center/10px 100%;
+  width: 15px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: l5 1s infinite linear alternate;
 }
-.loader:before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--c) 0 0, var(--c) 100% 0, var(--c) 0 100%, var(--c) 100% 100%;
-  background-size: 15.5px 15.5px;
-  animation: l16 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+@keyframes l5 {
+    0%  {box-shadow: 20px 0 #0052f1, -20px 0 #0002;background: #0052f1 }
+    33% {box-shadow: 20px 0 #0052f1, -20px 0 #0002;background: #0002}
+    66% {box-shadow: 20px 0 #0002,-20px 0 #0052f1; background: #0002}
+    100%{box-shadow: 20px 0 #0002,-20px 0 #0052f1; background: #0052f1 }
 }
-@keyframes l16 {
-  33% {
-    inset: -10px;
-    transform: rotate(0deg);
-  }
-  66% {
-    inset: -10px;
-    transform: rotate(90deg);
-  }
-  100% {
-    inset: 0;
-    transform: rotate(90deg);
-  }
+
+/* HTML: <div class="loader"></div> */
+.duplicate-loader {
+  width: 124px;
+  height: 24px;
+  -webkit-mask: 
+    conic-gradient(from 135deg at top   ,#0000,#000 .5deg 90deg,#0000 90.5deg) 0 0   ,
+    conic-gradient(from -45deg at bottom,#0000,#000 .5deg 90deg,#0000 90.5deg) 0 100%;
+  -webkit-mask-size:25% 50%;
+  -webkit-mask-repeat:repeat-x;
+  background: linear-gradient(#25b09b 0 0) left/0% 100% no-repeat #ddd;
+  animation: l13 2s infinite linear;
 }
+@keyframes l13 {
+  100% {background-size: 100% 100%}
+}
+
+// .loader {
+//   width: 40px;
+//   height: 40px;
+//   position: relative;
+//   --c: no-repeat linear-gradient(#0052f1 0 0);
+//   background: var(--c) center/100% 10px, var(--c) center/10px 100%;
+// }
+// .loader:before {
+//   content: "";
+//   position: absolute;
+//   inset: 0;
+//   background: var(--c) 0 0, var(--c) 100% 0, var(--c) 0 100%, var(--c) 100% 100%;
+//   background-size: 15.5px 15.5px;
+//   animation: l16 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+// }
+// @keyframes l16 {
+//   33% {
+//     inset: -10px;
+//     transform: rotate(0deg);
+//   }
+//   66% {
+//     inset: -10px;
+//     transform: rotate(90deg);
+//   }
+//   100% {
+//     inset: 0;
+//     transform: rotate(90deg);
+//   }
+// }
 
 /* Notification */
 
