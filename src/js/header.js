@@ -166,17 +166,19 @@ SearchFilters.addEventListener("keydown", function (event) {
 
 // searchButton
 
+function customSplit(line) {
+  var pattern = /[,]|and|or/g;
+  var splitline = line.split(pattern);
+  splitline = splitline.filter((word) => word.trim().length > 0);
+  return splitline;
+}
+
 // functionality
 async function onSubmiting() {
   SearchFilters.blur();
   value = SearchFilters.value.replace(/\s+/g, " ").trim();
-
-  data = value.split(" and ");
-  if (
-    MainSuggestionData.SubCategoriesData.find(
-      (item) => item.toLowerCase() === data[0].toLowerCase()
-    )
-  ) {
+  data = customSplit(value);
+  if (MainSuggestionData.SubCategoriesData.filter((item) => data.inludes())) {
     FilteringData.onFolderValue = true;
     FilteringData.onSelectSubFolder = data.join(" & ");
     FilteringData.chatbotData = false;
