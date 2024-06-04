@@ -85,6 +85,7 @@ async function notificationsInIt() {
     dateSpan.textContent = formattedDate
 
     const statusSpan = document.createElement("span")
+    statusSpan.id = i[0];
     statusSpan.setAttribute("data-values", JSON.stringify(i[6]))
 
     if (status == "error") {
@@ -93,7 +94,7 @@ async function notificationsInIt() {
       statusSpan.addEventListener("click", (event) => {
         const dataValues = event.target.getAttribute("data-values")
         console.log("onclick ", dataValues)
-        viewUploadErrorDetails(dataValues)
+        viewUploadErrorDetails(dataValues, i[0])
       })
       statusSpan.textContent = "Error"
     } else if (status == "inProgress") {
@@ -232,7 +233,7 @@ formatDateTimeString = (utcDateString) => {
 // Example usage
 console.log(formatDateTimeString("2024-05-21T12:00:00Z")) // Outputs: May 21, 2024 17:30:00 IST
 
-function viewUploadErrorDetails(errorDetailsObj) {
+function viewUploadErrorDetails(errorDetailsObj, statusId) {
   document.getElementById("duplicate-records").textContent = ""
   document.getElementById('corrupt-records').textContent = ''
   document.getElementById("duplicate-loader").style.display = "block"
@@ -247,7 +248,7 @@ function viewUploadErrorDetails(errorDetailsObj) {
       console.log("file length less than 3??")
       continue
     }
-    createDuplicateRecord(files[0], files[1], files[2])
+    createDuplicateRecord(files[0], files[1], files[2], statusId)
   }
 
   document.getElementById("showerrordialog").style.display = "flex"
@@ -270,7 +271,7 @@ function createCorruptRecord(error) {
   document.getElementById("corrupt-records").appendChild(duplicateFileDiv)
 }
 
-async function createDuplicateRecord(file1, file2, logId) {
+async function createDuplicateRecord(file1, file2, logId, statusId) {
   // filename1 = file1;
   // filename2 = file2;
 
@@ -326,8 +327,7 @@ async function createDuplicateRecord(file1, file2, logId) {
   checkbox.name = "checkbox"
   checkbox.setAttribute(
     "data-values",
-    `${file1},${file2},${logId}`
-    // JSON.stringify({ file1: file1, file2: file2, logId: logId })
+    JSON.stringify({ data: `${file1},${file2},${logId}`, statusId: statusId })
   )
 
   duplicateRecord.appendChild(checkbox)
@@ -484,10 +484,15 @@ document
       'input[name="checkbox"]:checked'
     )
     var dataValues = []
+    let statusId;
 
     selectedCheckboxes.forEach(function (checkbox) {
-      dataValues.push(checkbox.dataset.values)
+      const obj = JSON.parse(checkbox.dataset.values)
+      statusId = obj['statusId'];
+      dataValues.push(obj['data'])
     })
+
+    console.log(dataValues)
 
     if (clickedButton = "replace") {
       const data = await fetch('https://armss-be.exitest.com/replace_resume', {
@@ -495,8 +500,12 @@ document
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(dataValues),
+        body: JSON.stringify(dataValues.data),
       })
+
+      await notificationsInIt();
+
+      // document.getElementById(statusId).click();
 
       console.log('resume replaced?', data)
     }
