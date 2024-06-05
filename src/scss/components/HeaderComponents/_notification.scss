@@ -514,11 +514,21 @@ body {
 
 .errorSpan {
   cursor: pointer;
+  color: rgba(207, 0, 0, 0.74);
 }
 
 .errorSpan:hover {
-  color: #fc7c31;
+  color: red;
 }
+
+.inProgressSpan{
+  color: rgba(255, 166, 0, 0.726);
+}
+
+.successSpan{
+  color:rgba(0, 128, 0, 0.731);
+}
+
 
 .viewdatasection {
   position: absolute;
@@ -605,4 +615,34 @@ body {
   }
   
   
+}
+
+.loadMoreNotifications{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 0 1rem 0;
+  background-color: white;
+}
+
+.loadMoreNotificationsText{
+  color: rgba(0, 0, 255, 0.42);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* HTML: <div class="loader-more-spinner"></div> */
+.load-more-spinner {
+  // display: none;
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: 
+    radial-gradient(farthest-side,#ffa516 94%,#0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%,#ffa516);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+  animation: l13 1s infinite linear;
+}
+@keyframes l13{ 
+  100%{transform: rotate(1turn)}
 }

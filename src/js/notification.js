@@ -9,13 +9,21 @@
 
 // let notificationData;
 notificationLength = 0
+let numberOfNotifications = 10;
 
-async function getNotifications() {
+let loadingMoreNotifications = false;
+
+async function getNotifications(limit) {
+  console.log('limit is ', limit)
   try {
     const response = await fetch(
-      "https://armss-be.exitest.com/get-notifications",
+      "http://localhost:8000/get-notifications",
       {
         method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ Limit: limit })
       }
     )
     const data = await response.json()
@@ -28,17 +36,21 @@ async function getNotifications() {
   }
 }
 
-async function getNotificationLength() {
+
+
+let latestNotificationDate;
+
+async function getNotificationDate() {
   try {
     const response = await fetch(
-      "https://armss-be.exitest.com/get-notification-length",
+      "http://localhost:8000/get-notification-date",
       {
         method: "POST",
       }
     )
     const data = await response.json()
 
-    console.log("notification length:", data)
+    console.log("notification date:", data)
 
     return data
   } catch (error) {
@@ -46,13 +58,21 @@ async function getNotificationLength() {
   }
 }
 
-setInterval(async () => {
-  const notificationLen = await getNotificationLength()
-  if (notificationLen > notificationLength) {
-    console.log("dot set")
-    document.getElementById("notification-dot").style.display = "block"
+let notificationInterval = setInterval(async () => {
+  const notificationDate = await getNotificationDate()
+  const newDate = new Date(notificationDate)
+  if (!latestNotificationDate) {
+    clearInterval(notificationInterval)
   }
-  notificationLength = notificationLen
+  else {
+    const oldDate = new Date(latestNotificationDate)
+    if (newDate > oldDate) {
+      console.log("dot set")
+      document.getElementById("notification-dot").style.display = "block"
+    }
+    latestNotificationDate = notificationDate
+  }
+
 }, 10000)
 
 function onClickOpenErrorModal(event) {
@@ -72,13 +92,59 @@ function onClickOpenErrorModal(event) {
   )
 }
 
+
+formatDateTimeString = (utcDateString) => {
+  if (!utcDateString) return ""
+
+  const utcDate = new Date(utcDateString)
+
+  // Convert UTC time to IST by adding 5 hours and 30 minutes (19800000 milliseconds)
+  const istOffsetMilliseconds = 5.5 * 60 * 60 * 1000
+  const istDate = new Date(utcDate.getTime() + istOffsetMilliseconds)
+
+  const month = istDate.getMonth() + 1 // getMonth() is zero-based
+  const year = istDate.getFullYear()
+  const day = istDate.getDate()
+
+  const hours = istDate.getHours()
+  const minutes = istDate.getMinutes()
+  const seconds = istDate.getSeconds()
+
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ]
+  const monthName = monthNames[month - 1]
+
+  const formattedDate = `${monthName} ${day}, ${year}`
+  const formattedTime = `${String(hours).padStart(2, "0")}:${String(
+    minutes
+  ).padStart(2, "0")}:${String(seconds).padStart(2, "0")} IST`
+
+  return `${formattedDate} ${formattedTime}`
+}
+
+
+
 async function notificationsInIt() {
   document.getElementById("notification-dot").style.display = "none"
   document.getElementById("notification-container").style.height = "60vh"
-  data = await getNotifications()
+  data = await getNotifications(numberOfNotifications)
   notificationLength = data.length
+  latestNotificationDate = data[0][4]
 
-  console.log("data length:", data.length)
+
+  console.log("data length:", data)
   const notificationList = document.getElementById("notifications-list")
 
   notificationList.innerHTML = ""
@@ -99,9 +165,8 @@ async function notificationsInIt() {
 
     const txtDiv = document.createElement("div")
     txtDiv.classList.add("txt")
-    txtDiv.textContent = `A new upload session of ${fileCount} file${
-      fileCount == 1 ? "" : "s"
-    } was created!`
+    txtDiv.textContent = `A new upload session of ${fileCount} file${fileCount == 1 ? "" : "s"
+      } was created!`
 
     notificationDiv.appendChild(txtDiv)
 
@@ -126,15 +191,17 @@ async function notificationsInIt() {
       statusSpan.addEventListener("click", onClickOpenErrorModal)
       statusSpan.textContent = "Error"
     } else if (status == "inProgress") {
+      statusSpan.classList.add("inProgressSpan")
       statusSpan.textContent = "InProgress"
     } else if (status == "success") {
+      statusSpan.classList.add("successSpan")
       statusSpan.textContent = "Success"
     }
     // statusSpan.addEventListener('click', () => {
     //   viewUploadErrorDetails();
     // })
 
-    statusSpan.classList.add("UploadinProgress")
+
 
     subDiv.appendChild(dateSpan)
     subDiv.appendChild(statusSpan)
@@ -142,8 +209,40 @@ async function notificationsInIt() {
     notificationDiv.appendChild(subDiv)
 
     notificationList.appendChild(notificationDiv)
+
+
   }
+
+
+
+  const loadMoreNotifications = document.createElement("div")
+  loadMoreNotifications.classList.add("loadMoreNotifications")
+  const loadMoreSpan = document.createElement("span")
+  loadMoreSpan.id = 'loadmorenotifications'
+  loadMoreSpan.classList.add('loadMoreNotificationsText')
+  loadMoreSpan.textContent = "Load More Notifications"
+  loadMoreNotifications.appendChild(loadMoreSpan)
+  notificationList.appendChild(loadMoreNotifications)
+
+  loadMoreSpan.addEventListener('click', () => {
+    console.log('load more was clicked')
+    numberOfNotifications = numberOfNotifications + 10;
+    document.getElementById('loadmorenotifications').style.display = 'none'
+    document.getElementById('load-more-loader').style.display = 'block'
+    notificationsInIt();
+
+  })
+
+  const loadMoreSpinner = document.createElement('div');
+  loadMoreSpinner.id = 'load-more-loader'
+  loadMoreSpinner.classList.add('load-more-spinner')
+  loadMoreSpinner.style.display = 'none'
+  loadMoreNotifications.append(loadMoreSpinner)
+
+
 }
+
+
 
 window.addEventListener("click", function (event) {
   const notificationContainer = document.getElementById(
@@ -216,49 +315,9 @@ window.addEventListener("click", function (event) {
 //   return `${formattedDate} ${formattedTime}`
 // }
 
-formatDateTimeString = (utcDateString) => {
-  if (!utcDateString) return ""
-
-  const utcDate = new Date(utcDateString)
-
-  // Convert UTC time to IST by adding 5 hours and 30 minutes (19800000 milliseconds)
-  const istOffsetMilliseconds = 5.5 * 60 * 60 * 1000
-  const istDate = new Date(utcDate.getTime() + istOffsetMilliseconds)
-
-  const month = istDate.getMonth() + 1 // getMonth() is zero-based
-  const year = istDate.getFullYear()
-  const day = istDate.getDate()
-
-  const hours = istDate.getHours()
-  const minutes = istDate.getMinutes()
-  const seconds = istDate.getSeconds()
-
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ]
-  const monthName = monthNames[month - 1]
-
-  const formattedDate = `${monthName} ${day}, ${year}`
-  const formattedTime = `${String(hours).padStart(2, "0")}:${String(
-    minutes
-  ).padStart(2, "0")}:${String(seconds).padStart(2, "0")} IST`
-
-  return `${formattedDate} ${formattedTime}`
-}
 
 // Example usage
-console.log(formatDateTimeString("2024-05-21T12:00:00Z")) // Outputs: May 21, 2024 17:30:00 IST
+// console.log(formatDateTimeString("2024-05-21T12:00:00Z") // Outputs: May 21, 2024 17:30:00 IST
 
 function viewUploadErrorDetails(errors, statusId, filecount) {
   let countCorruptRecords = 0
