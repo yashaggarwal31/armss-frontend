@@ -484,7 +484,7 @@ body {
 
 
 /* HTML: <div class="loader"></div> */
-.loader {
+/* .loader {
   width: 15px;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -495,7 +495,7 @@ body {
     33% {box-shadow: 20px 0 #0052f1, -20px 0 #0002;background: #0002}
     66% {box-shadow: 20px 0 #0002,-20px 0 #0052f1; background: #0002}
     100%{box-shadow: 20px 0 #0002,-20px 0 #0052f1; background: #0052f1 }
-}
+} */
 
 
 .duplicate-loader {
@@ -513,7 +513,7 @@ body {
   100% {background-size: 100% 100%}
 }
 
-/* .loader {
+.loader {
   width: 40px;
   height: 40px;
   position: relative;
@@ -543,7 +543,7 @@ body {
     inset: 0;
     transform: rotate(90deg);
   }
-} */
+}
 /* Notification */
 .viewresumesection {
   position: absolute;
@@ -632,6 +632,7 @@ body {
 .multiviewdatasection {
   display: flex;
   flex-direction: row;
+  gap:1rem;
 }
 
 .errordialog {
@@ -644,6 +645,38 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 58;
+}
+
+.pdf{
+  height: 40rem;
+}
+
+.pdf iframe{
+  width: 62.5rem;
+}
+
+.pdf-compare iframe{
+  width:32rem;
+  height: 30rem;
+}
+
+
+@media screen and (min-width: 1400px) {
+
+  .pdf{
+    height: 55rem;
+  }
+  
+  .pdf iframe{
+    width: 70rem;
+  }
+
+  .pdf-compare iframe{
+    width:50rem;
+    height: 50rem;
+  }
+  
+  
 }
 
 :root {
