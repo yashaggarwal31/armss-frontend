@@ -17,7 +17,7 @@ async function getNotifications(limit) {
   console.log('limit is ', limit)
   try {
     const response = await fetch(
-      "http://localhost:8000/get-notifications",
+      "https://armss-be.exitest.com/get-notifications",
       {
         method: "POST",
         headers: {
@@ -43,7 +43,7 @@ let latestNotificationDate;
 async function getNotificationDate() {
   try {
     const response = await fetch(
-      "http://localhost:8000/get-notification-date",
+      "https://armss-be.exitest.com/get-notification-date",
       {
         method: "POST",
       }
