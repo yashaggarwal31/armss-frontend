@@ -1,5 +1,14 @@
+// ;(function () {
+//   initialNotifications = []
+//   flag = 0
+// })()
+
+// getNotifications().then((data) => {
+//   initialNotifications = data
+// })
+
 // let notificationData;
-notificationLength = 0;
+notificationLength = 0
 
 async function getNotifications() {
   try {
@@ -29,7 +38,7 @@ async function getNotificationLength() {
     )
     const data = await response.json()
 
-    console.log('notification length:', data)
+    console.log("notification length:", data)
 
     return data
   } catch (error) {
@@ -38,17 +47,33 @@ async function getNotificationLength() {
 }
 
 setInterval(async () => {
-  const notificationLen = await getNotificationLength();
+  const notificationLen = await getNotificationLength()
   if (notificationLen > notificationLength) {
-    console.log('dot set');
-    document.getElementById('notification-dot').style.display = 'block';
+    console.log("dot set")
+    document.getElementById("notification-dot").style.display = "block"
   }
-  notificationLength = notificationLen;
-}, 10000);
+  notificationLength = notificationLen
+}, 10000)
+
+function onClickOpenErrorModal(event) {
+  const dataValues = event.target.getAttribute("data-values")
+  const dataValuesFinal = JSON.parse(dataValues)
+  console.log(dataValuesFinal)
+  console.log(
+    "onclick ",
+    dataValuesFinal["data"],
+    dataValuesFinal["statusId"],
+    dataValuesFinal["filecount"]
+  )
+  viewUploadErrorDetails(
+    dataValuesFinal["data"],
+    dataValuesFinal["statusId"],
+    dataValuesFinal["filecount"]
+  )
+}
 
 async function notificationsInIt() {
-
-  document.getElementById('notification-dot').style.display = 'none';
+  document.getElementById("notification-dot").style.display = "none"
   document.getElementById("notification-container").style.height = "60vh"
   data = await getNotifications()
   notificationLength = data.length
@@ -74,8 +99,9 @@ async function notificationsInIt() {
 
     const txtDiv = document.createElement("div")
     txtDiv.classList.add("txt")
-    txtDiv.textContent = `A new upload session of ${fileCount} file${fileCount == 1 ? "" : "s"
-      } was created!`
+    txtDiv.textContent = `A new upload session of ${fileCount} file${
+      fileCount == 1 ? "" : "s"
+    } was created!`
 
     notificationDiv.appendChild(txtDiv)
 
@@ -86,21 +112,18 @@ async function notificationsInIt() {
     dateSpan.textContent = formattedDate
 
     const statusSpan = document.createElement("span")
-    statusSpan.id = i[0];
-    statusSpan.setAttribute("data-values", JSON.stringify({ data: i[6], statusId: i[0], filecount: fileCount }))
+    statusSpan.id = i[0]
+    statusSpan.setAttribute(
+      "data-values",
+      JSON.stringify({ data: i[6], statusId: i[0], filecount: fileCount })
+    )
 
-    console.log('this is???', i[6])
+    console.log("this is???", i[6])
 
     if (status == "error") {
       statusSpan.classList.add("errorSpan")
 
-      statusSpan.addEventListener("click", (event) => {
-        const dataValues = event.target.getAttribute("data-values")
-        const dataValuesFinal = JSON.parse(dataValues)
-        console.log(dataValuesFinal)
-        console.log("onclick ", dataValuesFinal['data'], dataValuesFinal['statusId'], dataValuesFinal['filecount'])
-        viewUploadErrorDetails(dataValuesFinal['data'], dataValuesFinal['statusId'], dataValuesFinal['filecount'])
-      })
+      statusSpan.addEventListener("click", onClickOpenErrorModal)
       statusSpan.textContent = "Error"
     } else if (status == "inProgress") {
       statusSpan.textContent = "InProgress"
@@ -149,7 +172,6 @@ window.addEventListener("click", function (event) {
 // document.getElementById("icon").addEventListener("click", () => {
 //   //mark all notifications as seen
 // })
-
 
 // const formatDateTimeString = (utcDateString) => {
 //   if (!utcDateString) return ''
@@ -239,35 +261,41 @@ formatDateTimeString = (utcDateString) => {
 console.log(formatDateTimeString("2024-05-21T12:00:00Z")) // Outputs: May 21, 2024 17:30:00 IST
 
 function viewUploadErrorDetails(errors, statusId, filecount) {
-  let countCorruptRecords = 0;
-  let countDuplicateRecords = 0;
+  let countCorruptRecords = 0
+  let countDuplicateRecords = 0
 
   document.getElementById("duplicate-records").textContent = ""
-  document.getElementById('corrupt-records').textContent = ''
+  document.getElementById("corrupt-records").textContent = ""
   document.getElementById("duplicate-loader").style.display = "block"
   // errors = JSON.parse(errorDetailsObj)
   console.log("these are error details: ", errors.errors)
+
   for (error of errors.errors) {
     files = error.split(",")
     console.log("error: ", error)
     console.log("these are files: ", files)
     if (files.length < 3) {
-      countCorruptRecords++;
+      countCorruptRecords++
       createCorruptRecord(error)
       console.log("file length less than 3??")
       continue
     }
-    countDuplicateRecords++;
+
+    countDuplicateRecords++
     createDuplicateRecord(files[0], files[1], files[2], statusId, filecount)
   }
 
   if (countDuplicateRecords == 0) {
+    document.getElementById("duplicate-wrapper").style.display = "none"
     document.getElementById("duplicate-loader").style.display = "none"
-    document.getElementById('duplicate-records').textContent = "No Records To Show";
+    document.getElementById("duplicate-records").textContent =
+      "No Records To Show"
   }
 
   if (countCorruptRecords == 0) {
-    document.getElementById('corrupt-records').textContent = "No Records To Show";
+    document.getElementById("corrupt-wrapper").style.display = "none"
+    document.getElementById("corrupt-records").textContent =
+      "No Records To Show"
   }
 
   document.getElementById("showerrordialog").style.display = "flex"
@@ -278,6 +306,7 @@ document.getElementById("closeerror-btn").addEventListener("click", () => {
 })
 
 function createCorruptRecord(error) {
+  document.getElementById("corrupt-wrapper").style.display = "block"
   console.log("\n Corrupt record error", error, " \n")
   filename = error.split("!@&")[1]
 
@@ -291,6 +320,7 @@ function createCorruptRecord(error) {
 }
 
 async function createDuplicateRecord(file1, file2, logId, statusId, filecount) {
+  document.getElementById("duplicate-wrapper").style.display = "block"
   // filename1 = file1;
   // filename2 = file2;
 
@@ -347,7 +377,12 @@ async function createDuplicateRecord(file1, file2, logId, statusId, filecount) {
   checkbox.name = "checkbox"
   checkbox.setAttribute(
     "data-values",
-    JSON.stringify({ data: `${file1},${file2},${logId}`, statusId: statusId, filecount: filecount, logId: logId })
+    JSON.stringify({
+      data: `${file1},${file2},${logId}`,
+      statusId: statusId,
+      filecount: filecount,
+      logId: logId,
+    })
   )
 
   duplicateRecord.appendChild(checkbox)
@@ -500,34 +535,61 @@ document
   .addEventListener("submit", async function (event) {
     event.preventDefault()
 
+    document.getElementById("showerrordialog").style.display = "none"
+
     var selectedCheckboxes = document.querySelectorAll(
       'input[name="checkbox"]:checked'
     )
+
+    const unselectedCheckboxes = document.querySelectorAll(
+      'input[name="checkbox"]:not(:checked)'
+    )
     var dataValues = []
-    let statusId;
-    let filecount;
+    var dataValues2 = []
+    let statusId
+    let filecount
 
     selectedCheckboxes.forEach(function (checkbox) {
       const obj = JSON.parse(checkbox.dataset.values)
-      statusId = obj['statusId'];
-      filecount = obj['filecount'];
+      statusId = obj["statusId"]
+      filecount = obj["filecount"]
       // let node = document.getElementById(obj['logId'])
       // console.log('logid: ', obj['logId'])
       // node.parentNode.removeChild(node)
       // document.getElementById('bothErrorGrid').style.display = 'none';
       // document.getElementById('replaceordiscardLoader').style.display = 'block';
-      dataValues.push(obj['data'])
+      dataValues.push(obj["data"])
     })
+
+    let count2 = 0
+
+    unselectedCheckboxes.forEach(function (checkbox) {
+      const obj = JSON.parse(checkbox.dataset.values)
+      dataValues2.push(obj["data"])
+      count2++
+    })
+
+    console.log(
+      "data values 2 have count: ",
+      count2,
+      "and value = ",
+      dataValues2
+    )
+
+    const statusSpanToRemove = document.getElementById(statusId)
+
+    statusSpanToRemove.textContent = "Success"
+    statusSpanToRemove.classList.remove("errorSpan")
+    statusSpanToRemove.removeEventListener("click", onClickOpenErrorModal)
 
     // if (document.getElementById('duplicate-records').innerHTML === '') {
     //   document.getElementById('duplicate-wrapper').style.display = 'none';
     // }
 
-
     console.log(dataValues)
 
-    if (clickedButton = "replace") {
-      const data = await fetch('https://armss-be.exitest.com/replace_resume', {
+    if ((clickedButton = "replace")) {
+      const data = await fetch("https://armss-be.exitest.com/replace_resume", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -535,20 +597,17 @@ document
         body: JSON.stringify(dataValues),
       })
 
-
-      await notificationsInIt();
+      await notificationsInIt()
 
       // document.getElementById('bothErrorGrid').style.display = 'block';
       // document.getElementById('replaceordiscardLoader').style.display = 'none';
 
-      console.log('status id: ', statusId)
-      console.log('fileCount: ', filecount)
+      console.log("status id: ", statusId)
+      console.log("fileCount: ", filecount)
 
+      // await restartModal(statusId, filecount);
 
-
-      await restartModal(statusId, filecount);
-
-      console.log('resume replaced?', data)
+      console.log("resume replaced?", data)
     }
 
     console.log(dataValues)
@@ -556,31 +615,29 @@ document
     console.log("clickedButton", clickedButton)
   })
 
-
 async function restartModal(statusId, filecount) {
-
-  const data = await fetch('http://localhost:8000/refresh-modal', {
+  const data = await fetch("https://armss-be.exitest.com/refresh-modal", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ 'statusId': `${statusId}`, 'filecount': `${filecount}` }),
+    body: JSON.stringify({
+      statusId: `${statusId}`,
+      filecount: `${filecount}`,
+    }),
   })
 
-  const dataval = await data.json();
+  const dataval = await data.json()
 
-  console.log('api data: ', dataval)
+  console.log("api data: ", dataval)
 
-
-
-  console.log('restart Modal status')
+  console.log("restart Modal status")
 
   // const dataValues = document.getElementById(statusId).getAttribute("data-values")
   // console.log('data values are: ', dataValues)
   viewUploadErrorDetails(dataval, statusId)
   // document.getElementById('bothErrorGrid').style.display = 'block';
   // document.getElementById('replaceordiscardLoader').style.display = 'none';
-
 }
 // createDuplicateRecord();
 // createDuplicateRecord();

@@ -1,38 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Header</title>
-    <!-- <link rel="stylesheet" href="./scss/Notification.css" />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Header</title>
+  <!-- <link rel="stylesheet" href="./scss/Notification.css" />
 
     <link rel="stylesheet" href="./scss/Header.css" />
     <link rel="stylesheet" href="css/chatbot.css" />
     <link rel="stylesheet" href="./scss/Chat.css" /> -->
-  </head>
-  <body>
-    <div class="Header-Container" id="HeaderContainer">
-      <div class="Header-SubContainer">
-        <div class="Header-logoContainer" id="Logo">
-          <img src="./assets/Logo4.png" alt="Logo" class="Header-logo" />
-          <!-- <h1 class="Header-title">ARMS</h1> -->
-        </div>
+</head>
 
-        <div class="Header-Filters">
-          <input
-            name="mainsaerchbar"
-            type="text"
-            class="Header-keywords"
-            id="SearchFilters"
-            placeholder=" Enter Keywords "
-            autocomplete="off"
-          />
-         
-          <svg class="Icon" id="ClearSearchValue" style="display: none">
-            <use xlink:href="./Icons/icons.svg#close" />
-          </svg>
+<body>
+  <div class="Header-Container" id="HeaderContainer">
+    <div class="Header-SubContainer">
+      <div class="Header-logoContainer" id="Logo">
+        <img src="./assets/Logo4.png" alt="Logo" class="Header-logo" />
+        <!-- <h1 class="Header-title">ARMS</h1> -->
+      </div>
 
-          <!-- <div class="dropdown" id="ExperienceDropdown" style="display: none">
+      <div class="Header-Filters">
+        <input name="mainsaerchbar" type="text" class="Header-keywords" id="SearchFilters"
+          placeholder=" Enter Keywords " autocomplete="off" />
+
+        <svg class="Icon" id="ClearSearchValue" style="display: none">
+          <use xlink:href="./Icons/icons.svg#close" />
+        </svg>
+
+        <!-- <div class="dropdown" id="ExperienceDropdown" style="display: none">
             <ul class="dropdown-list" id="ExperienceList">
               <li id="All">All</li>
               <li id="item1">0 - 1 Year</li>
@@ -44,15 +40,15 @@
               Add more options as needed
             </ul>
           </div> -->
-          <button class="Header-FilterButton" id="SearchButton">
-            <svg class="Icon" id="Icon">
-              <use xlink:href="./Icons/icons.svg#SearchIcon" />
-            </svg>
-          </button>
-          
-        </div>
+        <button class="Header-FilterButton" id="SearchButton">
+          <svg class="Icon" id="Icon">
+            <use xlink:href="./Icons/icons.svg#SearchIcon" />
+          </svg>
+        </button>
 
-        <!-- <div class="Header-dropdownContainer" id="Location-Header">
+      </div>
+
+      <!-- <div class="Header-dropdownContainer" id="Location-Header">
           <p id="LocationValue">Location</p>
           <svg class="Icon" id="DownIcon1">
             <use xlink:href="./Icons/icons.svg#Downarrow" />
@@ -65,35 +61,30 @@
         >
           <ul class="Locationlist" id="Locationlist"></ul>
         </div> -->
-        <!-- <div class="Header-dropdownContainer" id="Experience-Header">
+      <!-- <div class="Header-dropdownContainer" id="Experience-Header">
           <p id="ExperienceValue">Experience</p>
           <svg class="Icon" id="DownIcon2">
             <use xlink:href="./Icons/icons.svg#Downarrow" />
           </svg>
         </div> -->
-       
+
       <div class="div-contaning-bell-and-profile">
         <!-- <button onclick="window.uploadDialog.showModal()">
           Notification Bell
         </button> -->
         <div class="notification">
           <a href="#">
-            <div
-              onclick="notificationsInIt()"
-              id="icon"
-              class="notBtn"
-              href="#"
-            >
+            <div onclick="notificationsInIt()" id="icon" class="notBtn" href="#">
               <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
-              <div
-                style="
+              <div style="
                   display: flex;
                   align-items: center;
                   justify-content: center;
                   position: relative;
-                "
-              >
-                <div id="notification-dot" style="position: absolute; top:-2px; right:2.5px;background-color: blue; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);"></div>
+                ">
+                <div id="notification-dot"
+                  style="position: absolute; top:-2px; right:2.5px;background-color: blue; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
+                </div>
                 <svg style="height: 1.5rem; width: 1.5rem">
                   <use xlink:href="./Icons/icons.svg#bellIcon" />
                 </svg>
@@ -120,11 +111,7 @@
 
         <div class="ProfileContainer">
           <div class="ProfileContainer_name">
-            <img
-              src="./assets/Profile.png"
-              alt="Profile"
-              class="Header-Profile"
-            />
+            <img src="./assets/Profile.png" alt="Profile" class="Header-Profile" />
             <span>Yash Aggarwal</span>
           </div>
 
@@ -137,6 +124,8 @@
           <use xlink:href="./Icons/icons.svg#chatbot" />
         </svg>
       </div>
+
+
 
       <div class="SuggestionContainer" id="SuggestionContainer">
         <div>
@@ -273,13 +262,8 @@
             <h2>Find an answer yourself</h2>
             <div class="section-input-reset">
               <div class="input">
-                <input
-                  name="querysearchchatbot"
-                  id="querysearch"
-                  type="text"
-                  placeholder="Search..."
-                  autocomplete="off"
-                />
+                <input name="querysearchchatbot" id="querysearch" type="text" placeholder="Search..."
+                  autocomplete="off" />
               </div>
               <span id="reset">
                 <svg class="reset">
@@ -303,5 +287,6 @@
     <script src="scripts/chatbot.js"></script>
     <script src="./js/header.js"></script>
     <script src="./js/notification.js"></script>
-  </body>
+</body>
+
 </html>

@@ -80,8 +80,8 @@ button {
   flex-direction: column;
   gap: 2rem;
   overflow: hidden;
-  min-width: 4rem;
-  min-height: 4rem;
+  min-width: 48rem;
+  min-height: 16rem;
 }
 
 .error {
@@ -481,7 +481,39 @@ body {
   margin-top: 11rem;
 }
 
+
+
+/* HTML: <div class="loader"></div> */
 .loader {
+  width: 15px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: l5 1s infinite linear alternate;
+}
+@keyframes l5 {
+    0%  {box-shadow: 20px 0 #0052f1, -20px 0 #0002;background: #0052f1 }
+    33% {box-shadow: 20px 0 #0052f1, -20px 0 #0002;background: #0002}
+    66% {box-shadow: 20px 0 #0002,-20px 0 #0052f1; background: #0002}
+    100%{box-shadow: 20px 0 #0002,-20px 0 #0052f1; background: #0052f1 }
+}
+
+
+.duplicate-loader {
+  width: 124px;
+  height: 24px;
+  -webkit-mask: 
+    conic-gradient(from 135deg at top   ,#0000,#000 .5deg 90deg,#0000 90.5deg) 0 0   ,
+    conic-gradient(from -45deg at bottom,#0000,#000 .5deg 90deg,#0000 90.5deg) 0 100%;
+  -webkit-mask-size:25% 50%;
+  -webkit-mask-repeat:repeat-x;
+  background: linear-gradient(#f15700 0 0) left/0% 100% no-repeat #ddd;
+  animation: l13 2s infinite linear;
+}
+@keyframes l13 {
+  100% {background-size: 100% 100%}
+}
+
+/* .loader {
   width: 40px;
   height: 40px;
   position: relative;
@@ -511,7 +543,7 @@ body {
     inset: 0;
     transform: rotate(90deg);
   }
-}
+} */
 /* Notification */
 .viewresumesection {
   position: absolute;
@@ -1223,6 +1255,33 @@ h4.failure {
   background-color: #0052f1;
   z-index: 10;
   cursor: pointer;
+}
+
+.continue-upload {
+  /* display: none; */
+  position: fixed;
+  right: 2%;
+  top: 84.8%;
+  bottom: 2%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 0.4rem;
+  background-color: #0052f1;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.continue-upload-img{
+  height: 1.5rem;
+  width: 1.4rem;
+  z-index:1;
+  /* color: white; */
+  filter: brightness(0) invert(1);
 }
 
 .ProfileContainer {
