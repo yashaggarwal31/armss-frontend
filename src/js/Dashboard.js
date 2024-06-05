@@ -8,6 +8,11 @@
   CloseSubContainer = document.getElementById("CloseSubContainer");
   AddFolderSkills = document.getElementById("AddFolderSkills");
   AddFolderName = document.getElementById("AddFolderName");
+  AddFolderDisplayId = document.getElementById("AddFolderDisplayId");
+  EditFolderDisplayId = document.getElementById("EditFolderDisplayId");
+  EditFolderName = document.getElementById("EditFolderName");
+  PreviousFolderName = document.getElementById("PreviousFolderName");
+
   SubCategorySearchFilters = document.getElementById(
     "SubCategorySearchFilters"
   );
@@ -110,9 +115,7 @@ createListitems = (data, List, functions, flagvalue, value = undefined) => {
 
   for (let i = 0; i < 2; i++) {
     let idValue =
-      i == 0
-        ? "./Icons/icons.svg#categoryicon"
-        : "./Icons/icons.svg#DeleteIcon";
+      i == 0 ? "./Icons/icons.svg#categoryicon" : "./Icons/icons.svg#EditIcon";
     let classValue = i == 0 ? "DashboardFolderIcon" : "DashboardFolderIcon2";
     let icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     let div = document.createElement("div");
@@ -125,6 +128,14 @@ createListitems = (data, List, functions, flagvalue, value = undefined) => {
     div.appendChild(icon);
     // icon.setAttribute("class", iconClass);
     div.setAttribute("class", classValue);
+    if (!MainSuggestionData.MainFolders.includes(data) && i != 0) {
+      div.classList.add("DashboardFolderIconallowed");
+      div.onclick = (event) => {
+        event.stopPropagation();
+        // alert("You are not allowed to edit this folder");
+        EditCategory(data);
+      };
+    }
     MainDiv.appendChild(div);
   }
 
@@ -164,12 +175,16 @@ toDisplayFloder = (data) => {
 };
 
 toShowSubCategory = (id) => {
-  SubCategoryHeading.textContent = id;
-  SubCategorySection.style.display = "flex";
-  SubContainerList.innerHTML = "";
-  document.getElementById("Dashboard").style.overflow = "hidden";
-  FilteringData.onFolderSelect = id;
-  togetSubcategory(id);
+  if (id === "All Resumes") {
+    toDataPage("All Resumes");
+  } else {
+    SubCategoryHeading.textContent = id;
+    SubCategorySection.style.display = "flex";
+    SubContainerList.innerHTML = "";
+    document.getElementById("Dashboard").style.overflow = "hidden";
+    FilteringData.onFolderSelect = id;
+    togetSubcategory(id);
+  }
 };
 
 togetSubcategory = async (data) => {
@@ -183,7 +198,7 @@ togetSubcategory = async (data) => {
   })
     .then((response) => response.json())
     .then((responseData) => {
-      Folders.SubCategory = Object.keys(responseData);
+      Folders.SubCategory = responseData;
       toDisplaySubCategory(responseData);
     });
 };
@@ -214,7 +229,10 @@ togetFolders = async () => {
     .then((response) => response.json())
     .then((responseData) => {
       console.log(responseData);
-      containerList.innerHTML = "";
+      responseData["All Resumes"] = Object.values(responseData).reduce(
+        (acc, curr) => acc + curr,
+        0
+      );
       Folders.MainCategory = Object.keys(responseData);
       toDisplayFloder(responseData);
     });
@@ -294,9 +312,15 @@ tosetSuggestionData = (data) => {
 //  Search Functionality of Folders
 
 SubCategorySearchFilters.addEventListener("input", function (event) {
-  Data = Folders.SubCategory.filter((item) =>
-    item.toLowerCase().includes(event.target.value.toLowerCase())
-  );
+  Data = {};
+  for (let i of Object.keys(Folders.SubCategory)) {
+    if (i.toLowerCase().includes(event.target.value.toLowerCase())) {
+      Data[i] = Folders.SubCategory[i];
+    }
+  }
+  // Data = Folders.SubCategory.filter((item) =>
+  //   item.toLowerCase().includes(event.target.value.toLowerCase())
+  // );
   toDisplaySubCategory(Data);
 });
 
@@ -304,10 +328,14 @@ SubCategorySearchFilters.addEventListener("input", function (event) {
 document.getElementById("SubFolderAddFolder").onclick = function () {
   document.getElementById("CreateFolders-SubFolders").style.display = "flex";
   SubCategorySection.style.display = "none";
+  AddFolderDisplayId.style.display = "block";
+  EditFolderDisplayId.style.display = "none";
 };
 
 document.getElementById("CategoryAddFolder").onclick = function () {
   document.getElementById("CreateFolders-SubFolders").style.display = "flex";
+  AddFolderDisplayId.style.display = "block";
+  EditFolderDisplayId.style.display = "none";
 };
 
 //  close icon
@@ -328,6 +356,10 @@ async function addFolder(folderData) {
   });
   if (response.ok) {
     const data = await response.json();
+    if (data["status"] === 409) {
+      alert("Folder already exists");
+    }
+
     console.log("Folder added successfully:", data);
   } else {
     console.error("Failed to add folder:", response.statusText);
@@ -347,7 +379,7 @@ document.getElementById("SubmitAddFloder").onclick = function () {
     FilteringData.onFolderSelect = "";
     document.getElementById("CreateFolders-SubFolders").style.display = "none";
     FilteringData.page = "main";
-    setTimeout(triggerDOMContentLoaded, 800);
+    setTimeout(triggerDOMContentLoaded, 680);
     //  triggerDOMContentLoaded();
     togetFolders();
   } else {
@@ -381,3 +413,63 @@ async function getFlag() {
     console.error("Failed to get flag:", response.statusText);
   }
 }
+
+//  Edit Category
+async function EditFolderNamefunction(data) {
+  const response = await fetch("https://armss-be.exitest.com/editFodlerName", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  if (response.ok) {
+    const data = await response.json();
+    console.log(data);
+  } else {
+    console.error("Failed to get flag:", response.statusText);
+  }
+}
+
+function EditCategory(data) {
+  SubCategorySection.style.display = "none";
+  document.getElementById("CreateFolders-SubFolders").style.display = "flex";
+  // SubCategorySection.style.display = "none";
+  AddFolderDisplayId.style.display = "none";
+  EditFolderDisplayId.style.display = "block";
+  PreviousFolderName.value = data;
+}
+
+document
+  .getElementById("SubmitEditFloder")
+  .addEventListener("click", function () {
+    if (EditFolderName.value.length > 0) {
+      const folderData = {
+        PrevFolderName: EditFolderName.value,
+        Name: EditFolderName.value,
+        ParentFolder: FilteringData.onFolderSelect,
+      };
+
+      EditFolderNamefunction(folderData);
+      EditFolderName.value = "";
+      FilteringData.onFolderSelect = "";
+      document.getElementById("CreateFolders-SubFolders").style.display =
+        "none";
+      FilteringData.page = "main";
+      setTimeout(triggerDOMContentLoaded, 680);
+      // triggerDOMContentLoaded();
+      togetFolders();
+      EditFolderDisplayId.style.display = "none";
+    } else {
+      alert("Please fill all the fields to crete Folder");
+    }
+  });
+
+document.getElementById("CloseEditFolder").onclick = () => {
+  document.getElementById("CreateFolders-SubFolders").style.display = "none";
+  AddFolderDisplayId.style.display = "none";
+  EditFolderDisplayId.style.display = "none";
+  FilteringData.onFolderSelect = "";
+  AddFolderName.value = "";
+  AddFolderSkills.value = "";
+};

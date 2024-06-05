@@ -90,7 +90,7 @@
         id="CreateFolders-SubFolders"
         style="display: none"
       >
-        <div class="section-CategorySubContainer AddfloderContainer">
+        <div class="section-CategorySubContainer AddfloderContainer" id="AddFolderDisplayId" style="display: none;">
           <div class="section-SubHeadingContainer">
             <h4 class="SubCategoryHeading">Create a New Folder</h4>
             <svg class="Icon" id="CloseAddFolder">
@@ -119,6 +119,38 @@
             </div>
             <button class="AddFloder" id="SubmitAddFloder">Add Folder</button>
           </div>
+        </div>
+        <div class="section-CategorySubContainer AddfloderContainer" id="EditFolderDisplayId" style="display: none;">
+          <div class="section-SubHeadingContainer">
+            <h4 class="SubCategoryHeading">Edit Folder Name</h4>
+            <svg class="Icon" id="CloseEditFolder">
+              <use xlink:href="./Icons/icons.svg#close" />
+            </svg>
+          </div>
+          <div class="section-inputContainer">
+            <div class="section-AddFolderInputContainers">
+              <label>Previous Folder Name</label>
+              <input
+                name="PreviousFolder"
+                type="text"
+                id="PreviousFolderName"
+                autocomplete="off"
+                disabled
+              />
+            </div>
+            <div class="section-AddFolderInputContainers">
+              <label>New Folder Name</label>
+              <input
+                name="EditFolder"
+                type="text"
+                placeholder="Type the new folder name here"
+                id="EditFolderName"
+                autocomplete="off"
+              />
+            </div>
+            <button class="AddFloder" id="SubmitEditFloder">Edit</button>
+      
+
         </div>
       </section>
     </main>

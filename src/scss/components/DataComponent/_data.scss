@@ -78,7 +78,8 @@
   &-SearchHistory {
     //     @include grid(grid, 30% 36% 30% 4%, null, space-around);
 
-    @include grid(grid, 1fr 1fr 1fr 72px, null, null, 5px);
+    @include grid(grid, 1fr 1fr 1fr 62px, null, null, 5px);
+    position: relative;
     align-items: center;
     margin: 2rem 0;
     background-color: #f4f7ff;
@@ -87,10 +88,17 @@
 
     div {
       @include flex(flex, row, null, center, 0.6rem);
+      span {
+        background-color: #0055ff;
+        color: #fff;
+        padding: 4px 6px;
+        border-radius: 4px;
+      }
     }
 
     h4 {
       @include font_size_color(1rem, 400, $Textblack, "Inter");
+      padding-left: 20px;
     }
 
     button {
@@ -100,10 +108,10 @@
   }
 
   &-SearchFiltersDisplay {
-    width: 100%;
+    // width: 66%;
     @include flex(flex, row, null, center, 0.2rem);
-    overflow-x: auto;
-    flex-wrap: wrap;
+    // overflow-x: auto;
+    // flex-wrap: wrap;
 
     li {
       @include font_size_color(14px, 400, $Textblack, "Inter");
@@ -118,6 +126,10 @@
         font-size: 8px;
         font-weight: bold;
         filter: grayscale(1);
+        // padding: 2px 4px;
+        padding: 0px;
+        background-color: $white;
+        color: $Textblack;
       }
     }
   }
@@ -191,6 +203,7 @@
   @include grid(grid, 10% 12% 10% 10% 18% 12% 14% 10% 4%, null);
   align-items: center;
   justify-items: start;
+  border-left: 0.4rem solid transparent;
 
   p {
     max-width: 94%;
@@ -408,6 +421,18 @@ button {
     width: 1.4rem;
     height: 1.4rem;
   }
+}
+
+.ShowMoreContainer {
+  @include width_height(18vh, 18vw);
+  @include position(absolute, 10%, null, 100%, auto);
+  overflow-y: auto;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: $white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .ondisablebutton {
