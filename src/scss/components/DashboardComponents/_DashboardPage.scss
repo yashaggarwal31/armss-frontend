@@ -161,8 +161,10 @@ body {
   max-width: 24px;
   max-height: 24px;
   padding: 4px;
-  background-color: #ffebe678;
+  background-color: #f2f6ff7c;
   border-radius: 50%;
+  // overflow: hidden;
+  // border: 2px solid;
 
   // display: flex;
   // justify-content: center;
@@ -170,6 +172,8 @@ body {
   svg {
     height: 1rem;
     width: 1rem;
+    // border: 2px solid;
+    // border: 1px solid;
   }
 }
 
@@ -294,4 +298,11 @@ button {
     @include flex(flex, column, flex-start, null, 0.2rem);
     // margin: 1rem 0;
   }
+}
+
+.hovermessage {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

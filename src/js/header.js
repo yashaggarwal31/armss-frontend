@@ -31,18 +31,23 @@
 // downicon2.addEventListener("click", ExperienceDropdownFunction);
 // ExperienceHeader.addEventListener("click", ExperienceDropdownFunction);
 
+(function () {
+  MainSuggestionData = {
+    MainFolders: [],
+    SubCategoriesData: [],
+  };
+  SubCategoriesSuggestions = document.getElementById(
+    "SubCategoriesSuggestions"
+  );
+  SearchFilters = document.getElementById("SearchFilters");
+  Logo = document.getElementById("Logo");
+  clearsearchvalue = document.getElementById("ClearSearchValue");
+})();
+
 // SubCategories
 
-let clickedButton = "";
+// let clickedButton = "";
 
-let MainSuggestionData = {
-  MainFolders: [],
-  SubCategoriesData: [],
-};
-
-let SubCategoriesSuggestions = document.getElementById(
-  "SubCategoriesSuggestions"
-);
 toAppendSuggestionData = (data) => {
   data = data.sort((a, b) => a.localeCompare(b));
   SubCategoriesSuggestions.innerHTML = "";
@@ -130,7 +135,7 @@ FetchingMainCategories = () => {
 FetchingMainCategories();
 
 // SuggestionContainer
-const HoverSuggestionListContainer = () => {
+HoverSuggestionListContainer = () => {
   if (SearchFilters.value.split(" ").slice(-1)[0].trim() !== "") {
     SuggestionContainer.style.display = "block";
     console.log(SubCategoriesSuggestions.innerHTML);
@@ -138,7 +143,7 @@ const HoverSuggestionListContainer = () => {
     SuggestionContainer.style.display = "none";
   }
 };
-const HideHoverSuggestionListContainer = () => {
+HideHoverSuggestionListContainer = () => {
   setTimeout(() => {
     SuggestionContainer.style.display = "none";
     // SearchFilters.value = "";
@@ -147,7 +152,6 @@ const HideHoverSuggestionListContainer = () => {
 FetchingSubcategories();
 
 // Search Filter
-let SearchFilters = document.getElementById("SearchFilters");
 
 SearchFilters.addEventListener("focus", HoverSuggestionListContainer);
 SearchFilters.addEventListener("blur", HideHoverSuggestionListContainer);
@@ -262,9 +266,7 @@ function Logout() {
 
 // Logo
 
-let Logo = document.getElementById("Logo");
-
-Logo.addEventListener("click", function () {
+Logo.addEventListener("click", async function () {
   FilteringData.page = "main";
   Filterdata.Candidate.UploadDate = [];
   Filterdata.Skill.SkillName = [];
@@ -273,13 +275,12 @@ Logo.addEventListener("click", function () {
   FilteringData.TemporaryData = [];
   FilteringData.onFolderValue = false;
   FilteringData.onSelectSubFolder = "";
-  FilteringData.onFolderSelect = "";
-  triggerDOMContentLoaded();
+  // FilteringData.onFolderSelect = "";
+  await triggerDOMContentLoaded();
 });
 
 // clear serach value
 
-let clearsearchvalue = document.getElementById("ClearSearchValue");
 clearsearchvalue.addEventListener("click", function () {
   clearsearchvalue.style.display = "none";
   SearchFilters.value = "";

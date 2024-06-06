@@ -168,12 +168,22 @@ createListitems = (data, List, functions, flagvalue, value = undefined) => {
 };
 
 toDisplayFloder = (data) => {
+  containerList.innerHTML = "";
   Categorysvalue.textContent = Object.keys(data).length;
   for (i of Object.keys(data)) {
     createListitems(i, containerList, toShowSubCategory, data);
   }
 };
 
+function tomodal() {
+  if (FilteringData.onFolderSelect !== "") {
+    SubCategorySection.style.display = "flex";
+    toShowSubCategory(FilteringData.onFolderSelect);
+  } else {
+    SubCategorySection.style.display = "none";
+  }
+}
+tomodal();
 toShowSubCategory = (id) => {
   if (id === "All Resumes") {
     toDataPage("All Resumes");
@@ -181,7 +191,7 @@ toShowSubCategory = (id) => {
     SubCategoryHeading.textContent = id;
     SubCategorySection.style.display = "flex";
     SubContainerList.innerHTML = "";
-    document.getElementById("Dashboard").style.overflow = "hidden";
+    // document.getElementById("Dashboard").style.overflow = "hidden";
     FilteringData.onFolderSelect = id;
     togetSubcategory(id);
   }
@@ -379,7 +389,7 @@ document.getElementById("SubmitAddFloder").onclick = function () {
     FilteringData.onFolderSelect = "";
     document.getElementById("CreateFolders-SubFolders").style.display = "none";
     FilteringData.page = "main";
-    setTimeout(triggerDOMContentLoaded, 680);
+    setTimeout(triggerDOMContentLoaded, 400);
     //  triggerDOMContentLoaded();
     togetFolders();
   } else {
@@ -416,7 +426,7 @@ async function getFlag() {
 
 //  Edit Category
 async function EditFolderNamefunction(data) {
-  const response = await fetch("https://armss-be.exitest.com/editFodlerName", {
+  const response = await fetch("https://armss-be.exitest.com/editFolderName", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -445,8 +455,8 @@ document
   .addEventListener("click", function () {
     if (EditFolderName.value.length > 0) {
       const folderData = {
-        PrevFolderName: EditFolderName.value,
-        Name: EditFolderName.value,
+        PrevFolderName: PreviousFolderName.value,
+        NewFolderName: EditFolderName.value,
         ParentFolder: FilteringData.onFolderSelect,
       };
 
@@ -456,7 +466,7 @@ document
       document.getElementById("CreateFolders-SubFolders").style.display =
         "none";
       FilteringData.page = "main";
-      setTimeout(triggerDOMContentLoaded, 680);
+      setTimeout(triggerDOMContentLoaded, 400);
       // triggerDOMContentLoaded();
       togetFolders();
       EditFolderDisplayId.style.display = "none";

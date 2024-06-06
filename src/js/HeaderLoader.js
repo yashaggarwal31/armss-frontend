@@ -137,9 +137,12 @@ getContentHtml = async () => {
     var script = document.createElement("script");
     script.src = "./js/data.js";
 
-    document.body.appendChild(script);
+    // document.body.appendChild(script);
 
     // console.log(scripts)
+    if (!ScriptChecker("./js/data.js")) {
+      document.body.appendChild(script);
+    }
 
     document.getElementById("mainContent").innerHTML = "";
 
