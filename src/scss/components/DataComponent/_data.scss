@@ -76,10 +76,9 @@
   }
 
   &-SearchHistory {
-    //     @include grid(grid, 30% 36% 30% 4%, null, space-around);
+    @include grid(grid, 31% 31% 32% 4%, null, space-around, 5px);
 
-    @include grid(grid, 1fr 1fr 1fr 62px, null, null, 5px);
-    position: relative;
+    // @include grid(grid, 1fr 1fr 1fr 62px, null, null, 5px);
     align-items: center;
     margin: 2rem 0;
     background-color: #f4f7ff;
@@ -88,6 +87,7 @@
 
     div {
       @include flex(flex, row, null, center, 0.6rem);
+      position: relative;
       span {
         background-color: #0055ff;
         color: #fff;
@@ -104,15 +104,15 @@
     button {
       justify-self: center;
       padding: 8px 16px;
+      margin: 4px;
     }
   }
 
   &-SearchFiltersDisplay {
-    // width: 66%;
+    max-width: 80%;
     @include flex(flex, row, null, center, 0.2rem);
-    // overflow-x: auto;
+    overflow-x: hidden;
     // flex-wrap: wrap;
-
     li {
       @include font_size_color(14px, 400, $Textblack, "Inter");
       padding: 8px 16px;
@@ -424,15 +424,33 @@ button {
 }
 
 .ShowMoreContainer {
-  @include width_height(18vh, 18vw);
-  @include position(absolute, 10%, null, 100%, auto);
+  // @include width_height(8vh, 10vw);
+  max-height: 127px;
+  min-height: 127px;
+  // max-width: 10vw;
+  @include position(absolute, null, 10%, 110%, null);
+  @include flex(flex, column, flex-start, flex-start);
   overflow-y: auto;
-  flex-wrap: wrap;
-  gap: 1rem;
+  // overflow-x:hidden;
+  // flex-wrap: wrap;
+  // gap: 1rem;
   background-color: $white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 10px;
+}
+
+.ShowMoreContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ShowMoreContainer::-webkit-scrollbar-thumb {
+  border-radius: 2rem;
+  background-color: #c6d1e873;
+}
+
+.diableContainer {
+  display: none;
 }
 
 .ondisablebutton {

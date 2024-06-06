@@ -155,7 +155,11 @@
               class="Datasection-SearchFiltersDisplay"
               id="SkillSearchHistory"
             ></ul>
-            <span>+3</span>
+            <span id="SkillSearchHistory-span" class="diableContainer"></span>
+            <ul
+              id="SkillSearchHistory-Overflow"
+              class="Datasection-SearchFiltersDisplay ShowMoreContainer diableContainer"
+            ></ul>
           </div>
           <div>
             <h4>Experience</h4>
@@ -163,7 +167,14 @@
               class="Datasection-SearchFiltersDisplay"
               id="ExperienceSearchHistory"
             ></ul>
-            <span>+3</span>
+            <span
+              id="ExperienceSearchHistory-span"
+              class="diableContainer"
+            ></span>
+            <ul
+              id="ExperienceSearchHistory-Overflow"
+              class="Datasection-SearchFiltersDisplay ShowMoreContainer diableContainer"
+            ></ul>
           </div>
           <div>
             <h4>Location</h4>
@@ -171,15 +182,18 @@
               class="Datasection-SearchFiltersDisplay"
               id="LocationSearchHistory"
             ></ul>
-            <span>+3</span>
+            <span
+              id="LocationSearchHistory-span"
+              class="diableContainer"
+            ></span>
+            <ul
+              id="LocationSearchHistory-Overflow"
+              class="Datasection-SearchFiltersDisplay ShowMoreContainer diableContainer"
+            ></ul>
           </div>
-          <button id="ClearHistory">Clear</button>
-          <ul class="Datasection-SearchFiltersDisplay ShowMoreContainer">
-            <li>Hello<span>X</span></li>
-            <li>Hello<span>X</span></li>
-            <li>Hello<span>X</span></li>
-            <li>Hello<span>X</span></li>
-          </ul>
+          <div>
+            <button id="ClearHistory">Clear</button>
+          </div>
         </div>
         <div class="Datasection-maindataContainer">
           <ul class="datalistemsclass">
@@ -234,14 +248,8 @@
         <div class="spinner-loader"></div>
       </section>
       <section class="viewdatasection" id="viewsection" style="display: none">
-        <div>
-          <iframe
-            id="viewcandidatedata"
-            class="pdf"
-            width="800"
-            height="600"
-            src=""
-          ></iframe>
+        <div class="pdf">
+          <iframe id="viewcandidatedata" src=""></iframe>
 
           <div class="viewdatacloseicon" id="viewdatacloseicon">
             <svg>

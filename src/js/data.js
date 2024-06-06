@@ -9,6 +9,7 @@
   itemsPerPage = 10;
   currentPage = 1;
   paginationData = "";
+  VisibleTimout = "";
 })();
 
 // removeFunction = (id) => {
@@ -614,6 +615,22 @@ function setIds() {
   LocationSearchHistory = document.getElementById("LocationSearchHistory");
   SkillSearchHistory = document.getElementById("SkillSearchHistory");
   ExperienceSearchHistory = document.getElementById("ExperienceSearchHistory");
+  SkillSearchHistorySpan = document.getElementById("SkillSearchHistory-span");
+  LocationSearchHistorySpan = document.getElementById(
+    "LocationSearchHistory-span"
+  );
+  ExperienceSearchHistorySpan = document.getElementById(
+    "ExperienceSearchHistory-span"
+  );
+  SkillSearchHistoryContainer = document.getElementById(
+    "SkillSearchHistory-Overflow"
+  );
+  LocationSearchHistoryContainer = document.getElementById(
+    "LocationSearchHistory-Overflow"
+  );
+  ExperienceSearchHistoryContainer = document.getElementById(
+    "ExperienceSearchHistory-Overflow"
+  );
 
   console.log(SuggestionContainer);
   DropdownSelectFunction(ExperienceList);
@@ -988,6 +1005,7 @@ removeFunction = (id, item) => {
   }
 
   toapplyfilters(Filterdata);
+  toShowMoreApplyFilters(item);
   toCheckSearchHistory();
 };
 
@@ -1007,7 +1025,7 @@ function toAppendHistory(data, id, list) {
     toCheckSearchHistory();
   });
   list.appendChild(li);
-  toShowMoreApplyFilters();
+  toShowMoreApplyFilters(list);
 }
 
 //  Search History
@@ -1036,6 +1054,10 @@ document.getElementById("ClearHistory").addEventListener("click", function () {
   SkillSearchHistory.innerHTML = "";
   ExperienceSearchHistory.innerHTML = "";
   SearchHistoryContainer.style.display = "none";
+  SkillSearchHistoryContainer.innerHTML = "";
+  ExperienceSearchHistoryContainer.innerHTML = "";
+  LocationSearchHistoryContainer.innerHTML = "";
+  toClearAllSubFilter();
   // toget();
   toapplyfilters(Filterdata);
 });
@@ -1281,11 +1303,97 @@ async function updateView(id, view) {
 
 // Filter Add More
 
-function toShowMoreApplyFilters() {
-  if (SkillSearchHistory.children.length > 2) {
-    var hiddenItems = SkillSearchHistory.children.length - 2;
-    alert("+" + hiddenItems);
+function toShowMoreApplyFilters(valueid) {
+  console.log(valueid.scrollWidth, valueid.clientWidth, valueid.id);
+  let hiddenitemContainer = document.getElementById(`${valueid.id}-Overflow`);
+  let hiddenitemValue = document.getElementById(`${valueid.id}-span`);
+
+  if (valueid.scrollWidth > valueid.clientWidth) {
+    // hiddenitemContainer.style.display = "flex";
+    hiddenitemValue.style.display = "block";
+    let OverflowItem = valueid.removeChild(valueid.lastChild);
+    hiddenitemContainer.appendChild(OverflowItem);
+    hiddenitemValue.textContent = "+" + hiddenitemContainer.children.length;
+    // alert("+" + hiddenItems);
   } else {
-    alert(0);
+    if (hiddenitemContainer.children.length > 0) {
+      let OverflowItem = hiddenitemContainer.removeChild(
+        hiddenitemContainer.lastChild
+      );
+      valueid.appendChild(OverflowItem);
+
+      if (valueid.scrollWidth > valueid.clientWidth) {
+        // hiddenitemContainer.style.display = "flex";
+        hiddenitemValue.style.display = "block";
+        let OverflowItem = valueid.removeChild(valueid.lastChild);
+        hiddenitemContainer.appendChild(OverflowItem);
+        hiddenitemValue.textContent = "+" + hiddenitemContainer.children.length;
+      } else {
+        if (hiddenitemContainer.childNodes.length === 0) {
+          hiddenitemContainer.style.display = "none";
+          hiddenitemValue.style.display = "none";
+        }
+        // alert("-" + hiddenItems);
+      }
+      hiddenitemValue.textContent = "+" + hiddenitemContainer.children.length;
+    } else {
+      hiddenitemContainer.style.display = "none";
+      hiddenitemValue.style.display = "none";
+    }
   }
 }
+
+SkillSearchHistorySpan.onclick = function () {
+  SkillSearchHistoryContainer.style.display = "flex";
+  VisibleTimout = setTimeout(() => {
+    SkillSearchHistoryContainer.style.display = "none";
+  }, 400);
+};
+
+LocationSearchHistorySpan.onclick = function () {
+  LocationSearchHistoryContainer.style.display = "flex";
+  VisibleTimout = setTimeout(() => {
+    LocationSearchHistoryContainer.style.display = "none";
+  }, 400);
+};
+
+ExperienceSearchHistorySpan.onclick = function () {
+  ExperienceSearchHistoryContainer.style.display = "flex";
+  VisibleTimout = setTimeout(() => {
+    ExperienceSearchHistoryContainer.style.display = "none";
+  }, 400);
+};
+
+function toClearAllSubFilter() {
+  SkillSearchHistoryContainer.style.display = "none";
+  LocationSearchHistoryContainer.style.display = "none";
+  ExperienceSearchHistoryContainer.style.display = "none";
+  SkillSearchHistorySpan.style.display = "none";
+  LocationSearchHistorySpan.style.display = "none";
+  ExperienceSearchHistorySpan.style.display = "none";
+}
+
+SkillSearchHistoryContainer.addEventListener("mouseover", () => {
+  clearTimeout(VisibleTimout);
+});
+
+LocationSearchHistoryContainer.addEventListener("mouseover", () => {
+  clearTimeout(VisibleTimout);
+});
+
+ExperienceSearchHistoryContainer.addEventListener("mouseover", () => {
+  clearTimeout(VisibleTimout);
+});
+SkillSearchHistoryContainer.addEventListener("mouseleave", () => {
+  SkillSearchHistoryContainer.style.display = "none";
+});
+
+LocationSearchHistoryContainer.addEventListener("mouseleave", () => {
+  LocationSearchHistoryContainer.style.display = "none";
+});
+
+ExperienceSearchHistoryContainer.addEventListener("mouseleave", () => {
+  ExperienceSearchHistoryContainer.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {});

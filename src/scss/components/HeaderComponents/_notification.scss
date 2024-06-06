@@ -281,7 +281,7 @@ body {
   padding: 0px;
   left: -370px;
   margin-top: 5px;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
   -webkit-box-shadow: 10px 10px 23px 0px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 10px 10px 23px 0px rgba(0, 0, 0, 0.1);
   box-shadow: 10px 10px 23px 0px rgba(0, 0, 0, 0.1);
@@ -340,7 +340,7 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
 }
 
 .cont:empty {
@@ -414,18 +414,18 @@ body {
 }
 
 
-.loader {
-  width: 15px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  animation: l5 1s infinite linear alternate;
-}
-@keyframes l5 {
-    0%  {box-shadow: 20px 0 #0052f1, -20px 0 #0002;background: #0052f1 }
-    33% {box-shadow: 20px 0 #0052f1, -20px 0 #0002;background: #0002}
-    66% {box-shadow: 20px 0 #0002,-20px 0 #0052f1; background: #0002}
-    100%{box-shadow: 20px 0 #0002,-20px 0 #0052f1; background: #0052f1 }
-}
+// .loader {
+//   width: 15px;
+//   aspect-ratio: 1;
+//   border-radius: 50%;
+//   animation: l5 1s infinite linear alternate;
+// }
+// @keyframes l5 {
+//     0%  {box-shadow: 20px 0 #0052f1, -20px 0 #0002;background: #0052f1 }
+//     33% {box-shadow: 20px 0 #0052f1, -20px 0 #0002;background: #0002}
+//     66% {box-shadow: 20px 0 #0002,-20px 0 #0052f1; background: #0002}
+//     100%{box-shadow: 20px 0 #0002,-20px 0 #0052f1; background: #0052f1 }
+// }
 
 /* HTML: <div class="loader"></div> */
 .duplicate-loader {
@@ -436,42 +436,42 @@ body {
     conic-gradient(from -45deg at bottom,#0000,#000 .5deg 90deg,#0000 90.5deg) 0 100%;
   -webkit-mask-size:25% 50%;
   -webkit-mask-repeat:repeat-x;
-  background: linear-gradient(#25b09b 0 0) left/0% 100% no-repeat #ddd;
+  background: linear-gradient(#f15700 0 0) left/0% 100% no-repeat #ddd;
   animation: l13 2s infinite linear;
 }
 @keyframes l13 {
   100% {background-size: 100% 100%}
 }
 
-// .loader {
-//   width: 40px;
-//   height: 40px;
-//   position: relative;
-//   --c: no-repeat linear-gradient(#0052f1 0 0);
-//   background: var(--c) center/100% 10px, var(--c) center/10px 100%;
-// }
-// .loader:before {
-//   content: "";
-//   position: absolute;
-//   inset: 0;
-//   background: var(--c) 0 0, var(--c) 100% 0, var(--c) 0 100%, var(--c) 100% 100%;
-//   background-size: 15.5px 15.5px;
-//   animation: l16 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
-// }
-// @keyframes l16 {
-//   33% {
-//     inset: -10px;
-//     transform: rotate(0deg);
-//   }
-//   66% {
-//     inset: -10px;
-//     transform: rotate(90deg);
-//   }
-//   100% {
-//     inset: 0;
-//     transform: rotate(90deg);
-//   }
-// }
+.loader {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  --c: no-repeat linear-gradient(#0052f1 0 0);
+  background: var(--c) center/100% 10px, var(--c) center/10px 100%;
+}
+.loader:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--c) 0 0, var(--c) 100% 0, var(--c) 0 100%, var(--c) 100% 100%;
+  background-size: 15.5px 15.5px;
+  animation: l16 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+}
+@keyframes l16 {
+  33% {
+    inset: -10px;
+    transform: rotate(0deg);
+  }
+  66% {
+    inset: -10px;
+    transform: rotate(90deg);
+  }
+  100% {
+    inset: 0;
+    transform: rotate(90deg);
+  }
+}
 
 /* Notification */
 
@@ -514,11 +514,21 @@ body {
 
 .errorSpan {
   cursor: pointer;
+  color: rgba(207, 0, 0, 0.74);
 }
 
 .errorSpan:hover {
-  color: #fc7c31;
+  color: red;
 }
+
+.inProgressSpan{
+  color: rgba(255, 166, 0, 0.726);
+}
+
+.successSpan{
+  color:rgba(0, 128, 0, 0.731);
+}
+
 
 .viewdatasection {
   position: absolute;
@@ -560,6 +570,7 @@ body {
 .multiviewdatasection {
   display: flex;
   flex-direction: row;
+  gap:1rem;
 }
 
 .errordialog {
@@ -572,4 +583,66 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 58;
+}
+
+.pdf{
+  height: 40rem;
+}
+
+.pdf iframe{
+  width: 62.5rem;
+}
+
+.pdf-compare iframe{
+  width:32rem;
+  height: 30rem;
+}
+
+
+@media screen and (min-width: 1400px) {
+
+  .pdf{
+    height: 55rem;
+  }
+  
+  .pdf iframe{
+    width: 70rem;
+  }
+
+  .pdf-compare iframe{
+    width:50rem;
+    height: 50rem;
+  }
+  
+  
+}
+
+.loadMoreNotifications{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 0 1rem 0;
+  background-color: white;
+}
+
+.loadMoreNotificationsText{
+  color: rgba(0, 0, 255, 0.42);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* HTML: <div class="loader-more-spinner"></div> */
+.load-more-spinner {
+  // display: none;
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: 
+    radial-gradient(farthest-side,#ffa516 94%,#0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%,#ffa516);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+  animation: l134 1s infinite linear;
+}
+@keyframes l134{ 
+  100%{transform: rotate(1turn)}
 }

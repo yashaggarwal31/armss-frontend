@@ -125,6 +125,12 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 1400px) {
+  .continue-upload{
+    top: 82.8%;
+  }
+}
+
 .continue-upload-img{
   height: 1.5rem;
   width: 1.4rem;

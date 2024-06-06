@@ -353,7 +353,7 @@ body {
   padding: 0px;
   left: -370px;
   margin-top: 5px;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
   box-shadow: 10px 10px 23px 0px rgba(0, 0, 0, 0.1);
   cursor: context-menu;
   z-index: 50;
@@ -409,7 +409,7 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
 }
 
 .cont:empty {
@@ -481,31 +481,6 @@ body {
   margin-top: 11rem;
 }
 
-.loader {
-  width: 15px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  animation: l5 1s infinite linear alternate;
-}
-
-@keyframes l5 {
-  0% {
-    box-shadow: 20px 0 #0052f1, -20px 0 rgba(0, 0, 0, 0.1333333333);
-    background: #0052f1;
-  }
-  33% {
-    box-shadow: 20px 0 #0052f1, -20px 0 rgba(0, 0, 0, 0.1333333333);
-    background: rgba(0, 0, 0, 0.1333333333);
-  }
-  66% {
-    box-shadow: 20px 0 rgba(0, 0, 0, 0.1333333333), -20px 0 #0052f1;
-    background: rgba(0, 0, 0, 0.1333333333);
-  }
-  100% {
-    box-shadow: 20px 0 rgba(0, 0, 0, 0.1333333333), -20px 0 #0052f1;
-    background: #0052f1;
-  }
-}
 /* HTML: <div class="loader"></div> */
 .duplicate-loader {
   width: 124px;
@@ -513,13 +488,44 @@ body {
   -webkit-mask: conic-gradient(from 135deg at top, rgba(0, 0, 0, 0), #000 0.5deg 90deg, rgba(0, 0, 0, 0) 90.5deg) 0 0, conic-gradient(from -45deg at bottom, rgba(0, 0, 0, 0), #000 0.5deg 90deg, rgba(0, 0, 0, 0) 90.5deg) 0 100%;
   -webkit-mask-size: 25% 50%;
   -webkit-mask-repeat: repeat-x;
-  background: linear-gradient(#25b09b 0 0) left/0% 100% no-repeat #ddd;
+  background: linear-gradient(#f15700 0 0) left/0% 100% no-repeat #ddd;
   animation: l13 2s infinite linear;
 }
 
 @keyframes l13 {
   100% {
     background-size: 100% 100%;
+  }
+}
+.loader {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  --c: no-repeat linear-gradient(#0052f1 0 0);
+  background: var(--c) center/100% 10px, var(--c) center/10px 100%;
+}
+
+.loader:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--c) 0 0, var(--c) 100% 0, var(--c) 0 100%, var(--c) 100% 100%;
+  background-size: 15.5px 15.5px;
+  animation: l16 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+}
+
+@keyframes l16 {
+  33% {
+    inset: -10px;
+    transform: rotate(0deg);
+  }
+  66% {
+    inset: -10px;
+    transform: rotate(90deg);
+  }
+  100% {
+    inset: 0;
+    transform: rotate(90deg);
   }
 }
 /* Notification */
@@ -563,10 +569,19 @@ body {
 
 .errorSpan {
   cursor: pointer;
+  color: rgba(207, 0, 0, 0.74);
 }
 
 .errorSpan:hover {
-  color: #fc7c31;
+  color: red;
+}
+
+.inProgressSpan {
+  color: rgba(255, 166, 0, 0.726);
+}
+
+.successSpan {
+  color: rgba(0, 128, 0, 0.731);
 }
 
 .viewdatasection {
@@ -610,6 +625,7 @@ body {
 .multiviewdatasection {
   display: flex;
   flex-direction: row;
+  gap: 1rem;
 }
 
 .errordialog {
@@ -624,6 +640,60 @@ body {
   z-index: 58;
 }
 
+.pdf {
+  height: 40rem;
+}
+
+.pdf iframe {
+  width: 62.5rem;
+}
+
+.pdf-compare iframe {
+  width: 32rem;
+  height: 30rem;
+}
+
+@media screen and (min-width: 1400px) {
+  .pdf {
+    height: 55rem;
+  }
+  .pdf iframe {
+    width: 70rem;
+  }
+  .pdf-compare iframe {
+    width: 50rem;
+    height: 50rem;
+  }
+}
+.loadMoreNotifications {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 0 1rem 0;
+  background-color: white;
+}
+
+.loadMoreNotificationsText {
+  color: rgba(0, 0, 255, 0.42);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* HTML: <div class="loader-more-spinner"></div> */
+.load-more-spinner {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #ffa516 94%, rgba(0, 0, 0, 0)) top/8px 8px no-repeat, conic-gradient(rgba(0, 0, 0, 0) 30%, #ffa516);
+  -webkit-mask: radial-gradient(farthest-side, rgba(0, 0, 0, 0) calc(100% - 8px), #000 0);
+  animation: l134 1s infinite linear;
+}
+
+@keyframes l134 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
 :root {
   --vs-primary: 29 92 255;
 }
@@ -1235,6 +1305,11 @@ h4.failure {
   cursor: pointer;
 }
 
+@media screen and (max-width: 1400px) {
+  .continue-upload {
+    top: 82.8%;
+  }
+}
 .continue-upload-img {
   height: 1.5rem;
   width: 1.4rem;
@@ -1518,9 +1593,9 @@ h4.failure {
 }
 .Datasection-SearchHistory {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 62px;
+  grid-template-columns: 31% 31% 32% 4%;
   justify-content: 5px;
-  position: relative;
+  gap: space-around;
   align-items: center;
   margin: 2rem 0;
   background-color: #f4f7ff;
@@ -1532,6 +1607,7 @@ h4.failure {
   flex-direction: row;
   align-items: center;
   gap: 0.6rem;
+  position: relative;
 }
 .Datasection-SearchHistory div span {
   background-color: #0055ff;
@@ -1549,12 +1625,15 @@ h4.failure {
 .Datasection-SearchHistory button {
   justify-self: center;
   padding: 8px 16px;
+  margin: 4px;
 }
 .Datasection-SearchFiltersDisplay {
+  max-width: 80%;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.2rem;
+  overflow-x: hidden;
 }
 .Datasection-SearchFiltersDisplay li {
   font-size: 14px;
@@ -1931,19 +2010,33 @@ button {
 }
 
 .ShowMoreContainer {
-  height: 18vh;
-  width: 18vw;
+  max-height: 127px;
+  min-height: 127px;
   position: absolute;
-  left: 10%;
-  top: 100%;
-  bottom: auto;
+  right: 10%;
+  top: 110%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   overflow-y: auto;
-  flex-wrap: wrap;
-  gap: 1rem;
   background-color: #ffffff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 10px;
+}
+
+.ShowMoreContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ShowMoreContainer::-webkit-scrollbar-thumb {
+  border-radius: 2rem;
+  background-color: rgba(198, 209, 232, 0.4509803922);
+}
+
+.diableContainer {
+  display: none;
 }
 
 .ondisablebutton {
