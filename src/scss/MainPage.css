@@ -1591,8 +1591,9 @@ h4.failure {
 }
 .Datasection-SearchHistory {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 72px;
+  grid-template-columns: 1fr 1fr 1fr 62px;
   justify-content: 5px;
+  position: relative;
   align-items: center;
   margin: 2rem 0;
   background-color: #f4f7ff;
@@ -1605,24 +1606,28 @@ h4.failure {
   align-items: center;
   gap: 0.6rem;
 }
+.Datasection-SearchHistory div span {
+  background-color: #0055ff;
+  color: #fff;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
 .Datasection-SearchHistory h4 {
   font-size: 1rem;
   font-weight: 400;
   color: #333333;
   font-family: "Inter";
+  padding-left: 20px;
 }
 .Datasection-SearchHistory button {
   justify-self: center;
   padding: 8px 16px;
 }
 .Datasection-SearchFiltersDisplay {
-  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.2rem;
-  overflow-x: auto;
-  flex-wrap: wrap;
 }
 .Datasection-SearchFiltersDisplay li {
   font-size: 14px;
@@ -1644,6 +1649,9 @@ h4.failure {
   font-size: 8px;
   font-weight: bold;
   filter: grayscale(1);
+  padding: 0px;
+  background-color: #ffffff;
+  color: #333333;
 }
 .Datasection-MainPlusDropDropDown {
   width: 16.8%;
@@ -1726,6 +1734,7 @@ h4.failure {
   grid-template-columns: 10% 12% 10% 10% 18% 12% 14% 10% 4%;
   align-items: center;
   justify-items: start;
+  border-left: 0.4rem solid transparent;
 }
 .elementStyle p {
   max-width: 94%;
@@ -1994,6 +2003,22 @@ button {
   height: 1.4rem;
 }
 
+.ShowMoreContainer {
+  height: 18vh;
+  width: 18vw;
+  position: absolute;
+  left: 10%;
+  top: 100%;
+  bottom: auto;
+  overflow-y: auto;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+}
+
 .ondisablebutton {
   background-color: #779ae0;
 }
@@ -2113,7 +2138,6 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  pointer-events: none;
 }
 
 .listContentContainer {
@@ -2146,6 +2170,10 @@ body {
 }
 .listItem:hover .DashboardFolderIcon2 {
   background-color: #ffffff;
+  cursor: not-allowed;
+}
+.listItem:hover .DashboardFolderIconallowed {
+  cursor: pointer;
 }
 .listItem:hover span {
   background-color: #ffffff;

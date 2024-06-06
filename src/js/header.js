@@ -36,6 +36,7 @@
 let clickedButton = "";
 
 let MainSuggestionData = {
+  MainFolders: [],
   SubCategoriesData: [],
 };
 
@@ -51,15 +52,20 @@ toAppendSuggestionData = (data) => {
     li.id = i;
     li.addEventListener("click", () => {
       let value = SearchFilters.value.split(" ");
-      if (value.lastIndexOf("and") !== -1) {
-        newvalue = value.slice(0, value.lastIndexOf("and") + 1);
-        newvalue.push(li.textContent);
-        SearchFilters.value = newvalue.join(" ");
-        SearchFilters.focus();
-      } else if (value.lastIndexOf("and") === -1) {
-        SearchFilters.value = li.textContent;
-        SearchFilters.focus();
-      }
+      newvalue = value.slice(0, value.length - 1);
+      // console.log(newvalue);
+      newvalue.push(li.textContent);
+      SearchFilters.value = newvalue.join(" ");
+      SearchFilters.focus();
+      // if (value.lastIndexOf("and") !== -1) {
+      //   newvalue = value.slice(0, value.lastIndexOf("and") + 1);
+      //   newvalue.push(li.textContent);
+      //   SearchFilters.value = newvalue.join(" ");
+      //   SearchFilters.focus();
+      // } else if (value.lastIndexOf("and") === -1) {
+      //   SearchFilters.value = li.textContent;
+      //
+      // }
       // console.log(SearchFilters.value);
       // items = items.find((item) => item.id === "Search" + li.id);
       // if (!items) {
@@ -113,6 +119,16 @@ FetchingSubcategories = () => {
     });
 };
 
+FetchingMainCategories = () => {
+  fetch("./assets/Data/MainCategories.json")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      MainSuggestionData.MainFolders = data.AllMainCategory;
+    });
+};
+FetchingMainCategories();
+
 // SuggestionContainer
 const HoverSuggestionListContainer = () => {
   if (SearchFilters.value.split(" ").slice(-1)[0].trim() !== "") {
@@ -141,11 +157,13 @@ SearchFilters.addEventListener("input", function (event) {
     SubCategoriesSuggestions.innerHTML = "";
     clearsearchvalue.style.display = "block";
     // let targetvalue = event.target.value;
-    let inputvalue = event.target.value.toLowerCase().split(" and ");
-    targetvalue = inputvalue.slice(-1);
+    let inputvalue = event.target.value.split(" ");
+    console.log(inputvalue);
+    targetvalue = inputvalue.slice(-1)[0];
     data = MainSuggestionData.SubCategoriesData.filter((item) =>
-      item.toLowerCase().includes(targetvalue[0].toLowerCase())
+      item.toLowerCase().includes(targetvalue.trim().toLowerCase())
     );
+
     if (data.length == 0) {
       SuggestionContainer.style.display = "none";
       SubCategoriesSuggestions.innerHTML = "";
@@ -176,19 +194,27 @@ function customSplit(line) {
 // functionality
 async function onSubmiting() {
   SearchFilters.blur();
-  value = SearchFilters.value.replace(/\s+/g, " ").trim();
-  data = customSplit(value);
-  if (MainSuggestionData.SubCategoriesData.filter((item) => data.inludes())) {
+  let value = SearchFilters.value.replace(/\s+/g, " ").trim();
+  console.log(customSplit(value));
+  let checkvalue = value.toLowerCase();
+  for (i of MainSuggestionData.SubCategoriesData) {
+    checkvalue = checkvalue.replace(i.toLowerCase(), "");
+  }
+  console.log(customSplit(checkvalue));
+  if (customSplit(checkvalue).length === 0) {
     FilteringData.onFolderValue = true;
-    FilteringData.onSelectSubFolder = data.join(" & ");
+    FilteringData.onSelectSubFolder = customSplit(value)
+      .join(" & ")
+      .replace(/\s+/g, " ")
+      .trim();
     FilteringData.chatbotData = false;
   } else {
     FilteringData.onFolderValue = false;
-    FilteringData.onSelectSubFolder = data.join(" and ");
+    FilteringData.onSelectSubFolder = value;
 
     FilteringData.chatbotData = false;
   }
-  if (data.length > 0) {
+  if (value.length > 0) {
     FilteringData.page = "data";
     await triggerDOMContentLoaded();
   }

@@ -101,7 +101,7 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  pointer-events: none;
+  // pointer-events: none;
 }
 
 .listContentContainer {
@@ -132,6 +132,11 @@ body {
   }
   .DashboardFolderIcon2 {
     background-color: $white;
+    cursor: not-allowed;
+  }
+  .DashboardFolderIconallowed {
+    // pointer-events: all;
+    cursor: pointer;
   }
 
   span {
@@ -158,6 +163,7 @@ body {
   padding: 4px;
   background-color: #ffebe678;
   border-radius: 50%;
+
   // display: flex;
   // justify-content: center;
   // align-items: center;

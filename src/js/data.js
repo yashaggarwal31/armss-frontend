@@ -205,6 +205,7 @@ function toLoadContent() {
         let data1 = {
           category_data: data,
         };
+        console.log(data1);
         let url = new URL("https://armss-be.exitest.com/displayskillmap/");
         url.search = new URLSearchParams(data1).toString();
         method = "GET";
@@ -1006,6 +1007,7 @@ function toAppendHistory(data, id, list) {
     toCheckSearchHistory();
   });
   list.appendChild(li);
+  toShowMoreApplyFilters();
 }
 
 //  Search History
@@ -1275,4 +1277,15 @@ async function updateView(id, view) {
     body: JSON.stringify(data),
   });
   return await response.json();
+}
+
+// Filter Add More
+
+function toShowMoreApplyFilters() {
+  if (SkillSearchHistory.children.length > 2) {
+    var hiddenItems = SkillSearchHistory.children.length - 2;
+    alert("+" + hiddenItems);
+  } else {
+    alert(0);
+  }
 }
