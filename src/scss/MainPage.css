@@ -2427,6 +2427,7 @@ button {
   height: 1rem;
 }
 .section-actionContainer .closeSpan {
+  cursor:pointer;
   padding: 0.4rem;
 }
 .section-chatcontent {
