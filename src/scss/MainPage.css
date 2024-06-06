@@ -626,6 +626,7 @@ body {
 
 .viewdatacloseicon {
   padding: 6px;
+  cursor: pointer;
   align-self: flex-start;
   background-color: #ffffff;
   border-radius: 50%;
