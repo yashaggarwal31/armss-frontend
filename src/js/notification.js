@@ -596,8 +596,11 @@ document
       // node.parentNode.removeChild(node)
       // document.getElementById('bothErrorGrid').style.display = 'none';
       // document.getElementById('replaceordiscardLoader').style.display = 'block';
-      dataValues.push(obj["data"]);
-    });
+      dataValues.push(obj["data"])
+    })
+
+
+
 
     let count2 = 0;
 
@@ -606,6 +609,15 @@ document
       dataValues2.push(obj["data"]);
       count2++;
     });
+      const obj = JSON.parse(checkbox.dataset.values)
+      statusId = obj["statusId"]
+      filecount = obj["filecount"]
+      dataValues2.push(obj["data"])
+      count2++
+    })
+
+
+
 
     console.log(
       "data values 2 have count: ",
@@ -619,12 +631,26 @@ document
     statusSpanToRemove.textContent = "Success";
     statusSpanToRemove.classList.remove("errorSpan");
     statusSpanToRemove.removeEventListener("click", onClickOpenErrorModal);
+    statusSpanToRemove.textContent = "Success"
+    statusSpanToRemove.classList.remove("errorSpan")
+    statusSpanToRemove.classList.add("successSpan")
+    statusSpanToRemove.removeEventListener("click", onClickOpenErrorModal)
 
     // if (document.getElementById('duplicate-records').innerHTML === '') {
     //   document.getElementById('duplicate-wrapper').style.display = 'none';
     // }
 
     console.log(dataValues);
+    console.log(dataValues)
+
+    const updating = await fetch('https://armss-be.exitest.com/markNotificationAsResolved', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ NotifID: statusId })
+    }
+    )
 
     if ((clickedButton = "replace")) {
       const data = await fetch("https://armss-be.exitest.com/replace_resume", {
