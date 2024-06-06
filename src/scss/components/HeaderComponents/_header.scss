@@ -110,7 +110,7 @@
   // display: none;
   position: fixed;
   right: 2%;
-  top: 82.8%;
+  top: 84.8%;
   bottom: 2%;
   height: 50px;
   width: 50px;
@@ -123,6 +123,12 @@
   background-color: #0052f1;
   z-index: 0;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1400px) {
+  .continue-upload{
+    top: 82.8%;
+  }
 }
 
 .continue-upload-img{
