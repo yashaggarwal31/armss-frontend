@@ -1489,8 +1489,36 @@ h4.failure {
   max-height: 86vh;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 2rem;
+  padding: 1.2rem 2rem 2rem 2rem;
   font-family: "Inter";
+}
+.Datasection-BackPage {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+}
+.Datasection-BackPage .BackArrow {
+  height: 28px;
+  width: 28px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f7ff;
+  padding: 4px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.Datasection-BackPage .BackArrow svg {
+  height: 18px;
+  width: 18px;
+}
+.Datasection-BackPage h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+  font-family: "Inter";
+  padding-top: 6px;
 }
 .Datasection-TitleContainer {
   display: flex;
@@ -1803,6 +1831,11 @@ h4.failure {
   border: none;
 }
 
+.LocationElement {
+  color: rgba(224, 134, 0, 0.7647058824);
+  background-color: #fff5e8;
+}
+
 .SkillsContainer {
   display: flex;
   flex-direction: row;
@@ -1824,7 +1857,6 @@ h4.failure {
 
 .at-end-skill-container {
   position: absolute;
-  left: 28%;
   top: auto;
   bottom: 0%;
 }
@@ -1848,6 +1880,16 @@ h4.failure {
   border-radius: 8px;
   border: 1px solid transparent;
   align-self: flex-start;
+}
+
+.LocationContainer {
+  position: absolute;
+  left: 38%;
+  max-height: 24vh;
+}
+.LocationContainer span {
+  background-color: #f6f8fc;
+  color: #003db4;
 }
 
 button {
@@ -2014,6 +2056,7 @@ button {
 .ShowMoreContainer {
   max-height: 127px;
   min-height: 127px;
+  max-width: 20vw;
   position: absolute;
   right: 10%;
   top: 110%;
@@ -2026,6 +2069,9 @@ button {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   padding: 10px;
+}
+.ShowMoreContainer li {
+  text-wrap: wrap;
 }
 
 .ShowMoreContainer::-webkit-scrollbar {

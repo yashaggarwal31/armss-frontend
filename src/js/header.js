@@ -275,7 +275,7 @@ Logo.addEventListener("click", async function () {
   FilteringData.TemporaryData = [];
   FilteringData.onFolderValue = false;
   FilteringData.onSelectSubFolder = "";
-  // FilteringData.onFolderSelect = "";
+  FilteringData.onFolderSelect = "";
   await triggerDOMContentLoaded();
 });
 

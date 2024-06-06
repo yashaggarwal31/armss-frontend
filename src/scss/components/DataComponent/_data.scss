@@ -6,8 +6,30 @@
   max-height: 86vh;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 2rem;
+  padding: 1.2rem 2rem 2rem 2rem;
   font-family: "Inter";
+
+  &-BackPage {
+    @include flex(flex, row, null, null, 6px);
+    // margin-bottom: 2rem;
+    .BackArrow {
+      @include width_height(28px, 28px);
+      @include flex(flex, row, center, center);
+      background-color: #f4f7ff;
+      padding: 4px;
+      border-radius: 25px;
+      cursor: pointer;
+      svg {
+        height: 18px;
+        width: 18px;
+        // border: 1px solid;
+      }
+    }
+    h4 {
+      @include font_size_color(14px, 600, $Textblack, "Inter");
+      padding-top: 6px;
+    }
+  }
 
   &-TitleContainer {
     @include flex(flex, row, space-between, center);
@@ -266,6 +288,10 @@
   outline: none;
   border: none;
 }
+.LocationElement {
+  color: #e08600c3;
+  background-color: #fff5e8;
+}
 
 .SkillsContainer {
   @include flex(flex, row, null, null, 0.6rem, wrap);
@@ -281,7 +307,7 @@
   display: none;
 }
 .at-end-skill-container {
-  @include position(absolute, 28%, null, auto, 0%);
+  @include position(absolute, null, null, auto, 0%);
 }
 .SkillsContainer::-webkit-scrollbar {
   width: 8px;
@@ -298,6 +324,16 @@
   border-radius: 8px;
   border: 1px solid transparent;
   align-self: flex-start;
+}
+
+.LocationContainer {
+  @include position(absolute, 38%, null, null, null);
+  max-height: 24vh;
+
+  span {
+    background-color: #f6f8fc;
+    color: #003db4;
+  }
 }
 
 button {
@@ -428,7 +464,7 @@ button {
   // @include width_height(8vh, 10vw);
   max-height: 127px;
   min-height: 127px;
-  // max-width: 10vw;
+  max-width: 20vw;
   @include position(absolute, null, 10%, 110%, null);
   @include flex(flex, column, flex-start, flex-start);
   overflow-y: auto;
@@ -439,6 +475,10 @@ button {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   padding: 10px;
+
+  li {
+    text-wrap: wrap;
+  }
 }
 
 .ShowMoreContainer::-webkit-scrollbar {

@@ -64,6 +64,7 @@ querysearch.addEventListener("keydown", (event) => {
     value = event.target.value.replace(/\s+/g, " ").trim();
     chat(value);
     querysearch.value = "";
+    ClearHistory();
   }
 });
 
@@ -80,6 +81,7 @@ function submitQuery(event) {
 }
 
 async function chat(value) {
+  FilteringData.onFolderSelect = "";
   chatSpace.style.minHeight = "40vh";
   const query = value;
   const UserQuery = document.createElement("p");
