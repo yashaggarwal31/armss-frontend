@@ -488,7 +488,7 @@ body {
   -webkit-mask: conic-gradient(from 135deg at top, rgba(0, 0, 0, 0), #000 0.5deg 90deg, rgba(0, 0, 0, 0) 90.5deg) 0 0, conic-gradient(from -45deg at bottom, rgba(0, 0, 0, 0), #000 0.5deg 90deg, rgba(0, 0, 0, 0) 90.5deg) 0 100%;
   -webkit-mask-size: 25% 50%;
   -webkit-mask-repeat: repeat-x;
-  background: linear-gradient(#f15700 0 0) left/0% 100% no-repeat #ddd;
+  background: linear-gradient(rgb(0, 0, 255) 0 0) left/0% 100% no-repeat #ddd;
   animation: l13 2s infinite linear;
 }
 
@@ -607,6 +607,7 @@ body {
 }
 
 .viewdatacloseicon {
+  cursor: pointer;
   padding: 6px;
   align-self: flex-start;
   background-color: #ffffff;
@@ -684,7 +685,7 @@ body {
   width: 50px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(farthest-side, #ffa516 94%, rgba(0, 0, 0, 0)) top/8px 8px no-repeat, conic-gradient(rgba(0, 0, 0, 0) 30%, #ffa516);
+  background: radial-gradient(farthest-side, rgb(0, 0, 255) 94%, rgba(0, 0, 0, 0)) top/8px 8px no-repeat, conic-gradient(rgba(0, 0, 0, 0) 30%, rgb(0, 0, 255));
   -webkit-mask: radial-gradient(farthest-side, rgba(0, 0, 0, 0) calc(100% - 8px), #000 0);
   animation: l134 1s infinite linear;
 }
@@ -1917,6 +1918,7 @@ button {
 }
 
 .viewdatacloseicon {
+  cursor: pointer;
   padding: 6px;
   align-self: flex-start;
   background-color: #ffffff;
@@ -2454,6 +2456,7 @@ button {
   height: 1rem;
 }
 .section-actionContainer .closeSpan {
+  cursor: pointer;
   padding: 0.4rem;
 }
 .section-chatcontent {

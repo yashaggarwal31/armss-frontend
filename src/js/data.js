@@ -1395,5 +1395,3 @@ LocationSearchHistoryContainer.addEventListener("mouseleave", () => {
 ExperienceSearchHistoryContainer.addEventListener("mouseleave", () => {
   ExperienceSearchHistoryContainer.style.display = "none";
 });
-
-window.addEventListener("click", (event) => {});

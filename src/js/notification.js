@@ -6,13 +6,6 @@
   latestNotificationDate = undefined;
   notificationInterval = undefined;
 })();
-
-// getNotifications().then((data) => {
-//   initialNotifications = data
-// })
-
-// let notificationData;
-
 async function getNotifications(limit) {
   console.log("limit is ", limit);
   try {
@@ -603,6 +596,8 @@ document
 
     unselectedCheckboxes.forEach(function (checkbox) {
       const obj = JSON.parse(checkbox.dataset.values);
+      statusId = obj["statusId"];
+      filecount = obj["filecount"];
       dataValues2.push(obj["data"]);
       count2++;
     });
@@ -618,6 +613,7 @@ document
 
     statusSpanToRemove.textContent = "Success";
     statusSpanToRemove.classList.remove("errorSpan");
+    statusSpanToRemove.classList.add("successSpan");
     statusSpanToRemove.removeEventListener("click", onClickOpenErrorModal);
 
     // if (document.getElementById('duplicate-records').innerHTML === '') {
@@ -625,6 +621,17 @@ document
     // }
 
     console.log(dataValues);
+
+    const updating = await fetch(
+      "https://armss-be.exitest.com/markNotificationAsResolved",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ NotifID: statusId }),
+      }
+    );
 
     if ((clickedButton = "replace")) {
       const data = await fetch("https://armss-be.exitest.com/replace_resume", {
