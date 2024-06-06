@@ -148,9 +148,8 @@ async function notificationsInIt() {
 
     const txtDiv = document.createElement("div");
     txtDiv.classList.add("txt");
-    txtDiv.textContent = `A new upload session of ${fileCount} file${
-      fileCount == 1 ? "" : "s"
-    } was created!`;
+    txtDiv.textContent = `A new upload session of ${fileCount} file${fileCount == 1 ? "" : "s"
+      } was created!`;
 
     notificationDiv.appendChild(txtDiv);
 
@@ -343,9 +342,9 @@ function createCorruptRecord(error) {
 
   // <div class="duplicate-record-file-div">Hello world</div>
 
-  let duplicateFileDiv = document.createElement("div");
-  duplicateFileDiv.className = "duplicate-record-file-div";
-  duplicateFileDiv.textContent = filename;
+  let duplicateFileDiv = document.createElement("div")
+  duplicateFileDiv.className = "duplicate-record-file-div"
+  duplicateFileDiv.textContent = filename
 
   document.getElementById("corrupt-records").appendChild(duplicateFileDiv);
 }
@@ -633,7 +632,8 @@ document
       }
     );
 
-    if ((clickedButton = "replace")) {
+    if ((clickedButton == "replace")) {
+
       const data = await fetch("https://armss-be.exitest.com/replace_resume", {
         method: "POST",
         headers: {
@@ -642,23 +642,38 @@ document
         body: JSON.stringify(dataValues),
       });
 
-      await notificationsInIt();
 
-      // document.getElementById('bothErrorGrid').style.display = 'block';
-      // document.getElementById('replaceordiscardLoader').style.display = 'none';
-
-      console.log("status id: ", statusId);
-      console.log("fileCount: ", filecount);
-
-      // await restartModal(statusId, filecount);
-
-      console.log("resume replaced?", data);
     }
 
-    console.log(dataValues);
+    if (clickedButton == 'discard') {
+      const data = await fetch("https://armss-be.exitest.com/replace_resume", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataValues2),
+      })
+    }
 
-    console.log("clickedButton", clickedButton);
-  });
+
+    await notificationsInIt()
+
+    // document.getElementById('bothErrorGrid').style.display = 'block';
+    // document.getElementById('replaceordiscardLoader').style.display = 'none';
+
+    // console.log("status id: ", statusId)
+    // console.log("fileCount: ", filecount)
+
+    // // await restartModal(statusId, filecount);
+
+    // console.log("resume replaced?", data)
+
+
+    // console.log(dataValues)
+
+    // console.log("clickedButton", clickedButton)
+  })
+
 
 async function restartModal(statusId, filecount) {
   const data = await fetch("https://armss-be.exitest.com/refresh-modal", {
@@ -757,7 +772,40 @@ function openResumeComparer(filelink1, filelink2) {
 }
 
 document.getElementById("CompareViewClose").addEventListener("click", () => {
-  document.getElementById("resumeViewOne").src = "";
-  document.getElementById("resumeViewTwo").src = "";
-  document.getElementById("compareViewResume").style.display = "none";
-});
+
+  document.getElementById("resumeViewOne").src = ""
+  document.getElementById("resumeViewTwo").src = ""
+  document.getElementById("compareViewResume").style.display = "none"
+})
+
+
+let toggleDuplicateSelectionVal = false;
+
+document.getElementById('toggleDuplicateSelection').addEventListener('click', () => {
+  if (toggleDuplicateSelectionVal == false) {
+    toggleDuplicateSelectionVal = true;
+    selectAllCheckboxes()
+  }
+  else {
+    toggleDuplicateSelectionVal = false
+    unselectAllCheckboxes()
+  }
+})
+
+
+function selectAllCheckboxes() {
+  var checkboxes = document.querySelectorAll('#duplicate-records input[type="checkbox"]');
+  checkboxes.forEach(function (checkbox) {
+    checkbox.checked = true;
+  });
+}
+
+
+
+function unselectAllCheckboxes() {
+  var checkboxes = document.querySelectorAll('#duplicate-records input[type="checkbox"]');
+  checkboxes.forEach(function (checkbox) {
+    checkbox.checked = false;
+  });
+}
+
