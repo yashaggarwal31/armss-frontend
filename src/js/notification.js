@@ -783,10 +783,12 @@ let toggleDuplicateSelectionVal = false;
 
 document.getElementById('toggleDuplicateSelection').addEventListener('click', () => {
   if (toggleDuplicateSelectionVal == false) {
+    document.getElementById('toggle-select-text').textContent = 'Deselect All'
     toggleDuplicateSelectionVal = true;
     selectAllCheckboxes()
   }
   else {
+    document.getElementById('toggle-select-text').textContent = 'Select All'
     toggleDuplicateSelectionVal = false
     unselectAllCheckboxes()
   }
