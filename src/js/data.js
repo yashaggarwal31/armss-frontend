@@ -1156,10 +1156,16 @@ toapplyfilters = (data) => {
             if (
               data[key][i].some((item2) => {
                 console.log(
-                  item["Location"].join(",").includes(item2.toLowerCase())
+                  item["Location"]
+                    .join(",")
+                    .toLowerCase()
+                    .includes(item2.toLowerCase())
                 );
 
-                return item["Location"].join(",").includes(item2.toLowerCase());
+                return item["Location"]
+                  .join(",")
+                  .toLowerCase()
+                  .includes(item2.toLowerCase());
               })
             )
               return true;
@@ -1394,26 +1400,33 @@ function toShowMoreApplyFilters(valueid) {
   }
 }
 
-SkillSearchHistorySpan.onclick = function () {
+SkillSearchHistorySpan.addEventListener("mouseover", () => {
   SkillSearchHistoryContainer.style.display = "flex";
+});
+
+SkillSearchHistorySpan.addEventListener("mouseleave", () => {
   VisibleTimout = setTimeout(() => {
     SkillSearchHistoryContainer.style.display = "none";
-  }, 400);
-};
+  }, 280);
+});
 
-LocationSearchHistorySpan.onclick = function () {
+LocationSearchHistorySpan.addEventListener("mouseover", () => {
   LocationSearchHistoryContainer.style.display = "flex";
+});
+
+LocationSearchHistorySpan.addEventListener("mouseleave", () => {
   VisibleTimout = setTimeout(() => {
     LocationSearchHistoryContainer.style.display = "none";
-  }, 480);
-};
-
-ExperienceSearchHistorySpan.onclick = function () {
+  }, 280);
+});
+ExperienceSearchHistorySpan.addEventListener("mouseover", () => {
   ExperienceSearchHistoryContainer.style.display = "flex";
+});
+ExperienceSearchHistorySpan.addEventListener("mouseleave", () => {
   VisibleTimout = setTimeout(() => {
     ExperienceSearchHistoryContainer.style.display = "none";
-  }, 480);
-};
+  }, 280);
+});
 
 function toClearAllSubFilter() {
   SkillSearchHistoryContainer.style.display = "none";
