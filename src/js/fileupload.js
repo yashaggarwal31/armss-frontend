@@ -202,7 +202,9 @@ function fileuplodInit() {
         // })
 
         const link = await getUploadLink(file.name)
-        const response = await uploadFileThroughLink(link.presignedUrl, file)
+        console.log('this is link: ', link)
+        if (link == 0) continue;
+        const response = await uploadFileThroughLink(link, file)
         console.log("response is ", response)
 
         if (response == "success") {
@@ -279,32 +281,36 @@ function fileuplodInit() {
       name: filename,
     }
 
-    return fetch("https://armss-be.exitest.com/presignedUrl/", {
-      method: "POST", // Change the method to POST
-      headers: {
-        "Content-Type": "application/json", // Specify the Content-Type
-      },
-      body: JSON.stringify({ input: filename }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok")
-        }
-        return response.json()
+    try {
+      const response = await fetch("https://armss-be.exitest.com/presignedUrl/", {
+        method: "POST", // Change the method to POST
+        headers: {
+          "Content-Type": "application/json", // Specify the Content-Type
+        },
+        body: JSON.stringify({ input: filename }),
       })
-      .then((data) => {
-        // Handle the fetched object here
-        console.log(data)
-        return data
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error)
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok")
         errorCount++
-      })
+      }
+
+      const data = await response.json()
+      console.log('inside the link getter function: ', data)
+      return data
+    }
+    catch (error) {
+      console.error("There was a problem with the fetch operation:", error)
+      errorCount++
+      return 0;
+    }
+
   }
 
   const uploadFileThroughLink = async (url, file) => {
+
     try {
+      console.log('this is link: ', url)
       const data = await fetch(url, {
         method: "PUT",
         body: file,
