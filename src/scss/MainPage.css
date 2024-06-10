@@ -67,14 +67,6 @@ button {
   border: none;
 }
 
-::-webkit-scrollbar {
-  width: 0;
-}
-
-::-webkit-scrollbar {
-  height: 0;
-}
-
 .upload-logs-wrapper-div {
   display: flex;
   flex-direction: column;
@@ -1150,7 +1142,6 @@ h4.failure {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1490196078);
 }
 .Header-SubContainer {
@@ -1171,6 +1162,7 @@ h4.failure {
   border-radius: 2rem;
   padding: 0.2rem;
   gap: 5px;
+  position: relative;
 }
 .Header-logoContainer {
   font-size: 0.48rem;
@@ -1432,8 +1424,8 @@ h4.failure {
 
 .SuggestionContainer {
   position: absolute;
-  left: 20.8%;
-  top: 80%;
+  left: 16%;
+  top: 10.8%;
   width: 20%;
   border-radius: 1rem;
   background-color: #ffffff;
@@ -1631,12 +1623,14 @@ h4.failure {
   padding: 0.6rem;
   border-radius: 8px;
 }
+.Datasection-SearchHistory .Showmorecontainerposition {
+  position: relative;
+}
 .Datasection-SearchHistory div {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.6rem;
-  position: relative;
 }
 .Datasection-SearchHistory div span {
   background-color: #0055ff;
@@ -1756,6 +1750,12 @@ h4.failure {
   color: #0052f1;
 }
 
+.SKillFilterLastChild {
+  color: #0052f1;
+  text-align: center;
+  cursor: pointer;
+}
+
 .elementStyle {
   padding: 0.4rem;
   border: 1px solid #f4f2ff;
@@ -1783,6 +1783,10 @@ h4.failure {
   height: 14px;
   justify-self: flex-start;
   align-self: center;
+}
+
+#datalistItems {
+  z-index: 10;
 }
 
 .RecentElements {
@@ -1851,8 +1855,8 @@ h4.failure {
   position: absolute;
   left: 28%;
   top: 10%;
-  z-index: 20;
   display: none;
+  z-index: 20;
 }
 
 .at-end-skill-container {
@@ -2055,11 +2059,11 @@ button {
 
 .ShowMoreContainer {
   max-height: 127px;
-  min-height: 127px;
-  max-width: 20vw;
+  max-width: 14vw;
+  min-width: 14vw;
   position: absolute;
-  right: 10%;
-  top: 110%;
+  right: 0%;
+  top: calc(100% + 10px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -2067,10 +2071,19 @@ button {
   overflow-y: auto;
   background-color: #ffffff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
+  border-radius: 6px;
   padding: 10px;
 }
 .ShowMoreContainer li {
+  max-width: 100%;
+}
+.ShowMoreContainer li p {
+  max-width: 80%;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  overflow: hidden;
+}
+.ShowMoreContainer li p:hover {
   text-wrap: wrap;
 }
 
@@ -2215,6 +2228,7 @@ body {
 }
 
 .Justadded {
+  height: 17.8px;
   padding: 3px 5px;
   color: #e08700;
   font-weight: bold;

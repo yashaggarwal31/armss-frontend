@@ -696,8 +696,9 @@ function setIds() {
 // adding skill function
 function toSkillsclick(value) {
   value = value.trim();
-  if (value === "All") {
-    Filterdata.Skill.SkillName = [];
+  if (value === "More Skills") {
+    toappendSkills(FilteringData.AllSkills);
+    FilteringData.Skills = FilteringData.AllSkills;
   } else {
     let values = Filterdata.Skill.SkillName.find(
       (item) => item.SkillName === value
@@ -712,14 +713,19 @@ function toSkillsclick(value) {
       toAppendHistory(value, Unique_id, SkillSearchHistory);
       toCheckSearchHistory();
     }
+    SkillDropdownFunction();
   }
 }
 
-toappendSkills = (data) => {
+toappendSkills = (data, value = false) => {
   console.log(data);
   SkillList.innerHTML = "";
   // data = data.SkillList !== undefined ? data.SkillList : data;
   data = data.sort((a, b) => a.localeCompare(b));
+  if (value) {
+    data.push("More Skills");
+  }
+  console.log(data);
   for (let i of data) {
     let li = document.createElement("li");
     li.textContent = i;
@@ -729,11 +735,12 @@ toappendSkills = (data) => {
       value = li.id;
       toSkillsclick(value);
       toapplyfilters(Filterdata);
-
-      SkillDropdownFunction();
       // toget();
     });
     SkillList.appendChild(li);
+  }
+  if (value) {
+    SkillList.lastChild.classList.add("SKillFilterLastChild");
   }
 };
 
@@ -744,6 +751,7 @@ function tolocationclick(value) {
   if (value === "All") {
     LocationSearchHistory.innerHTML = "";
     Filterdata.WorkExperience.Location = [];
+    LocationSearchHistoryContainer.innerHTML = "";
     toCheckSearchHistory();
     toapplyfilters(Filterdata);
   } else {
@@ -808,14 +816,14 @@ FetchingSkills = () => {
   fetch("https://armss-be.exitest.com/fetch_folder_skills")
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       if (value === false) {
         toappendSkills([...new Set(Object.values(data).flat())]);
         FilteringData.Skills = [...new Set(Object.values(data).flat())];
       } else {
         if (data[item]) {
-          toappendSkills(data[item]);
+          toappendSkills(data[item], true);
           FilteringData.Skills = [...data[item]];
+          FilteringData.AllSkills = [...new Set(Object.values(data).flat())];
         } else {
           toappendSkills([...new Set(Object.values(data).flat())]);
           FilteringData.Skills = [...new Set(Object.values(data).flat())];
@@ -849,23 +857,23 @@ FetchingSkills();
 
 // to Close Other Functions
 
-function tocloseAllOtherFunctions(event) {
-  value = event.target.id.split("-")[0];
+function tocloseAllOtherFunctions(item) {
+  value = item.id.split("-")[0];
   if (Locationdropdown.style.display === "block" && value !== "Location") {
-    LocationdropdownFunction(event);
+    LocationdropdownFunction();
   }
   if (ExperienceDropdown.style.display === "block" && value !== "Experience") {
-    ExperienceDropdownFunction(event);
+    ExperienceDropdownFunction();
   }
   if (SkillDropdown.style.display === "block" && value !== "Skill") {
-    SkillDropdownFunction(event);
+    SkillDropdownFunction();
   }
   if (DateDropdown.style.display === "block" && value !== "Date") {
-    DateDropdownFunction(event);
+    DateDropdownFunction();
   }
 }
 
-LocationdropdownFunction = (event) => {
+LocationdropdownFunction = () => {
   if (Locationdropdown.style.display === "block") {
     Locationdropdown.classList.remove("dropdownVisible");
     Locationdropdown.style.display = "none";
@@ -878,10 +886,10 @@ LocationdropdownFunction = (event) => {
     downicon1.classList.add("IconStyles");
     SearchLocation.value = "";
     FetchingLocation();
-    tocloseAllOtherFunctions(event);
+    tocloseAllOtherFunctions(LocationHeader);
   }
 };
-ExperienceDropdownFunction = (event) => {
+ExperienceDropdownFunction = () => {
   if (ExperienceDropdown.style.display === "block") {
     ExperienceDropdown.classList.remove("dropdownVisible");
     ExperienceDropdown.style.display = "none";
@@ -892,11 +900,11 @@ ExperienceDropdownFunction = (event) => {
     ExperienceDropdown.classList.add("dropdownVisible");
     ExperienceDropdown.style.display = "block";
     downicon2.classList.add("IconStyles");
-    tocloseAllOtherFunctions(event);
+    tocloseAllOtherFunctions(ExperienceHeader);
   }
 };
 
-SkillDropdownFunction = (event) => {
+SkillDropdownFunction = () => {
   if (SkillDropdown.style.display === "block") {
     SkillDropdown.classList.remove("dropdownVisible");
     SkillDropdown.style.display = "none";
@@ -909,11 +917,11 @@ SkillDropdownFunction = (event) => {
     SkillDropdown.style.display = "block";
     downicon3.classList.add("IconStyles");
     FetchingSkills();
-    tocloseAllOtherFunctions(event);
+    tocloseAllOtherFunctions(SkillHeader);
   }
 };
 
-DateDropdownFunction = (event) => {
+DateDropdownFunction = () => {
   if (DateDropdown.style.display === "block") {
     DateDropdown.classList.remove("dropdownVisible");
     DateDropdown.style.display = "none";
@@ -924,18 +932,33 @@ DateDropdownFunction = (event) => {
     DateDropdown.classList.add("dropdownVisible");
     DateDropdown.style.display = "block";
     downicon4.classList.add("IconStyles");
-    tocloseAllOtherFunctions(event);
+    tocloseAllOtherFunctions(DateHeader);
   }
 };
 
 LocationHeader.addEventListener("click", LocationdropdownFunction);
 ExperienceHeader.addEventListener("click", ExperienceDropdownFunction);
-SkillHeader.addEventListener("click", SkillDropdownFunction);
+SkillHeader.addEventListener("click", SkillDropdownFunction, true);
 DateHeader.addEventListener("click", DateDropdownFunction);
+// toPreventDefault(LocationHeader);
+// toPreventDefault(SkillHeader);
+// toPreventDefault(ExperienceHeader);
+// toPreventDefault(DateHeader);
 
+function toPreventDefault(id) {
+  console.log(Array.from(id.children));
+  Array.from(id.children).forEach((item) => {
+    item.addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
+  });
+}
 window.addEventListener("click", function (event) {
   if (!event.target.closest(".Datasection-MainPlusDropDropDown")) {
-    if (SkillDropdown.style.display === "block") {
+    if (
+      SkillDropdown.style.display === "block" &&
+      event.target.textContent !== "More Skills"
+    ) {
       SkillDropdownFunction();
     }
     if (ExperienceDropdown.style.display === "block") {
