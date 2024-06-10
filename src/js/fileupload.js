@@ -203,7 +203,7 @@ function fileuplodInit() {
 
         const link = await getUploadLink(file.name)
         console.log('this is link: ', link)
-        if (link == 0) continue;
+        // if (link == 0) continue;
         const response = await uploadFileThroughLink(link, file)
         console.log("response is ", response)
 
@@ -275,19 +275,80 @@ function fileuplodInit() {
     }
   }
 
+  // const getUploadLink = async (filename) => {
+  //   console.log(`this is filename, ${filename}`)
+  //   const requestData = {
+  //     name: filename,
+  //   }
+
+  //   try {
+  //     const response = await fetch("https://armss-be.exitest.com/presignedUrl/", {
+  //       method: "POST", // Change the method to POST
+  //       headers: {
+  //         "Content-Type": "application/json", // Specify the Content-Type
+  //       },
+  //       body: JSON.stringify({ input: filename }),
+  //     })
+
+  //     if (!response.ok) {
+  //       throw new Error("Network response was not ok")
+  //       errorCount++
+  //     }
+
+  //     const data = await response.json()
+  //     console.log('inside the link getter function: ', data)
+  //     return data
+  //   }
+  //   catch (error) {
+  //     console.error("There was a problem with the fetch operation:", error)
+  //     errorCount++
+  //     return 0;
+  //   }
+
+  // }
+
+  // const uploadFileThroughLink = async (url, file) => {
+
+  //   // const formdata = new FormData();
+
+  //   // formdata.append('file', file)
+
+  //   try {
+  //     console.log('this is link: ', url)
+  //     const data = await fetch(url, {
+  //       method: "PUT",
+  //       body: file,
+  //     })
+
+  //     console.log(data)
+
+  //     if (data.status === 200) {
+  //       return "success"
+  //     } else {
+  //       return "error"
+  //     }
+  //   } catch (error) {
+  //     console.error(error)
+  //     throw Error()
+  //   }
+  // }
+
+  // aws ke liye upload function
+
+
   const getUploadLink = async (filename) => {
     console.log(`this is filename, ${filename}`)
-    const requestData = {
-      name: filename,
-    }
+    // const requestData = {
+    //   name: filename,
+    // }
 
     try {
-      const response = await fetch("https://armss-be.exitest.com/presignedUrl/", {
+      const response = await fetch("http://localhost:8000/presignedUrl/", {
         method: "POST", // Change the method to POST
         headers: {
           "Content-Type": "application/json", // Specify the Content-Type
         },
-        body: JSON.stringify({ input: filename }),
+        body: JSON.stringify({ object_name: filename }),
       })
 
       if (!response.ok) {
@@ -307,26 +368,58 @@ function fileuplodInit() {
 
   }
 
-  const uploadFileThroughLink = async (url, file) => {
+
+  const uploadFileThroughLink = async (presignedPostData, file) => {
+
+    console.log('this is upload data :', presignedPostData)
+
+    // const formdata = new FormData();
+
+    // formdata.append('file', file)
 
     try {
-      console.log('this is link: ', url)
-      const data = await fetch(url, {
-        method: "PUT",
-        body: file,
-      })
+      const formData = new FormData();
+      Object.keys(presignedPostData.fields).forEach(key => {
+        formData.append(key, presignedPostData.fields[key]);
+      });
+      formData.append('file', file);
 
-      console.log(data)
+      const uploadResponse = await fetch(presignedPostData.url, {
+        method: 'POST',
+        body: formData
+      });
 
-      if (data.status === 200) {
-        return "success"
+      if (uploadResponse.ok) {
+        alert('File uploaded successfully.');
+        return 'success';
       } else {
-        return "error"
+        alert('Failed to upload file.');
+        return 'failure';
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error(error)
       throw Error()
     }
+
+    // try {
+    //   console.log('this is link: ', url)
+    //   const data = await fetch(url, {
+    //     method: "PUT",
+    //     body: file,
+    //   })
+
+    //   console.log(data)
+
+    //   if (data.status === 200) {
+    //     return "success"
+    //   } else {
+    //     return "error"
+    //   }
+    // } catch (error) {
+    //   console.error(error)
+    //   throw Error()
+    // }
   }
 
   function calculateHash(file) {
