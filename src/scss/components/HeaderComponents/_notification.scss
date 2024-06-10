@@ -589,6 +589,11 @@ body {
 .pdf{
   height: 40rem;
 }
+.pdf-options{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
 .pdf iframe{
   // width: 62.5rem;
