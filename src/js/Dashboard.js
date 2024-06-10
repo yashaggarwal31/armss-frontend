@@ -154,7 +154,7 @@ createListitems = (data, List, functions, flagvalue, value = undefined) => {
     createspan.classList.add("Justadded");
     div.appendChild(createspan);
   } else {
-    let createspan = document.createElement("li");
+    let createspan = document.createElement("span");
     createspan.textContent = ``;
     // createspan.classList.add("Justadded");
     createspan.style.height = "17.8px";

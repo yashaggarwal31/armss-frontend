@@ -105,7 +105,7 @@ body {
 }
 
 .listContentContainer {
-  @include flex(flex, column, null, null, 8px);
+  @include flex(flex, column, null, null, 2px);
 }
 
 .Justadded {
@@ -140,7 +140,7 @@ body {
     cursor: pointer;
   }
 
-  span {
+  .Justadded {
     background-color: $white;
     color: $darkblue;
   }

@@ -57,10 +57,10 @@ toget = async (
     method === "GET"
       ? { method: method }
       : {
-        method: method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      };
+          method: method,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        };
   console.log(options);
   await fetch(url, options)
     .then((response) => {
@@ -1260,8 +1260,6 @@ function tocheckUploadDate(date) {
 
 // fetch resume
 
-
-
 fetchviewdata = async (id) => {
   let data = "";
   let idvalue = {
@@ -1277,21 +1275,19 @@ fetchviewdata = async (id) => {
     const [type, link] = getFileViewerUrl(data);
 
     try {
-      let response
+      let response;
       if (type == 2) {
         response = await fetch(data);
-      }
-      else {
+      } else {
         response = await fetch(link);
       }
 
       const blob = await response.blob();
 
       const url = window.URL.createObjectURL(blob);
-      document.getElementById('viewdatadownloadiconA').href = url
-      viewdatadownloadiconA.download = 'resume'
-    }
-    catch (error) {
+      document.getElementById("viewdatadownloadiconA").href = url;
+      viewdatadownloadiconA.download = "resume";
+    } catch (error) {
       throw Error(error.message);
     }
 
@@ -1335,22 +1331,14 @@ fetchviewdata = async (id) => {
           `;
 
       // Create a Blob from the iframe content
-      const blob = new Blob([iframeContent], { type: 'text/html' });
+      const blob = new Blob([iframeContent], { type: "text/html" });
       // Create an object URL from the Blob
       const url = URL.createObjectURL(blob);
 
-
       viewcandidatedata.src = url;
-    }
-
-    else {
-
+    } else {
       viewcandidatedata.src = link;
     }
-
-
-
-
   }
   viewsection.style.display = "flex";
 };
@@ -1364,18 +1352,21 @@ function getFileViewerUrl(fileUrl) {
       return [0, fileUrl];
     case "doc":
     case "docx":
-      return [2, `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
-        fileUrl
-      )}`];
+      return [
+        2,
+        `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
+          fileUrl
+        )}`,
+      ];
     case "jpg":
       // alert("File type is a jpg!");
-      return [1, fileUrl]
+      return [1, fileUrl];
     case "jpeg":
       // alert("File type is a jpeg!");
-      return [1, fileUrl]
+      return [1, fileUrl];
     case "png":
       // alert("File type is a png!");
-      return [1, fileUrl]
+      return [1, fileUrl];
     default:
       alert("File type not supported!");
       return "";
