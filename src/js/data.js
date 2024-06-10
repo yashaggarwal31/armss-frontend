@@ -57,10 +57,10 @@ toget = async (
     method === "GET"
       ? { method: method }
       : {
-          method: method,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        };
+        method: method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      };
   console.log(options);
   await fetch(url, options)
     .then((response) => {
@@ -1247,7 +1247,64 @@ fetchviewdata = async (id) => {
   data = await response.json();
   if (data) {
     console.log(data);
-    viewcandidatedata.src = getFileViewerUrl(data);
+
+    const [type, link] = getFileViewerUrl(data);
+
+    if (type == 1) {
+      const imageSrc = link;
+      const iframeContent = `
+              <!DOCTYPE html>
+              <html lang="en">
+              <head>
+                  <meta charset="UTF-8">
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                  <title>Image</title>
+                  <style>
+                      body, html {
+                          margin: 0;
+                          padding: 0;
+                          height: 100%;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                      }
+                      .image-container {
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          height: 100vh; /* Ensure it takes full height */
+                      }
+                      img {
+                          max-width: 100%;
+                          max-height: 100%;
+                          object-fit: contain; /* Adjust as needed */
+                      }
+                  </style>
+              </head>
+              <body>
+                  <div class="image-container">
+                      <img src="${imageSrc}" alt="Centered Image">
+                  </div>
+              </body>
+              </html>
+          `;
+
+      // Create a Blob from the iframe content
+      const blob = new Blob([iframeContent], { type: 'text/html' });
+      // Create an object URL from the Blob
+      const url = URL.createObjectURL(blob);
+
+
+      viewcandidatedata.src = url;
+    }
+
+    else {
+      viewcandidatedata.src = link;
+    }
+
+
+
+
   }
   viewsection.style.display = "flex";
 };
@@ -1258,17 +1315,21 @@ function getFileViewerUrl(fileUrl) {
 
   switch (fileExtension) {
     case "pdf":
-      return fileUrl;
+      return [0, fileUrl];
     case "doc":
     case "docx":
-      return `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
+      return [0, `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
         fileUrl
-      )}`;
+      )}`];
     case "jpg":
+      // alert("File type is a jpg!");
+      return [1, fileUrl]
     case "jpeg":
+      // alert("File type is a jpeg!");
+      return [1, fileUrl]
     case "png":
-    case "gif":
-      return fileUrl;
+      // alert("File type is a png!");
+      return [1, fileUrl]
     default:
       alert("File type not supported!");
       return "";

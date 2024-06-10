@@ -642,11 +642,14 @@ body {
 }
 
 .pdf {
+
   height: 40rem;
 }
 
 .pdf iframe {
-  width: 62.5rem;
+  /* width: 62.5rem; */
+  width: 50rem;
+
 }
 
 .pdf-compare iframe {
@@ -659,7 +662,8 @@ body {
     height: 55rem;
   }
   .pdf iframe {
-    width: 70rem;
+    /* width: 70rem; */
+  width: 50rem;
   }
   .pdf-compare iframe {
     width: 50rem;

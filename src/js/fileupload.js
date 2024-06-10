@@ -178,8 +178,10 @@ function fileuplodInit() {
 
       // const file = fileList[i];
 
+      const oldFileName = uploadedFile.name;
+
       const newName =
-        `[${notificationId}]-` + `${fileHash}` + `!@&` + uploadedFile.name
+        `[${notificationId}]-` + `${fileHash}` + `!@&` + oldFileName.replace(/\s+/g, '')
       const file = new File([uploadedFile], newName, {
         type: uploadedFile.type,
       })
@@ -201,13 +203,13 @@ function fileuplodInit() {
         //   const response = uploadFileThroughLink(link.presignedUrl, file)
         // })
 
-        const link = await getUploadLink(file.name)
+        const link = await getUploadLink(file.name, file.type)
         console.log('this is link: ', link)
         // if (link == 0) continue;
         const response = await uploadFileThroughLink(link, file)
         console.log("response is ", response)
 
-        if (response == "success") {
+        if (response == 204) {
           uploadedCount++
           if (progressBarOverall) {
             progressBarOverall.value = uploadedCount
@@ -336,7 +338,7 @@ function fileuplodInit() {
   // aws ke liye upload function
 
 
-  const getUploadLink = async (filename) => {
+  const getUploadLink = async (filename, filetype) => {
     console.log(`this is filename, ${filename}`)
     // const requestData = {
     //   name: filename,
@@ -348,7 +350,7 @@ function fileuplodInit() {
         headers: {
           "Content-Type": "application/json", // Specify the Content-Type
         },
-        body: JSON.stringify({ object_name: filename }),
+        body: JSON.stringify({ object_name: filename, file_type: filetype }),
       })
 
       if (!response.ok) {
@@ -369,57 +371,89 @@ function fileuplodInit() {
   }
 
 
+  // const uploadFileThroughLink = async (presignedPostData, file) => {
+
+  //   console.log('this is upload data :', presignedPostData)
+
+  //   // const formdata = new FormData();
+
+  //   // formdata.append('file', file)
+
+  //   try {
+  //     const formData = new FormData();
+  //     Object.keys(presignedPostData.fields).forEach(key => {
+  //       formData.append(key, presignedPostData.fields[key]);
+  //     });
+  //     formData.append('file', file);
+
+  //     const uploadResponse = await fetch(presignedPostData.url, {
+  //       method: 'POST',
+  //       body: formData
+  //     });
+
+  //     if (uploadResponse.ok) {
+  //       alert('File uploaded successfully.');
+  //       return 'success';
+  //     } else {
+  //       alert('Failed to upload file.');
+  //       return 'failure';
+  //     }
+  //   }
+  //   catch (error) {
+  //     console.error(error)
+  //     throw Error()
+  //   }
+
+  //   // try {
+  //   //   console.log('this is link: ', url)
+  //   //   const data = await fetch(url, {
+  //   //     method: "PUT",
+  //   //     body: file,
+  //   //   })
+
+  //   //   console.log(data)
+
+  //   //   if (data.status === 200) {
+  //   //     return "success"
+  //   //   } else {
+  //   //     return "error"
+  //   //   }
+  //   // } catch (error) {
+  //   //   console.error(error)
+  //   //   throw Error()
+  //   // }
+  // }
+
   const uploadFileThroughLink = async (presignedPostData, file) => {
 
-    console.log('this is upload data :', presignedPostData)
-
-    // const formdata = new FormData();
-
-    // formdata.append('file', file)
-
     try {
-      const formData = new FormData();
+      console.log('this is upload data :', presignedPostData)
+
+      const form = new FormData();
+      // const fileStream = fs.createReadStream(file.name);
+
+
+      // Append presigned fields to the form data
+      // for (const key in presignedPostData.fields) {
+      //   form.append(key, presignedPostData.fields[key]);
+      // }
+
       Object.keys(presignedPostData.fields).forEach(key => {
-        formData.append(key, presignedPostData.fields[key]);
-      });
-      formData.append('file', file);
-
-      const uploadResponse = await fetch(presignedPostData.url, {
-        method: 'POST',
-        body: formData
+        form.append(key, presignedPostData.fields[key]);
       });
 
-      if (uploadResponse.ok) {
-        alert('File uploaded successfully.');
-        return 'success';
-      } else {
-        alert('Failed to upload file.');
-        return 'failure';
-      }
+      form.append('file', file);
+
+      // Upload the file using the presigned URL
+      response = await axios.post(presignedPostData.url, form)
+      console.log(`File upload HTTP status code: ${response.status}`);
+      return response.status;
     }
+
     catch (error) {
-      console.error(error)
-      throw Error()
+      console.error('File upload failed:', error);
+      return 400;
     }
-
-    // try {
-    //   console.log('this is link: ', url)
-    //   const data = await fetch(url, {
-    //     method: "PUT",
-    //     body: file,
-    //   })
-
-    //   console.log(data)
-
-    //   if (data.status === 200) {
-    //     return "success"
-    //   } else {
-    //     return "error"
-    //   }
-    // } catch (error) {
-    //   console.error(error)
-    //   throw Error()
-    // }
   }
 
   function calculateHash(file) {
