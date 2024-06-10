@@ -845,6 +845,7 @@ FetchingSkills();
   ExperienceMainContainer = document.getElementById("ExperienceMainContainer");
   viewsection = document.getElementById("viewsection");
   viewdatacloseicon = document.getElementById("viewdatacloseicon");
+  viewdatadownloadicon = document.getElementById("viewdatadownloadicon");
 })();
 
 // to Close Other Functions
@@ -1236,6 +1237,8 @@ function tocheckUploadDate(date) {
 
 // fetch resume
 
+
+
 fetchviewdata = async (id) => {
   let data = "";
   let idvalue = {
@@ -1249,6 +1252,25 @@ fetchviewdata = async (id) => {
     console.log(data);
 
     const [type, link] = getFileViewerUrl(data);
+
+    try {
+      let response
+      if (type == 2) {
+        response = await fetch(data);
+      }
+      else {
+        response = await fetch(link);
+      }
+
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+      document.getElementById('viewdatadownloadiconA').href = url
+      viewdatadownloadiconA.download = 'resume'
+    }
+    catch (error) {
+      throw Error(error.message);
+    }
 
     if (type == 1) {
       const imageSrc = link;
@@ -1299,6 +1321,7 @@ fetchviewdata = async (id) => {
     }
 
     else {
+
       viewcandidatedata.src = link;
     }
 
@@ -1318,7 +1341,7 @@ function getFileViewerUrl(fileUrl) {
       return [0, fileUrl];
     case "doc":
     case "docx":
-      return [0, `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
+      return [2, `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
         fileUrl
       )}`];
     case "jpg":
