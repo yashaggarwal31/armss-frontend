@@ -589,9 +589,16 @@ body {
 .pdf{
   height: 40rem;
 }
+.pdf-options{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
 .pdf iframe{
-  width: 62.5rem;
+  // width: 62.5rem;
+  background-color: #333;
+  width: 50rem;
 }
 
 .pdf-compare iframe{
@@ -606,8 +613,10 @@ body {
     height: 55rem;
   }
   
-  .pdf iframe{
-    width: 70rem;
+  .pdf iframe {
+    background-color: #333;
+    /* width: 70rem; */
+  width: 50rem;
   }
 
   .pdf-compare iframe{

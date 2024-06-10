@@ -116,11 +116,12 @@ toAppendSuggestionData = (data) => {
 // };
 
 FetchingSubcategories = () => {
-  fetch("./assets/Data/Subcategories.json")
+  fetch("https://armss-be.exitest.com/fetch_folder_subfolders")
     .then((response) => response.json())
     .then((data) => {
-      MainSuggestionData.SubCategoriesData = data.AllSubcategory;
-      toAppendSuggestionData(data.AllSubcategory);
+      console.log(data);
+      MainSuggestionData.SubCategoriesData = Object.values(data).flat();
+      toAppendSuggestionData(Object.values(data).flat());
     });
 };
 
@@ -136,7 +137,11 @@ FetchingMainCategories();
 
 // SuggestionContainer
 HoverSuggestionListContainer = () => {
-  if (SearchFilters.value.split(" ").slice(-1)[0].trim() !== "") {
+  if (
+    SearchFilters.value.split(" ").slice(-1)[0].trim() !== "" &&
+    SearchFilters.value.length > 0 &&
+    SubCategoriesSuggestions.innerHTML !== ""
+  ) {
     SuggestionContainer.style.display = "block";
     console.log(SubCategoriesSuggestions.innerHTML);
   } else {
@@ -177,6 +182,7 @@ SearchFilters.addEventListener("input", function (event) {
     }
   } else {
     clearsearchvalue.style.display = "none";
+    SuggestionContainer.style.display = "none";
   }
 });
 
@@ -275,7 +281,7 @@ Logo.addEventListener("click", async function () {
   FilteringData.TemporaryData = [];
   FilteringData.onFolderValue = false;
   FilteringData.onSelectSubFolder = "";
-  // FilteringData.onFolderSelect = "";
+  FilteringData.onFolderSelect = "";
   await triggerDOMContentLoaded();
 });
 

@@ -5,6 +5,7 @@
   loadingMoreNotifications = false;
   latestNotificationDate = undefined;
   notificationInterval = undefined;
+  toggleDuplicateSelectionVal = false;
 })();
 async function getNotifications(limit) {
   console.log("limit is ", limit);
@@ -633,7 +634,7 @@ document
       }
     );
 
-    if ((clickedButton = "replace")) {
+    if (clickedButton == "replace") {
       const data = await fetch("https://armss-be.exitest.com/replace_resume", {
         method: "POST",
         headers: {
@@ -641,23 +642,33 @@ document
         },
         body: JSON.stringify(dataValues),
       });
-
-      await notificationsInIt();
-
-      // document.getElementById('bothErrorGrid').style.display = 'block';
-      // document.getElementById('replaceordiscardLoader').style.display = 'none';
-
-      console.log("status id: ", statusId);
-      console.log("fileCount: ", filecount);
-
-      // await restartModal(statusId, filecount);
-
-      console.log("resume replaced?", data);
     }
 
-    console.log(dataValues);
+    if (clickedButton == "discard") {
+      const data = await fetch("https://armss-be.exitest.com/replace_resume", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataValues2),
+      });
+    }
 
-    console.log("clickedButton", clickedButton);
+    await notificationsInIt();
+
+    // document.getElementById('bothErrorGrid').style.display = 'block';
+    // document.getElementById('replaceordiscardLoader').style.display = 'none';
+
+    // console.log("status id: ", statusId)
+    // console.log("fileCount: ", filecount)
+
+    // // await restartModal(statusId, filecount);
+
+    // console.log("resume replaced?", data)
+
+    // console.log(dataValues)
+
+    // console.log("clickedButton", clickedButton)
   });
 
 async function restartModal(statusId, filecount) {
@@ -761,3 +772,36 @@ document.getElementById("CompareViewClose").addEventListener("click", () => {
   document.getElementById("resumeViewTwo").src = "";
   document.getElementById("compareViewResume").style.display = "none";
 });
+
+document
+  .getElementById("toggleDuplicateSelection")
+  .addEventListener("click", () => {
+    if (toggleDuplicateSelectionVal == false) {
+      document.getElementById("toggle-select-text").textContent =
+        "Deselect All";
+      toggleDuplicateSelectionVal = true;
+      selectAllCheckboxes();
+    } else {
+      document.getElementById("toggle-select-text").textContent = "Select All";
+      toggleDuplicateSelectionVal = false;
+      unselectAllCheckboxes();
+    }
+  });
+
+function selectAllCheckboxes() {
+  var checkboxes = document.querySelectorAll(
+    '#duplicate-records input[type="checkbox"]'
+  );
+  checkboxes.forEach(function (checkbox) {
+    checkbox.checked = true;
+  });
+}
+
+function unselectAllCheckboxes() {
+  var checkboxes = document.querySelectorAll(
+    '#duplicate-records input[type="checkbox"]'
+  );
+  checkboxes.forEach(function (checkbox) {
+    checkbox.checked = false;
+  });
+}

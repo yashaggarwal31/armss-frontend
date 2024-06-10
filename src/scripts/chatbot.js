@@ -80,6 +80,8 @@ function submitQuery(event) {
 }
 
 async function chat(value) {
+  FilteringData.onFolderSelect = "";
+  ClearHistory();
   chatSpace.style.minHeight = "40vh";
   const query = value;
   const UserQuery = document.createElement("p");

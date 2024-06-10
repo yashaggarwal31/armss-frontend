@@ -178,8 +178,10 @@ function fileuplodInit() {
 
       // const file = fileList[i];
 
+      const oldFileName = uploadedFile.name;
+
       const newName =
-        `[${notificationId}]-` + `${fileHash}` + `!@&` + uploadedFile.name
+        `[${notificationId}]-` + `${fileHash}` + `!@&` + oldFileName.replace(/\s+/g, '')
       const file = new File([uploadedFile], newName, {
         type: uploadedFile.type,
       })
@@ -201,11 +203,13 @@ function fileuplodInit() {
         //   const response = uploadFileThroughLink(link.presignedUrl, file)
         // })
 
-        const link = await getUploadLink(file.name)
-        const response = await uploadFileThroughLink(link.presignedUrl, file)
+        const link = await getUploadLink(file.name, file.type)
+        console.log('this is link: ', link)
+        // if (link == 0) continue;
+        const response = await uploadFileThroughLink(link, file)
         console.log("response is ", response)
 
-        if (response == "success") {
+        if (response == 204) {
           uploadedCount++
           if (progressBarOverall) {
             progressBarOverall.value = uploadedCount
@@ -273,53 +277,182 @@ function fileuplodInit() {
     }
   }
 
-  const getUploadLink = async (filename) => {
+  // const getUploadLink = async (filename) => {
+  //   console.log(`this is filename, ${filename}`)
+  //   const requestData = {
+  //     name: filename,
+  //   }
+
+  //   try {
+  //     const response = await fetch("https://armss-be.exitest.com/presignedUrl/", {
+  //       method: "POST", // Change the method to POST
+  //       headers: {
+  //         "Content-Type": "application/json", // Specify the Content-Type
+  //       },
+  //       body: JSON.stringify({ input: filename }),
+  //     })
+
+  //     if (!response.ok) {
+  //       throw new Error("Network response was not ok")
+  //       errorCount++
+  //     }
+
+  //     const data = await response.json()
+  //     console.log('inside the link getter function: ', data)
+  //     return data
+  //   }
+  //   catch (error) {
+  //     console.error("There was a problem with the fetch operation:", error)
+  //     errorCount++
+  //     return 0;
+  //   }
+
+  // }
+
+  // const uploadFileThroughLink = async (url, file) => {
+
+  //   // const formdata = new FormData();
+
+  //   // formdata.append('file', file)
+
+  //   try {
+  //     console.log('this is link: ', url)
+  //     const data = await fetch(url, {
+  //       method: "PUT",
+  //       body: file,
+  //     })
+
+  //     console.log(data)
+
+  //     if (data.status === 200) {
+  //       return "success"
+  //     } else {
+  //       return "error"
+  //     }
+  //   } catch (error) {
+  //     console.error(error)
+  //     throw Error()
+  //   }
+  // }
+
+  // aws ke liye upload function
+
+
+  const getUploadLink = async (filename, filetype) => {
     console.log(`this is filename, ${filename}`)
-    const requestData = {
-      name: filename,
+    // const requestData = {
+    //   name: filename,
+    // }
+
+    try {
+      const response = await fetch("https://armss-be.exitest.com/presignedUrl/", {
+        method: "POST", // Change the method to POST
+        headers: {
+          "Content-Type": "application/json", // Specify the Content-Type
+        },
+        body: JSON.stringify({ object_name: filename, file_type: filetype }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok")
+        errorCount++
+      }
+
+      const data = await response.json()
+      console.log('inside the link getter function: ', data)
+      return data
+    }
+    catch (error) {
+      console.error("There was a problem with the fetch operation:", error)
+      errorCount++
+      return 0;
     }
 
-    return fetch("https://armss-be.exitest.com/presignedUrl/", {
-      method: "POST", // Change the method to POST
-      headers: {
-        "Content-Type": "application/json", // Specify the Content-Type
-      },
-      body: JSON.stringify({ input: filename }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok")
-        }
-        return response.json()
-      })
-      .then((data) => {
-        // Handle the fetched object here
-        console.log(data)
-        return data
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error)
-        errorCount++
-      })
   }
 
-  const uploadFileThroughLink = async (url, file) => {
+
+  // const uploadFileThroughLink = async (presignedPostData, file) => {
+
+  //   console.log('this is upload data :', presignedPostData)
+
+  //   // const formdata = new FormData();
+
+  //   // formdata.append('file', file)
+
+  //   try {
+  //     const formData = new FormData();
+  //     Object.keys(presignedPostData.fields).forEach(key => {
+  //       formData.append(key, presignedPostData.fields[key]);
+  //     });
+  //     formData.append('file', file);
+
+  //     const uploadResponse = await fetch(presignedPostData.url, {
+  //       method: 'POST',
+  //       body: formData
+  //     });
+
+  //     if (uploadResponse.ok) {
+  //       alert('File uploaded successfully.');
+  //       return 'success';
+  //     } else {
+  //       alert('Failed to upload file.');
+  //       return 'failure';
+  //     }
+  //   }
+  //   catch (error) {
+  //     console.error(error)
+  //     throw Error()
+  //   }
+
+  //   // try {
+  //   //   console.log('this is link: ', url)
+  //   //   const data = await fetch(url, {
+  //   //     method: "PUT",
+  //   //     body: file,
+  //   //   })
+
+  //   //   console.log(data)
+
+  //   //   if (data.status === 200) {
+  //   //     return "success"
+  //   //   } else {
+  //   //     return "error"
+  //   //   }
+  //   // } catch (error) {
+  //   //   console.error(error)
+  //   //   throw Error()
+  //   // }
+  // }
+
+  const uploadFileThroughLink = async (presignedPostData, file) => {
+
     try {
-      const data = await fetch(url, {
-        method: "PUT",
-        body: file,
-      })
+      console.log('this is upload data :', presignedPostData)
 
-      console.log(data)
+      const form = new FormData();
+      // const fileStream = fs.createReadStream(file.name);
 
-      if (data.status === 200) {
-        return "success"
-      } else {
-        return "error"
-      }
-    } catch (error) {
-      console.error(error)
-      throw Error()
+
+      // Append presigned fields to the form data
+      // for (const key in presignedPostData.fields) {
+      //   form.append(key, presignedPostData.fields[key]);
+      // }
+
+      Object.keys(presignedPostData.fields).forEach(key => {
+        form.append(key, presignedPostData.fields[key]);
+      });
+
+      form.append('file', file);
+
+      // Upload the file using the presigned URL
+      response = await axios.post(presignedPostData.url, form)
+      console.log(`File upload HTTP status code: ${response.status}`);
+      return response.status;
+    }
+
+    catch (error) {
+      console.error('File upload failed:', error);
+      return 400;
     }
   }
 

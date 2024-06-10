@@ -4,6 +4,8 @@
   datalistItems = document.getElementById("datalistItems");
   viewcandidatedata = document.getElementById("viewcandidatedata");
   paraelemnet = document.getElementById("paraelemnet");
+  DashboardFolderName = document.getElementById("DashboardFolderName");
+  BackArrow = document.getElementById("BackArrow");
   sortedorder = "asc";
   sortedordervalue = 0;
   itemsPerPage = 10;
@@ -193,6 +195,10 @@ function toLoadContent() {
     if (dataString && !chatbotData) {
       const data = dataString;
       document.getElementById("heading").textContent = data;
+      DashboardFolderName.textContent =
+        FilteringData.onFolderSelect != ""
+          ? " - " + FilteringData.onFolderSelect
+          : "";
       console.log(searchvalue);
       if (searchvalue === false) {
         let data1 = {
@@ -230,7 +236,6 @@ toLoadContent();
 toUpdateSkillContainer = function (data, id, item) {
   let Listid = document.getElementById(id);
   let Listitem = document.getElementById(item);
-
   let boundaries = Listid.getBoundingClientRect();
   if (boundaries.top > window.innerHeight - 180) {
     Listitem.classList.add("at-end-skill-container");
@@ -277,10 +282,12 @@ toHideSkillContainer = function (id, item) {
 function toShowData(data, method = "POST") {
   console.log(FilteringData.FetchedData);
   datalistItems.innerHTML = "";
+
   lst = [];
   if (data.length !== 0 && data[1] !== null) {
     TotalValue.textContent = data[0];
     data = data[1];
+    console.log(data);
     let interval;
     for (let i in data) {
       let li = document.createElement("li");
@@ -299,6 +306,8 @@ function toShowData(data, method = "POST") {
       SkillName.addEventListener("mouseover", () => {
         let values = data[i].SkillName;
         toUpdateSkillContainer(values, li.id, ul.id);
+        ul.classList.remove("LocationContainer");
+
         clearTimeout(interval);
       });
 
@@ -318,9 +327,25 @@ function toShowData(data, method = "POST") {
       Email.textContent =
         data[i].Contact_Email !== "" ? data[i].Contact_Email : "abc@email.com";
 
-      let Location = document.createElement("p");
-      Location.textContent =
-        data[i].Location[0] === null ? "Unknown" : data[i].Location;
+      let Location = document.createElement("button");
+      Location.id = i + "_Location";
+      Location.classList.add("SkillElement");
+      Location.classList.add("LocationElement");
+      Location.textContent = "Locations";
+
+      Location.addEventListener("mouseover", () => {
+        let values =
+          data[i].Location[0] === null ? ["Unknown"] : data[i].Location;
+        toUpdateSkillContainer(values, li.id, ul.id);
+        ul.classList.add("LocationContainer");
+        clearTimeout(interval);
+      });
+
+      Location.addEventListener("mouseout", () => {
+        toHideSkillContainer(li.id, ul.id);
+      });
+      // Location.textContent =
+      //   data[i].Location[0] === null ? "Unknown" : data[i].Location;
 
       let Phone_no = document.createElement("p");
       Phone_no.textContent =
@@ -390,10 +415,12 @@ function displayItems(data, page) {
   paginationData = data;
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const pageItems =
+  const newData =
     data[1] !== null
-      ? Object.values(data[1]).slice(startIndex, endIndex)
+      ? Object.values(data[1]).sort((a, b) => b.ResumeId - a.ResumeId)
       : null;
+  const pageItems =
+    newData !== null ? newData.slice(startIndex, endIndex) : null;
   console.log("page items ", pageItems);
   if (currentPage === 1) {
     document.getElementById("previous-button").classList.add("ondisablebutton");
@@ -531,6 +558,7 @@ DropdownSelectFunction = (data) => {
       if (Value === "All") {
         ExperienceSearchHistory.innerHTML = "";
         Filterdata.Candidate.Experience = [];
+        ExperienceSearchHistoryContainer.innerHTML = "";
         toapplyfilters(Filterdata);
       } else {
         const [start, end] = this.getAttribute("data-value")
@@ -668,8 +696,9 @@ function setIds() {
 // adding skill function
 function toSkillsclick(value) {
   value = value.trim();
-  if (value === "All") {
-    Filterdata.Skill.SkillName = [];
+  if (value === "More Skills") {
+    toappendSkills(FilteringData.AllSkills);
+    FilteringData.Skills = FilteringData.AllSkills;
   } else {
     let values = Filterdata.Skill.SkillName.find(
       (item) => item.SkillName === value
@@ -684,14 +713,19 @@ function toSkillsclick(value) {
       toAppendHistory(value, Unique_id, SkillSearchHistory);
       toCheckSearchHistory();
     }
+    SkillDropdownFunction();
   }
 }
 
-toappendSkills = (data) => {
+toappendSkills = (data, value = false) => {
   console.log(data);
   SkillList.innerHTML = "";
   // data = data.SkillList !== undefined ? data.SkillList : data;
   data = data.sort((a, b) => a.localeCompare(b));
+  if (value) {
+    data.push("More Skills");
+  }
+  console.log(data);
   for (let i of data) {
     let li = document.createElement("li");
     li.textContent = i;
@@ -701,11 +735,12 @@ toappendSkills = (data) => {
       value = li.id;
       toSkillsclick(value);
       toapplyfilters(Filterdata);
-
-      SkillDropdownFunction();
       // toget();
     });
     SkillList.appendChild(li);
+  }
+  if (value) {
+    SkillList.lastChild.classList.add("SKillFilterLastChild");
   }
 };
 
@@ -716,6 +751,7 @@ function tolocationclick(value) {
   if (value === "All") {
     LocationSearchHistory.innerHTML = "";
     Filterdata.WorkExperience.Location = [];
+    LocationSearchHistoryContainer.innerHTML = "";
     toCheckSearchHistory();
     toapplyfilters(Filterdata);
   } else {
@@ -780,14 +816,14 @@ FetchingSkills = () => {
   fetch("https://armss-be.exitest.com/fetch_folder_skills")
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       if (value === false) {
         toappendSkills([...new Set(Object.values(data).flat())]);
         FilteringData.Skills = [...new Set(Object.values(data).flat())];
       } else {
         if (data[item]) {
-          toappendSkills(data[item]);
+          toappendSkills(data[item], true);
           FilteringData.Skills = [...data[item]];
+          FilteringData.AllSkills = [...new Set(Object.values(data).flat())];
         } else {
           toappendSkills([...new Set(Object.values(data).flat())]);
           FilteringData.Skills = [...new Set(Object.values(data).flat())];
@@ -817,7 +853,26 @@ FetchingSkills();
   ExperienceMainContainer = document.getElementById("ExperienceMainContainer");
   viewsection = document.getElementById("viewsection");
   viewdatacloseicon = document.getElementById("viewdatacloseicon");
+  viewdatadownloadicon = document.getElementById("viewdatadownloadicon");
 })();
+
+// to Close Other Functions
+
+function tocloseAllOtherFunctions(item) {
+  value = item.id.split("-")[0];
+  if (Locationdropdown.style.display === "block" && value !== "Location") {
+    LocationdropdownFunction();
+  }
+  if (ExperienceDropdown.style.display === "block" && value !== "Experience") {
+    ExperienceDropdownFunction();
+  }
+  if (SkillDropdown.style.display === "block" && value !== "Skill") {
+    SkillDropdownFunction();
+  }
+  if (DateDropdown.style.display === "block" && value !== "Date") {
+    DateDropdownFunction();
+  }
+}
 
 LocationdropdownFunction = () => {
   if (Locationdropdown.style.display === "block") {
@@ -832,6 +887,7 @@ LocationdropdownFunction = () => {
     downicon1.classList.add("IconStyles");
     SearchLocation.value = "";
     FetchingLocation();
+    tocloseAllOtherFunctions(LocationHeader);
   }
 };
 ExperienceDropdownFunction = () => {
@@ -845,6 +901,7 @@ ExperienceDropdownFunction = () => {
     ExperienceDropdown.classList.add("dropdownVisible");
     ExperienceDropdown.style.display = "block";
     downicon2.classList.add("IconStyles");
+    tocloseAllOtherFunctions(ExperienceHeader);
   }
 };
 
@@ -861,6 +918,7 @@ SkillDropdownFunction = () => {
     SkillDropdown.style.display = "block";
     downicon3.classList.add("IconStyles");
     FetchingSkills();
+    tocloseAllOtherFunctions(SkillHeader);
   }
 };
 
@@ -875,17 +933,33 @@ DateDropdownFunction = () => {
     DateDropdown.classList.add("dropdownVisible");
     DateDropdown.style.display = "block";
     downicon4.classList.add("IconStyles");
+    tocloseAllOtherFunctions(DateHeader);
   }
 };
 
 LocationHeader.addEventListener("click", LocationdropdownFunction);
 ExperienceHeader.addEventListener("click", ExperienceDropdownFunction);
-SkillHeader.addEventListener("click", SkillDropdownFunction);
+SkillHeader.addEventListener("click", SkillDropdownFunction, true);
 DateHeader.addEventListener("click", DateDropdownFunction);
+// toPreventDefault(LocationHeader);
+// toPreventDefault(SkillHeader);
+// toPreventDefault(ExperienceHeader);
+// toPreventDefault(DateHeader);
 
+function toPreventDefault(id) {
+  console.log(Array.from(id.children));
+  Array.from(id.children).forEach((item) => {
+    item.addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
+  });
+}
 window.addEventListener("click", function (event) {
   if (!event.target.closest(".Datasection-MainPlusDropDropDown")) {
-    if (SkillDropdown.style.display === "block") {
+    if (
+      SkillDropdown.style.display === "block" &&
+      event.target.textContent !== "More Skills"
+    ) {
       SkillDropdownFunction();
     }
     if (ExperienceDropdown.style.display === "block") {
@@ -1046,7 +1120,7 @@ function toCheckSearchHistory() {
 toCheckSearchHistory();
 
 // Clear History
-document.getElementById("ClearHistory").addEventListener("click", function () {
+function ClearHistory() {
   Filterdata.WorkExperience.Location = [];
   Filterdata.Skill.SkillName = [];
   Filterdata.Candidate.Experience = [];
@@ -1060,7 +1134,9 @@ document.getElementById("ClearHistory").addEventListener("click", function () {
   toClearAllSubFilter();
   // toget();
   toapplyfilters(Filterdata);
-});
+}
+
+document.getElementById("ClearHistory").addEventListener("click", ClearHistory);
 
 // Search Skills
 
@@ -1104,10 +1180,16 @@ toapplyfilters = (data) => {
             if (
               data[key][i].some((item2) => {
                 console.log(
-                  item["Location"].join(",").includes(item2.toLowerCase())
+                  item["Location"]
+                    .join(",")
+                    .toLowerCase()
+                    .includes(item2.toLowerCase())
                 );
 
-                return item["Location"].join(",").includes(item2.toLowerCase());
+                return item["Location"]
+                  .join(",")
+                  .toLowerCase()
+                  .includes(item2.toLowerCase());
               })
             )
               return true;
@@ -1189,7 +1271,74 @@ fetchviewdata = async (id) => {
   data = await response.json();
   if (data) {
     console.log(data);
-    viewcandidatedata.src = getFileViewerUrl(data);
+
+    const [type, link] = getFileViewerUrl(data);
+
+    try {
+      let response;
+      if (type == 2) {
+        response = await fetch(data);
+      } else {
+        response = await fetch(link);
+      }
+
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+      document.getElementById("viewdatadownloadiconA").href = url;
+      viewdatadownloadiconA.download = "resume";
+    } catch (error) {
+      throw Error(error.message);
+    }
+
+    if (type == 1) {
+      const imageSrc = link;
+      const iframeContent = `
+              <!DOCTYPE html>
+              <html lang="en">
+              <head>
+                  <meta charset="UTF-8">
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                  <title>Image</title>
+                  <style>
+                      body, html {
+                          margin: 0;
+                          padding: 0;
+                          height: 100%;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                      }
+                      .image-container {
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          height: 100vh; /* Ensure it takes full height */
+                      }
+                      img {
+                          max-width: 100%;
+                          max-height: 100%;
+                          object-fit: contain; /* Adjust as needed */
+                      }
+                  </style>
+              </head>
+              <body>
+                  <div class="image-container">
+                      <img src="${imageSrc}" alt="Centered Image">
+                  </div>
+              </body>
+              </html>
+          `;
+
+      // Create a Blob from the iframe content
+      const blob = new Blob([iframeContent], { type: "text/html" });
+      // Create an object URL from the Blob
+      const url = URL.createObjectURL(blob);
+
+      viewcandidatedata.src = url;
+    } else {
+      viewcandidatedata.src = link;
+    }
   }
   viewsection.style.display = "flex";
 };
@@ -1200,17 +1349,24 @@ function getFileViewerUrl(fileUrl) {
 
   switch (fileExtension) {
     case "pdf":
-      return fileUrl;
+      return [0, fileUrl];
     case "doc":
     case "docx":
-      return `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
-        fileUrl
-      )}`;
+      return [
+        2,
+        `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
+          fileUrl
+        )}`,
+      ];
     case "jpg":
+      // alert("File type is a jpg!");
+      return [1, fileUrl];
     case "jpeg":
+      // alert("File type is a jpeg!");
+      return [1, fileUrl];
     case "png":
-    case "gif":
-      return fileUrl;
+      // alert("File type is a png!");
+      return [1, fileUrl];
     default:
       alert("File type not supported!");
       return "";
@@ -1304,7 +1460,6 @@ async function updateView(id, view) {
 // Filter Add More
 
 function toShowMoreApplyFilters(valueid) {
-  console.log(valueid.scrollWidth, valueid.clientWidth, valueid.id);
   let hiddenitemContainer = document.getElementById(`${valueid.id}-Overflow`);
   let hiddenitemValue = document.getElementById(`${valueid.id}-span`);
 
@@ -1343,26 +1498,33 @@ function toShowMoreApplyFilters(valueid) {
   }
 }
 
-SkillSearchHistorySpan.onclick = function () {
+SkillSearchHistorySpan.addEventListener("mouseover", () => {
   SkillSearchHistoryContainer.style.display = "flex";
+});
+
+SkillSearchHistorySpan.addEventListener("mouseleave", () => {
   VisibleTimout = setTimeout(() => {
     SkillSearchHistoryContainer.style.display = "none";
-  }, 400);
-};
+  }, 280);
+});
 
-LocationSearchHistorySpan.onclick = function () {
+LocationSearchHistorySpan.addEventListener("mouseover", () => {
   LocationSearchHistoryContainer.style.display = "flex";
+});
+
+LocationSearchHistorySpan.addEventListener("mouseleave", () => {
   VisibleTimout = setTimeout(() => {
     LocationSearchHistoryContainer.style.display = "none";
-  }, 400);
-};
-
-ExperienceSearchHistorySpan.onclick = function () {
+  }, 280);
+});
+ExperienceSearchHistorySpan.addEventListener("mouseover", () => {
   ExperienceSearchHistoryContainer.style.display = "flex";
+});
+ExperienceSearchHistorySpan.addEventListener("mouseleave", () => {
   VisibleTimout = setTimeout(() => {
     ExperienceSearchHistoryContainer.style.display = "none";
-  }, 400);
-};
+  }, 280);
+});
 
 function toClearAllSubFilter() {
   SkillSearchHistoryContainer.style.display = "none";
@@ -1373,27 +1535,33 @@ function toClearAllSubFilter() {
   ExperienceSearchHistorySpan.style.display = "none";
 }
 
-SkillSearchHistoryContainer.addEventListener("mouseover", () => {
-  clearTimeout(VisibleTimout);
+containers = [
+  SkillSearchHistoryContainer,
+  LocationSearchHistoryContainer,
+  ExperienceSearchHistoryContainer,
+];
+
+containers.forEach((container) => {
+  container.addEventListener("mouseleave", () => {
+    container.style.display = "none";
+  });
+
+  container.addEventListener("mouseover", () => {
+    clearTimeout(VisibleTimout);
+  });
 });
 
-LocationSearchHistoryContainer.addEventListener("mouseover", () => {
-  clearTimeout(VisibleTimout);
-});
+// toBack Page
 
-ExperienceSearchHistoryContainer.addEventListener("mouseover", () => {
-  clearTimeout(VisibleTimout);
-});
-SkillSearchHistoryContainer.addEventListener("mouseleave", () => {
-  SkillSearchHistoryContainer.style.display = "none";
-});
-
-LocationSearchHistoryContainer.addEventListener("mouseleave", () => {
-  LocationSearchHistoryContainer.style.display = "none";
-});
-
-ExperienceSearchHistoryContainer.addEventListener("mouseleave", () => {
-  ExperienceSearchHistoryContainer.style.display = "none";
-});
-
-window.addEventListener("click", (event) => {});
+BackArrow.onclick = async () => {
+  FilteringData.page = "main";
+  Filterdata.Candidate.UploadDate = [];
+  Filterdata.Skill.SkillName = [];
+  Filterdata.WorkExperience.Location = [];
+  Filterdata.Candidate.Experience = [];
+  FilteringData.TemporaryData = [];
+  FilteringData.onFolderValue = false;
+  FilteringData.onSelectSubFolder = "";
+  // FilteringData.onFolderSelect = "";
+  await triggerDOMContentLoaded();
+};
