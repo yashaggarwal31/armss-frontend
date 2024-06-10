@@ -343,7 +343,7 @@ function fileuplodInit() {
     // }
 
     try {
-      const response = await fetch("http://localhost:8000/presignedUrl/", {
+      const response = await fetch("https://armss-be.exitest.com/presignedUrl/", {
         method: "POST", // Change the method to POST
         headers: {
           "Content-Type": "application/json", // Specify the Content-Type
