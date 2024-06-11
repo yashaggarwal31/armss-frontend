@@ -178,6 +178,13 @@
 </symbol>
 
 
+
+<symbol id="Maximize" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 14L5.55 9.45M5.55 9.45H1.74295M5.55 9.45V13.257M14 1L9.45 5.55M9.45 5.55H13.257M9.45 5.55V1.74295" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+
+
+
 <symbol  id= "reset" height="21" viewBox="0 0 21 21" width="21" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="matrix(0 1 1 0 2.5 2.5)"><path d="m3.98652376 1.07807068c-2.38377179 1.38514556-3.98652376 3.96636605-3.98652376 6.92192932 0 4.418278 3.581722 8 8 8s8-3.581722 8-8-3.581722-8-8-8"/><path d="m4 1v4h-4" transform="matrix(1 0 0 -1 0 6)"/></g></symbol>
 <symbol id="upload-minimize" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_1809_3436)">
