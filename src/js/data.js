@@ -1177,26 +1177,31 @@ toapplyfilters = (data) => {
           });
         } else if (i === "Location") {
           sampleData = sampleData.filter((item) => {
-            if (
-              data[key][i].some((item2) => {
-                console.log(
-                  item["Location"]
-                    .join(",")
-                    .toLowerCase()
-                    .includes(item2.toLowerCase())
-                );
-
-                return item["Location"]
-                  .join(",")
-                  .toLowerCase()
-                  .includes(item2.toLowerCase());
-              })
-            )
-              return true;
-            else {
-              return false;
-            }
+            return data[key][i].some((item2) => {
+              return item["Location"].some((location) => {
+                return location.toLowerCase().includes(item2.toLowerCase());
+              });
+            });
           });
+          // if (
+          //   data[key][i].some((item2) => {
+          //     console.log(
+          //       item["Location"]
+          //         .join(",")
+          //         .toLowerCase()
+          //         .includes(item2.toLowerCase())
+          //     );
+
+          //     return item["Location"]
+          //       .join(",")
+          //       .toLowerCase()
+          //       .includes(item2.toLowerCase());
+          //   })
+          // )
+          //   return true;
+          // else {
+          //   return false;
+          // }
         } else if (i === "Experience") {
           sampleData = sampleData.filter((item) => {
             let status = false;
@@ -1273,6 +1278,7 @@ fetchviewdata = async (id) => {
     console.log(data);
 
     const [type, link] = getFileViewerUrl(data);
+    console.log(link);
 
     try {
       let response;
