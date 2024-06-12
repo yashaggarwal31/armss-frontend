@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     FilteringData = JSON.parse(sessionStorage.getItem("data"));
     console.log(FilteringData);
     sessionStorage.removeItem("data");
-    FilteringData.onFolderSelect = "";
+    // FilteringData.onFolderSelect = "";
     await getHtml();
   }
   if (FilteringData.page === "") {

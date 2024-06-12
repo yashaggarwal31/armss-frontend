@@ -153,6 +153,12 @@ createListitems = (data, List, functions, flagvalue, value = undefined) => {
     createspan.textContent = `${flagvalue[data]} Just Added`;
     createspan.classList.add("Justadded");
     div.appendChild(createspan);
+  } else {
+    let createspan = document.createElement("span");
+    createspan.textContent = ``;
+    // createspan.classList.add("Justadded");
+    createspan.style.height = "17.8px";
+    div.appendChild(createspan);
   }
 
   li.appendChild(MainDiv);
@@ -173,6 +179,7 @@ toDisplayFloder = (data) => {
   for (i of Object.keys(data)) {
     createListitems(i, containerList, toShowSubCategory, data);
   }
+  tomodal();
 };
 
 function tomodal() {
@@ -183,7 +190,7 @@ function tomodal() {
     SubCategorySection.style.display = "none";
   }
 }
-tomodal();
+
 toShowSubCategory = (id) => {
   if (id === "All Resumes") {
     toDataPage("All Resumes");
@@ -239,10 +246,13 @@ togetFolders = async () => {
     .then((response) => response.json())
     .then((responseData) => {
       console.log(responseData);
-      responseData["All Resumes"] = Object.values(responseData).reduce(
-        (acc, curr) => acc + curr,
-        0
-      );
+      newElement = {
+        "All Resumes": Object.values(responseData).reduce(
+          (acc, curr) => acc + curr,
+          0
+        ),
+      };
+      responseData = { ...newElement, ...responseData };
       Folders.MainCategory = Object.keys(responseData);
       toDisplayFloder(responseData);
     });

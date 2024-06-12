@@ -106,10 +106,12 @@
     background-color: #f4f7ff;
     padding: 0.6rem;
     border-radius: 8px;
+    .Showmorecontainerposition {
+      position: relative;
+    }
 
     div {
       @include flex(flex, row, null, center, 0.6rem);
-      position: relative;
       span {
         background-color: #0055ff;
         color: #fff;
@@ -186,6 +188,7 @@
 }
 
 .Locationlist {
+  overflow: hidden;
   overflow-y: auto;
   max-height: 22vh;
 }
@@ -216,6 +219,14 @@
   color: #0052f1;
 }
 
+.SKillFilterLastChild {
+  color: #0052f1;
+  // width: 98%;
+  // margin-top: 4px;
+  text-align: center;
+  cursor: pointer;
+}
+
 .elementStyle {
   padding: 0.4rem;
   border: 1px solid #f4f2ff;
@@ -243,7 +254,9 @@
     align-self: center;
   }
 }
-
+#datalistItems {
+  z-index: 10;
+}
 .RecentElements {
   border-left: 0.4rem solid #00ac47;
 }
@@ -253,7 +266,7 @@
 }
 
 // .datalistemsclass {
-//   max-height: calc(100vh - 402px);
+//   position: relative;
 // }
 
 #datalistItems {
@@ -303,8 +316,8 @@
   border: 1px solid #7169ff35;
   border-radius: 0.5rem;
   @include position(absolute, 28%, null, 10%, null);
-  z-index: 20;
   display: none;
+  z-index: 20;
 }
 .at-end-skill-container {
   @include position(absolute, null, null, auto, 0%);
@@ -463,9 +476,9 @@ button {
 .ShowMoreContainer {
   // @include width_height(8vh, 10vw);
   max-height: 127px;
-  min-height: 127px;
-  max-width: 20vw;
-  @include position(absolute, null, 10%, 110%, null);
+  max-width: 14vw;
+  min-width: 14vw;
+  @include position(absolute, null, 0%, calc(100% + 10px), null);
   @include flex(flex, column, flex-start, flex-start);
   overflow-y: auto;
   // overflow-x:hidden;
@@ -473,11 +486,20 @@ button {
   // gap: 1rem;
   background-color: $white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
+  border-radius: 6px;
   padding: 10px;
 
   li {
-    text-wrap: wrap;
+    max-width: 100%;
+    p {
+      max-width: 80%;
+      text-overflow: ellipsis;
+      text-wrap: nowrap;
+      overflow: hidden;
+    }
+    p:hover {
+      text-wrap: wrap;
+    }
   }
 }
 

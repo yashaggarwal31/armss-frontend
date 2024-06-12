@@ -211,11 +211,11 @@
         </div>
       </div> -->
 
-      <div class="section-chatbot" id="ChatbotContainerMain">
-        <div class="section-contentContainer">
-          <div class="section-actionContainer">
-            <span>
-              <svg class="minimize">
+      <div class="section-chatbot MiniSection-chatbot mini" id="ChatbotContainerMain">
+        <div class="section-contentContainer MiniSection-contentContainer">
+          <div class="section-actionContainer MiniSection-actionContainer">
+            <span id="MiniChatbot">
+              <svg class="minimize" id="MiniChatbotValue">
                 <use xlink:href="./Icons/icons.svg#minimize" />
               </svg>
             </span>
@@ -225,7 +225,7 @@
               </svg>
             </span>
           </div>
-          <div class="section-chatcontent" id="ChatbotSuggestedQuestions">
+          <div class="section-chatcontent MiniSection-chatcontent" id="ChatbotSuggestedQuestions">
             <h2>Some Recently Asked Questions</h2>
             <ul>
               <li onclick="addQuestion(this)">
@@ -257,12 +257,12 @@
               </li>
             </ul>
           </div>
-          <div class="section-chatspace">
+          <div class="section-chatspace MiniSection-chatspace">
             <div class="chatspace" id="Chat-space"></div>
           </div>
-          <div class="section-questioncontent">
+          <div class="section-questioncontent MiniSection-questioncontent">
             <h2>Find an answer yourself</h2>
-            <div class="section-input-reset">
+            <div class="section-input-reset MiniSection-input-reset">
               <div class="input">
                 <input name="querysearchchatbot" id="querysearch" type="text" placeholder="Search..."
                   autocomplete="off" />

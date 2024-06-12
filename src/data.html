@@ -49,7 +49,7 @@
                 </svg>
               </div>
               <div
-                class="Locationdropdown"
+                class="Locationdropdown newDropdownlist"
                 id="Locationdropdown"
                 style="display: none"
               >
@@ -80,7 +80,7 @@
                 </svg>
               </div>
               <div
-                class="Datasection-dropdownContainer"
+                class="Datasection-dropdownContainer newDropdownlist"
                 id="ExperienceDropdown"
                 style="display: none"
               >
@@ -102,7 +102,7 @@
                 </svg>
               </div>
               <div
-                class="Locationdropdown"
+                class="Locationdropdown newDropdownlist"
                 id="SkillDropdown"
                 style="display: none"
               >
@@ -133,11 +133,11 @@
                 </svg>
               </div>
               <div
-                class="Datasection-dropdownContainer"
+                class="Datasection-dropdownContainer newDropdownlist"
                 id="DateDropdown"
                 style="display: none"
               >
-                <ul class="dropdown-list" id="DateList">
+                <ul class="dropdown-list newDropdownlist" id="DateList">
                   <li id="DateAll">All</li>
                   <li id="Dateitem1">Today</li>
                   <li id="Dateitem2">7 days</li>
@@ -158,46 +158,53 @@
         </div>
         <div class="Datasection-SearchHistory" id="SearchHistoryContainer">
           <div>
-            <h4>Skills</h4>
+            <h4>Location</h4>
             <ul
               class="Datasection-SearchFiltersDisplay"
-              id="SkillSearchHistory"
+              id="LocationSearchHistory"
             ></ul>
-            <span id="SkillSearchHistory-span" class="diableContainer"></span>
-            <ul
-              id="SkillSearchHistory-Overflow"
-              class="Datasection-SearchFiltersDisplay ShowMoreContainer diableContainer"
-            ></ul>
+            <div class="Showmorecontainerposition">
+              <span
+                id="LocationSearchHistory-span"
+                class="diableContainer"
+              ></span>
+              <ul
+                id="LocationSearchHistory-Overflow"
+                class="Datasection-SearchFiltersDisplay ShowMoreContainer diableContainer"
+              ></ul>
+            </div>
           </div>
+
           <div>
             <h4>Experience</h4>
             <ul
               class="Datasection-SearchFiltersDisplay"
               id="ExperienceSearchHistory"
             ></ul>
-            <span
-              id="ExperienceSearchHistory-span"
-              class="diableContainer"
-            ></span>
-            <ul
-              id="ExperienceSearchHistory-Overflow"
-              class="Datasection-SearchFiltersDisplay ShowMoreContainer diableContainer"
-            ></ul>
+            <div class="Showmorecontainerposition">
+              <span
+                id="ExperienceSearchHistory-span"
+                class="diableContainer"
+              ></span>
+              <ul
+                id="ExperienceSearchHistory-Overflow"
+                class="Datasection-SearchFiltersDisplay ShowMoreContainer diableContainer"
+              ></ul>
+            </div>
           </div>
           <div>
-            <h4>Location</h4>
+            <h4>Skills</h4>
             <ul
               class="Datasection-SearchFiltersDisplay"
-              id="LocationSearchHistory"
+              id="SkillSearchHistory"
             ></ul>
-            <span
-              id="LocationSearchHistory-span"
-              class="diableContainer"
-            ></span>
-            <ul
-              id="LocationSearchHistory-Overflow"
-              class="Datasection-SearchFiltersDisplay ShowMoreContainer diableContainer"
-            ></ul>
+            <div class="Showmorecontainerposition">
+              <span id="SkillSearchHistory-span" class="diableContainer"></span>
+              <ul
+                id="SkillSearchHistory-Overflow"
+                class="Datasection-SearchFiltersDisplay ShowMoreContainer diableContainer"
+              ></ul>
+            </div>
           </div>
           <div>
             <button id="ClearHistory">Clear</button>
@@ -266,7 +273,10 @@
             </div>
 
             <a id="viewdatadownloadiconA" href="">
-              <div class="viewdatadownloadicon" id="viewdatadownloadicon">
+              <div
+                class="viewdatacloseicon viewdatadownloadicon"
+                id="viewdatadownloadicon"
+              >
                 <svg>
                   <use xlink:href="./Icons/icons.svg#downloadIcon" />
                 </svg>

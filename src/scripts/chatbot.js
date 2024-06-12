@@ -1,5 +1,7 @@
 (function () {
   ChatbotContainer = document.getElementById("ChatbotContainerMain");
+  MiniChatbot = document.getElementById("MiniChatbot");
+  MiniChatbotValuechange = document.querySelector("#MiniChatbotValue use");
   btn = document.getElementById("Chatbot");
   spaner = document.getElementById("closeChatbot");
   ChatbotSuggestedQuestions = document.getElementById(
@@ -53,6 +55,25 @@ send_data = {
   user: "userid1",
 };
 
+MiniChatbot.onclick = function () {
+  if (
+    MiniChatbotValuechange.getAttribute("xlink:href") ===
+    "./Icons/icons.svg#Maximize"
+  ) {
+    ChatbotContainer.classList.add("mini");
+    MiniChatbotValuechange.setAttribute(
+      "xlink:href",
+      "./Icons/icons.svg#minimize"
+    );
+  } else {
+    ChatbotContainer.classList.remove("mini");
+    MiniChatbotValuechange.setAttribute(
+      "xlink:href",
+      "./Icons/icons.svg#Maximize"
+    );
+  }
+};
+
 querysearch.addEventListener("keydown", (event) => {
   if (
     event.key === "Enter" &&
@@ -64,7 +85,6 @@ querysearch.addEventListener("keydown", (event) => {
     value = event.target.value.replace(/\s+/g, " ").trim();
     chat(value);
     querysearch.value = "";
-    ClearHistory();
   }
 });
 
@@ -82,6 +102,11 @@ function submitQuery(event) {
 
 async function chat(value) {
   FilteringData.onFolderSelect = "";
+  if (FilteringData.page === "data") {
+    ClearHistory();
+    toCheckSearchHistory();
+  }
+
   chatSpace.style.minHeight = "40vh";
   const query = value;
   const UserQuery = document.createElement("p");
