@@ -237,7 +237,7 @@ toUpdateSkillContainer = function (data, id, item) {
   let Listid = document.getElementById(id);
   let Listitem = document.getElementById(item);
   let boundaries = Listid.getBoundingClientRect();
-  if (boundaries.top > window.innerHeight - 180) {
+  if (boundaries.top > window.innerHeight - 100) {
     Listitem.classList.add("at-end-skill-container");
   } else {
     Listitem.classList.remove("at-end-skill-container");
@@ -1019,6 +1019,9 @@ SearchLocation.addEventListener("input", (event) => {
   );
   data = new Set(data);
   toappendLocation([...data]);
+  if ([...data].length === 0) {
+    toappendLocation([event.target.value]);
+  }
 });
 
 SearchLocation.addEventListener("keydown", (event) => {
@@ -1147,6 +1150,9 @@ document
       item.toLowerCase().includes(event.target.value.toLowerCase())
     );
     toappendSkills(data);
+    if (data.length === 0) {
+      toappendSkills([event.target.value]);
+    }
   });
 
 // Search Skills by Enter
@@ -1177,26 +1183,31 @@ toapplyfilters = (data) => {
           });
         } else if (i === "Location") {
           sampleData = sampleData.filter((item) => {
-            if (
-              data[key][i].some((item2) => {
-                console.log(
-                  item["Location"]
-                    .join(",")
-                    .toLowerCase()
-                    .includes(item2.toLowerCase())
-                );
-
-                return item["Location"]
-                  .join(",")
-                  .toLowerCase()
-                  .includes(item2.toLowerCase());
-              })
-            )
-              return true;
-            else {
-              return false;
-            }
+            return data[key][i].some((item2) => {
+              return item["Location"].some((location) => {
+                return location.toLowerCase().includes(item2.toLowerCase());
+              });
+            });
           });
+          // if (
+          //   data[key][i].some((item2) => {
+          //     console.log(
+          //       item["Location"]
+          //         .join(",")
+          //         .toLowerCase()
+          //         .includes(item2.toLowerCase())
+          //     );
+
+          //     return item["Location"]
+          //       .join(",")
+          //       .toLowerCase()
+          //       .includes(item2.toLowerCase());
+          //   })
+          // )
+          //   return true;
+          // else {
+          //   return false;
+          // }
         } else if (i === "Experience") {
           sampleData = sampleData.filter((item) => {
             let status = false;
@@ -1273,6 +1284,7 @@ fetchviewdata = async (id) => {
     console.log(data);
 
     const [type, link] = getFileViewerUrl(data);
+    console.log(link);
 
     try {
       let response;

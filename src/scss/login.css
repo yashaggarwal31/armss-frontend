@@ -113,9 +113,9 @@ button {
 .login-Bgdesign {
   width: 400px;
   position: absolute;
-  right: 0;
-  bottom: 50px;
-  z-index: -50;
+  left: 72%;
+  top: 44%;
+  z-index: -10;
   opacity: 0.5;
 }
 
@@ -233,7 +233,7 @@ button {
   margin: 0 12px 0 16px;
 }
 .LoginPage-CarouselContainer {
-  background-image: radial-gradient(circle, rgb(202, 216, 244), rgba(6, 86, 207, 0.8), rgba(6, 86, 207, 0.9), rgb(6, 86, 207), rgb(6, 86, 207));
+  background-color: #0656cf;
 }
 .LoginPage-Carousel {
   width: 100%;
@@ -311,5 +311,9 @@ button {
 #CarouselContainer {
   display: flex;
   width: 68%;
+  overflow: hidden;
+}
+
+body {
   overflow: hidden;
 }/*# sourceMappingURL=Login.css.map */
