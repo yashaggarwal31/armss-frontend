@@ -167,7 +167,20 @@ function fileuplodInit() {
     for (let i = 0; i < fileList.length; i++) {
       if (currentUploadCancelled) {
         console.log("upload cancelled")
-        break
+        console.log('cancel count: ', uploadedCount)
+        const res = await fetch('https://armss-be.exitest.com/abort-upload', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            NotificationId: notificationId,
+            CountOfFiles: uploadedCount,
+          })
+        })
+
+        console.log('abort result: ', res)
+        break;
       }
 
       //selecting individual file
