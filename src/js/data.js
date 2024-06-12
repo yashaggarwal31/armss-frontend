@@ -57,10 +57,10 @@ toget = async (
     method === "GET"
       ? { method: method }
       : {
-          method: method,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        };
+        method: method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      };
   console.log(options);
   await fetch(url, options)
     .then((response) => {
@@ -1286,23 +1286,6 @@ fetchviewdata = async (id) => {
     const [type, link] = getFileViewerUrl(data);
     console.log(link);
 
-    try {
-      let response;
-      if (type == 2) {
-        response = await fetch(data);
-      } else {
-        response = await fetch(link);
-      }
-
-      const blob = await response.blob();
-
-      const url = window.URL.createObjectURL(blob);
-      document.getElementById("viewdatadownloadiconA").href = url;
-      viewdatadownloadiconA.download = "resume";
-    } catch (error) {
-      throw Error(error.message);
-    }
-
     if (type == 1) {
       const imageSrc = link;
       const iframeContent = `
@@ -1351,8 +1334,30 @@ fetchviewdata = async (id) => {
     } else {
       viewcandidatedata.src = link;
     }
+
+    viewsection.style.display = "flex";
+
+
+    try {
+      let response;
+      if (type == 2) {
+        response = await fetch(data);
+      } else {
+        response = await fetch(link);
+      }
+
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+      document.getElementById("viewdatadownloadiconA").href = url;
+      viewdatadownloadiconA.download = "resume";
+    } catch (error) {
+      throw Error(error.message);
+    }
+
+
   }
-  viewsection.style.display = "flex";
+
 };
 
 function getFileViewerUrl(fileUrl) {
