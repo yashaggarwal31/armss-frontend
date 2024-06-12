@@ -209,7 +209,7 @@ function fileuplodInit() {
         const response = await uploadFileThroughLink(link.presignedUrl, file)
         console.log("response is ", response)
 
-        if (response == 204) {
+        if (response == "success") {
           uploadedCount++
           if (progressBarOverall) {
             progressBarOverall.value = uploadedCount
