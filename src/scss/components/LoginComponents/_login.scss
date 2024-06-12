@@ -22,8 +22,8 @@
 
   &-Bgdesign {
     width: 400px;
-    @include position(absolute, null, 0, null, 50px);
-    z-index: -50;
+    @include position(absolute, 72%, null, 44%, null);
+    z-index: -10;
     opacity: 0.5;
   }
 }

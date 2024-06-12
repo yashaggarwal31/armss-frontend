@@ -113,9 +113,9 @@ button {
 .login-Bgdesign {
   width: 400px;
   position: absolute;
-  right: 0;
-  bottom: 50px;
-  z-index: -50;
+  left: 72%;
+  top: 44%;
+  z-index: -10;
   opacity: 0.5;
 }
 
@@ -311,5 +311,9 @@ button {
 #CarouselContainer {
   display: flex;
   width: 68%;
+  overflow: hidden;
+}
+
+body {
   overflow: hidden;
 }/*# sourceMappingURL=Login.css.map */

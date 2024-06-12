@@ -1019,6 +1019,9 @@ SearchLocation.addEventListener("input", (event) => {
   );
   data = new Set(data);
   toappendLocation([...data]);
+  if ([...data].length === 0) {
+    toappendLocation([event.target.value]);
+  }
 });
 
 SearchLocation.addEventListener("keydown", (event) => {
@@ -1147,6 +1150,9 @@ document
       item.toLowerCase().includes(event.target.value.toLowerCase())
     );
     toappendSkills(data);
+    if (data.length === 0) {
+      toappendSkills([event.target.value]);
+    }
   });
 
 // Search Skills by Enter
