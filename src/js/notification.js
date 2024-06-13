@@ -54,8 +54,12 @@ async function getNotificationDate() {
 
 notificationInterval = setInterval(async () => {
     const notificationDate = await getNotificationDate();
+    console.log(notificationDate)
     const newDate = new Date(notificationDate);
-    if (!latestNotificationDate) {
+    if (!latestNotificationDate || !newDate) {
+        if (!notificationDate) {
+            notificationDate = '2024-06-13T06:38:33.644608'
+        }
         latestNotificationDate = notificationDate;
         console.log('latestNotificationDate not defined')
         clearInterval(notificationInterval);
@@ -64,6 +68,7 @@ notificationInterval = setInterval(async () => {
         if (newDate > oldDate) {
             console.log("dot set");
             document.getElementById("notification-dot").style.display = "block";
+            await notificationsInIt()
         }
         latestNotificationDate = notificationDate;
     }
