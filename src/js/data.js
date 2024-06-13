@@ -393,6 +393,7 @@ function toShowData(data, method = "POST") {
           : "None";
       li.classList.add("elementStyle", className);
       datalistItems.appendChild(li);
+      datalistItems.scrollTop = 0;
     }
 
     if (method === "GET") {
@@ -1184,11 +1185,14 @@ toapplyfilters = (data) => {
         } else if (i === "Location") {
           sampleData = sampleData.filter((item) => {
             return data[key][i].some((item2) => {
-              return item["Location"].some((location) => {
-                return location.toLowerCase().includes(item2.toLowerCase());
-              });
+              if (item["Location"][0] !== null) {
+                return item["Location"].some((location) => {
+                  return location.toLowerCase().includes(item2.toLowerCase());
+                });
+              }
             });
           });
+
           // if (
           //   data[key][i].some((item2) => {
           //     console.log(
