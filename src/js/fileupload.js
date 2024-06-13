@@ -144,8 +144,46 @@ function fileuplodInit() {
     totalFileCount = 0
     errorCount = 0
 
-    const fileList = document.getElementById("fileInput").files
+    const initialfileList = document.getElementById("fileInput").files
+    if (initialfileList.length == 0) return;
+
+    console.log('intilial File List: ', initialfileList)
+
+    let fileArray = Array.from(initialfileList);
+    let indicesToRemove = [];
+    // for (record of initialfileList) {
+    //   if (record.size > maxFileSize) {
+    //     console.log('file size exceeded', record.name)
+    //     alert(`File Uploaded exceeds limit for:${record.name}`)
+    //     alert(`File Uploaded exceeds limit for:${record.name}`)
+    //     return;
+    //   }
+    // }
+
+    for (let i = 0; i < fileArray.length; i++) {
+      if (fileArray[i].size > maxFileSize) {
+        console.log('file size exceeded', fileArray[i].name);
+        alert(`File Uploaded exceeds limit for: ${fileArray[i].name}`);
+        indicesToRemove.push(i);
+      }
+    }
+
+    let fileList = fileArray.filter((file, index) => !indicesToRemove.includes(index));
+
+    console.log('intilial File List: ', fileList)
+    // for (let i = 0; i < initialfileList.length; i++) {
+    //   if (initialfileList[i].size > maxFileSize) {
+    //     console.log('file size exceeded', initialfileList[i].name);
+    //     alert(`File Uploaded exceeds limit for: ${initialfileList[i].name}`);
+    //     indicesToRemove.push(i);
+    //   }
+    // }
+
+    // let fileList = initialfileList.filter((file, index) => !indicesToRemove.includes(index));
+
+
     if (fileList.length == 0) return
+
     const total = fileList.length
     totalFileCount = total
     console.log("ssssddfdvdvdvdvdvddvdv", totalFileCount)
