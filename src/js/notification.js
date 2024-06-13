@@ -2,7 +2,8 @@
     notificationLength = 0;
     numberOfNotifications = 10;
     loadingMoreNotifications = false;
-    toggleDuplicateSelectionVal = false
+    toggleDuplicateSelectionVal = false;
+    toggleNotifcationListDiv = false;
     latestNotificationDate = undefined;
     notificationInterval = undefined;
 
@@ -55,6 +56,8 @@ notificationInterval = setInterval(async () => {
     const notificationDate = await getNotificationDate();
     const newDate = new Date(notificationDate);
     if (!latestNotificationDate) {
+        latestNotificationDate = notificationDate;
+        console.log('latestNotificationDate not defined')
         clearInterval(notificationInterval);
     } else {
         const oldDate = new Date(latestNotificationDate);
@@ -64,7 +67,7 @@ notificationInterval = setInterval(async () => {
         }
         latestNotificationDate = notificationDate;
     }
-}, 10000);
+}, 5000);
 
 function onClickOpenErrorModal(event) {
     const dataValues = event.target.getAttribute("data-values");
@@ -126,20 +129,26 @@ formatDateTimeString = (utcDateString) => {
 
 async function notificationsInIt() {
     document.getElementById("notification-dot").style.display = "none";
+    toggleNotifcationListDiv = true;
     document.getElementById("notification-container").style.height = "60vh";
     data = await getNotifications(numberOfNotifications);
     notificationLength = data.length;
 
+    const notificationList = document.getElementById("notifications-list");
+
     if (notificationLength == 0) {
         document.getElementById('no-noti-message').style.display = 'block'
-        document.getElementById('noti-loader-div').style.display = 'none';
-
+        // document.getElementById('noti-loader-div').style.display = 'none';
+        notificationList.innerHTML = "";
+        document.getElementById('clear-all').style.display = 'none';
         return;
     }
+
+    document.getElementById('clear-all').style.display = 'block';
     latestNotificationDate = data[0][4];
 
     console.log("data length:", data);
-    const notificationList = document.getElementById("notifications-list");
+
 
     notificationList.innerHTML = "";
 
@@ -230,7 +239,7 @@ async function notificationsInIt() {
     loadMoreNotifications.append(loadMoreSpinner);
 }
 
-window.addEventListener("click", function (event) {
+window.addEventListener("click", async function (event) {
     const notificationContainer = document.getElementById(
         "notification-container"
     );
@@ -243,6 +252,8 @@ window.addEventListener("click", function (event) {
     // console.log('single viewer ', singleResumeViewer)
     // console.log('multiple viewer ', multipleResumeViewer)
 
+    console.log('toggleNotifcationListDiv is: ', toggleNotifcationListDiv)
+
     if (
         !notificationContainer.contains(event.target) &&
         !icon.contains(event.target) &&
@@ -251,8 +262,29 @@ window.addEventListener("click", function (event) {
         !multipleResumeViewer.contains(event.target)
     ) {
         notificationContainer.style.height = "0";
+        toggleNotifcationListDiv = false;
+    }
+
+    if (icon.contains(event.target) && toggleNotifcationListDiv == true) {
+        console.log('toggleNotifcationListDiv inside the condition is: ', toggleNotifcationListDiv)
+        toggleNotifcationListDiv = false;
+        notificationContainer.style.height = "0";
+    }
+
+    else if (icon.contains(event.target) && toggleNotifcationListDiv == false) {
+        console.log('toggleNotifcationListDiv inside the condition is: ', toggleNotifcationListDiv)
+        toggleNotifcationListDiv = true;
+        await notificationsInIt();
     }
 });
+
+function loadNotifications() {
+    if (toggleNotifcationListDiv != true) {
+        toggleNotifcationListDiv = true;
+        notificationsInIt();
+    }
+
+}
 
 // document.getElementById("icon").addEventListener("click", () => {
 //   //mark all notifications as seen
@@ -844,3 +876,18 @@ function unselectAllCheckboxes() {
         checkbox.checked = false;
     });
 }
+
+console.log(document.getElementById('clear-all'))
+document.getElementById('clear-all').addEventListener('click', async () => {
+    document.getElementById("notifications-list").innerHTML = ''
+    document.getElementById('clear-all').style.display = 'none';
+    console.log('hello')
+    const response = await fetch('https://armss-be.exitest.com/clear-all-notifications', {
+        method: 'POST'
+    })
+
+    notificationsInIt();
+
+    console.log('clear all called: ', response)
+
+})

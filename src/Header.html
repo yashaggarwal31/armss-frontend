@@ -74,16 +74,15 @@
         </button> -->
         <div class="notification">
           <a >
-            <div onclick="notificationsInIt()" id="icon" class="notBtn" >
+            <div class="notBtn" >
               <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
               <div style="
                   display: flex;
                   align-items: center;
                   justify-content: center;
-                  position: relative;
-                ">
+                  position: relative;"  id="icon">
                 <div id="notification-dot"
-                  style="position: absolute; top:-2px; right:2.5px;background-color: blue; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
+                  style="display: none; position: absolute; top:-2px; right:2.5px;background-color: blue; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
                 </div>
                 <svg style="height: 1.5rem; width: 1.5rem">
                   <use xlink:href="./Icons/icons.svg#bellIcon" />
@@ -91,12 +90,20 @@
               </div>
               <!-- <div class="number">2</div> -->
 
+              
+
               <div id="notification-container" class="box">
+                <div id="clear-all" style="text-align: right; padding: 1rem 0.5rem 0 0; font-size: small; cursor: pointer; color: blue; z-index: 20;">
+                  Clear All
+                </div>
                 <div class="display">
                   <div class="nothing">
                     <i class="fas fa-child stick"></i>
                     <div id="no-noti-message" class="cent">Looks Like your all caught up!</div>
                   </div>
+
+                  
+
                   <div id="notifications-list" class="cont">
                     <!-- Notification Records here -->
 
@@ -288,6 +295,7 @@
     <!-- <script src="scripts/chatbot.js"></script> -->
     <script src="scripts/chatbot.js"></script>
     <script src="./js/header.js"></script>
+    <script src="./js/notification.js" defer></script>
     <!-- <script src="./js/notification.js"></script> -->
 </body>
 
