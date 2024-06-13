@@ -49,6 +49,7 @@ async function getNotificationDate() {
         return data;
     } catch (error) {
         console.log("failed to fetch notifications: ", error);
+        return '2024-06-13T06:38:33.644608'
     }
 }
 
@@ -62,13 +63,13 @@ notificationInterval = setInterval(async () => {
         }
         latestNotificationDate = notificationDate;
         console.log('latestNotificationDate not defined')
-        clearInterval(notificationInterval);
+        // clearInterval(notificationInterval);
     } else {
         const oldDate = new Date(latestNotificationDate);
         if (newDate > oldDate) {
             console.log("dot set");
             document.getElementById("notification-dot").style.display = "block";
-            await notificationsInIt()
+            // await notificationsInIt()
         }
         latestNotificationDate = notificationDate;
     }
