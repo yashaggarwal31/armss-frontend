@@ -11,7 +11,7 @@
 
   &-BackPage {
     @include flex(flex, row, null, null, 6px);
-    // margin-bottom: 2rem;
+    margin-bottom: 10px;
     .BackArrow {
       @include width_height(28px, 28px);
       @include flex(flex, row, center, center);

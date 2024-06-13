@@ -193,7 +193,7 @@ function tomodal() {
 
 toShowSubCategory = (id) => {
   if (id === "All Resumes") {
-    toDataPage("All Resumes");
+    toDataPage("Show All Resumes");
   } else {
     SubCategoryHeading.textContent = id;
     SubCategorySection.style.display = "flex";
@@ -445,9 +445,13 @@ async function EditFolderNamefunction(data) {
   });
   if (response.ok) {
     const data = await response.json();
-    console.log(data);
+    if (data.status === 401) {
+      alert(data.action);
+    } else {
+      alert(data.action);
+    }
   } else {
-    console.error("Failed to get flag:", response.statusText);
+    console.error("Failed to Change:", response.statusText);
   }
 }
 

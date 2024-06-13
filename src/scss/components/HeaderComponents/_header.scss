@@ -10,16 +10,19 @@
     width: 100%;
     @include flex(flex, row, space-between, center);
   }
-
+  &-filters-Suggestions {
+    width: 60%;
+    @include flex(flex, row, center, center);
+    position: relative;
+  }
   &-Filters {
-    @include width_height(null, 60%);
+    @include width_height(null, 100%);
     @include flex(flex, row, space-between, center);
     background-color: #f4f7ff;
     border: 0.8px solid #e1eaff;
     border-radius: 2rem;
     padding: 0.2rem;
     gap: 5px;
-    position: relative;
   }
   &-logoContainer {
     // @include width_height(null, 8%);
@@ -211,8 +214,8 @@
 }
 
 .SuggestionContainer {
-  @include position(absolute, 16%, null, 10.8%, null);
-  @include width_height(null, 20%);
+  @include position(absolute, 0%, null, 100%, null);
+  @include width_height(null, 40%);
   border-radius: 1rem;
   // @include flex(flex, row, space-around, center, 1rem);
   background-color: $white;
@@ -233,7 +236,7 @@
 
   ul {
     max-height: 28vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 0.2rem;
 
     li {
