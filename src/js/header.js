@@ -195,7 +195,7 @@ SearchFilters.addEventListener("keydown", function (event) {
 // searchButton
 
 function customSplit(line) {
-  var pattern = /[,]|and|or/g;
+  var pattern = /[,]|and|(?:\sor\s)/g;
   var splitline = line.split(pattern);
   splitline = splitline.filter((word) => word.trim().length > 0);
   return splitline;

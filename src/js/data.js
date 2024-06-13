@@ -57,10 +57,10 @@ toget = async (
     method === "GET"
       ? { method: method }
       : {
-        method: method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      };
+          method: method,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        };
   console.log(options);
   await fetch(url, options)
     .then((response) => {
@@ -335,7 +335,7 @@ function toShowData(data, method = "POST") {
 
       Location.addEventListener("mouseover", () => {
         let values =
-          data[i].Location[0] === null ? ["Unknown"] : data[i].Location;
+          data[i].Location[0] === null ? ["India"] : data[i].Location;
         toUpdateSkillContainer(values, li.id, ul.id);
         ul.classList.add("LocationContainer");
         clearTimeout(interval);
@@ -990,23 +990,12 @@ FetchingLocation();
 //  Fetching All Cities
 
 FetchCities = async () => {
-  let response = await fetch(
-    "https://countriesnow.space/api/v0.1/countries/cities",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        country: "India",
-      }),
-    }
-  );
+  let response = await fetch("./assets/Data/SuggestionsList.json");
   let data = await response.json();
 
   FilteringData.LocationCities = [
     ...FilteringData.LocationCities,
-    ...data.data,
+    ...data["Cities"],
   ];
 };
 
@@ -1341,7 +1330,6 @@ fetchviewdata = async (id) => {
 
     viewsection.style.display = "flex";
 
-
     try {
       let response;
       if (type == 2) {
@@ -1358,10 +1346,7 @@ fetchviewdata = async (id) => {
     } catch (error) {
       throw Error(error.message);
     }
-
-
   }
-
 };
 
 function getFileViewerUrl(fileUrl) {
