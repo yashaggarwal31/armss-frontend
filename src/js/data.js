@@ -237,7 +237,7 @@ toUpdateSkillContainer = function (data, id, item) {
   let Listid = document.getElementById(id);
   let Listitem = document.getElementById(item);
   let boundaries = Listid.getBoundingClientRect();
-  if (boundaries.top > window.innerHeight - 100) {
+  if (boundaries.top > window.innerHeight - 168) {
     Listitem.classList.add("at-end-skill-container");
   } else {
     Listitem.classList.remove("at-end-skill-container");

@@ -12,7 +12,9 @@
   EditFolderDisplayId = document.getElementById("EditFolderDisplayId");
   EditFolderName = document.getElementById("EditFolderName");
   PreviousFolderName = document.getElementById("PreviousFolderName");
-
+  ClearSubFolderSearchValue = document.getElementById(
+    "ClearSubFolderSearchValue"
+  );
   SubCategorySearchFilters = document.getElementById(
     "SubCategorySearchFilters"
   );
@@ -329,9 +331,22 @@ tosetSuggestionData = (data) => {
   }
 };
 
+// Clear Sub Folder Search Value
+
+ClearSubFolderSearchValue.addEventListener("click", function () {
+  SubCategorySearchFilters.value = "";
+  toDisplaySubCategory(Folders.SubCategory);
+  ClearSubFolderSearchValue.style.display = "none";
+});
+
 //  Search Functionality of Folders
 
 SubCategorySearchFilters.addEventListener("input", function (event) {
+  if (event.target.value !== "") {
+    ClearSubFolderSearchValue.style.display = "block";
+  } else {
+    ClearSubFolderSearchValue.style.display = "none";
+  }
   Data = {};
   for (let i of Object.keys(Folders.SubCategory)) {
     if (i.toLowerCase().includes(event.target.value.toLowerCase())) {

@@ -245,6 +245,14 @@ button {
   &-subCategory {
     @include flex(flex, row, space-between, center);
     margin-bottom: 1rem;
+    div {
+      width: 60%;
+    }
+    #ClearSubFolderSearchValue {
+      margin-right: 10px;
+      width: 22px;
+      cursor: pointer;
+    }
   }
   &-CategorySubContainer ::-webkit-scrollbar {
     width: 6px;

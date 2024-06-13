@@ -1487,6 +1487,8 @@ h4.failure {
 
 #ClearSearchValue {
   cursor: pointer;
+  width: 22px;
+  margin-right: 4px;
 }
 
 .body {
@@ -2397,6 +2399,14 @@ button {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+}
+.section-subCategory div {
+  width: 60%;
+}
+.section-subCategory #ClearSubFolderSearchValue {
+  margin-right: 10px;
+  width: 22px;
+  cursor: pointer;
 }
 .section-CategorySubContainer ::-webkit-scrollbar {
   width: 6px;
