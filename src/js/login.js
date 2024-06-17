@@ -9,15 +9,29 @@ async function digestMessage(message) {
 }
 
 togetLoginDetails = async (newJsonData, data = null) => {
-  if (data !== null) {
-    let hasedvalue = await digestMessage(data);
-    newJsonData["Password"] = hasedvalue;
-  }
+  // if (data !== null) {
+  //   let hasedvalue = await digestMessage(data);
+  //   newJsonData["Password"] = hasedvalue;
+  // }
 
-  let url = new URL("https://armss-be.exitest.com/login/");
-  url.search = new URLSearchParams(newJsonData).toString();
+  username = newJsonData['Email'];
+  password = newJsonData['Password'];
+
+  // let url = new URL("https://armss-be.exitest.com/login/");
+
+  // url.search = new URLSearchParams(newJsonData).toString();
+
+  const url = 'http://localhost:8000/token';
+  const formData = new URLSearchParams();
+  formData.append('username', username);
+  formData.append('password', password);
+
   await fetch(url, {
-    method: "GET",
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: formData
   })
     .then((response) => {
       if (!response.ok) {
@@ -29,6 +43,8 @@ togetLoginDetails = async (newJsonData, data = null) => {
     .then((data) => toLoginValidate(data))
     .catch((error) => alert(error));
 };
+
+
 
 toLoginValidate = (data) => {
   if (data.statusCode) {
