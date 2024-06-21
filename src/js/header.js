@@ -58,7 +58,18 @@ toAppendSuggestionData = (data) => {
     li.addEventListener("click", () => {
       let value = SearchFilters.value.split(" ");
       newvalue = value.slice(0, value.length - 1);
-      // console.log(newvalue);
+      if (newvalue.length > 0) {
+        if (
+          li.textContent
+            .toLowerCase()
+            .includes(newvalue.slice(-1)[0].toLowerCase()) &&
+          newvalue.slice(-1)[0].toLowerCase() !==
+            li.textContent.split(" ").slice(-1)[0].toLowerCase()
+        ) {
+          newvalue = newvalue.slice(0, newvalue.length - 1);
+        }
+      }
+
       newvalue.push(li.textContent);
       SearchFilters.value = newvalue.join(" ");
       SearchFilters.focus();

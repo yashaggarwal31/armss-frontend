@@ -1216,13 +1216,16 @@ toapplyfilters = (data) => {
           });
         } else if (i === "SkillName") {
           sampleData = sampleData.filter((item) => {
-            var ids = item["SkillName"].filter(
-              (item2) => data[key][i].indexOf(item2.toLowerCase()) !== -1
-            );
-            if (ids.length === data[key][i].length) {
-              return true;
-            } else {
-              return false;
+            if (item["SkillName"][0] !== null) {
+              let ids = item["SkillName"].filter(
+                (item2) => data[key][i].indexOf(item2.toLowerCase()) !== -1
+              );
+
+              if (ids.length === data[key][i].length) {
+                return true;
+              } else {
+                return false;
+              }
             }
           });
         } else if (i === "UploadDate") {

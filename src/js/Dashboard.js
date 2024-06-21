@@ -416,7 +416,8 @@ document.getElementById("SubmitAddFloder").onclick = function () {
     FilteringData.page = "main";
     setTimeout(triggerDOMContentLoaded, 400);
     //  triggerDOMContentLoaded();
-    togetFolders();
+    setTimeout(FetchingSubcategories, 400);
+    // togetFolders();
   } else {
     alert("Please fill all the fields to crete Folder");
   }

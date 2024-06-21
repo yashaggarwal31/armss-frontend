@@ -12,14 +12,9 @@ let FilteringData = {
   QueryonProcess: false,
   dataparaelement: "",
   TemporaryData: [],
-
-
 };
 
-
 // let toggleDuplicateSelectionVal = false;
-
-
 
 let loaded = false;
 
